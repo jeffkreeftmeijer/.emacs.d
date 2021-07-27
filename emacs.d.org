@@ -36,3 +36,12 @@
     (straight-use-package 'evil)
     (evil-mode 1)
   #+end_src
+
+* Magit
+
+  [[https://magit.vc][Magit]] is an interface to Git.
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Git: magit
+    (straight-use-package 'magit)
+  #+end_src
