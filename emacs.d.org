@@ -25,3 +25,14 @@
     ;; Disable package.el in favor of straight.el
     (setq package-enable-at-startup nil)
   #+end_src
+
+* Evil
+
+  [[https://github.com/emacs-evil/evil][Evil]] is a Vim emulator for emacs.
+  Install it with =straight.el=, and turn =evil-mode= on:
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Vim emulation: evil
+    (straight-use-package 'evil)
+    (evil-mode 1)
+  #+end_src
