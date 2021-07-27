@@ -1,0 +1,27 @@
+* Package management
+
+  [[https://github.com/raxod502/straight.el][=straight.el=]] is a package manager for Emacs that locks package versions and downloads packages from Git repositories.
+  The [[https://github.com/raxod502/straight.el#getting-started][Getting started]] section in its README provides the bootstrap code to place inside =init.el=:
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Package management: straight.el
+    (defvar bootstrap-version)
+    (let ((bootstrap-file
+	   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	  (bootstrap-version 5))
+      (unless (file-exists-p bootstrap-file)
+	(with-current-buffer
+	    (url-retrieve-synchronously
+	     "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	     'silent 'inhibit-cookies)
+	  (goto-char (point-max))
+	  (eval-print-last-sexp)))
+      (load bootstrap-file nil 'nomessage))
+  #+end_src
+
+  To disable =package.el= (Emacs' default package manager) in favor of using =straight.el=, turn off =package-enable-at-startup= in =early-init.el=:
+
+  #+begin_src emacs-lisp :tangle early-init.el
+    ;; Disable package.el in favor of straight.el
+    (setq package-enable-at-startup nil)
+  #+end_src
