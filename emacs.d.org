@@ -21,3 +21,13 @@
 #+begin_src emacs-lisp
   (load-file "~/.emacs.d/early-package-management.el")
 #+end_src
+
+* Evil
+
+#+include: "emacs-evil.org"
+
+#+headers: :tangle init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/evil.el")
+#+end_src
