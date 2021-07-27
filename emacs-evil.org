@@ -1,0 +1,10 @@
+#+title: Emacs Evil mode
+
+[[https://github.com/emacs-evil/evil][Evil]] is a Vim emulator for emacs.
+Install it with =straight.el=, and turn =evil-mode= on:
+
+#+begin_src emacs-lisp :tangle evil.el
+  ;; Vim emulation: evil
+  (use-package evil
+    :config (evil-mode))
+#+end_src
