@@ -22,3 +22,6 @@
 
 ;; Git: magit
 (straight-use-package 'magit)
+
+;; Elixir: elixir-mode
+(straight-use-package 'elixir-mode)
