@@ -62,3 +62,11 @@
     ;; Elixir: elixir-mode
     (straight-use-package 'elixir-mode)
   #+end_src
+
+  Automatically format Elixir files on save.
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Format Elixir files on save
+    (add-hook 'elixir-mode-hook
+	      (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+  #+end_src

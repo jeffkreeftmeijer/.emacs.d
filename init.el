@@ -25,3 +25,7 @@
 
 ;; Elixir: elixir-mode
 (straight-use-package 'elixir-mode)
+
+;; Format Elixir files on save
+(add-hook 'elixir-mode-hook
+	  (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
