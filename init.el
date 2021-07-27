@@ -16,5 +16,9 @@
 (straight-use-package 'evil)
 (evil-mode 1)
 
+;; Vim bindings for plugins: evil-collection
+(straight-use-package 'evil-collection)
+(evil-collection-init)
+
 ;; Git: magit
 (straight-use-package 'magit)
