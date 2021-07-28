@@ -26,6 +26,18 @@
     (setq package-enable-at-startup nil)
   #+end_src
 
+  To install a package for the current session, execute the =straight-use-package= command:
+
+  #+begin_example
+    M-x straight-use-package <RET> evil <RET>
+  #+end_example
+
+  To continue using the package in future sessions, add the =straight-use-package= call to =~/.emacs/init.el=:
+
+  #+begin_src emacs-lisp
+    (straight-use-package 'evil)
+  #+end_src
+
 * Evil
 
   [[https://github.com/emacs-evil/evil][Evil]] is a Vim emulator for emacs.
