@@ -92,3 +92,12 @@
     (add-hook 'elixir-mode-hook
 	      (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
   #+end_src
+
+** Babel
+
+   Add "shell" to Babel's code execution languages.
+
+   #+begin_src emacs-lisp :tangle init.el
+     ;; Add "shell" to Babel's code execution languages.
+     (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+   #+end_src

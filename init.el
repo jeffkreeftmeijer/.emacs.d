@@ -29,3 +29,6 @@
 ;; Format Elixir files on save
 (add-hook 'elixir-mode-hook
 	  (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+
+;; Add "shell" to Babel's code execution languages.
+(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
