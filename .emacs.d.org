@@ -62,3 +62,16 @@
 #+begin_src emacs-lisp
   (load-file "~/.emacs.d/org.el")
 #+end_src
+
+* Org-roam
+:PROPERTIES:
+:CUSTOM_ID: org-roam
+:END:
+
+#+include: "emacs-org-roam.org"
+
+#+headers: :tangle init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/org-roam.el")
+#+end_src
