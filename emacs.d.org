@@ -69,6 +69,17 @@
      (evil-collection-init)
    #+end_src
 
+* Org-roam
+
+  [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
+  Set the directory for notes to =~/notes=.
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Org-roam
+    (straight-use-package 'org-roam)
+    (setq org-roam-directory (file-truename "~/notes"))
+  #+end_src
+
 * Magit
 
   [[https://magit.vc][Magit]] is an interface to Git.

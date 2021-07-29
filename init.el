@@ -20,6 +20,10 @@
 (straight-use-package 'evil-collection)
 (evil-collection-init)
 
+;; Org-roam
+(straight-use-package 'org-roam)
+(setq org-roam-directory (file-truename "~/notes"))
+
 ;; Git: magit
 (straight-use-package 'magit)
 
