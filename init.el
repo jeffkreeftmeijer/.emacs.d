@@ -21,6 +21,9 @@
 (setq evil-want-keybinding nil)
 (evil-collection-init)
 
+;; GitHub-flavored Markdown Org exporter: ox-gfm
+(straight-use-package 'ox-gfm)
+
 ;; Org-roam
 (straight-use-package 'org-roam)
 (setq org-roam-directory (file-truename "~/notes"))

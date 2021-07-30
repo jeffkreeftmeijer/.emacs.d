@@ -108,6 +108,13 @@ It replaces Evil's `evil-integration`, which should be turned off through the `e
 
 # Org-mode
 
+[ox-gfm](https://github.com/larstvei/ox-gfm) is an Org export backend for GitHub-flavored Markdown.
+
+```emacs-lisp
+;; GitHub-flavored Markdown Org exporter: ox-gfm
+(straight-use-package 'ox-gfm)
+```
+
 
 <a id="org-roam"></a>
 

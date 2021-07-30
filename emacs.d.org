@@ -100,6 +100,13 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
 :CUSTOM_ID: org-mode
 :END:
 
+[[https://github.com/larstvei/ox-gfm][ox-gfm]] is an Org export backend for GitHub-flavored Markdown.
+
+#+begin_src emacs-lisp :tangle init.el
+  ;; GitHub-flavored Markdown Org exporter: ox-gfm
+  (straight-use-package 'ox-gfm)
+#+end_src
+
 ** Org Roam
 :PROPERTIES:
 :CUSTOM_ID: org-roam
