@@ -1,4 +1,5 @@
 #+title: ~/.emacs.d
+#+export_file_name: README
 
 * Package management
 
@@ -143,3 +144,7 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     (add-hook 'elixir-mode-hook
 	      (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
   #+end_src
+
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda ()(org-export-to-markdown)) nil t)
+# End:
