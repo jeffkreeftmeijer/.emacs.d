@@ -65,11 +65,23 @@
 
    [[https://github.com/emacs-evil/evil-collection][Evil collection]] is a collection of bindings for plugins.
 
+   It replaces Evil's =evil-integration=, which should be turned off through the =evil-want-keybinding= option before Evil collection is loaded[fn:evil-integration-warning].
+
    #+begin_src emacs-lisp :tangle init.el
      ;; Vim bindings for plugins: evil-collection
      (straight-use-package 'evil-collection)
+     (setq evil-want-keybinding nil)
      (evil-collection-init)
    #+end_src
+
+[fn:evil-integration-warning] Evil collection prints a warning if it's loaded without =evil-want-keybinding= turned off:
+
+#+begin_example
+Warning (evil-collection): Make sure to set `evil-want-keybinding' to nil before loading evil or evil-collection.
+
+See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
+#+end_example
+
 
 * Flyspell
 
