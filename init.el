@@ -21,12 +21,15 @@
 (setq evil-want-keybinding nil)
 (evil-collection-init)
 
-;; Spell checking: Flyspell
-(add-hook 'text-mode-hook 'flyspell-mode)
-
 ;; Org-roam
 (straight-use-package 'org-roam)
 (setq org-roam-directory (file-truename "~/notes"))
+
+;; Add "shell" to Babel's code execution languages.
+(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+
+;; Spell checking: Flyspell
+(add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Git: magit
 (straight-use-package 'magit)
@@ -37,6 +40,3 @@
 ;; Format Elixir files on save
 (add-hook 'elixir-mode-hook
 	  (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
-
-;; Add "shell" to Babel's code execution languages.
-(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))

@@ -82,6 +82,27 @@ Warning (evil-collection): Make sure to set `evil-want-keybinding' to nil before
 See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
 #+end_example
 
+* Org-mode
+
+** Org Roam
+
+  [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
+  Set the directory for notes to =~/notes=.
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Org-roam
+    (straight-use-package 'org-roam)
+    (setq org-roam-directory (file-truename "~/notes"))
+  #+end_src
+
+** Org Babel
+
+   Add "shell" to Babel's code execution languages.
+
+   #+begin_src emacs-lisp :tangle init.el
+     ;; Add "shell" to Babel's code execution languages.
+     (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+   #+end_src
 
 * Flyspell
 
@@ -97,17 +118,6 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
   #+begin_src emacs-lisp :tangle init.el
     ;; Spell checking: Flyspell
     (add-hook 'text-mode-hook 'flyspell-mode)
-  #+end_src
-
-* Org-roam
-
-  [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
-  Set the directory for notes to =~/notes=.
-
-  #+begin_src emacs-lisp :tangle init.el
-    ;; Org-roam
-    (straight-use-package 'org-roam)
-    (setq org-roam-directory (file-truename "~/notes"))
   #+end_src
 
 * Magit
@@ -133,12 +143,3 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     (add-hook 'elixir-mode-hook
 	      (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
   #+end_src
-
-** Babel
-
-   Add "shell" to Babel's code execution languages.
-
-   #+begin_src emacs-lisp :tangle init.el
-     ;; Add "shell" to Babel's code execution languages.
-     (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
-   #+end_src
