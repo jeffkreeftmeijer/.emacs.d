@@ -71,6 +71,22 @@
      (evil-collection-init)
    #+end_src
 
+* Flyspell
+
+  [[https://www.emacswiki.org/emacs/FlySpell][Flyspell]] is a minor mode that enables on-the-fly spell checking.
+  It uses [[http://aspell.net][GNU aspell]], which is installed via Homebrew:
+
+  #+begin_src shell
+    brew install aspell
+  #+end_src
+
+  To enable Flyspell in text-mode, add a hook:
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Spell checking: Flyspell
+    (add-hook 'text-mode-hook 'flyspell-mode)
+  #+end_src
+
 * Org-roam
 
   [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.

@@ -20,6 +20,9 @@
 (straight-use-package 'evil-collection)
 (evil-collection-init)
 
+;; Spell checking: Flyspell
+(add-hook 'text-mode-hook 'flyspell-mode)
+
 ;; Org-roam
 (straight-use-package 'org-roam)
 (setq org-roam-directory (file-truename "~/notes"))
