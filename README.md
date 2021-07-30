@@ -1,17 +1,17 @@
-- [Package management](#org36c55f3)
-- [Evil](#orgde9a5c1)
-  - ["Fix" the tab key for visibility cycling in Org and Evil mode](#org8426f86)
-  - [Evil collection](#org456b84c)
-- [Org-mode](#org69cfeaa)
-  - [Org Roam](#org841e124)
-  - [Org Babel](#orga2410b2)
-- [Flyspell](#org696458c)
-- [Magit](#org25c646a)
-- [Elixir](#org9cd07e3)
+- [Package management](#package-management)
+- [Evil](#evil)
+  - ["Fix" the tab key for visibility cycling in Org and Evil mode](#evil-org-tab)
+  - [Evil collection](#evil-collection)
+- [Org-mode](#org-mode)
+  - [Org Roam](#org-roam)
+  - [Org Babel](#org-babel)
+- [Flyspell](#flyspell)
+- [Magit](#magit)
+- [Elixir](#elixir)
 
 
 
-<a id="org36c55f3"></a>
+<a id="package-management"></a>
 
 # Package management
 
@@ -51,7 +51,7 @@ To continue using the package in future sessions, add the `straight-use-package`
 ```
 
 
-<a id="orgde9a5c1"></a>
+<a id="evil"></a>
 
 # Evil
 
@@ -64,7 +64,7 @@ To continue using the package in future sessions, add the `straight-use-package`
 ```
 
 
-<a id="org8426f86"></a>
+<a id="evil-org-tab"></a>
 
 ## "Fix" the tab key for visibility cycling in Org and Evil mode
 
@@ -88,7 +88,7 @@ To fix the tab key's functionality in Org mode, sacrifice Evil's `C-i` backward 
 ```
 
 
-<a id="org456b84c"></a>
+<a id="evil-collection"></a>
 
 ## Evil collection
 
@@ -104,12 +104,12 @@ It replaces Evil's `evil-integration`, which should be turned off through the `e
 ```
 
 
-<a id="org69cfeaa"></a>
+<a id="org-mode"></a>
 
 # Org-mode
 
 
-<a id="org841e124"></a>
+<a id="org-roam"></a>
 
 ## Org Roam
 
@@ -122,7 +122,7 @@ It replaces Evil's `evil-integration`, which should be turned off through the `e
 ```
 
 
-<a id="orga2410b2"></a>
+<a id="org-babel"></a>
 
 ## Org Babel
 
@@ -134,7 +134,7 @@ Add "shell" to Babel's code execution languages.
 ```
 
 
-<a id="org696458c"></a>
+<a id="flyspell"></a>
 
 # Flyspell
 
@@ -152,7 +152,7 @@ To enable Flyspell in text-mode, add a hook:
 ```
 
 
-<a id="org25c646a"></a>
+<a id="magit"></a>
 
 # Magit
 
@@ -164,7 +164,7 @@ To enable Flyspell in text-mode, add a hook:
 ```
 
 
-<a id="org9cd07e3"></a>
+<a id="elixir"></a>
 
 # Elixir
 

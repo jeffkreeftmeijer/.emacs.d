@@ -2,6 +2,9 @@
 #+export_file_name: README
 
 * Package management
+:PROPERTIES:
+:CUSTOM_ID: package-management
+:END:
 
   [[https://github.com/raxod502/straight.el][=straight.el=]] is a package manager for Emacs that locks package versions and downloads packages from Git repositories.
   The [[https://github.com/raxod502/straight.el#getting-started][Getting started]] section in its README provides the bootstrap code to place inside =init.el=:
@@ -42,6 +45,9 @@
   #+end_src
 
 * Evil
+:PROPERTIES:
+:CUSTOM_ID: evil
+:END:
 
   [[https://github.com/emacs-evil/evil][Evil]] is a Vim emulator for emacs.
   Install it with =straight.el=, and turn =evil-mode= on:
@@ -53,6 +59,9 @@
   #+end_src
 
 ** "Fix" the tab key for visibility cycling in Org and Evil mode
+:PROPERTIES:
+:CUSTOM_ID: evil-org-tab
+:END:
    #+include: "emacs-evil-org-tab.org" :lines "8-23" :only-contents t
 
    # NOTE: This block was copied in from emacs-evil-org-tab.org to make it tangle to init.el.
@@ -63,6 +72,9 @@
    #+end_src
 
 ** Evil collection
+:PROPERTIES:
+:CUSTOM_ID: evil-collection
+:END:
 
    [[https://github.com/emacs-evil/evil-collection][Evil collection]] is a collection of bindings for plugins.
 
@@ -84,8 +96,14 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
 #+end_example
 
 * Org-mode
+:PROPERTIES:
+:CUSTOM_ID: org-mode
+:END:
 
 ** Org Roam
+:PROPERTIES:
+:CUSTOM_ID: org-roam
+:END:
 
   [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
   Set the directory for notes to =~/notes=.
@@ -97,6 +115,9 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
   #+end_src
 
 ** Org Babel
+:PROPERTIES:
+:CUSTOM_ID: org-babel
+:END:
 
    Add "shell" to Babel's code execution languages.
 
@@ -106,6 +127,9 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
    #+end_src
 
 * Flyspell
+:PROPERTIES:
+:CUSTOM_ID: flyspell
+:END:
 
   [[https://www.emacswiki.org/emacs/FlySpell][Flyspell]] is a minor mode that enables on-the-fly spell checking.
   It uses [[http://aspell.net][GNU aspell]], which is installed via Homebrew:
@@ -122,6 +146,9 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
   #+end_src
 
 * Magit
+:PROPERTIES:
+:CUSTOM_ID: magit
+:END:
 
   [[https://magit.vc][Magit]] is an interface to Git.
 
@@ -131,6 +158,9 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
   #+end_src
 
 * Elixir
+:PROPERTIES:
+:CUSTOM_ID: elixir
+:END:
 
   #+begin_src emacs-lisp :tangle init.el
     ;; Elixir: elixir-mode
@@ -146,5 +176,5 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
   #+end_src
 
 # Local Variables:
-# eval: (add-hook 'after-save-hook (lambda ()(org-export-to-markdown)) nil t)
+# eval: (add-hook 'after-save-hook (lambda () (org-gfm-export-to-markdown)) nil t)
 # End:
