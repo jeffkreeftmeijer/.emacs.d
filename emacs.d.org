@@ -183,6 +183,6 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
   #+end_src
 
 # Local Variables:
-# eval: (add-hook 'after-save-hook (lambda () (org-gfm-export-to-markdown)) nil t)
+# eval: (add-hook 'after-save-hook (lambda () (load "~/.emacs.d/hacks/ox-md-with-title.el") (org-gfm-export-to-markdown)) nil t)
 # eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
 # End:

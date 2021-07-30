@@ -1,3 +1,6 @@
+
+# ~/.emacs.d
+
 - [Package management](#package-management)
 - [Evil](#evil)
   - ["Fix" the tab key for visibility cycling in Org and Evil mode](#evil-org-tab)
@@ -13,7 +16,7 @@
 
 <a id="package-management"></a>
 
-# Package management
+## Package management
 
 [`straight.el`](https://github.com/raxod502/straight.el) is a package manager for Emacs that locks package versions and downloads packages from Git repositories. The [Getting started](https://github.com/raxod502/straight.el#getting-started) section in its README provides the bootstrap code to place inside `init.el`:
 
@@ -53,7 +56,7 @@ To continue using the package in future sessions, add the `straight-use-package`
 
 <a id="evil"></a>
 
-# Evil
+## Evil
 
 [Evil](https://github.com/emacs-evil/evil) is a Vim emulator for emacs. Install it with `straight.el`, and turn `evil-mode` on:
 
@@ -66,9 +69,9 @@ To continue using the package in future sessions, add the `straight-use-package`
 
 <a id="evil-org-tab"></a>
 
-## "Fix" the tab key for visibility cycling in Org and Evil mode
+### "Fix" the tab key for visibility cycling in Org and Evil mode
 
-Every `TAB` press on a headline cycles through a different function<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>:
+Every `TAB` press on a headline cycles through a different function<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>:
 
 1.  The first press folds the headline's subtree, showing only the headline itself
 2.  The scond press shows the headline and its direct descendants, but keeps them folded
@@ -78,7 +81,7 @@ However, running Emacs with Evil mode in a terminal breaks the `TAB` key for cyc
 
 Most terminals map both `TAB` and `C-i` to `U+0009 (Character Tabulation)` for historical reasons, meaning they're recognised as the same keypress. Because of this, there is no way to map different functions to them inside Emacs.
 
-Evil remaps `C-i` to `evil-jump-forward` to emulate Vim's jump lists feature<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>, which overwrites the default mapping for the `TAB` key in Org mode.
+Evil remaps `C-i` to `evil-jump-forward` to emulate Vim's jump lists feature<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>, which overwrites the default mapping for the `TAB` key in Org mode.
 
 To fix the tab key's functionality in Org mode, sacrifice Evil's `C-i` backward jumping by turning it off in your configuration with the `evil-want-C-i-jump` option. This option needs to be set *before* Evil is loaded to take effect, so put it in the early init file:
 
@@ -90,11 +93,11 @@ To fix the tab key's functionality in Org mode, sacrifice Evil's `C-i` backward 
 
 <a id="evil-collection"></a>
 
-## Evil collection
+### Evil collection
 
 [Evil collection](https://github.com/emacs-evil/evil-collection) is a collection of bindings for plugins.
 
-It replaces Evil's `evil-integration`, which should be turned off through the `evil-want-keybinding` option before Evil collection is loaded<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
+It replaces Evil's `evil-integration`, which should be turned off through the `evil-want-keybinding` option before Evil collection is loaded<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>.
 
 ```emacs-lisp
 ;; Vim bindings for plugins: evil-collection
@@ -106,7 +109,7 @@ It replaces Evil's `evil-integration`, which should be turned off through the `e
 
 <a id="org-mode"></a>
 
-# Org-mode
+## Org-mode
 
 [ox-gfm](https://github.com/larstvei/ox-gfm) is an Org export backend for GitHub-flavored Markdown.
 
@@ -118,7 +121,7 @@ It replaces Evil's `evil-integration`, which should be turned off through the `e
 
 <a id="org-roam"></a>
 
-## Org Roam
+### Org Roam
 
 [Org-roam](https://github.com/org-roam/org-roam) is a knowledge management system. Set the directory for notes to `~/notes`.
 
@@ -131,7 +134,7 @@ It replaces Evil's `evil-integration`, which should be turned off through the `e
 
 <a id="org-babel"></a>
 
-## Org Babel
+### Org Babel
 
 Add "shell" to Babel's code execution languages.
 
@@ -143,7 +146,7 @@ Add "shell" to Babel's code execution languages.
 
 <a id="flyspell"></a>
 
-# Flyspell
+## Flyspell
 
 [Flyspell](https://www.emacswiki.org/emacs/FlySpell) is a minor mode that enables on-the-fly spell checking. It uses [GNU aspell](http://aspell.net), which is installed via Homebrew:
 
@@ -161,7 +164,7 @@ To enable Flyspell in text-mode, add a hook:
 
 <a id="magit"></a>
 
-# Magit
+## Magit
 
 [Magit](https://magit.vc) is an interface to Git.
 
@@ -173,7 +176,7 @@ To enable Flyspell in text-mode, add a hook:
 
 <a id="elixir"></a>
 
-# Elixir
+## Elixir
 
 ```emacs-lisp
 ;; Elixir: elixir-mode
