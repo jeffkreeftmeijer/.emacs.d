@@ -57,6 +57,7 @@
     M-x straight-freeze-versions <RET>
   #+end_example
 
+
 * Evil
 :PROPERTIES:
 :CUSTOM_ID: evil
@@ -128,6 +129,7 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
      (evil-commentary-mode)
    #+end_src
 
+
 * Org-mode
 :PROPERTIES:
 :CUSTOM_ID: org-mode
@@ -166,6 +168,7 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
      (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
    #+end_src
 
+
 * Ivy and Counsel
 :PROPERTIES:
 :CUSTOM_ID: ivy-and-counsel
@@ -192,6 +195,7 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     (straight-use-package 'counsel)
   #+end_src
 
+
 * Flyspell
 :PROPERTIES:
 :CUSTOM_ID: flyspell
@@ -211,6 +215,7 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     (add-hook 'text-mode-hook 'flyspell-mode)
   #+end_src
 
+
 * Magit
 :PROPERTIES:
 :CUSTOM_ID: magit
@@ -222,6 +227,7 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     ;; Git: magit
     (straight-use-package 'magit)
   #+end_src
+
 
 * Elixir
 :PROPERTIES:
@@ -240,6 +246,7 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     (add-hook 'elixir-mode-hook
 	      (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
   #+end_src
+
 
 * Local variables                                                  :noexport:
 # Local Variables:
