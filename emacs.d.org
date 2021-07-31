@@ -154,6 +154,8 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     ;; Org-roam
     (straight-use-package 'org-roam)
     (setq org-roam-directory (file-truename "~/notes/"))
+    (setq org-roam-v2-ack t)
+    (org-roam-setup)
   #+end_src
 
 ** Org Babel
