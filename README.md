@@ -169,6 +169,12 @@ Add "shell" to Babel's code execution languages.
 (ivy-mode 1)
 ```
 
+Make Ivy's prompt line selectable as a candidate, for renaming files when a similar name already exists, for example.
+
+```emacs-lisp
+(setq ivy-use-selectable-prompt t)
+```
+
 [Counsel](https://github.com/abo-abo/swiper) provides versions of Emacs functions updated to make use of Ivy.
 
 ```emacs-lisp

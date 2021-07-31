@@ -34,6 +34,8 @@
 (straight-use-package 'ivy)
 (ivy-mode 1)
 
+(setq ivy-use-selectable-prompt t)
+
 ;; Completions: Ivy
 (straight-use-package 'counsel)
 

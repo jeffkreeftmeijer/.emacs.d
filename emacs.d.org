@@ -164,6 +164,12 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     (ivy-mode 1)
   #+end_src
 
+  Make Ivy's prompt line selectable as a candidate, for renaming files when a similar name already exists, for example.
+
+  #+begin_src emacs-lisp :tangle init.el
+    (setq ivy-use-selectable-prompt t)
+  #+end_src
+
   [[https://github.com/abo-abo/swiper][Counsel]] provides versions of Emacs functions updated to make use of Ivy.
 
   #+begin_src emacs-lisp :tangle init.el
