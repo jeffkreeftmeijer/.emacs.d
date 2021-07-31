@@ -172,6 +172,13 @@ Add "shell" to Babel's code execution languages.
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
 ```
 
+Don't warn when evaluating code blocks:
+
+```emacs-lisp
+;; Don't warn when evaluating code blocks.
+(setq org-confirm-babel-evaluate nil)
+```
+
 
 <a id="ivy-and-counsel"></a>
 

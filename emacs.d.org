@@ -170,6 +170,13 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
      (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
    #+end_src
 
+   Don't warn when evaluating code blocks:
+
+   #+begin_src emacs-lisp :tangle init.el
+     ;; Don't warn when evaluating code blocks.
+     (setq org-confirm-babel-evaluate nil)
+   #+end_src
+
 
 * Ivy and Counsel
 :PROPERTIES:
