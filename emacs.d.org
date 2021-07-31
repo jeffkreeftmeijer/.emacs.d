@@ -1,5 +1,6 @@
 #+title: ~/.emacs.d
 #+export_file_name: README
+#+startup: fold
 
 * Package management
 :PROPERTIES:
