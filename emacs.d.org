@@ -142,6 +142,14 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
   (straight-use-package 'ox-gfm)
 #+end_src
 
+[[https://github.com/hniksic/emacs-htmlize][htmlize]] is an HTML syntax highlighter.
+
+#+begin_src emacs-lisp :tangle init.el
+  ;; Syntax highlighted HTML exports for code blocks: htmlize
+  (straight-use-package 'htmlize)
+#+end_src
+
+
 ** Org Roam
 :PROPERTIES:
 :CUSTOM_ID: org-roam

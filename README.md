@@ -145,6 +145,13 @@ Evil collection replaces Evil's `evil-integration`, which should be turned befor
 (straight-use-package 'ox-gfm)
 ```
 
+[htmlize](https://github.com/hniksic/emacs-htmlize) is an HTML syntax highlighter.
+
+```emacs-lisp
+;; Syntax highlighted HTML exports for code blocks: htmlize
+(straight-use-package 'htmlize)
+```
+
 
 <a id="org-roam"></a>
 
