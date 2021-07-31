@@ -113,6 +113,20 @@ Warning (evil-collection): Make sure to set `evil-want-keybinding' to nil before
 See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
 #+end_example
 
+** Evil commentary
+:PROPERTIES:
+:CUSTOM_ID: evil-commentary
+:END:
+
+   [[https://github.com/linktohack/evil-commentary][Evil commentary]] comments stuff out.
+   It's an Emacs port of [[https://github.com/tpope/vim-commentary][commentary.vim]].
+
+   #+begin_src emacs-lisp :tangle init.el
+     ;; Comment stuff out: Evil commentary
+     (straight-use-package 'evil-commentary)
+     (evil-commentary-mode)
+   #+end_src
+
 * Org-mode
 :PROPERTIES:
 :CUSTOM_ID: org-mode

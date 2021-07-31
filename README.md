@@ -5,6 +5,7 @@
 - [Evil](#evil)
   - ["Fix" the tab key for visibility cycling in Org and Evil mode](#evil-org-tab)
   - [Evil collection](#evil-collection)
+  - [Evil commentary](#evil-commentary)
 - [Org-mode](#org-mode)
   - [Org Roam](#org-roam)
   - [Org Babel](#org-babel)
@@ -117,6 +118,19 @@ Evil collection replaces Evil's `evil-integration`, which should be turned befor
 ```emacs-lisp
 ;; Disable evil-integration in favor of evil-collection.
 (setq evil-want-keybinding nil)
+```
+
+
+<a id="evil-commentary"></a>
+
+### Evil commentary
+
+[Evil commentary](https://github.com/linktohack/evil-commentary) comments stuff out. It's an Emacs port of [commentary.vim](https://github.com/tpope/vim-commentary).
+
+```emacs-lisp
+;; Comment stuff out: Evil commentary
+(straight-use-package 'evil-commentary)
+(evil-commentary-mode)
 ```
 
 

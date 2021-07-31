@@ -20,6 +20,10 @@
 (straight-use-package 'evil-collection)
 (evil-collection-init)
 
+;; Comment stuff out: Evil commentary
+(straight-use-package 'evil-commentary)
+(evil-commentary-mode)
+
 ;; GitHub-flavored Markdown Org exporter: ox-gfm
 (straight-use-package 'ox-gfm)
 
