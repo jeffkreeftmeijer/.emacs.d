@@ -3,7 +3,6 @@
 #+html_path: /emacs-evil-org-tab/
 #+date: 2012-07-29
 #+description: To fix the tab key's functionality in Org mode, sacrifice Evil's backward jumping by turning it off with the evil-want-C-i-jump option.
-#+setupfile: ~/articles/setup.org
 
 Emacs' Org mode uses the =TAB= key to call =org-cycle=, which cycles visibility for headers.
 Every =TAB= press on a headline cycles through a different function[fn:vim-folding]:
