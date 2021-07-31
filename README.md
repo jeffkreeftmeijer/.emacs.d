@@ -106,13 +106,17 @@ To fix the tab key's functionality in Org mode, sacrifice Evil's `C-i` backward 
 
 [Evil collection](https://github.com/emacs-evil/evil-collection) is a collection of bindings for plugins.
 
-It replaces Evil's `evil-integration`, which should be turned off through the `evil-want-keybinding` option before Evil collection is loaded<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>.
-
 ```emacs-lisp
 ;; Vim bindings for plugins: evil-collection
 (straight-use-package 'evil-collection)
-(setq evil-want-keybinding nil)
 (evil-collection-init)
+```
+
+Evil collection replaces Evil's `evil-integration`, which should be turned before Evil and Evil collection are loaded<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>. To do so, set the `evil-want-keybinding` configuration option to `nil` in the early init file:
+
+```emacs-lisp
+;; Disable evil-integration in favor of evil-collection.
+(setq evil-want-keybinding nil)
 ```
 
 

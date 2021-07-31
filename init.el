@@ -18,7 +18,6 @@
 
 ;; Vim bindings for plugins: evil-collection
 (straight-use-package 'evil-collection)
-(setq evil-want-keybinding nil)
 (evil-collection-init)
 
 ;; GitHub-flavored Markdown Org exporter: ox-gfm
