@@ -57,9 +57,15 @@
 ;; Git: magit
 (straight-use-package 'magit)
 
+;; Language server client: Eglot
+(straight-use-package 'eglot)
+
 ;; Elixir: elixir-mode
 (straight-use-package 'elixir-mode)
 
 ;; Format Elixir files on save
 (add-hook 'elixir-mode-hook
 	  (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+
+;; Add elixir-ls to Eglot's server programs list
+(add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))

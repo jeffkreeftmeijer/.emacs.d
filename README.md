@@ -12,7 +12,9 @@
 - [Ivy and Counsel](#ivy-and-counsel)
 - [Flyspell](#flyspell)
 - [Magit](#magit)
+- [Eglot](#eglot)
 - [Elixir](#elixir)
+  - [elixir-ls](#elixir-ls)
 
 
 
@@ -243,6 +245,18 @@ To enable Flyspell in text-mode, add a hook:
 ```
 
 
+<a id="eglot"></a>
+
+## Eglot
+
+[Eglot](https://github.com/joaotavora/eglot) is a language server protocol client.
+
+```emacs-lisp
+;; Language server client: Eglot
+(straight-use-package 'eglot)
+```
+
+
 <a id="elixir"></a>
 
 ## Elixir
@@ -258,6 +272,27 @@ Automatically format Elixir files on save.
 ;; Format Elixir files on save
 (add-hook 'elixir-mode-hook
 	  (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+```
+
+
+<a id="elixir-ls"></a>
+
+### elixir-ls
+
+Check out the repository for elixir-ls inside the `~/.emacs.d/` directory, and build<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup> it using `mix elixir_ls.release`:
+
+```shell
+git clone git@github.com:elixir-lsp/elixir-ls.git ~/.emacs.d/elixir-ls
+cd ~/.emacs.d/elixir-ls
+mix deps.get
+mix elixir_ls.release
+```
+
+In `~/.emacs.d/init.el`, add the path to the `language_server.sh` file to the server programs list:
+
+```emacs-lisp
+;; Add elixir-ls to Eglot's server programs list
+(add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
 ```
 
 ## Footnotes
@@ -279,3 +314,12 @@ Automatically format Elixir files on save.
     Warning (evil-collection): Make sure to set `evil-want-keybinding' to nil before loading evil or evil-collection.
     
     See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
+
+<sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> Because elixir-ls in a local repository, pull in changes through Git and rebuild the language server to update it in the future:
+
+```shell
+cd ~/.emacs.d/elixir-ls
+git pull
+mix deps.get
+mix elixir_ls.release
+```

@@ -1,0 +1,48 @@
+#+title: Set up Eglot with elixir-ls
+#+html_path: /emacs-eglot-elixir-ls/
+#+date: 2021-07-28
+#+description: Set up Eglot by checking out elixir-ls and building it locally
+#+setupfile: ../setup.org
+#+custom_id: /emacs-eglot-elixir-ls//
+
+To set up [[https://github.com/joaotavora/eglot][Eglot]] with [[https://github.com/elixir-lsp/elixir-ls][elixir-ls]], first install both [[https://github.com/elixir-editors/emacs-elixir][elixir-mode]] and Eglot using your preferred Emacs package manager.
+With [[https://github.com/raxod502/straight.el][straight.el]]:
+
+#+caption: =~/emacs.d/init.el=
+#+begin_src emacs-lisp :tangle init.el
+  ;; Elixir: elixir-mode
+  (straight-use-package 'elixir-mode)
+
+  ;; Language server client: Eglot
+  (straight-use-package 'eglot)
+#+end_src
+
+Check out the repository for elixir-ls inside the =~/.emacs.d/= directory, and build[fn:update] it using =mix elixir_ls.release=:
+
+#+begin_src shell
+  git clone git@github.com:elixir-lsp/elixir-ls.git ~/.emacs.d/elixir-ls
+  cd ~/.emacs.d/elixir-ls
+  mix deps.get
+  mix elixir_ls.release
+#+end_src
+
+In =~/.emacs.d/init.el=, add the path to the =language_server.sh= file to the server programs list:
+
+#+caption: =~/emacs.d/init.el=
+#+begin_src emacs-lisp :tangle init.el
+  ;; Add elixir-ls to Eglot's server programs list
+  (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
+#+end_src
+
+Evaluate the =init.el= file by running =M-x eval-buffer= (or by restarting Emacs) to reload the configuration.
+
+Now, run =M-x eglot= in any Elixir file to start the language server.
+
+[fn:update] Because elixir-ls in a local repository, pull in changes through Git and rebuild the language server to update it in the future:
+
+#+begin_src shell
+  cd ~/.emacs.d/elixir-ls
+  git pull
+  mix deps.get
+  mix elixir_ls.release
+#+end_src

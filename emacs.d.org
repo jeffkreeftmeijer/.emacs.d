@@ -246,6 +246,19 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
   #+end_src
 
 
+* Eglot
+:PROPERTIES:
+:CUSTOM_ID: eglot
+:END:
+
+  [[https://github.com/joaotavora/eglot][Eglot]] is a language server protocol client.
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Language server client: Eglot
+    (straight-use-package 'eglot)
+  #+end_src
+
+
 * Elixir
 :PROPERTIES:
 :CUSTOM_ID: elixir
@@ -263,6 +276,21 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     (add-hook 'elixir-mode-hook
 	      (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
   #+end_src
+
+
+** elixir-ls
+:PROPERTIES:
+:CUSTOM_ID: elixir-ls
+:END:
+
+   #+INCLUDE: "~/articles/emacs-eglot-elixir-ls/emacs-eglot-elixir-ls.org" :lines "19-30"
+
+   # NOTE: Copied in to allow for tangling.
+   # https://emacs.stackexchange.com/questions/61278/tangle-org-file-containing-include-directives-and-multiple-tangle-targets
+   #+begin_src emacs-lisp :tangle init.el
+     ;; Add elixir-ls to Eglot's server programs list
+     (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
+   #+end_src
 
 
 * Local variables                                                  :noexport:
