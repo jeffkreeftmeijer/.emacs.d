@@ -18,6 +18,7 @@
  ("pkg-info" . "76ba7415480687d05a4353b27fea2ae02b8d9d61")
  ("s.el" . "08661efb075d1c6b4fa812184c1e5e90c08795a9")
  ("straight.el" . "1e27b0590df77a5d478970ca58fd6606971692f5")
+ ("swiper" . "20d78ae4fe2b128411f0ddb0aa22ba25aa5d6d3f")
  ("transient" . "efdf91980a6f8bcb151debb877302ead8751ab65")
  ("with-editor" . "5519b6a67ecd66865b4fdd5447425eee900c54f4"))
 :beta

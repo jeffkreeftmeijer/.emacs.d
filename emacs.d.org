@@ -145,6 +145,26 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
      (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
    #+end_src
 
+* Ivy and Counsel
+:PROPERTIES:
+:CUSTOM_ID: ivy-and-counsel
+:END:
+
+  [[https://github.com/abo-abo/swiper][Ivy]] is a generic completion mechanism.
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Completions: Ivy
+    (straight-use-package 'ivy)
+    (ivy-mode 1)
+  #+end_src
+
+  [[https://github.com/abo-abo/swiper][Counsel]] provides versions of Emacs functions updated to make use of Ivy.
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Completions: Ivy
+    (straight-use-package 'counsel)
+  #+end_src
+
 * Flyspell
 :PROPERTIES:
 :CUSTOM_ID: flyspell

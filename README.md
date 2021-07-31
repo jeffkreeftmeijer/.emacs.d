@@ -8,6 +8,7 @@
 - [Org-mode](#org-mode)
   - [Org Roam](#org-roam)
   - [Org Babel](#org-babel)
+- [Ivy and Counsel](#ivy-and-counsel)
 - [Flyspell](#flyspell)
 - [Magit](#magit)
 - [Elixir](#elixir)
@@ -149,6 +150,26 @@ Add "shell" to Babel's code execution languages.
 ```emacs-lisp
 ;; Add "shell" to Babel's code execution languages.
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+```
+
+
+<a id="ivy-and-counsel"></a>
+
+## Ivy and Counsel
+
+[Ivy](https://github.com/abo-abo/swiper) is a generic completion mechanism.
+
+```emacs-lisp
+;; Completions: Ivy
+(straight-use-package 'ivy)
+(ivy-mode 1)
+```
+
+[Counsel](https://github.com/abo-abo/swiper) provides versions of Emacs functions updated to make use of Ivy.
+
+```emacs-lisp
+;; Completions: Ivy
+(straight-use-package 'counsel)
 ```
 
 

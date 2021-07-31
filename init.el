@@ -31,6 +31,13 @@
 ;; Add "shell" to Babel's code execution languages.
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
 
+;; Completions: Ivy
+(straight-use-package 'ivy)
+(ivy-mode 1)
+
+;; Completions: Ivy
+(straight-use-package 'counsel)
+
 ;; Spell checking: Flyspell
 (add-hook 'text-mode-hook 'flyspell-mode)
 
