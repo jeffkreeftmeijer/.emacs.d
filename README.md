@@ -53,6 +53,10 @@ To continue using the package in future sessions, add the `straight-use-package`
 (straight-use-package 'evil)
 ```
 
+To update an installed package, execute the `straight-pull-package` command:
+
+    M-x straight-pull-package <RET> evil <RET>
+
 
 <a id="evil"></a>
 

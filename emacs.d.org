@@ -44,6 +44,12 @@
     (straight-use-package 'evil)
   #+end_src
 
+  To update an installed package, execute the =straight-pull-package= command:
+
+  #+begin_example
+    M-x straight-pull-package <RET> evil <RET>
+  #+end_example
+
 * Evil
 :PROPERTIES:
 :CUSTOM_ID: evil
