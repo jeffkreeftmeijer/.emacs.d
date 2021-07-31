@@ -26,7 +26,7 @@
 
 ;; Org-roam
 (straight-use-package 'org-roam)
-(setq org-roam-directory (file-truename "~/notes"))
+(setq org-roam-directory (file-truename "~/notes/"))
 
 ;; Add "shell" to Babel's code execution languages.
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))

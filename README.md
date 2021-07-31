@@ -123,12 +123,12 @@ It replaces Evil's `evil-integration`, which should be turned off through the `e
 
 ### Org Roam
 
-[Org-roam](https://github.com/org-roam/org-roam) is a knowledge management system. Set the directory for notes to `~/notes`.
+[Org-roam](https://github.com/org-roam/org-roam) is a knowledge management system. Set the directory for notes to `~/notes/`.
 
 ```emacs-lisp
 ;; Org-roam
 (straight-use-package 'org-roam)
-(setq org-roam-directory (file-truename "~/notes"))
+(setq org-roam-directory (file-truename "~/notes/"))
 ```
 
 
