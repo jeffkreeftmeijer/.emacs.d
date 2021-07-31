@@ -57,6 +57,10 @@ To update an installed package, execute the `straight-pull-package` command:
 
     M-x straight-pull-package <RET> evil <RET>
 
+To update the [version lockfile](straight/versions/default.el), run `straight-freeze-versions`:
+
+    M-x straight-freeze-versions <RET>
+
 
 <a id="evil"></a>
 

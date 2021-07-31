@@ -50,6 +50,12 @@
     M-x straight-pull-package <RET> evil <RET>
   #+end_example
 
+  To update the [[file:straight/versions/default.el][version lockfile]], run =straight-freeze-versions=:
+
+  #+begin_example
+    M-x straight-freeze-versions <RET>
+  #+end_example
+
 * Evil
 :PROPERTIES:
 :CUSTOM_ID: evil
