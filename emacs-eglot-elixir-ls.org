@@ -2,11 +2,10 @@
 :ID:       D89AD16D-BCF6-49A3-9EC1-FBCB1A7A0BD7
 :END:
 #+title: Set up Eglot with elixir-ls
+#+author: Jeff Kreeftmeijer
 #+html_path: /emacs-eglot-elixir-ls/
 #+date: 2021-07-28
 #+description: Set up Eglot by checking out elixir-ls and building it locally
-#+setupfile: ../setup.org
-#+custom_id: /emacs-eglot-elixir-ls//
 
 To set up [[https://github.com/joaotavora/eglot][Eglot]] with [[https://github.com/elixir-lsp/elixir-ls][elixir-ls]], first install both [[https://github.com/elixir-editors/emacs-elixir][elixir-mode]] and Eglot using your preferred Emacs package manager.
 With [[https://github.com/raxod502/straight.el][straight.el]]:
