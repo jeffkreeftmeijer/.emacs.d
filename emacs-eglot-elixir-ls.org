@@ -1,3 +1,6 @@
+:PROPERTIES:
+:ID:       D89AD16D-BCF6-49A3-9EC1-FBCB1A7A0BD7
+:END:
 #+title: Set up Eglot with elixir-ls
 #+html_path: /emacs-eglot-elixir-ls/
 #+date: 2021-07-28
