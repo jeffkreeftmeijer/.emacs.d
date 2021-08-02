@@ -69,3 +69,7 @@
 
 ;; Add elixir-ls to Eglot's server programs list
 (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
+
+;; Copy and paste: xclip
+(straight-use-package 'xclip)
+(xclip-mode 1)

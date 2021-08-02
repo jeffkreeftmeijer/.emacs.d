@@ -293,6 +293,20 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
    #+end_src
 
 
+* Copy and paste
+:PROPERTIES:
+:CUSTOM_ID: copy-and-paste
+:END:
+
+[[https://elpa.gnu.org/packages/xclip.html][xclip]] is a package that allows Emacs to copy and paste from the GUI clipboard to enable copying and pasting text to and from terminal Emacs.
+
+#+begin_src emacs-lisp :tangle init.el
+  ;; Copy and paste: xclip
+  (straight-use-package 'xclip)
+  (xclip-mode 1)
+#+end_src
+
+
 * Local variables                                                  :noexport:
 # Local Variables:
 # eval: (add-hook 'after-save-hook (lambda () (load "~/.emacs.d/hacks/ox-md-with-title.el") (org-gfm-export-to-markdown)) nil t)

@@ -15,6 +15,7 @@
 - [Eglot](#eglot)
 - [Elixir](#elixir)
   - [elixir-ls](#elixir-ls)
+- [Copy and paste](#copy-and-paste)
 
 
 
@@ -293,6 +294,18 @@ In `~/.emacs.d/init.el`, add the path to the `language_server.sh` file to the se
 ```emacs-lisp
 ;; Add elixir-ls to Eglot's server programs list
 (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
+
+
+<a id="copy-and-paste"></a>
+
+## Copy and paste
+
+[xclip](https://elpa.gnu.org/packages/xclip.html) is a package that allows Emacs to copy and paste from the GUI clipboard to enable copying and pasting text to and from terminal Emacs.
+
+```emacs-lisp
+;; Copy and paste: xclip
+(straight-use-package 'xclip)
+(xclip-mode 1)
 ```
 
 ## Footnotes
