@@ -84,7 +84,7 @@ To update the [version lockfile](straight/versions/default.el), run `straight-fr
 
 ### "Fix" the tab key for visibility cycling in Org and Evil mode
 
-Every `TAB` press on a headline cycles through a different function<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>:
+Emacs' Org mode uses the `TAB` key to call `org-cycle`, which cycles visibility for headers. Every `TAB` press on a headline cycles through a different function<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>:
 
 1.  The first press folds the headline's subtree, showing only the headline itself
 2.  The scond press shows the headline and its direct descendants, but keeps them folded
@@ -294,6 +294,7 @@ In `~/.emacs.d/init.el`, add the path to the `language_server.sh` file to the se
 ```emacs-lisp
 ;; Add elixir-ls to Eglot's server programs list
 (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
+```
 
 
 <a id="copy-and-paste"></a>
