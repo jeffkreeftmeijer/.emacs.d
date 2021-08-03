@@ -4,7 +4,7 @@
 #+title: "Fix" the tab key for visibility cycling in Org and Evil mode
 #+author: Jeff Kreeftmeijer
 #+html_path: /emacs-evil-org-tab/
-#+date: 2012-07-29
+#+date: 2021-07-29
 #+description: To fix the tab key's functionality in Org mode, sacrifice Evil's backward jumping by turning it off with the evil-want-C-i-jump option.
 
 Emacs' Org mode uses the =TAB= key to call =org-cycle=, which cycles visibility for headers.
