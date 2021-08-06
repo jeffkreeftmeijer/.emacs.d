@@ -214,6 +214,8 @@ To remove it, turn off =org-html-head-include-default-style=:
 :CUSTOM_ID: ivy-and-counsel
 :END:
 
+Inputs in commands like =M-x=, =C-x b= and =C-x C-f= are completed by prompting the user for input by showing a list of completion options.
+
   [[https://github.com/abo-abo/swiper][Ivy]] is a generic completion mechanism.
 
   #+begin_src emacs-lisp :tangle init.el
