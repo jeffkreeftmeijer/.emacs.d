@@ -104,3 +104,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Feed reader: elfeed
+(straight-use-package 'elfeed)

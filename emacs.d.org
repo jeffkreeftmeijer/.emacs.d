@@ -319,6 +319,17 @@ Inputs in commands like =M-x=, =C-x b= and =C-x C-f= are completed by prompting 
 #+end_src
 
 
+* Feed reader
+
+  #+begin_src emacs-lisp :tangle init.el
+    ;; Feed reader: elfeed
+    (straight-use-package 'elfeed)
+  #+end_src
+
+  #+RESULTS:
+  : t
+
+
 * Local variables                                                  :noexport:
 # Local Variables:
 # eval: (add-hook 'after-save-hook (lambda () (load "~/.emacs.d/hacks/ox-md-with-title.el") (org-gfm-export-to-markdown)) nil t)

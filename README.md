@@ -324,6 +324,16 @@ In `~/.emacs.d/init.el`, add the path to the `language_server.sh` file to the se
 (xclip-mode 1)
 ```
 
+
+<a id="org6a3bb81"></a>
+
+## Feed reader
+
+```emacs-lisp
+;; Feed reader: elfeed
+(straight-use-package 'elfeed)
+```
+
 ## Footnotes
 
 <sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> Vim and Evil don't have a direct equivalent to fold cycling, but they have three different commands that achieve the same result:
