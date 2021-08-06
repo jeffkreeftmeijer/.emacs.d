@@ -149,6 +149,17 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
   (straight-use-package 'htmlize)
 #+end_src
 
+** Exporting
+
+Org exports to HTML.
+
+By default, the exported HTML files include default a stylesheet.
+To remove it, turn off =org-html-head-include-default-style=:
+
+#+begin_src emacs-lisp :tangle init.el
+  ;; Don't include default stylesheet in Org HTML export
+  (setq org-html-head-include-default-style nil)
+#+end_src
 
 ** Org Roam
 :PROPERTIES:
@@ -165,6 +176,18 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
     (setq org-roam-v2-ack t)
     (org-roam-setup)
   #+end_src
+
+** org-roam-ui
+
+#+begin_src emacs-lisp :tangle init.el
+  (straight-use-package 'websocket)
+  
+  (straight-use-package
+   '(org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out")))
+#+end_src
+
+#+RESULTS:
+: t
 
 ** Org Babel
 :PROPERTIES:
@@ -289,7 +312,7 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
    # https://emacs.stackexchange.com/questions/61278/tangle-org-file-containing-include-directives-and-multiple-tangle-targets
    #+begin_src emacs-lisp :tangle init.el
      ;; Add elixir-ls to Eglot's server programs list
-     (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
+     ;;(add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
    #+end_src
 
 

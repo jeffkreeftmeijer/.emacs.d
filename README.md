@@ -1,5 +1,5 @@
 
-# ~/.emacs.d
+# ~/.emacs.d "Fix" the tab key for visibility cycling in Org and Evil mode
 
 - [Package management](#package-management)
 - [Evil](#evil)
@@ -7,7 +7,9 @@
   - [Evil collection](#evil-collection)
   - [Evil commentary](#evil-commentary)
 - [Org-mode](#org-mode)
+  - [Exporting](#org52cd7c4)
   - [Org Roam](#org-roam)
+  - [org-roam-ui](#org733d0c0)
   - [Org Babel](#org-babel)
 - [Ivy and Counsel](#ivy-and-counsel)
 - [Flyspell](#flyspell)
@@ -156,6 +158,20 @@ Evil collection replaces Evil's `evil-integration`, which should be turned befor
 ```
 
 
+<a id="org52cd7c4"></a>
+
+### Exporting
+
+Org exports to HTML.
+
+By default, the exported HTML files include default a stylesheet. To remove it, turn off `org-html-head-include-default-style`:
+
+```emacs-lisp
+;; Don't include default stylesheet in Org HTML export
+(setq org-html-head-include-default-style nil)
+```
+
+
 <a id="org-roam"></a>
 
 ### Org Roam
@@ -168,6 +184,18 @@ Evil collection replaces Evil's `evil-integration`, which should be turned befor
 (setq org-roam-directory (file-truename "~/notes/"))
 (setq org-roam-v2-ack t)
 (org-roam-setup)
+```
+
+
+<a id="org733d0c0"></a>
+
+### org-roam-ui
+
+```emacs-lisp
+(straight-use-package 'websocket)
+
+(straight-use-package
+ '(org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out")))
 ```
 
 
@@ -293,7 +321,7 @@ In `~/.emacs.d/init.el`, add the path to the `language_server.sh` file to the se
 
 ```emacs-lisp
 ;; Add elixir-ls to Eglot's server programs list
-(add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
+;;(add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/elixir-ls/release/language_server.sh"))
 ```
 
 
