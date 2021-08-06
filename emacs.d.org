@@ -209,34 +209,21 @@ To remove it, turn off =org-html-head-include-default-style=:
    #+end_src
 
 
-* Ivy and Counsel
+* Completion
 :PROPERTIES:
-:CUSTOM_ID: ivy-and-counsel
+:CUSTOM_ID: completion
 :END:
 
 Inputs in commands like =M-x=, =C-x b= and =C-x C-f= are completed by prompting the user for input by showing a list of completion options.
 
-  [[https://github.com/abo-abo/swiper][Ivy]] is a generic completion mechanism.
+#+begin_src emacs-lisp :tangle init.el
+  ;; Completions: Vertico
+  (straight-use-package 'vertico)
+  (vertico-mode)
+#+end_src
 
-  #+begin_src emacs-lisp :tangle init.el
-    ;; Completions: Ivy
-    (straight-use-package 'ivy)
-    (ivy-mode 1)
-  #+end_src
-
-  Make Ivy's prompt line selectable as a candidate, for renaming files when a similar name already exists, for example.
-
-  #+begin_src emacs-lisp :tangle init.el
-    (setq ivy-use-selectable-prompt t)
-  #+end_src
-
-  [[https://github.com/abo-abo/swiper][Counsel]] provides versions of Emacs functions updated to make use of Ivy.
-
-  #+begin_src emacs-lisp :tangle init.el
-    ;; Completions: Ivy
-    (straight-use-package 'counsel)
-  #+end_src
-
+#+RESULTS:
+: t
 
 * Flyspell
 :PROPERTIES:

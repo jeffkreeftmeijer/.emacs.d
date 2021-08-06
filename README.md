@@ -218,29 +218,16 @@ Don't warn when evaluating code blocks:
 ```
 
 
-<a id="ivy-and-counsel"></a>
+<a id="completion"></a>
 
-## Ivy and Counsel
+## Completion
 
-[Ivy](https://github.com/abo-abo/swiper) is a generic completion mechanism.
-
-```emacs-lisp
-;; Completions: Ivy
-(straight-use-package 'ivy)
-(ivy-mode 1)
-```
-
-Make Ivy's prompt line selectable as a candidate, for renaming files when a similar name already exists, for example.
+Inputs in commands like `M-x`, `C-x b` and `C-x C-f` are completed by prompting the user for input by showing a list of completion options.
 
 ```emacs-lisp
-(setq ivy-use-selectable-prompt t)
-```
-
-[Counsel](https://github.com/abo-abo/swiper) provides versions of Emacs functions updated to make use of Ivy.
-
-```emacs-lisp
-;; Completions: Ivy
-(straight-use-package 'counsel)
+;; Completions: Vertico
+(straight-use-package 'vertico)
+(vertico-mode)
 ```
 
 
