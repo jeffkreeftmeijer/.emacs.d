@@ -1,5 +1,4 @@
 #+title: ~/.emacs.d
-#+export_file_name: README
 #+startup: fold
 
 * Package management
@@ -208,7 +207,7 @@ To remove it, turn off =org-html-head-include-default-style=:
      (setq org-confirm-babel-evaluate nil)
    #+end_src
 
-   
+
 * Completion
 :PROPERTIES:
 :CUSTOM_ID: completion
@@ -328,19 +327,6 @@ Inputs in commands like =M-x=, =C-x b= and =C-x C-f= are completed by prompting 
 
   #+RESULTS:
   : t
-
-  By default, elfeed only shows unread entries in the last six months.
-  To keep read entries on the list, and see entries that are older than six months, set =elfeed-search-filter= to nil:
-
-  #+begin_src emacs-lisp :tangle init.el
-  (setq-default elfeed-search-filter nil)
-  #+end_src
-
-  #+RESULTS:
-
-  #+begin_src emacs-lisp :tangle init.el
-
-  #+end_src
 
 
 * Local variables                                                  :noexport:
