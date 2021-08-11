@@ -198,7 +198,7 @@ To remove it, turn off =org-html-head-include-default-style=:
 
    #+begin_src emacs-lisp :tangle init.el
      ;; Add "shell" to Babel's code execution languages.
-     (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+     (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) (ruby . t)))
    #+end_src
 
    Don't warn when evaluating code blocks:
