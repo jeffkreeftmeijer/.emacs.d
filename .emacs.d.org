@@ -173,7 +173,6 @@ To remove it, turn off =org-html-head-include-default-style=:
     (straight-use-package 'org-roam)
     (setq org-roam-directory (file-truename "~/notes/"))
     (setq org-roam-v2-ack t)
-    (org-roam-setup)
   #+end_src
 
 ** org-roam-ui

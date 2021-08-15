@@ -37,7 +37,6 @@
 (straight-use-package 'org-roam)
 (setq org-roam-directory (file-truename "~/notes/"))
 (setq org-roam-v2-ack t)
-(org-roam-setup)
 
 (straight-use-package 'websocket)
 
