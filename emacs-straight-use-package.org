@@ -1,0 +1,214 @@
+:PROPERTIES:
+:ID:       717C84DE-62C3-4E10-98C6-B4C3390F3B81
+:END:
+#+title: Emacs package management with straight.el and use-package
+#+author: Jeff Kreeftmeijer
+#+html_path: /emacs-straight-use-package/
+#+date: 2021-08-16
+#+description: Use straight.el and use-package for reproducable, performant and cleanly-configured package management in Emacs
+
+Emacs includes a package manager named =package.el=, which installs packages from the official Emacs Lisp Package Archive, named [[https://elpa.gnu.org][GNU ELPA.]]
+GNU ELPA hosts a selection of packages, but most are available on [[https://melpa.org][MELPA]], which is an unofficial package archive that implements the ELPA specification.
+To use MELPA, it has to be [[https://melpa.org/#/getting-started][installed]] by adding it to the list of =package.el= package archives.
+
+The built-in package manager installs packages through the =package-install= function.
+For example, to install the "evil-commentary" package from MELPA, call =package-install= inside Emacs:
+
+=M-x= =package-install= =<RET>= =evil-commentary= =<RET>=
+
+* Straight.el
+
+[[https://github.com/raxod502/straight.el][Straight.el]] is an alternative package manager that installs packages through Git checkouts instead of downloading tarballs from one of the package archives.
+Doing so allows installing forked packages, altering local package checkouts, and locking packages to exact versions for reproducable setups.
+
+** Installation
+
+The [[https://github.com/raxod502/straight.el#getting-started][Getting started]] section in the straight.el README provides the bootstrap code to place inside =~/.emacs.d/init.el= in order to install it:
+
+#+caption: =init.el=, installing straight.el
+#+headers: :tangle package-management.el
+#+begin_src emacs-lisp
+  ;; Install straight.el
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	(bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+	  (url-retrieve-synchronously
+	   "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	   'silent 'inhibit-cookies)
+	(goto-char (point-max))
+	(eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+#+end_src
+
+Straight.el uses package archives like GNU ELPA as registries to find the linked repositories to clone from.
+Since these are checked automatically, there's no need to add them to the list of package archives.
+
+While package.el loads all installed packages on startup, straight.el only loads packages that are referenced in the init file.
+This allows for installing packages temporarily without slowing down Emacs' startup time on subsequent startups.
+
+To create a truly reproducable setup, disable package.el in favor of straight.el by turning off =package-enable-at-startup=.
+Because this step needs to happen before package.el gets a chance to load packages, it this configuration needs to be set in the early init file:
+
+#+caption: =early-init.el=, disabling package.el
+#+name: early-init
+#+headers: :tangle early-package-management.el
+#+begin_src emacs-lisp
+  ;; Disable package.el in favor of straight.el
+  (setq package-enable-at-startup nil)
+#+end_src
+
+With this configuration set, Emacs will only load the packages installed through straight.el.
+
+** Usage
+
+To use straight.el to install a package for the current session, execute the =straight-use-package= command:
+
+=M-x= =straight-use-package= =<RET>= =evil-commentary= =<RET>=
+
+To continue using the package in future sessions, add the =straight-use-package= call to =~/.emacs/init.el=:
+
+#+begin_src emacs-lisp
+  (straight-use-package 'evil-commentary)
+#+end_src
+
+To update an installed package, execute the =straight-pull-package= command:
+
+=M-x= =straight-pull-package= =<RET>= =evil-commentary= =<RET>=
+
+To update the version lockfile, which is used to target the exact version to check out when installing, run =straight-freeze-versions=:
+
+=M-x= =straight-freeze-versions= =<RET>=
+
+* Use-package
+
+[[https://github.com/jwiegley/use-package][Use-package]] is a macro to configure and load packages in Emacs configurations.
+It interfaces with package managers like package.el or straight.el to install packages, but is not a package manager by itself.
+
+For example, when using straight.el without use-package, installing and starting evil-commentary requires installing the package and starting it as two separate steps:
+
+#+begin_src emacs-lisp
+  (straight-use-package 'evil-commentary)
+  (evil-commentary-mode)
+#+end_src
+
+[[*Using straight.el with use-package][Combined with use-package]], the installation and configuration are unified into a single call to =use-package=:
+
+#+begin_src emacs-lisp
+  (use-package evil-commentary
+	       :config (evil-commentary-mode))
+#+end_src
+
+Aside from keeping configuration files tidy, having package configuration contained within a single call allows for more advanced package setups.
+For example, packages can be lazy-loaded, keeping their configuration code from executing until the package they configure is needed.
+
+** Installation
+
+To install use-package with straight.el, use =straight-use-package=:
+
+#+caption: =init.el=, installing use-package
+#+headers: :tangle package-management.el
+#+begin_src emacs-lisp
+  ;; Install use-package
+  (straight-use-package 'use-package)
+#+end_src
+
+** Using straight.el with use-package
+
+By default, use-package uses package.el to install packages.
+To use straight.el instead of package.el, pass the =:straight= option:
+
+#+begin_src emacs-lisp
+  (use-package evil-commentary
+	       :straight t)
+#+end_src
+
+To configure use-package to always use straight.el, use =use-package= to configure straight.el to turn on =straight-use-package-by-default=[fn:configure-straight]:
+
+[fn:configure-straight] Calling =use-package= would normally install straight.el, but since it's already installed, the installation is skipped and the configuration is set.
+Here, the call to =use-package= is only used to configure straight.el, by setting the =straight-use-package-by-default= option.
+
+
+#+name: straight-use-package
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (use-package straight
+	       :custom (straight-use-package-by-default t))
+#+end_src
+
+#+caption: =init.el=, configuring straight.el
+#+headers: :tangle package-management.el
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  ;; Configure use-package to use straight.el by default
+  <<straight-use-package>>
+#+end_src
+
+Now, installing any package using use-package uses straight.el, even when omitting the =:straight.el= option.
+
+Having both straight.el and use-package installed and configured to work together, the =straight-use-package= function isn't used anymore.
+Instead, all packages are installed and configured through use-package.
+
+** Usage
+
+Use the =use-package= macro to load a package.
+If the package is not installed yet, it is installed automatically:
+
+#+begin_src emacs-lisp
+  (use-package evil-commentary)
+#+end_src
+
+Use-package provides keywords to add configuration, key bindings and variables.
+Although there are [[https://github.com/jwiegley/use-package#getting-started/][many more options]], some examples include =:config=, =:init=, =:bind=, and =:custom=:
+
+- =:config= and =:init= ::
+  The =:config= and =:init= configuration keywords define code that's run right after, or right before a package is loaded, respectively.
+
+  For example, call =evil-mode= from the =:config= keyword to start Evil after loading its package.
+  To [[id:37FA1876-075E-43DA-B402-8DA102705FD6][turn off =evil-want-C-i-jump=]] right before evil is loaded (instead of adding it to the early init file), configure it in the =:init= keyword:
+ 
+  #+begin_src emacs-lisp
+    (use-package evil
+		 :init (setq evil-want-C-i-jump nil)
+		 :config (evil-mode))
+  #+end_src
+  
+- =:bind= ::
+  Adds key bindings after a module is loaded.
+  For example, to use =consult-buffer= instead of the built-in =switch-to-buffer= after loading the consult package, add a binding through the =:bind= keyword:
+
+  #+begin_src emacs-lisp
+    (use-package consult
+		 :bind ("C-x b" . consult-buffer)
+  #+end_src
+
+- =:custom= ::
+  Sets customizable variables.
+  The variables set through use-package are not saved in Emacs' custom file.
+  Instead, all custom variables are expected to be set through use-package.
+  In an example from before, the =:custom= keyword is used to set the =straight-use-package-by-default= configuration option after loading straight.el:
+
+  #+headers: :noweb yes
+  #+begin_src emacs-lisp
+    <<straight-use-package>>
+  #+end_src
+
+* Summary
+
+The resulting =~/.emacs.d/init.el= file installs straight.el and use-package, and configures straight.el as the package manager for use-package to use:
+
+#+caption: =init.el=, the package management section
+#+include: package-management.el src emacs-lisp
+
+The =~/.emacs.d/early-init.el= file disables package.el to disable its auto-loading, causing all packages to be loaded through straight.el in the init file:
+
+#+caption: =early-init.el=, disabling package.el
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  <<early-init>>
+#+end_src
+
+This is the only configuration set in the early init file.
+All other packages are installed and configured through use-package, which makes sure to load configuration options before packages are loaded, if configured with the =:init= keyword.
