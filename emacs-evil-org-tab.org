@@ -37,7 +37,8 @@ With use-package, set the =evil-want-C-i-jump= before the package is loaded by u
 #+begin_src emacs-lisp :tangle early-init.el
   ;; Install Evil and disable C-i to jump forward to restore TAB functionality in Org mode.
   (use-package evil
-	       :init (setq evil-want-C-i-jump nil))
+	       :init (setq evil-want-C-i-jump nil)
+	       :config (evil-mode))
 #+end_src
 
 [fn:vim-folding] Vim and Evil don't have a direct equivalent to fold cycling, but they have three different commands that achieve the same result:
