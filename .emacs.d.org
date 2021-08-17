@@ -6,55 +6,20 @@
 :CUSTOM_ID: package-management
 :END:
 
-  [[https://github.com/raxod502/straight.el][=straight.el=]] is a package manager for Emacs that locks package versions and downloads packages from Git repositories.
-  The [[https://github.com/raxod502/straight.el#getting-started][Getting started]] section in its README provides the bootstrap code to place inside =init.el=:
+#+include: "emacs-straight-use-package.org" :lines "10-" :only-contents t
 
-  #+begin_src emacs-lisp :tangle init.el
-    ;; Package management: straight.el
-    (defvar bootstrap-version)
-    (let ((bootstrap-file
-	   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	  (bootstrap-version 5))
-      (unless (file-exists-p bootstrap-file)
-	(with-current-buffer
-	    (url-retrieve-synchronously
-	     "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	     'silent 'inhibit-cookies)
-	  (goto-char (point-max))
-	  (eval-print-last-sexp)))
-      (load bootstrap-file nil 'nomessage))
-  #+end_src
+#+headers: :tangle init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/package-management.el")
+#+end_src
 
-  To disable =package.el= (Emacs' default package manager) in favor of using =straight.el=, turn off =package-enable-at-startup= in =early-init.el=:
-
-  #+begin_src emacs-lisp :tangle early-init.el
-    ;; Disable package.el in favor of straight.el
-    (setq package-enable-at-startup nil)
-  #+end_src
-
-  To install a package for the current session, execute the =straight-use-package= command:
-
-  #+begin_example
-    M-x straight-use-package <RET> evil <RET>
-  #+end_example
-
-  To continue using the package in future sessions, add the =straight-use-package= call to =~/.emacs/init.el=:
-
-  #+begin_src emacs-lisp
-    (straight-use-package 'evil)
-  #+end_src
-
-  To update an installed package, execute the =straight-pull-package= command:
-
-  #+begin_example
-    M-x straight-pull-package <RET> evil <RET>
-  #+end_example
-
-  To update the [[file:straight/versions/default.el][version lockfile]], run =straight-freeze-versions=:
-
-  #+begin_example
-    M-x straight-freeze-versions <RET>
-  #+end_example
+#+headers: :tangle early-init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  ;; Disable package.el in favor of straight.el
+  (setq package-enable-at-startup nil)
+#+end_src
 
 
 * Evil
