@@ -40,7 +40,7 @@
 :PROPERTIES:
 :CUSTOM_ID: evil-org-tab
 :END:
-   #+include: "emacs-evil-org-tab.org" :lines "4-26" :only-contents t
+   #+include: "emacs-evil-org-tab.org" :lines "10-" :only-contents t
 
    # NOTE: This block was copied in from emacs-evil-org-tab.org to make it tangle to init.el.
    #+caption: =~/emacs.d/early-init.el=
