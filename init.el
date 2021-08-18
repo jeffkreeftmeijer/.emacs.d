@@ -1,3 +1,5 @@
+(load-file "~/.emacs.d/general.el")
+
 (load-file "~/.emacs.d/package-management.el")
 
 ;; Vim emulation: evil

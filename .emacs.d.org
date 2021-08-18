@@ -1,6 +1,20 @@
 #+title: ~/.emacs.d
 #+startup: fold
 
+* General configuration
+:PROPERTIES:
+:CUSTOM_ID: general
+:END:
+
+#+include: "emacs-general-configuration.org" :lines "3-" :only-contents t
+
+#+headers: :tangle init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/general.el")
+#+end_src
+
+
 * Package management
 :PROPERTIES:
 :CUSTOM_ID: package-management
