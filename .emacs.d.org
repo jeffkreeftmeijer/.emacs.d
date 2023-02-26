@@ -1,3 +1,6 @@
+:PROPERTIES:
+:ID:       193B271C-CB97-4FDA-A372-28D4DDFD61E8
+:END:
 #+title: ~/.emacs.d
 
 * Package management
