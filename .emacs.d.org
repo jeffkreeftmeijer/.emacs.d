@@ -4,6 +4,9 @@
 #+title: ~/.emacs.d
 
 * Package management
+:PROPERTIES:
+:CUSTOM_ID: package-management
+:END:
 
 #+include: "emacs-straight-use-package.org"
 
