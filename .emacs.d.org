@@ -1,1 +1,17 @@
 #+title: ~/.emacs.d
+
+* Package management
+
+#+include: "emacs-straight-use-package.org"
+
+#+headers: :tangle init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/package-management.el")
+#+end_src
+
+#+headers: :tangle early-init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/early-package-management.el")
+#+end_src
