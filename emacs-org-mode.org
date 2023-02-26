@@ -8,3 +8,19 @@ Install Org mode to prevent version mismatches between the Org bundled with Emac
   ;; Org mode
   (use-package org)
 #+end_src
+
+* Org-auto-tangle
+:PROPERTIES:
+:CUSTOM_ID: org-auto-tangle
+:END:
+
+[[https://github.com/yilkalargaw/org-auto-tangle][Org-auto-tangle]] automatically tangles Org files on save.
+
+Be default, it only auto-tangles files marked with the =#+auto_tangle= header option.
+By turning on =org-auto-tangle-default=, org-auto-tangle tangles all Org files, even without that option.
+
+#+begin_src emacs-lisp :tangle org.el
+  (use-package org-auto-tangle
+    :hook (org-mode . org-auto-tangle-mode)
+    :custom (org-auto-tangle-default t))
+#+end_src
