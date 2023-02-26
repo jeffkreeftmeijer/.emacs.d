@@ -23,6 +23,9 @@
 #+end_src
 
 * Evil
+:PROPERTIES:
+:CUSTOM_ID: evil
+:END:
 
 #+include: "emacs-evil.org"
 
