@@ -34,3 +34,16 @@
 #+begin_src emacs-lisp
   (load-file "~/.emacs.d/evil.el")
 #+end_src
+
+* Org mode
+:PROPERTIES:
+:CUSTOM_ID: org-mode
+:END:
+
+#+include: "emacs-org-mode.org" :lines "2-"
+
+#+headers: :tangle init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/org.el")
+#+end_src
