@@ -76,3 +76,16 @@ By turning on =org-auto-tangle-default=, org-auto-tangle tangles all Org files, 
     :custom
     (org-auto-tangle-default t))
 #+end_src
+
+* Generate Github-flavored Markdown READMEs from Org files
+:PROPERTIES:
+:CUSTOM_ID: generate-readme
+:END:
+
+#+include: "emacs-org-markdown-readme.org" :lines "2-"
+
+#+headers: :tangle org.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/readme.el")
+#+end_src

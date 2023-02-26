@@ -9,3 +9,5 @@
   (org-mode . org-auto-tangle-mode)
   :custom
   (org-auto-tangle-default t))
+
+(load-file "~/.emacs.d/readme.el")

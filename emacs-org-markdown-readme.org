@@ -1,0 +1,60 @@
+#+title: Generate Github-flavored Markdown READMEs from Org files
+
+Although GitHub supports Org files to a certain extent[fn:github-org-support], it seems to generally be a bad match.
+For projects hosted on the code platform, it makes sense to generate a README file in GitHub's own version of Markdown.
+
+[fn:github-org-support] Aside from the obvious things like not executing code samples and not supporting noweb, GitHub's Org support doesn't understand the src_org[:exports code]{:exports none} header line, inline-highlighted code (src_org[:exports code]{src_lisp{ (message "rhubarb") }}), or example blocks.
+
+
+* Generating GitHub-flavored Markdown
+
+We'll start out by installing the [[https://github.com/larstvei/ox-gfm][ox-gfm]] package, a GitHub-flavored Markdown exporter derived from [[https://git.savannah.gnu.org/cgit/emacs/org-mode.git/tree/lisp][Org's =ox-md.el=]]:
+
+#+begin_src emacs-lisp :tangle readme.el
+  (use-package ox-gfm)
+#+end_src
+
+Then, since ox-md (and thus ox-gfm) [[https://lists.gnu.org/archive/html/emacs-orgmode/2017-08/msg00555.html][don't support document titles]], we'll install the =ox-md-title= extension, and it's dependency =ox-extend=[fn:unpublished]:
+
+[fn:unpublished]: These packages aren't available on any Emacs package archive yet, so we'll install them by hand for now.
+
+
+#+begin_src emacs-lisp :tangle readme.el
+  (use-package ox-extend
+    :straight '(ox-extend
+		:type git
+		:host github
+		:repo "jeffkreeftmeijer/ox-extend.el"))
+
+  (use-package ox-md-title
+    :straight '(ox-md-title
+		:type git
+		:host github
+		:repo "jeffkreeftmeijer/ox-md-title.el"))
+#+end_src
+
+To generate the Markdown file, call src_emacs-lisp[:exports code]{org-publish-file} with src_emacs-lisp[:exports code]{org-gfm-publish-to-gfm} as the src_emacs-lisp[:exports code]{:publishing-function}.
+Add src_emacs-lisp[:exports code]{ox-md-title} to the list of src_emacs-lisp[:exports code]{:extensions}:
+
+#+begin_src emacs-lisp
+  (ox-extend-add)
+
+  (org-publish-file ".emacs.d.org"
+		    '("readme"
+		      :base-directory "."
+		      :publishing-directory "."
+		      :publishing-function org-gfm-publish-to-gfm
+		      :extensions ('ox-md-title)))
+#+end_src
+
+This generates a Markdown version with the same name as the Org file, except for the extension.
+
+* Symlinking as README.md
+
+GitHub expects repositories to have a =README.md= file.
+You could name your Org file =README.org= to make the Markdown exporter generate a file named =README.md=.
+If that's impossible or undesirable, you can create a symlink from =README.md= to your generated Markdown file:
+
+#+begin_src bash
+ ln -s .emacs.d.md README.md
+#+end_src
