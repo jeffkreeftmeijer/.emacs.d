@@ -43,18 +43,26 @@ Emacs also prints a message in the echo area that explains how to read more info
 For information about GNU Emacs and the GNU system, type C-h C-a.
 #+end_example
 
-To prevent this message from being printed, set =inihibit-startup-echo-area-message=:
+To prevent this message from being printed, use =inihibit-startup-echo-area-message=.
+Emacs tries to prevent this message from being disabled by requiring the value to match the current user's name.
+This can be circumvented by using =user-login-name=, but only after setting the =saved-value= property on the =inhibit-startup-echo-area-message= variable:
+
+#+headers: :exports none
+#+name: saved-value
+#+begin_src emacs-lisp
+  (put 'inhibit-startup-echo-area-message 'saved-value t)
+#+end_src
 
 #+headers: :exports none
 #+name: startup-message
 #+begin_src emacs-lisp
-  inhibit-startup-echo-area-message t
+  inhibit-startup-echo-area-message (user-login-name)
 #+end_src
 
 #+caption: =init.el=, disabling the startup message
 #+headers: :noweb yes
 #+begin_src emacs-lisp
-  ;; Disable the startup message
+  <<saved-value>>
   (setq <<startup-message>>)
 #+end_src
 
@@ -113,9 +121,12 @@ The first part of the =init.el= file removes the menu bar and disables the start
 #+headers: :tangle general.el
 #+begin_src emacs-lisp
   <<menu-bar>>
-  
+
   <<savehist>>
-  
+
+  ;; Disable the startup message
+  <<saved-value>>
+
   (setq
    ;; Disable the startup screen
    <<startup-screen>>
