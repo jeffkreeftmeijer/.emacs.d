@@ -10,3 +10,5 @@
       "%?"
       :target (file+head "${slug}.org" "#+title: ${title}\n#+author: %(user-full-name)\n#+date: %<%Y-%m-%d>")
       :unnarrowed t))))
+
+(use-package org-roam-ui)

@@ -65,3 +65,11 @@ Finally, the author name is added by calling src_elisp[:exports code]{user-full-
 	:target (file+head "${slug}.org" "#+title: ${title}\n#+author: %(user-full-name)\n#+date: %<%Y-%m-%d>")
 	:unnarrowed t))))
 #+end_src
+
+* Org-roam-ui
+
+Org-roam-ui is a graphical frontend for Org-roam.
+
+#+begin_src emacs-lisp :tangle org-roam.el
+  (use-package org-roam-ui)
+#+end_src
