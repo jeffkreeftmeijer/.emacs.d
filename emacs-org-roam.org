@@ -1,10 +1,25 @@
 #+title: Org-roam
 
 [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
-Install it with =straight.el= and set the directory for notes to =~/notes=:
+Install it with =straight.el= and set the directory for notes to =~/notes=.
 
-#+begin_src emacs-lisp :tangle org-roam.el
-;; Org-roam
-(use-package org-roam
-  :init (setq org-roam-directory (file-truename "~/notes")))
+#+name: org-roam-1
+#+begin_src emacs-lisp :exports none
+  (use-package org-roam
+    :init (setq org-roam-directory (file-truename "~/notes"))
+#+end_src
+
+#+begin_src emacs-lisp :noweb yes
+  ;; Org-roam
+  <<org-roam-1>>)
+#+end_src
+
+* Sync automatically
+
+Turn on =org-roam-db-autosync-mode= to automatically sync the database instead of manually running =org-roam-db-sync=:
+
+#+begin_src emacs-lisp :noweb yes :tangle org-roam.el
+  ;; Org-roam
+  <<org-roam-1>>
+    :config (org-roam-db-autosync-mode))
 #+end_src
