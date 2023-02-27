@@ -2,6 +2,8 @@
 :ID:       193B271C-CB97-4FDA-A372-28D4DDFD61E8
 :END:
 #+title: ~/.emacs.d
+#+author: Jeff Kreeftmeijer
+#+date: 2021-07-04
 
 * Package management
 :PROPERTIES:
