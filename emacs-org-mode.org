@@ -1,0 +1,10 @@
+#+title: Org mode
+
+Install Org mode to prevent version mismatches between the Org bundled with Emacs and the dependencies of other packages.
+
+#+headers: :tangle org.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  ;; Org mode
+  (use-package org)
+#+end_src
