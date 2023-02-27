@@ -157,7 +157,7 @@ Here, the call to =use-package= is only used to configure straight.el, by settin
   <<straight-use-package>>
 #+end_src
 
-Now, installing any package using use-package uses straight.el, even when omitting the =:straight.el= option.
+Now, installing any package using use-package uses straight.el, even when omitting the =:straight= option.
 
 Having both straight.el and use-package installed and configured to work together, the =straight-use-package= function isn't used anymore.
 Instead, all packages are installed and configured through use-package.
