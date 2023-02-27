@@ -8,7 +8,7 @@
 :CUSTOM_ID: package-management
 :END:
 
-#+include: "emacs-straight-use-package.org"
+#+include: "emacs-straight-use-package.org" :lines "2-"
 
 #+headers: :tangle init.el
 #+headers: :exports none
@@ -27,7 +27,7 @@
 :CUSTOM_ID: evil
 :END:
 
-#+include: "emacs-evil.org"
+#+include: "emacs-evil.org" :lines "2-"
 
 #+headers: :tangle init.el
 #+headers: :exports none
