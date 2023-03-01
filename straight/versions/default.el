@@ -19,6 +19,5 @@
  ("org-auto-tangle" . "817eabf902e759e96782bdc54d2dab36c4a2c5ab")
  ("org-roam" . "e73807efe135c5797d7a94c0f205a7fbd4b2e781")
  ("straight.el" . "3eca39dfc6797243ec7d1c6a7d45142407f73f88")
- ("use-package" . "77945e002f11440eae72d8730d3de218163d551e")
  ("yaml-mode" . "3fcb36d6039bef57e2a0f6e24c51f623c0bf5fb7"))
 :gamma

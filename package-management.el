@@ -12,9 +12,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Install use-package
-(straight-use-package 'use-package)
-
 ;; Configure use-package to use straight.el by default
 (use-package straight
   :custom

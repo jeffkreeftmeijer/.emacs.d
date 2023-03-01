@@ -16,6 +16,85 @@ For example, to install the "evil-commentary" package from MELPA, call =package-
 
 =M-x= =package-install= =<RET>= =evil-commentary= =<RET>=
 
+Although =package.el= is conveniently built into Emacs, the combination of =use-package= and =straight.el= helps building and configuring reproducable package setups.
+
+* Use-package
+:PROPERTIES:
+:CUSTOM_ID: use-package
+:END:
+
+[[https://github.com/jwiegley/use-package][Use-package]] is a macro to configure and load packages in Emacs configurations that's included in Emacs 29 and up.
+It interfaces with package managers like package.el or straight.el to install packages, but is not a package manager by itself.
+
+For example, when using =package.el= without use-package, installing evil-commentary requires running a command (=M-x= =package-install= =<RET>= =evil-commentary= =<RET>=) to install the package.
+Then, running =(evil-commentary-mode)= starts the package.
+To get the the package to start with Emacs, you need to add it to your init file:
+
+#+begin_src emacs-lisp
+  (evil-commentary-mode)
+#+end_src
+
+[[*Using straight.el with use-package][Combined with use-package]], the installation and configuration are unified into a single call to =use-package=:
+
+#+begin_src emacs-lisp
+  (use-package evil-commentary
+    :config
+    (evil-commentary-mode))
+#+end_src
+
+Aside from keeping configuration files tidy, having package configuration contained within a single call allows for more advanced package setups.
+For example, packages can be lazy-loaded, keeping their configuration code from executing until the package they configure is needed.
+
+** Usage
+:PROPERTIES:
+:CUSTOM_ID: use-package-usage
+:END:
+
+Use the =use-package= macro to load a package.
+If the package is not installed yet, it is installed automatically:
+
+#+begin_src emacs-lisp
+  (use-package evil-commentary)
+#+end_src
+
+Use-package provides keywords to add configuration, key bindings and variables.
+Although there are [[https://github.com/jwiegley/use-package#getting-started/][many more options]], some examples include =:config=, =:init=, =:bind=, and =:custom=:
+
+- =:config= and =:init= ::
+  The =:config= and =:init= configuration keywords define code that's run right after, or right before a package is loaded, respectively.
+
+  For example, call =evil-mode= from the =:config= keyword to start Evil after loading its package.
+  To turn off =evil-want-C-i-jump= right before evil is loaded (instead of adding it to the early init file), configure it in the =:init= keyword:
+
+  #+begin_src emacs-lisp
+    (use-package evil
+      :init
+      (setq evil-want-C-i-jump nil)
+      :config
+      (evil-mode))
+  #+end_src
+
+- =:bind= ::
+  Adds key bindings after a module is loaded.
+  For example, to use =consult-buffer= instead of the built-in =switch-to-buffer= after loading the consult package, add a binding through the =:bind= keyword:
+
+  #+begin_src emacs-lisp
+    (use-package consult
+      :bin
+      ("C-x b" . consult-buffer))
+  #+end_src
+
+- =:custom= ::
+  Sets customizable variables.
+  The variables set through use-package are not saved in Emacs' custom file.
+  Instead, all custom variables are expected to be set through use-package.
+  In an example from before, the =:custom= keyword is used to set the =straight-use-package-by-default= configuration option after loading straight.el:
+
+  #+headers: :noweb yes
+  #+begin_src emacs-lisp
+    <<straight-use-package>>
+  #+end_src
+
 * Straight.el
 :PROPERTIES:
 :CUSTOM_ID: straight.el
@@ -91,50 +170,14 @@ To update the version lockfile, which is used to target the exact version to che
 
 =M-x= =straight-freeze-versions= =<RET>=
 
-* Use-package
-:PROPERTIES:
-:CUSTOM_ID: use-package
-:END:
-
-[[https://github.com/jwiegley/use-package][Use-package]] is a macro to configure and load packages in Emacs configurations.
-It interfaces with package managers like package.el or straight.el to install packages, but is not a package manager by itself.
-
-For example, when using straight.el without use-package, installing and starting evil-commentary requires installing the package and starting it as two separate steps:
-
-#+begin_src emacs-lisp
-  (straight-use-package 'evil-commentary)
-  (evil-commentary-mode)
-#+end_src
-
-[[*Using straight.el with use-package][Combined with use-package]], the installation and configuration are unified into a single call to =use-package=:
-
-#+begin_src emacs-lisp
-  (use-package evil-commentary
-    :config
-    (evil-commentary-mode))
-#+end_src
-
-Aside from keeping configuration files tidy, having package configuration contained within a single call allows for more advanced package setups.
-For example, packages can be lazy-loaded, keeping their configuration code from executing until the package they configure is needed.
-
-** Installation
-:PROPERTIES:
-:CUSTOM_ID: use-package-installation
-:END:
-
-To install use-package with straight.el, use =straight-use-package=:
-
-#+caption: =init.el=, installing use-package
-#+headers: :tangle package-management.el
-#+begin_src emacs-lisp
-  ;; Install use-package
-  (straight-use-package 'use-package)
-#+end_src
-
 ** Using straight.el with use-package
 :PROPERTIES:
 :CUSTOM_ID: straight.el-use-package
 :END:
+
+Straight.el provides =straight-use-package=, which functions a lot like to =use-package= on first glance.
+However, straight.el's version only installs the package, and does not have the configuration abilities of use-package.
+Combining straight.el and use-package produces a setup that has the best of both worlds.
 
 By default, use-package uses package.el to install packages.
 To use straight.el instead of package.el, pass the =:straight= option:
@@ -144,10 +187,10 @@ To use straight.el instead of package.el, pass the =:straight= option:
     :straight t)
 #+end_src
 
-To configure use-package to always use straight.el, use =use-package= to configure straight.el to turn on =straight-use-package-by-default=[fn:configure-straight]:
+To configure use-package to /always/ use straight.el without having to pass the =:straight= option, use =use-package= to configure straight.el to turn on =straight-use-package-by-default=[fn:configure-straight]:
 
 [fn:configure-straight] Calling =use-package= would normally install straight.el, but since it's already installed, the installation is skipped and the configuration is set.
-Here, the call to =use-package= is only used to configure straight.el, by setting the =straight-use-package-by-default= option.
+Here, the call to =use-package= is only used to configure straight.el by setting the =straight-use-package-by-default= option.
 
 
 #+name: straight-use-package
@@ -171,62 +214,12 @@ Now, installing any package using use-package uses straight.el, even when omitti
 Having both straight.el and use-package installed and configured to work together, the =straight-use-package= function isn't used anymore.
 Instead, all packages are installed and configured through use-package.
 
-** Usage
-:PROPERTIES:
-:CUSTOM_ID: use-package-usage
-:END:
-
-Use the =use-package= macro to load a package.
-If the package is not installed yet, it is installed automatically:
-
-#+begin_src emacs-lisp
-  (use-package evil-commentary)
-#+end_src
-
-Use-package provides keywords to add configuration, key bindings and variables.
-Although there are [[https://github.com/jwiegley/use-package#getting-started/][many more options]], some examples include =:config=, =:init=, =:bind=, and =:custom=:
-
-- =:config= and =:init= ::
-  The =:config= and =:init= configuration keywords define code that's run right after, or right before a package is loaded, respectively.
-
-  For example, call =evil-mode= from the =:config= keyword to start Evil after loading its package.
-  To turn off =evil-want-C-i-jump= right before evil is loaded (instead of adding it to the early init file), configure it in the =:init= keyword:
-
-  #+begin_src emacs-lisp
-    (use-package evil
-      :init
-      (setq evil-want-C-i-jump nil)
-      :config
-      (evil-mode))
-  #+end_src
-
-- =:bind= ::
-  Adds key bindings after a module is loaded.
-  For example, to use =consult-buffer= instead of the built-in =switch-to-buffer= after loading the consult package, add a binding through the =:bind= keyword:
-
-  #+begin_src emacs-lisp
-    (use-package consult
-      :bin
-      ("C-x b" . consult-buffer))
-  #+end_src
-
-- =:custom= ::
-  Sets customizable variables.
-  The variables set through use-package are not saved in Emacs' custom file.
-  Instead, all custom variables are expected to be set through use-package.
-  In an example from before, the =:custom= keyword is used to set the =straight-use-package-by-default= configuration option after loading straight.el:
-
-  #+headers: :noweb yes
-  #+begin_src emacs-lisp
-    <<straight-use-package>>
-  #+end_src
-
 * Summary
 :PROPERTIES:
 :CUSTOM_ID: package-management-summary
 :END:
 
-The resulting =~/.emacs.d/init.el= file installs straight.el and use-package, and configures straight.el as the package manager for use-package to use:
+The resulting =~/.emacs.d/init.el= file installs straight.el and configures it as the package manager for use-package to use:
 
 #+caption: =init.el=, the package management section
 #+include: package-management.el src emacs-lisp
