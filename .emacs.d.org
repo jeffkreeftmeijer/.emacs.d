@@ -37,6 +37,19 @@
   (load-file "~/.emacs.d/early-package-management.el")
 #+end_src
 
+* Linguist
+:PROPERTIES:
+:CUSTOM_ID: linguist
+:END:
+
+#+include: "emacs-linguist.org" :lines "2-55"
+
+#+headers: :tangle init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/linguist.el")
+#+end_src
+
 * Evil
 :PROPERTIES:
 :CUSTOM_ID: evil
