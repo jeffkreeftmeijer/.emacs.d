@@ -5,6 +5,19 @@
 #+author: Jeff Kreeftmeijer
 #+date: 2021-07-04
 
+* General configuration
+:PROPERTIES:
+:CUSTOM_ID: general
+:END:
+
+#+include: "emacs-general-configuration.org"
+
+#+headers: :tangle init.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/general.el")
+#+end_src
+
 * Package management
 :PROPERTIES:
 :CUSTOM_ID: package-management

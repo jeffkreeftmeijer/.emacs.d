@@ -1,0 +1,137 @@
+#+title: Emacs general configuration
+
+The first part of the configuration file configures Emacs' main functionality.
+Since this doesn't require any of the plugins to load, it's placed first in the configuration file.
+
+Loading it first has some advantages.
+For example, it prevents the hidden menu bar from flickering on startup.
+
+* User interface
+:PROPERTIES:
+:CUSTOM_ID: user-interface
+:END:
+
+By default, Emacs shows the menu bar at the top of the screen, which is accessed by pressing =<F10>=.
+To turn it off, set =menu-bar-mode= to a negative number:
+
+#+name: menu-bar
+#+caption: =init.el=, hiding the menu bar
+#+begin_src emacs-lisp
+  ;; Hide the top menu bar
+  (menu-bar-mode -1)
+#+end_src
+
+On startup, Emacs shows the startup screen, which links to the manual and the tutorial.
+To open with a blank screen instead, set
+
+#+headers: :exports none
+#+name: startup-screen
+#+begin_src emacs-lisp
+  inhibit-startup-screen t
+#+end_src
+
+#+caption: =init.el=, disabling the startup screen
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  ;; Disable the startup screen
+  (setq <<startup-screen>>)
+#+end_src
+
+Emacs also prints a message in the echo area that explains how to read more information about Emacs and the GNU system:
+
+#+begin_example
+For information about GNU Emacs and the GNU system, type C-h C-a.
+#+end_example
+
+To prevent this message from being printed, use =inihibit-startup-echo-area-message=.
+Emacs tries to prevent this message from being disabled by requiring the value to match the current user's name.
+This can be circumvented by using =user-login-name=, but only after setting the =saved-value= property on the =inhibit-startup-echo-area-message= variable:
+
+#+headers: :exports none
+#+name: saved-value
+#+begin_src emacs-lisp
+  (put 'inhibit-startup-echo-area-message 'saved-value t)
+#+end_src
+
+#+headers: :exports none
+#+name: startup-message
+#+begin_src emacs-lisp
+  inhibit-startup-echo-area-message (user-login-name)
+#+end_src
+
+#+caption: =init.el=, disabling the startup message
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  <<saved-value>>
+  (setq <<startup-message>>)
+#+end_src
+
+* Backups
+:PROPERTIES:
+:CUSTOM_ID: backups
+:END:
+
+Instead of placing backup files (like =init.el~=) in the original file's directory, store them in =~/.emacs.d/backups/=:
+
+#+headers: :exports none
+#+name: backup-directory
+#+begin_src emacs-lisp
+  backup-directory-alist '(("." . "~/.emacs.d/backups"))
+#+end_src
+
+#+caption: =init.el=, setting the backups directory
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  ;; Store all backup files in =~/.emacs.d/backups/
+  (setq <<backup-directory>>)
+#+end_src
+
+The =backup-directory-alist= lists cons cells with a regular expression and a directory name.
+In this setting, the regular expression is ="."=, meaning all files are stored in the specified directory.
+
+* History
+:PROPERTIES:
+:CUSTOM_ID: history
+:END:
+
+Commands executed through =M-x= are remembered to suggest them when pressing =M-x= again later.
+To execute a previously used command again, press =UP= in the minibuffer after pressing =M-x=.
+
+Because the history is not saved, starting a new Emacs session loses all previously executed commands.
+To configure Emacs to periodically save the minibuffer history to a file and load it when starting a new session, enable =savehist-mode=:
+
+#+name: savehist
+#+caption: =init.el=, saving minibuffer history
+#+begin_src emacs-lisp
+  ;; Save minibuffer history
+  (savehist-mode 1)
+#+end_src
+
+By default, Emacs saves the minibuffer history to =~/.emacs.d/history=.
+
+* Summary
+:PROPERTIES:
+:CUSTOM_ID: general-summary
+:END:
+
+The first part of the =init.el= file removes the menu bar and disables the startup screen and message:
+
+#+caption: =init.el=, the user interface section
+#+headers: :noweb yes
+#+headers: :tangle general.el
+#+begin_src emacs-lisp
+  <<menu-bar>>
+
+  <<savehist>>
+
+  ;; Disable the startup message
+  <<saved-value>>
+
+  (setq
+   ;; Disable the startup screen
+   <<startup-screen>>
+   ;; Disable the startup message
+   <<startup-message>>
+   ;; Store all backup files in =~/.emacs.d/backups/
+   <<backup-directory>>)
+#+end_src
