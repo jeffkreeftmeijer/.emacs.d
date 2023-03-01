@@ -2,5 +2,7 @@
 (use-package org)
 
 (use-package org-auto-tangle
-  :hook (org-mode . org-auto-tangle-mode)
-  :custom (org-auto-tangle-default t))
+  :hook
+  (org-mode . org-auto-tangle-mode)
+  :custom
+  (org-auto-tangle-default t))

@@ -103,7 +103,8 @@ For example, when using straight.el without use-package, installing and starting
 
 #+begin_src emacs-lisp
   (use-package evil-commentary
-    :config (evil-commentary-mode))
+    :config
+    (evil-commentary-mode))
 #+end_src
 
 Aside from keeping configuration files tidy, having package configuration contained within a single call allows for more advanced package setups.
@@ -146,7 +147,8 @@ Here, the call to =use-package= is only used to configure straight.el, by settin
 #+headers: :exports none
 #+begin_src emacs-lisp
   (use-package straight
-    :custom (straight-use-package-by-default t))
+    :custom
+    (straight-use-package-by-default t))
 #+end_src
 
 #+caption: =init.el=, configuring straight.el
@@ -185,8 +187,10 @@ Although there are [[https://github.com/jwiegley/use-package#getting-started/][m
 
   #+begin_src emacs-lisp
     (use-package evil
-      :init (setq evil-want-C-i-jump nil)
-      :config (evil-mode))
+      :init
+      (setq evil-want-C-i-jump nil)
+      :config
+      (evil-mode))
   #+end_src
 
 - =:bind= ::
@@ -195,7 +199,8 @@ Although there are [[https://github.com/jwiegley/use-package#getting-started/][m
 
   #+begin_src emacs-lisp
     (use-package consult
-      :bind ("C-x b" . consult-buffer)
+      :bin
+      ("C-x b" . consult-buffer))
   #+end_src
 
 - =:custom= ::

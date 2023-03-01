@@ -17,4 +17,5 @@
 
 ;; Configure use-package to use straight.el by default
 (use-package straight
-  :custom (straight-use-package-by-default t))
+  :custom
+  (straight-use-package-by-default t))

@@ -1,3 +1,4 @@
-;; Vim emulation: evil
-(straight-use-package 'evil)
-(evil-mode 1)
+;; Evil mode
+(use-package evil
+  :config
+  (evil-mode))

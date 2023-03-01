@@ -21,6 +21,8 @@ By turning on =org-auto-tangle-default=, org-auto-tangle tangles all Org files, 
 
 #+begin_src emacs-lisp :tangle org.el
   (use-package org-auto-tangle
-    :hook (org-mode . org-auto-tangle-mode)
-    :custom (org-auto-tangle-default t))
+    :hook
+    (org-mode . org-auto-tangle-mode)
+    :custom
+    (org-auto-tangle-default t))
 #+end_src
