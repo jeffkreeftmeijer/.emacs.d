@@ -8,6 +8,10 @@
   :mode ("\\.ex\\'" . elixir-mode)
   :mode ("\\.elixir\\'" . elixir-mode))
 
+(use-package ledger-mode
+  :config (linguist--loaded-message "ledger-mode")
+  :mode ("\\.ledger\\'" . ledger-mode))
+
 (use-package yaml-mode
   :config (linguist--loaded-message "yaml-mode")
   :mode ("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode))
