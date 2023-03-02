@@ -12,6 +12,10 @@
   :config (linguist--loaded-message "ledger-mode")
   :mode ("\\.ledger\\'" . ledger-mode))
 
+(use-package markdown-mode
+  :config (linguist--loaded-message "markdown-mode")
+  :mode ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
+
 (use-package yaml-mode
   :config (linguist--loaded-message "yaml-mode")
   :mode ("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode))
