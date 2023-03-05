@@ -1,0 +1,55 @@
+#+title: linguist.el: A language modes pack for Emacs
+
+Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sheerun/vim-polyglot][vim-polyglot]].
+
+#+begin_src emacs-lisp :tangle linguist.el :exports none
+  (defun linguist--loaded-message (mode)
+    (message (concat "Linguist: Loaded " mode ".")))
+#+end_src
+
+* Language packs
+
+** [[https://github.com/elixir-editors/emacs-elixir][elixir-mode]]
+
+#+begin_src emacs-lisp :tangle linguist.el
+  (use-package elixir-mode
+    :config (linguist--loaded-message "elixir-mode")
+    :mode ("mix\\.lock" . elixir-mode)
+    :mode ("\\.exs\\'" . elixir-mode)
+    :mode ("\\.ex\\'" . elixir-mode)
+    :mode ("\\.elixir\\'" . elixir-mode))
+#+end_src
+
+** [[https://github.com/magit/git-modes/blob/main/gitignore-mode.el][gitignore-mode]]
+
+#+begin_src emacs-lisp :tangle linguist.el
+  (use-package git-modes
+    :config (linguist--loaded-message "linguist-mode")
+    :mode ("/git/ignore\\'" . gitignore-mode)
+    :mode ("/info/exclude\\'" . gitignore-mode)
+    :mode ("/\\.gitignore\\'" . gitignore-mode))
+#+end_src
+
+** [[https://github.com/ledger/ledger-mode][ledger-mode]]
+
+#+begin_src emacs-lisp :tangle linguist.el
+  (use-package ledger-mode
+    :config (linguist--loaded-message "ledger-mode")
+    :mode ("\\.ledger\\'" . ledger-mode))
+#+end_src
+
+** [[https://github.com/jrblevin/markdown-mode][markdown-mode]]
+
+#+begin_src emacs-lisp :tangle linguist.el
+  (use-package markdown-mode
+    :config (linguist--loaded-message "markdown-mode")
+    :mode ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
+#+end_src
+
+** [[https://github.com/yoshiki/yaml-mode][yaml-mode]]
+
+#+begin_src emacs-lisp :tangle linguist.el
+  (use-package yaml-mode
+    :config (linguist--loaded-message "yaml-mode")
+    :mode ("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode))
+#+end_src
