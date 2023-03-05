@@ -53,3 +53,39 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
     :config (linguist--loaded-message "yaml-mode")
     :mode ("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode))
 #+end_src
+
+* Adding language packs
+
+Each language pack requires one or multiple =:mode= keys with patterns to automatically load the mode when a file that matches it is opened.
+
+The easiest way to determine patterns for new language packs is to extract them from =auto-mode-alist=.
+To do this, first install the package by installing it for the current session:
+
+#+begin_src emacs-lisp
+(use-package yaml-mode)
+#+end_src
+
+Then, open the help page for =auto-mode-alist= (=C-h= =v= auto-mode-alist =<RET>=) and find the patterns for the package being added:
+
+#+begin_src emacs-lisp
+  ("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode)
+#+end_src
+
+Take all pattern lines corresponding to the new package and add them as =:mode=​s in a call to =use-package=:
+
+#+begin_src emacs-lisp
+(use-package yaml-mode
+  :config (linguist--loaded-message "yaml-mode")
+  :mode ("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode))
+#+end_src
+
+If the package has multiple pattern lines, add a =:mode= for each:
+
+#+begin_src emacs-lisp
+(use-package elixir-mode
+  :config (linguist--loaded-message "elixir-mode")
+  :mode ("mix\\.lock" . elixir-mode)
+  :mode ("\\.exs\\'" . elixir-mode)
+  :mode ("\\.ex\\'" . elixir-mode)
+  :mode ("\\.elixir\\'" . elixir-mode))
+#+end_src
