@@ -16,6 +16,15 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
 
 * Language packs
 
+** [[https://github.com/spotify/dockerfile-mode][dockerfile-mode]]
+
+#+begin_src emacs-lisp :tangle linguist.el
+  (use-package dockerfile-mode
+    :config (linguist--loaded-message "dockerfile-mode")
+    :mode ("\\.dockerfile\\'" . dockerfile-mode)
+    :mode ("[/\\]\\(?:Containerfile\\|Dockerfile\\)\\(?:\\.[^/\\]*\\)?\\'" . dockerfile-mode))
+#+end_src
+
 ** [[https://github.com/elixir-editors/emacs-elixir][elixir-mode]]
 
 #+begin_src emacs-lisp :tangle linguist.el

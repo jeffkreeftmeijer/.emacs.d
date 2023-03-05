@@ -1,6 +1,11 @@
 (defun linguist--loaded-message (mode)
   (message (concat "Linguist: Loaded " mode ".")))
 
+(use-package dockerfile-mode
+  :config (linguist--loaded-message "dockerfile-mode")
+  :mode ("\\.dockerfile\\'" . dockerfile-mode)
+  :mode ("[/\\]\\(?:Containerfile\\|Dockerfile\\)\\(?:\\.[^/\\]*\\)?\\'" . dockerfile-mode))
+
 (use-package elixir-mode
   :config (linguist--loaded-message "elixir-mode")
   :mode ("mix\\.lock" . elixir-mode)
