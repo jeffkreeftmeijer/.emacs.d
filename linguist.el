@@ -8,6 +8,12 @@
   :mode ("\\.ex\\'" . elixir-mode)
   :mode ("\\.elixir\\'" . elixir-mode))
 
+(use-package git-modes
+  :config (linguist--loaded-message "linguist-mode")
+  :mode ("/git/ignore\\'" . gitignore-mode)
+  :mode ("/info/exclude\\'" . gitignore-mode)
+  :mode ("/\\.gitignore\\'" . gitignore-mode))
+
 (use-package ledger-mode
   :config (linguist--loaded-message "ledger-mode")
   :mode ("\\.ledger\\'" . ledger-mode))
