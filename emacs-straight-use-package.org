@@ -1,4 +1,11 @@
+:PROPERTIES:
+:ID:       8AB1B0EA-E9AB-4F40-BDFD-3A18DCE92658
+:ROAM_ALIASES: emacs-straight-use-package
+:END:
 #+title: Emacs package management with straight.el and use-package
+#+author: Jeff Kreeftmeijer
+#+date: 2021-08-16
+#+options: toc:nil
 
 Emacs includes a package manager named =package.el=, which installs packages from the official Emacs Lisp Package Archive, named [[https://elpa.gnu.org][GNU ELPA.]]
 GNU ELPA hosts a selection of packages, but most are available on [[https://melpa.org][MELPA]], which is an unofficial package archive that implements the ELPA specification.

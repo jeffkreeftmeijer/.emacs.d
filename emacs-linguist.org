@@ -1,4 +1,11 @@
+:PROPERTIES:
+:ID:       34BF0D46-C8B8-4B05-8381-3E59693E6143
+:ROAM_ALIASES: emacs-linguist
+:END:
 #+title: linguist.el: A language modes pack for Emacs
+#+author: Jeff Kreeftmeijer
+#+date: 2023-03-05
+#+options: toc:nil
 
 Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sheerun/vim-polyglot][vim-polyglot]].
 
