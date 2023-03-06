@@ -21,7 +21,7 @@ For example, to install the "evil-commentary" package from MELPA, call =package-
 :CUSTOM_ID: straight.el
 :END:
 
-[[https://github.com/raxod502/straight.el][Straight.el]] is an alternative package manager that installs packages through Git checkouts instead of downloading tarballs from one of the package archives.
+[[https://github.com/radian-software/straight.el][Straight.el]] is an alternative package manager that installs packages through Git checkouts instead of downloading tarballs from one of the package archives.
 Doing so allows installing forked packages, altering local package checkouts, and locking packages to exact versions for reproducable setups.
 
 ** Installation
@@ -29,24 +29,24 @@ Doing so allows installing forked packages, altering local package checkouts, an
 :CUSTOM_ID: straight.el-installation
 :END:
 
-The [[https://github.com/raxod502/straight.el#getting-started][Getting started]] section in the straight.el README provides the bootstrap code to place inside =~/.emacs.d/init.el= in order to install it:
+The [[https://github.com/radian-software/straight.el#getting-started][Getting started]] section in the straight.el README provides the bootstrap code to place inside =~/.emacs.d/init.el= in order to install it:
 
 #+caption: =init.el=, installing straight.el
 #+headers: :tangle package-management.el
 #+begin_src emacs-lisp
-  ;; Install straight.el
-  (defvar bootstrap-version)
-  (let ((bootstrap-file
-	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	(bootstrap-version 5))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-	  (url-retrieve-synchronously
-	   "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	   'silent 'inhibit-cookies)
-	(goto-char (point-max))
-	(eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
+;; Install straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 #+end_src
 
 Straight.el uses package archives like GNU ELPA as registries to find the linked repositories to clone from.
