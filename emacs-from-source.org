@@ -52,7 +52,10 @@ After switching to the =~/emacs= directory, run =autogen.sh= to generate the =co
 : Running 'autoreconf -fi -I m4' ...
 : You can now run './configure'.
 
-Then, run the newly-generated =./configure= with the following options:
+Then, run the newly-generated =./configure= with the following options[fn:configure-help]:
+
+[fn:configure-help] Find more configuration options with src_shell{./configure --help}.
+
 
 - =--without-ns= :: Without NextStep (or AppKit) support, needed to build a graphical user interface.
 - =--without-x= :: No X window support either, which is used as a fallback.
