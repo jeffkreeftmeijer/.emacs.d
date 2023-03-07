@@ -6,7 +6,8 @@ Install it with =straight.el= and set the directory for notes to =~/notes=.
 #+name: org-roam-1
 #+begin_src emacs-lisp :exports none
   (use-package org-roam
-    :init (setq org-roam-directory (file-truename "~/notes"))
+    :init
+    (setq org-roam-directory (file-truename "~/notes"))
 #+end_src
 
 #+caption: =init.el=: Install Org-roam, and set the notes directory
@@ -19,9 +20,15 @@ Install it with =straight.el= and set the directory for notes to =~/notes=.
 
 Turn on =org-roam-db-autosync-mode= to automatically sync the database instead of manually running =org-roam-db-sync=:
 
+#+name: org-roam-2
+#+begin_src emacs-lisp :exports none :noweb yes
+  <<org-roam-1>>
+    :config
+    (org-roam-db-autosync-mode)
+#+end_src
+
 #+caption: =init.el=: Turn on =org-roam-db-autosync-mode=
 #+begin_src emacs-lisp :noweb yes :tangle org-roam.el
   ;; Org-roam
-  <<org-roam-1>>
-    :config (org-roam-db-autosync-mode))
+  <<org-roam-2>>)
 #+end_src
