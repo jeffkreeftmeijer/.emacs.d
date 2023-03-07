@@ -28,7 +28,40 @@ Turn on =org-roam-db-autosync-mode= to automatically sync the database instead o
 #+end_src
 
 #+caption: =init.el=: Turn on =org-roam-db-autosync-mode=
-#+begin_src emacs-lisp :noweb yes :tangle org-roam.el
+#+name: org-roam-2
+#+begin_src emacs-lisp :noweb yes
   ;; Org-roam
   <<org-roam-2>>)
+#+end_src
+
+* Capture templates
+
+Org-roam's default capture template creates notes with filenames that include the current time, like =20230227171947-org-escape.org=.
+The time prefix is used to make sure note names are unique.
+
+With some care not to duplicate names, the prefix can be removed by overwriting the default template[fn:org-roam-default-template] in =org-roam-capture-templates=.
+To keep the creation date, this new default template also adds a date header attribute to the generated file contents.
+
+[fn:org-roam-default-template]
+#+caption: Org-roam's default capture template
+#+begin_src emacs-lisp
+  (("d" "default" plain
+    "%?"
+    :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}")
+    :unnarrowed t))
+#+end_src
+
+
+Finally, the author name is added by calling src_elisp[:exports code]{user-full-name}:
+
+#+caption: =init.el=: Overwrite org-roam's default capture template
+#+begin_src emacs-lisp :noweb yes :tangle org-roam.el
+  ;; Org-roam
+  <<org-roam-2>>
+    :custom
+    (org-roam-capture-templates
+     '(("d" "default" plain
+	"%?"
+	:target (file+head "${slug}.org" "#+title: ${title}\n#+date: %<%Y-%m-%d>")
+	:unnarrowed t))))
 #+end_src
