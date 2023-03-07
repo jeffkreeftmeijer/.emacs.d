@@ -73,6 +73,7 @@ Then, run the newly-generated =./configure= with the following options[fn:config
 - =--without-x= :: No X window support either, which is used as a fallback.
 - =--with-native-compilation= :: Compile with the Emacs Lisp native compiler
 - =--with-tree-sitter= :: By default, tree-sitter support is enabled only if the dependency is installed. Turning it on explicitly makes the configuration raise an error when tee-sitter isn't installed.
+- =--program-suffix= :: Suffix the program filename to not overwrite the old version while testing.
 
 #+headers: :dir ~/emacs
 #+headers: :cache yes
@@ -81,7 +82,7 @@ Then, run the newly-generated =./configure= with the following options[fn:config
 #+headers: :prologue exec 2>&1
 #+headers: :epilogue ":"
 #+begin_src shell
-  ./configure --without-x --without-ns --with-native-compilation --with-tree-sitter
+  ./configure --without-x --without-ns --with-native-compilation --with-tree-sitter --program-suffix=-native-comp
 #+end_src
 
 #+RESULTS[af9244a5c707ae80db0bc4b73da68cf793df0550]:
