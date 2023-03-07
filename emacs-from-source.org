@@ -61,21 +61,14 @@ Then, run the newly-generated =./configure= with the following options[fn:config
 - =--without-x= :: No X window support either, which is used as a fallback.
 - =--with-tree-sitter= :: By default, tree-sitter support is enabled only if the dependency is installed. Turning it on explicitly makes the configuration raise an error when tee-sitter isn't installed.
 
-#+name: configure
-#+headers: :exports none
-#+begin_src shell
-  ./configure --without-x --without-ns --with-tree-sitter
-#+end_src
-
 #+headers: :dir ~/emacs
 #+headers: :cache yes
 #+headers: :results scalar
 #+headers: :prologue brew install texinfo tree-sitter --quiet
 #+headers: :prologue exec 2>&1
 #+headers: :epilogue ":"
-#+headers: :noweb yes
 #+begin_src shell
-  <<configure>>
+  ./configure --without-x --without-ns --with-tree-sitter
 #+end_src
 
 #+RESULTS[44bf465f7c77318606e035d039e6f5c1fdbf9fe4]:
