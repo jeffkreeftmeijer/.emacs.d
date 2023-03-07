@@ -8,5 +8,5 @@
   (org-roam-capture-templates
    '(("d" "default" plain
       "%?"
-      :target (file+head "${slug}.org" "#+title: ${title}\n#+date: %<%Y-%m-%d>")
+      :target (file+head "${slug}.org" "#+title: ${title}\n#+author: %(user-full-name)\n#+date: %<%Y-%m-%d>")
       :unnarrowed t))))
