@@ -88,3 +88,14 @@
 #+begin_src emacs-lisp
   (load-file "~/.emacs.d/org-roam.el")
 #+end_src
+
+* Clipboard
+
+Use the macOS system clipboard through =pbpaste=/=pbcopy= by using [[https://elpa.gnu.org/packages/xclip.html][xclip]]:
+
+#+headers: :tangle init.el
+#+begin_src emacs-lisp
+  (use-package xclip
+    :init
+    (xclip-mode))
+#+end_src

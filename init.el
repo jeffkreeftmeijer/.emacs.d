@@ -9,3 +9,7 @@
 (load-file "~/.emacs.d/org.el")
 
 (load-file "~/.emacs.d/org-roam.el")
+
+(use-package xclip
+  :init
+  (xclip-mode))
