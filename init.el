@@ -7,3 +7,5 @@
 (load-file "~/.emacs.d/evil.el")
 
 (load-file "~/.emacs.d/org.el")
+
+(load-file "~/.emacs.d/org-roam.el")
