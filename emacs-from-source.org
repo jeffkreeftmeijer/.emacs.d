@@ -20,6 +20,18 @@ I'm currently running Emacs 29 on macOS's Terminal.app, built from source withou
 : GNU Emacs 29.0.60
 : Development version ab417c8a6eeb on emacs-29 branch; build date 2023-03-07.
 
+My current version was build with the following src_elisp[:exports code]{system-configuration-features}:
+
+#+headers: :cache yes
+#+headers: :exports results
+#+headers: :results scalar
+#+begin_src emacs-lisp
+  system-configuration-features
+#+end_src
+
+#+RESULTS[967d2bb98d6c94b8165bd0a4b8f8fc06c42576e1]:
+: "ACL GMP GNUTLS JSON LCMS2 LIBXML2 MODULES NOTIFY KQUEUE PDUMPER SQLITE3 THREADS TREE_SITTER XIM ZLIB"
+
 * Build & install
 
 First, clone Emacs from Savannah's git repository to =~/emacs=.
