@@ -1,5 +1,6 @@
 .org-id-locations
 backups
+bookmarks
 history
 org-roam.db
 straight/build
