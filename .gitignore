@@ -1,7 +1,7 @@
-straight/build-cache.el
-straight/build
-straight/repos
 .org-id-locations
 backups
 history
 org-roam.db
+straight/build
+straight/build-cache.el
+straight/repos
