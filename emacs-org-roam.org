@@ -43,7 +43,7 @@ With some care not to duplicate names, the prefix can be removed by overwriting 
 To keep the creation date, this new default template also adds a date header attribute to the generated file contents.
 
 [fn:org-roam-default-template]
-#+caption: Org-roam's default capture template
+Org-roam's default capture template:
 #+begin_src emacs-lisp
   (("d" "default" plain
     "%?"
