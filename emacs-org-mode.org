@@ -9,7 +9,6 @@ Install Org mode to prevent version mismatches between the Org bundled with Emac
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; Org mode
   <<org-use-package>>)
 #+end_src
 
@@ -20,7 +19,6 @@ Configure Org to recursively look through =~/notes/= for displaying the agenda:
 #+headers: :noweb yes
 #+headers: :tangle org.el
 #+begin_src emacs-lisp
-  ;; Org mode
   <<org-use-package>>
     :custom
     (org-agenda-files (directory-files-recursively "~/notes/" "\\.org$")))

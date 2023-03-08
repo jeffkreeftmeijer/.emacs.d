@@ -1,4 +1,3 @@
-;; Org mode
 (use-package org
   :custom
   (org-agenda-files (directory-files-recursively "~/notes/" "\\.org$")))
