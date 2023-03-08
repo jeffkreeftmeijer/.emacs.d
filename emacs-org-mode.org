@@ -8,6 +8,7 @@ Install Org mode to prevent version mismatches between the Org bundled with Emac
   (use-package org
 #+end_src
 
+#+headers: :noweb yes
 #+begin_src emacs-lisp
   <<org-use-package>>)
 #+end_src
@@ -16,12 +17,46 @@ Install Org mode to prevent version mismatches between the Org bundled with Emac
 
 Configure Org to recursively look through =~/notes/= for displaying the agenda:
 
+#+name: org-custom-agenda
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (org-agenda-files (directory-files-recursively "~/notes/" "\\.org$"))
+#+end_src
+
 #+headers: :noweb yes
-#+headers: :tangle org.el
 #+begin_src emacs-lisp
   <<org-use-package>>
     :custom
-    (org-agenda-files (directory-files-recursively "~/notes/" "\\.org$")))
+    <<org-custom-agenda>>)
+#+end_src
+
+* Org-babel
+
+[[https://orgmode.org/worg/org-contrib/babel/][Org-babel]] executes source code within Org documents.
+It only supports Emacs Lisp by default, but more languages can be added to =org-babel-load-languages=:
+
+#+name: org-custom-babel
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (org-babel-load-languages ((emacs-lisp . t)
+                             (shell . t)))
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  <<org-use-package>>
+    :custom
+    <<org-custom-babel>>)
+#+end_src
+
+#+headers: :tangle org.el
+#+headers: :noweb yes
+#+headers: :exports none
+#+begin_src emacs-lisp
+  <<org-use-package>>
+    :custom
+    <<org-custom-agenda>>
+    <<org-custom-babel>>)
 #+end_src
 
 * Org-auto-tangle
