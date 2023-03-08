@@ -27,7 +27,7 @@ To fix the tab key's functionality in Org mode, sacrifice Evil's =C-i= backward 
 This option needs to be set /before/ Evil is loaded to take effect, so put it in the early init file:
 
 #+caption: =~/emacs.d/early-init.el=
-#+begin_src emacs-lisp :tangle early-init.el
+#+begin_src emacs-lisp
   ;; Disable C-i to jump forward to restore TAB functionality in Org mode.
   (setq evil-want-C-i-jump nil)
 #+end_src
@@ -35,7 +35,7 @@ This option needs to be set /before/ Evil is loaded to take effect, so put it in
 With use-package, set the =evil-want-C-i-jump= before the package is loaded by using the =:init= keyword:
 
 #+caption: =~/emacs.d/init.el=
-#+begin_src emacs-lisp :tangle early-init.el
+#+begin_src emacs-lisp
   ;; Install Evil and disable C-i to jump forward to restore TAB functionality in Org mode.
   (use-package evil
 	       :init (setq evil-want-C-i-jump nil)
