@@ -3,8 +3,25 @@
 [[https://github.com/emacs-evil/evil][Evil]] is a Vim emulator for emacs.
 Install it with =straight.el=, and turn =evil-mode= on:
 
-#+begin_src emacs-lisp :tangle evil.el
+#+begin_src emacs-lisp
   (use-package evil
+    :config
+    (evil-mode))
+#+end_src
+
+* "Fix" the tab key for visibility cycling in Org and Evil mode
+:PROPERTIES:
+:CUSTOM_ID: evil-tab
+:END:
+
+#+include: "emacs-evil-org-tab.org" :lines "11-"
+
+#+headers: :tangle evil.el
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (use-package evil
+    :init
+    (setq evil-want-C-i-jump nil)
     :config
     (evil-mode))
 #+end_src
