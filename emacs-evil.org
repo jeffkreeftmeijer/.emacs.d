@@ -4,7 +4,6 @@
 Install it with =straight.el=, and turn =evil-mode= on:
 
 #+begin_src emacs-lisp :tangle evil.el
-  ;; Evil mode
   (use-package evil
     :config
     (evil-mode))
