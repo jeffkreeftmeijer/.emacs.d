@@ -2,7 +2,7 @@
 
 Install Org mode to prevent version mismatches between the Org bundled with Emacs and the dependencies of other packages.
 
-#+name: org-1
+#+name: org-use-package
 #+headers: :exports none
 #+begin_src emacs-lisp
   (use-package org
@@ -10,7 +10,7 @@ Install Org mode to prevent version mismatches between the Org bundled with Emac
 
 #+begin_src emacs-lisp
   ;; Org mode
-  <<org-1>>)
+  <<org-use-package>>)
 #+end_src
 
 * Org-agenda
@@ -21,7 +21,7 @@ Configure Org to recursively look through =~/notes/= for displaying the agenda:
 #+headers: :tangle org.el
 #+begin_src emacs-lisp
   ;; Org mode
-  <<org-1>>
+  <<org-use-package>>
     :custom
     (org-agenda-files (directory-files-recursively "~/notes/" "\\.org$")))
 #+end_src
