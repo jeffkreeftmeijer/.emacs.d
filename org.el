@@ -1,6 +1,8 @@
 (use-package org
   :custom
-  (org-agenda-files (directory-files-recursively "~/notes/" "\\.org$")))
+  (org-agenda-files (directory-files-recursively "~/notes/" "\\.org$"))
+  (org-babel-load-languages '((emacs-lisp . t)
+                              (shell . t))))
 
 (use-package org-auto-tangle
   :hook
