@@ -18,7 +18,7 @@
  ("org" . "6ab611720d29d069a1cb9b62614a873755bba243")
  ("org-auto-tangle" . "817eabf902e759e96782bdc54d2dab36c4a2c5ab")
  ("org-roam" . "5c06471c3a11348342719fd9011486455adeb701")
- ("straight.el" . "3eca39dfc6797243ec7d1c6a7d45142407f73f88")
+ ("straight.el" . "da48615f293960d37829a2d8cb1f0bb9d0524a7a")
  ("use-package" . "77945e002f11440eae72d8730d3de218163d551e")
  ("xclip" . "a1ac607f75a250dddf49866918bb493884451130")
  ("yaml-mode" . "3fcb36d6039bef57e2a0f6e24c51f623c0bf5fb7"))

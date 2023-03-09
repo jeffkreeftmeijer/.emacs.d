@@ -1,3 +1,5 @@
+(setq straight-repository-branch "develop")
+
 ;; Install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
