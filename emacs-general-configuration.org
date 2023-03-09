@@ -1,7 +1,7 @@
 #+title: Emacs general configuration
 
 The first part of the configuration file configures Emacs' main functionality.
-Since this doesn't require any of the plugins to load, it's placed first in the configuration file.
+Since this doesn't require any of the plugins to load, it's placed in the =early-init.el= configuration file.
 
 Loading it first has some advantages.
 For example, it prevents the hidden menu bar from flickering on startup.

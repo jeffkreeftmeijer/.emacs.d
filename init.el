@@ -1,5 +1,3 @@
-(load "~/.emacs.d/general.el" nil t)
-
 (load "~/.emacs.d/package-management.el" nil t)
 
 (load "~/.emacs.d/linguist.el" nil t)

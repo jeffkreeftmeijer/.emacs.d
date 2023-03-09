@@ -12,7 +12,7 @@
 
 #+include: "emacs-general-configuration.org" :lines "3-"
 
-#+headers: :tangle init.el
+#+headers: :tangle early-init.el
 #+headers: :exports none
 #+begin_src emacs-lisp
   (load "~/.emacs.d/general.el" nil t)
