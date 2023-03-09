@@ -25,3 +25,22 @@ Install it with =straight.el=, and turn =evil-mode= on:
     :config
     (evil-mode))
 #+end_src
+
+* Evil-commentary
+:PROPERTIES:
+:CUSTOM_ID: evil-commentary
+:END:
+
+[[https://github.com/linktohack/evil-commentary][Evil-commentary]] is an Emacs port of [[https://github.com/tpope/vim-commentary][vim-commentary]] which adds key bindings to call Emacs' built in =comment-or-uncomment-region= function:
+
+#+begin_quote
+1. =g c c= comments out a line (takes a count)
+2. =g p= comments out the target of a motion, e.g. =g c a p= to comment out a paragraph (normal state) and =g c= to comment out the selection (visual state).
+#+end_quote
+
+#+headers: :tangle evil.el
+#+begin_src emacs-lisp
+  (use-package evil-commentary-mode
+    :config
+    (evil-commentary-mode))
+#+end_src
