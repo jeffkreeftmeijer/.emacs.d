@@ -15,7 +15,7 @@
 #+headers: :tangle init.el
 #+headers: :exports none
 #+begin_src emacs-lisp
-  (load-file "~/.emacs.d/general.el")
+  (load "~/.emacs.d/general.el" nil t)
 #+end_src
 
 * Package management
@@ -28,13 +28,13 @@
 #+headers: :tangle init.el
 #+headers: :exports none
 #+begin_src emacs-lisp
-  (load-file "~/.emacs.d/package-management.el")
+  (load "~/.emacs.d/package-management.el" nil t)
 #+end_src
 
 #+headers: :tangle early-init.el
 #+headers: :exports none
 #+begin_src emacs-lisp
-  (load-file "~/.emacs.d/early-package-management.el")
+  (load "~/.emacs.d/early-package-management.el" nil t)
 #+end_src
 
 * Linguist
@@ -47,7 +47,7 @@
 #+headers: :tangle init.el
 #+headers: :exports none
 #+begin_src emacs-lisp
-  (load-file "~/.emacs.d/linguist.el")
+  (load "~/.emacs.d/linguist.el" nil t)
 #+end_src
 
 * Evil
@@ -60,7 +60,7 @@
 #+headers: :tangle init.el
 #+headers: :exports none
 #+begin_src emacs-lisp
-  (load-file "~/.emacs.d/evil.el")
+  (load "~/.emacs.d/evil.el" nil t)
 #+end_src
 
 * Org mode
@@ -73,7 +73,7 @@
 #+headers: :tangle init.el
 #+headers: :exports none
 #+begin_src emacs-lisp
-  (load-file "~/.emacs.d/org.el")
+  (load "~/.emacs.d/org.el" nil t)
 #+end_src
 
 * Org-roam
@@ -86,7 +86,7 @@
 #+headers: :tangle init.el
 #+headers: :exports none
 #+begin_src emacs-lisp
-  (load-file "~/.emacs.d/org-roam.el")
+  (load "~/.emacs.d/org-roam.el" nil t)
 #+end_src
 
 * Clipboard

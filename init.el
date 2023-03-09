@@ -1,14 +1,14 @@
-(load-file "~/.emacs.d/general.el")
+(load "~/.emacs.d/general.el" nil t)
 
-(load-file "~/.emacs.d/package-management.el")
+(load "~/.emacs.d/package-management.el" nil t)
 
-(load-file "~/.emacs.d/linguist.el")
+(load "~/.emacs.d/linguist.el" nil t)
 
-(load-file "~/.emacs.d/evil.el")
+(load "~/.emacs.d/evil.el" nil t)
 
-(load-file "~/.emacs.d/org.el")
+(load "~/.emacs.d/org.el" nil t)
 
-(load-file "~/.emacs.d/org-roam.el")
+(load "~/.emacs.d/org-roam.el" nil t)
 
 (use-package xclip
   :init
