@@ -29,6 +29,13 @@ Doing so allows installing forked packages, altering local package checkouts, an
 :CUSTOM_ID: straight.el-installation
 :END:
 
+When on Emacs 29 with the =--with-native-compilation= turned on, make sure you're on straight.el's development branch, as staying on the main branch breaks its bootstrap for now (=(void-variable native-comp-deferred-compilation-deny-list)=):
+
+#+headers: :tangle package-management.el
+#+begin_src emacs-lisp
+(setq straight-repository-branch "develop")
+#+end_src
+
 The [[https://github.com/radian-software/straight.el#getting-started][Getting started]] section in the straight.el README provides the bootstrap code to place inside =~/.emacs.d/init.el= in order to install it:
 
 #+caption: =init.el=, installing straight.el
