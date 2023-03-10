@@ -35,7 +35,7 @@ My current version was build with the following src_elisp[:exports code]{system-
 * Build & install
 
 First, clone Emacs from Savannah's git repository to =~/emacs=.
-By selecting =emacs-29= through the =-b= flag, git automatically fetches the branch for the upcoming Erlang 29 release:
+By selecting =emacs-29= through the =--branch= flag, git automatically fetches the branch for the upcoming Erlang 29 release:
 
 #+headers: :dir ~/
 #+headers: :cache yes
