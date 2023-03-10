@@ -84,7 +84,7 @@ Then, run the newly-generated =./configure= with the following options[fn:config
   ./configure --without-x --without-ns --with-native-compilation --with-tree-sitter
 #+end_src
 
-#+RESULTS[af9244a5c707ae80db0bc4b73da68cf793df0550]:
+#+RESULTS[1ef16a411533da84697cf04dd9ba10f12c5f0782]:
 #+begin_example
 checking for xcrun... xcrun
 checking for make... yes
@@ -692,7 +692,6 @@ config.status: creating admin/charsets/Makefile
 config.status: creating admin/unidata/Makefile
 config.status: creating admin/grammars/Makefile
 config.status: creating src/config.h
-config.status: src/config.h is unchanged
 config.status: executing src/epaths.h commands
 config.status: executing src/.gdbinit commands
 config.status: executing doc/emacs/emacsver.texi commands
