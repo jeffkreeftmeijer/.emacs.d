@@ -13,4 +13,6 @@
  ;; Disable the startup message
  inhibit-startup-echo-area-message (user-login-name)
  ;; Store all backup files in =~/.emacs.d/backups/
- backup-directory-alist '(("." . "~/.emacs.d/backups")))
+ backup-directory-alist '(("." . "~/.emacs.d/backups"))
+ ;; Hide native compilation warnings
+ native-comp-async-report-warnings-errors nil)
