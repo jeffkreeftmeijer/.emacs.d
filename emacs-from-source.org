@@ -18,7 +18,7 @@ I'm currently running Emacs 29 on macOS's Terminal.app, built from source withou
 
 #+RESULTS[2a48b3a0a2f9fa487f699966e2850d68c68a94e6]:
 : GNU Emacs 29.0.60
-: Development version ab417c8a6eeb on emacs-29 branch; build date 2023-03-07.
+: Development version 679f528b953a on emacs-29 branch; build date 2023-03-10.
 
 My current version was build with the following src_elisp[:exports code]{system-configuration-features}:
 
@@ -30,7 +30,7 @@ My current version was build with the following src_elisp[:exports code]{system-
 #+end_src
 
 #+RESULTS[967d2bb98d6c94b8165bd0a4b8f8fc06c42576e1]:
-: "ACL GMP GNUTLS JSON LCMS2 LIBXML2 MODULES NOTIFY KQUEUE PDUMPER SQLITE3 THREADS TREE_SITTER XIM ZLIB"
+: "ACL GMP GNUTLS JSON LCMS2 LIBXML2 MODULES NATIVE_COMP NOTIFY KQUEUE PDUMPER SQLITE3 THREADS TREE_SITTER XIM ZLIB"
 
 * Build & install
 
