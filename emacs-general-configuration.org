@@ -109,6 +109,28 @@ To configure Emacs to periodically save the minibuffer history to a file and loa
 
 By default, Emacs saves the minibuffer history to =~/.emacs.d/history=.
 
+* Native compilation
+:PROPERTIES:
+:CUSTOM_ID: general-native-compilation
+:END:
+
+Emacs compiles packages natively if the =--with-native-compilation= configuration flag is set while [[id:E2360227-3089-4340-9300-7076CB890E0C][building Emacs from source]].
+Since this happens asynchronously, warnings about deprecations in the packages are printed whenever they happen in the compile process, popping open the =*Warnings= buffer.
+To hide these warnings, unset src_emacs-lisp[:exports code]{native-comp-async-report-warnings-errors}:
+
+#+headers: :exports none
+#+name: native-comp-warnings
+#+begin_src emacs-lisp
+  native-comp-async-report-warnings-errors nil
+#+end_src
+
+#+caption: =init.el=, disabling native compilation warnings
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  ;; Hide native compilation warnings
+  (setq <<native-comp-warnings>>)
+#+end_src
+
 * Summary
 :PROPERTIES:
 :CUSTOM_ID: general-summary
@@ -133,5 +155,7 @@ The first part of the =init.el= file removes the menu bar and disables the start
    ;; Disable the startup message
    <<startup-message>>
    ;; Store all backup files in =~/.emacs.d/backups/
-   <<backup-directory>>)
+   <<backup-directory>>
+   ;; Hide native compilation warnings
+   <<native-comp-warnings>>)
 #+end_src
