@@ -5,6 +5,7 @@ backups
 bookmarks
 history
 org-roam.db
+projects
 straight/build
 straight/build-cache.el
 straight/repos
