@@ -707,7 +707,7 @@ Then, run =make=:
 
 * Update
 
-If the repository was checked out previously, upgrade the installed version of Emacs by switching to =~/emacs=, pulling in recent changes, running =make= and =make install=:
+If the repository was checked out previously and you don't want to update the configuration flags, upgrade the installed version of Emacs by switching to =~/emacs=, pulling in recent changes, running =make= and =make install=:
 
 #+name: update
 #+begin_src shell
