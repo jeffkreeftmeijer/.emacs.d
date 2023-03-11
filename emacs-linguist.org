@@ -15,8 +15,14 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
 #+end_src
 
 * Language packs
+:PROPERTIES:
+:CUSTOM_ID: language-packs
+:END:
 
 ** [[https://github.com/spotify/dockerfile-mode][dockerfile-mode]]
+:PROPERTIES:
+:CUSTOM_ID: dockerfile-mode
+:END:
 
 #+begin_src emacs-lisp :tangle linguist.el
   (use-package dockerfile-mode
@@ -26,6 +32,9 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
 #+end_src
 
 ** [[https://github.com/elixir-editors/emacs-elixir][elixir-mode]]
+:PROPERTIES:
+:CUSTOM_ID: elixir-mode
+:END:
 
 #+begin_src emacs-lisp :tangle linguist.el
   (use-package elixir-mode
@@ -37,6 +46,9 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
 #+end_src
 
 ** [[https://github.com/magit/git-modes/blob/main/gitignore-mode.el][gitignore-mode]]
+:PROPERTIES:
+:CUSTOM_ID: gitignore-mode
+:END:
 
 #+begin_src emacs-lisp :tangle linguist.el
   (use-package git-modes
@@ -47,6 +59,9 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
 #+end_src
 
 ** [[https://github.com/ledger/ledger-mode][ledger-mode]]
+:PROPERTIES:
+:CUSTOM_ID: ledger-mode
+:END:
 
 #+begin_src emacs-lisp :tangle linguist.el
   (use-package ledger-mode
@@ -55,6 +70,9 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
 #+end_src
 
 ** [[https://github.com/jrblevin/markdown-mode][markdown-mode]]
+:PROPERTIES:
+:CUSTOM_ID: markdown-mode
+:END:
 
 #+begin_src emacs-lisp :tangle linguist.el
   (use-package markdown-mode
@@ -63,6 +81,9 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
 #+end_src
 
 ** [[https://github.com/yoshiki/yaml-mode][yaml-mode]]
+:PROPERTIES:
+:CUSTOM_ID: yaml-mode
+:END:
 
 #+begin_src emacs-lisp :tangle linguist.el
   (use-package yaml-mode
@@ -71,6 +92,9 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
 #+end_src
 
 * Adding language packs
+:PROPERTIES:
+:CUSTOM_ID: adding-language-packs
+:END:
 
 Each language pack requires one or multiple =:mode= keys with patterns to automatically load the mode when a file that matches it is opened.
 
