@@ -80,6 +80,18 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
     :mode ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
 #+end_src
 
+** [[https://github.com/NixOS/nix-mode][nix-mode]]
+:PROPERTIES:
+:CUSTOM_ID: nix-mode
+:END:
+
+#+begin_src emacs-lisp :tangle linguist.el
+  (use-package nix-mode
+    :config (linguist--loaded-message "nix-mode")
+    :mode ("\\.nix\\'" . nix-mode)
+    :mode ("^/nix/store/.+\\.drv\\'" . nix-drv-mode))
+#+end_src
+
 ** [[https://github.com/yoshiki/yaml-mode][yaml-mode]]
 :PROPERTIES:
 :CUSTOM_ID: yaml-mode

@@ -27,6 +27,11 @@
   :config (linguist--loaded-message "markdown-mode")
   :mode ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
 
+(use-package nix-mode
+  :config (linguist--loaded-message "nix-mode")
+  :mode ("\\.nix\\'" . nix-mode)
+  :mode ("^/nix/store/.+\\.drv\\'" . nix-drv-mode))
+
 (use-package yaml-mode
   :config (linguist--loaded-message "yaml-mode")
   :mode ("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode))
