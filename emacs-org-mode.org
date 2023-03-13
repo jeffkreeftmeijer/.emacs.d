@@ -70,6 +70,42 @@ It only supports Emacs Lisp by default, but more languages can be added to =org-
     <<org-custom-babel>>)
 #+end_src
 
+
+* Org-gtd.el
+:PROPERTIES:
+:CUSTOM_ID: org-gtd
+:END:
+
+[[https://github.com/Trevoke/org-gtd.el][Org-gtd.el]] is an implementation of "Getting Things Done" in Emacs.
+
+Set the =org-gtd-update-ack= variable to prevent a warning about upgrading from being printed when org-gtd loads.
+
+#+headers: :exports none
+#+begin_src
+ ■  Warning (org-gtd):
+
+|--------------------------|
+| WARNING: action required |
+|--------------------------|
+
+Upgrading to 2.1.0 requires changing the org-edna triggers for the project
+categories. Failure to do so means your projects will end up in inconsistent
+states.
+
+See the documentation for instructions to upgrade (C-h i, then find org-gtd),
+then add the following setting to your config file (BEFORE ORG-GTD LOADS)
+to disable this warning.
+
+(setq org-gtd-update-ack "2.1.0")
+#+end_src
+
+#+begin_src emacs-lisp :tangle org.el
+  (use-package org-gtd
+    :init
+    (setq org-gtd-update-ack "2.1.0"))
+#+end_src
+
+
 * Org-auto-tangle
 :PROPERTIES:
 :CUSTOM_ID: org-auto-tangle
