@@ -15,4 +15,6 @@
  ;; Store all backup files in =~/.emacs.d/backups/
  backup-directory-alist '(("." . "~/.emacs.d/backups"))
  ;; Hide native compilation warnings
- native-comp-async-report-warnings-errors nil)
+ native-comp-async-report-warnings-errors nil
+ ;; Don't insert tabs while indenting
+ indent-tabs-mode nil)

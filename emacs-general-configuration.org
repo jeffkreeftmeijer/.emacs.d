@@ -109,6 +109,24 @@ To configure Emacs to periodically save the minibuffer history to a file and loa
 
 By default, Emacs saves the minibuffer history to =~/.emacs.d/history=.
 
+* No tabs
+
+By default, Erlang uses tabs for indentation.
+Use spaces instead:
+
+#+headers: :exports none
+#+name: indent-tabs-mode
+#+begin_src emacs-lisp
+  indent-tabs-mode nil
+#+end_src
+
+#+caption: =init.el=, disabling  tabs in indentation
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  ;; Don't insert tabs while indenting
+  (setq <<indent-tabs-mode>>)
+#+end_src
+
 * Native compilation
 :PROPERTIES:
 :CUSTOM_ID: general-native-compilation
@@ -157,5 +175,7 @@ The first part of the =init.el= file removes the menu bar and disables the start
    ;; Store all backup files in =~/.emacs.d/backups/
    <<backup-directory>>
    ;; Hide native compilation warnings
-   <<native-comp-warnings>>)
+   <<native-comp-warnings>>
+   ;; Don't insert tabs while indenting
+   <<indent-tabs-mode>>)
 #+end_src
