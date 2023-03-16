@@ -14,6 +14,12 @@
   :mode ("\\.elixir\\'" . elixir-mode))
 
 (use-package git-modes
+  :config (linguist--loaded-message "gitattributes-mode")
+  :mode ("/git/attributes\\'" . gitattributes-mode)
+  :mode ("/info/attributes\\'" . gitattributes-mode)
+  :mode ("/\\.gitattributes\\'" . gitattributes-mode))
+
+(use-package git-modes
   :config (linguist--loaded-message "gitconfig-mode")
   :mode ("/etc/gitconfig\\'" . gitconfig-mode)
   :mode ("/\\.gitmodules\\'" . gitconfig-mode)
