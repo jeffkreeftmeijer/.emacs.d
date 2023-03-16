@@ -1,5 +1,6 @@
 (use-package org
   :custom
+  (org-cycle-separator-lines -1)
   (org-agenda-files (directory-files-recursively "~/notes/" "\\.org$"))
   (org-babel-load-languages '((emacs-lisp . t)
                               (shell . t))))
