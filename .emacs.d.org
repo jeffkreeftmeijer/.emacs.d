@@ -42,7 +42,7 @@
 :CUSTOM_ID: linguist
 :END:
 
-#+include: "emacs-linguist.org" :lines "10-71"
+#+include: "emacs-linguist.org" :lines "10-"
 
 #+headers: :tangle init.el
 #+headers: :exports none
