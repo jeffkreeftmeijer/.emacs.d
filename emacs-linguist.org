@@ -45,6 +45,22 @@ Linguist is a language modes pack for Emacs, inspired by [[https://github.com/sh
     :mode ("\\.elixir\\'" . elixir-mode))
 #+end_src
 
+** [[https://github.com/magit/git-modes/blob/main/gitconfig-mode.el][gitconfig-mode]]
+:PROPERTIES:
+:CUSTOM_ID: gitconfig-mode
+:END:
+
+#+begin_src emacs-lisp :tangle linguist.el
+  (use-package git-modes
+    :config (linguist--loaded-message "gitconfig-mode")
+    :mode ("/etc/gitconfig\\'" . gitconfig-mode)
+    :mode ("/\\.gitmodules\\'" . gitconfig-mode)
+    :mode ("/git/config\\'" . gitconfig-mode)
+    :mode ("/modules/.*/config\\'" . gitconfig-mode)
+    :mode ("/\\.git/config\\'" . gitconfig-mode)
+    :mode ("/\\.gitconfig\\'" . gitconfig-mode))
+#+end_src
+
 ** [[https://github.com/magit/git-modes/blob/main/gitignore-mode.el][gitignore-mode]]
 :PROPERTIES:
 :CUSTOM_ID: gitignore-mode

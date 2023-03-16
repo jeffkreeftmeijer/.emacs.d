@@ -14,6 +14,15 @@
   :mode ("\\.elixir\\'" . elixir-mode))
 
 (use-package git-modes
+  :config (linguist--loaded-message "gitconfig-mode")
+  :mode ("/etc/gitconfig\\'" . gitconfig-mode)
+  :mode ("/\\.gitmodules\\'" . gitconfig-mode)
+  :mode ("/git/config\\'" . gitconfig-mode)
+  :mode ("/modules/.*/config\\'" . gitconfig-mode)
+  :mode ("/\\.git/config\\'" . gitconfig-mode)
+  :mode ("/\\.gitconfig\\'" . gitconfig-mode))
+
+(use-package git-modes
   :config (linguist--loaded-message "gitignore-mode")
   :mode ("/git/ignore\\'" . gitignore-mode)
   :mode ("/info/exclude\\'" . gitignore-mode)
