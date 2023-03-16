@@ -25,7 +25,8 @@
 
 (use-package markdown-mode
   :config (linguist--loaded-message "markdown-mode")
-  :mode ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
+  :mode ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
+  :mode ("\\.mdx\\'" . markdown-mode))
 
 (use-package nix-mode
   :config (linguist--loaded-message "nix-mode")
