@@ -3,6 +3,7 @@
 :ROAM_ALIASES: emacs-straight-use-package
 :END:
 #+title: Emacs package management with straight.el and use-package
+#+description: Use straight.el and use-package for reproducable, performant and cleanly-configured package management in Emacs
 #+author: Jeff Kreeftmeijer
 #+date: 2021-08-16
 #+options: toc:nil
