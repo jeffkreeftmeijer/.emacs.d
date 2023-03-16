@@ -1,0 +1,117 @@
+:PROPERTIES:
+:ID:       41912E09-4E5A-4C47-A343-0644B2719CF4
+:END:
+#+title: Hiding blank lines while collapsing Org document sections in Emacs
+#+author: Jeff Kreeftmeijer
+#+date: 2021-07-04
+
+The =org-cycle-separator-lines= variable determines hwo Org hides trailing lines when collapsing document sections.
+It's options are confusing at first glance, as it takes either a positive or negative number, but should make more sense with some examples.
+
+Consider the following example file:
+
+#+begin_src org
+  ,* Zero
+
+  This section has no trailing blank lines.
+  ,* One
+
+  This section has one trailing blank line.
+
+  ,* Two
+
+  This section has two trailing blank  lines.
+
+
+  ,* Three
+
+  This section has three trailing blank lines.
+
+
+
+#+end_src
+
+When the separator lines configuration is left on the default of two, Org requires two lines in the file to keep an empty line between collapsed headers.
+Collapsing the example file above yields the following restult:
+
+#+caption: A collapsed Org file, with =(setq org-cycle-separator-lines 2)=:
+#+begin_src org
+  ,* Zero...
+  ,* One...
+  ,* Two...
+
+  ,* Three...
+
+#+end_src
+
+Setting the configuration value to 1 gives this result, as all sections have at least one line of whitespace:
+
+#+caption: A collapsed Org file, with =(setq org-cycle-separator-lines 1)=:
+#+begin_src org
+  ,* Zero...
+  ,* One...
+
+  ,* Two...
+
+  ,* Three...
+
+#+end_src
+
+A special case is added for a configuration value of zero, which always hides all lines between sections:
+
+#+caption: A collapsed Org file, with =(setq org-cycle-separator-lines 0)=:
+#+begin_src org
+  ,* Zero...
+  ,* One...
+  ,* Two...
+  ,* Three...
+#+end_src
+
+Finally, a negative value disables the whitespace hiding altogether:
+
+#+caption: A collapsed Org file, with =(setq org-cycle-separator-lines -1)=:
+#+begin_src org
+  ,* Zero...
+  ,* One...
+
+  ,* Two...
+
+
+  ,* Three...
+
+
+
+#+end_src
+
+As a final caveat; negative options hide whitespace /only/ if the number of blank lines is at least -N, where N is the =org-cycle-separator-lines= value.
+Setting it to -2 collapses all whitespace smaller than two lines:
+
+
+#+caption: A collapsed Org file, with =(setq org-cycle-separator-lines -2)=:
+#+begin_src org
+  ,* Zero...
+  ,* One...
+  ,* Two...
+
+
+  ,* Three...
+
+
+
+#+end_src
+
+I opt for =-1= in my configuration, which disables hiding altogether, for the simple reason that it shows when a section has too much trailing whitespace.
+That allows me to go in and fix the document, rather than hiding the problem.
+
+#+name: org-custom-separator-lines
+#+headers: :exports none
+#+begin_src emacs-lisp
+  (org-cycle-separator-lines -1)
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (use-package org
+    :custom
+    <<org-custom-separator-lines>>)
+#+end_src
