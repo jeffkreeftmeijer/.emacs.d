@@ -18,7 +18,11 @@
     }).extend(emacs-overlay.overlay);
   in {
     overlay = (final: prev: rec {
-      configured-emacs = pkgs.emacsGit;
+      configured-emacs = (pkgs.emacsWithPackagesFromUsePackage {
+        config = ./default.el;
+        defaultInitFile = true;
+        package = pkgs.emacsGit;
+      });
     });
 
     packages.x86_64-darwin = pkgs;
