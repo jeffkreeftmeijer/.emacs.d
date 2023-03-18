@@ -15,6 +15,7 @@ After installing Evil, turn on =evil-mode= globally:
 #+headers: :tangle no
 #+begin_src emacs-lisp
   (use-package evil
+    :ensure t
     :config
     (evil-mode 1))
 #+end_src
@@ -33,6 +34,7 @@ To do that, add an src_emacs-lisp[:exports code]{:init} key to the Evil package 
 
 #+begin_src emacs-lisp
   (use-package evil
+    :ensure t
     :init
     (setq evil-want-keybinding nil)
     :config
@@ -43,6 +45,7 @@ Then, install evil-collection.
 
 #+begin_src emacs-lisp
   (use-package evil-collection
+    :ensure t
     :commands
     (evil-collection-eshell-setup evil-collection-magit-setup))
 #+end_src
@@ -62,6 +65,7 @@ Finally, add Evil-collection by adding an after for each feature or package it p
 
 #+begin_src emacs-lisp
   (use-package magit
+    :ensure t
     :defer t
     :config
     (evil-collection-magit-setup))
