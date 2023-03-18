@@ -2,7 +2,8 @@
   :init
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
-  (menu-bar-mode -1))
+  (menu-bar-mode -1)
+  (set-face-attribute 'default nil :font "SF Mono-15"))
 
 (use-package evil
   :ensure t
