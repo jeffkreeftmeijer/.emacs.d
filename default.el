@@ -14,4 +14,6 @@
   (evil-collection-eshell-setup))
 
 (use-package magit
-  :defer t)
+  :defer t
+  :config
+  (evil-collection-magit-setup))
