@@ -212,6 +212,7 @@ Now, since I'm working on switching from running Emacs in the terminal to runnin
     :ensure t
     :init
     (global-corfu-mode)
+    (corfu-history-mode)
     :custom
     (corfu-auto t))
 #+end_src
