@@ -97,3 +97,10 @@
 (use-package citeproc
   :ensure t
   :defer t)
+
+(use-package elixir-mode
+  :ensure t
+  :mode ("mix\\.lock" . elixir-mode)
+  :mode ("\\.exs\\'" . elixir-mode)
+  :mode ("\\.ex\\'" . elixir-mode)
+  :mode ("\\.elixir\\'" . elixir-mode))
