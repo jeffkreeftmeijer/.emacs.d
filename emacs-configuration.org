@@ -79,6 +79,8 @@ To do that, add an src_emacs-lisp[:exports code]{:init} key to the Evil package 
 #+end_src
 
 Then, install evil-collection.
+To defer loading, define commands in the package declaration.
+The package will only be loaded when one of these functions is called:
 
 #+begin_src emacs-lisp
   (use-package evil-collection
@@ -88,12 +90,20 @@ Then, install evil-collection.
 #+end_src
 
 Finally, add Evil-collection by adding an after for each feature or package it provides key bindings for.
+To keep the configuration modular, these declarations don't assume anything about the packages that are being configured, as setting package-specific configuration will happen later.
 
 #+begin_src emacs-lisp
   (use-package eshell
     :defer t
     :config
     (evil-collection-eshell-setup))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package magit
+    :defer t
+    :config
+    (evil-collection-magit-setup))
 #+end_src
 
 * Magit: an interface for working with Git repositories
@@ -103,9 +113,7 @@ Finally, add Evil-collection by adding an after for each feature or package it p
 #+begin_src emacs-lisp
   (use-package magit
     :ensure t
-    :defer t
-    :config
-    (evil-collection-magit-setup))
+    :defer t)
 #+end_src
 
 [fn:magit] I'm quite comfortable with Git's CLI in the terminal, so I held off on isntalling Magit even though I've used (and loved) it in the past.

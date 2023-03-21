@@ -23,10 +23,13 @@
   (evil-collection-eshell-setup))
 
 (use-package magit
-  :ensure t
   :defer t
   :config
   (evil-collection-magit-setup))
+
+(use-package magit
+  :ensure t
+  :defer t)
 
 (use-package vertico
   :ensure t
