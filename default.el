@@ -28,6 +28,11 @@
   :config
   (evil-collection-magit-setup))
 
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode 1))
+
 (use-package org-roam
   :ensure t
   :init

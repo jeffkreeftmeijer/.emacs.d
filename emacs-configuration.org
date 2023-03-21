@@ -111,6 +111,15 @@ Finally, add Evil-collection by adding an after for each feature or package it p
 [fn:magit] I'm quite comfortable with Git's CLI in the terminal, so I held off on isntalling Magit even though I've used (and loved) it in the past.
 Now, since I'm working on switching from running Emacs in the terminal to running a terminal in Emacs, I ran into the fact that Eshell can't handle Git's interactive modes because it's a dumb terminal.
 
+* Vertical completions with Vertico
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :ensure t
+    :init
+    (vertico-mode 1))
+#+end_src
+
 * Org-roam
 
 [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
