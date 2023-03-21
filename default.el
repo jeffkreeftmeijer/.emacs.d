@@ -15,7 +15,14 @@
 (use-package evil-collection
   :ensure t
   :commands
-  (evil-collection-eshell-setup evil-collection-magit-setup))
+  (evil-collection-dired-setup
+   evil-collection-eshell-setup
+   evil-collection-magit-setup))
+
+(use-package dired
+  :defer t
+  :config
+  (evil-collection-dired-setup))
 
 (use-package eshell
   :defer t
