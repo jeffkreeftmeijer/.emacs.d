@@ -128,6 +128,14 @@ Now, since I'm working on switching from running Emacs in the terminal to runnin
     (vertico-mode 1))
 #+end_src
 
+** History-aware completions
+
+#+begin_src emacs-lisp
+  (use-package savehist
+    :init
+    (savehist-mode 1))
+#+end_src
+
 * Org-roam
 
 [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
