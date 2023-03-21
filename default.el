@@ -46,6 +46,11 @@
   :init
   (marginalia-mode))
 
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic)))
+
 (use-package org-roam
   :ensure t
   :init
