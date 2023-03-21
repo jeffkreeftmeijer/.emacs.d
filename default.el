@@ -77,6 +77,13 @@
   :custom
   (completion-styles '(orderless basic)))
 
+(use-package corfu
+  :ensure t
+  :init
+  (global-corfu-mode)
+  :custom
+  (corfu-auto t))
+
 (use-package org-roam
   :ensure t
   :init
