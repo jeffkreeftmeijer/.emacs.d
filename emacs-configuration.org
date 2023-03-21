@@ -88,7 +88,8 @@ The package will only be loaded when one of these functions is called:
     :commands
     (evil-collection-dired-setup
      evil-collection-eshell-setup
-     evil-collection-magit-setup))
+     evil-collection-magit-setup
+     evil-collection-vertico-setup))
 #+end_src
 
 Finally, add Evil-collection by adding an after for each feature or package it provides key bindings for.
@@ -113,6 +114,13 @@ To keep the configuration modular, these declarations don't assume anything abou
     :defer t
     :config
     (evil-collection-magit-setup))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :defer t
+    :config
+    (evil-collection-vertico-setup))
 #+end_src
 
 * Magit: an interface for working with Git repositories
