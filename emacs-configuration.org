@@ -110,3 +110,43 @@ Finally, add Evil-collection by adding an after for each feature or package it p
 
 [fn:magit] I'm quite comfortable with Git's CLI in the terminal, so I held off on isntalling Magit even though I've used (and loved) it in the past.
 Now, since I'm working on switching from running Emacs in the terminal to running a terminal in Emacs, I ran into the fact that Eshell can't handle Git's interactive modes because it's a dumb terminal.
+
+* Org-roam
+
+[[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
+Install it, and configure the directory the package will store notes in:
+
+#+name: org-roam-1
+#+headers: :exports none
+#+headers: :tangle no
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-directory (file-truename "~/notes"))
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :tangle no
+#+begin_src emacs-lisp
+  <<org-roam-1>>)
+#+end_src
+
+** Sync automatically
+
+Turn on automatic database syncing instead of manually running =org-roam-db-sync=:
+
+#+name: org-roam-2
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle no
+#+begin_src emacs-lisp
+  <<org-roam-1>>
+    :config
+    (org-roam-db-autosync-mode)
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  <<org-roam-2>>)
+#+end_src

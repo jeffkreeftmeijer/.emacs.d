@@ -27,3 +27,10 @@
   :defer t
   :config
   (evil-collection-magit-setup))
+
+(use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-directory (file-truename "~/notes"))
+  :config
+  (org-roam-db-autosync-mode))
