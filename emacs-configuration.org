@@ -136,6 +136,18 @@ Now, since I'm working on switching from running Emacs in the terminal to runnin
     (savehist-mode 1))
 #+end_src
 
+** Extra information about completion options
+
+[[https://github.com/minad/marginalia][Marginalia]] is an extension for Vertico that shows extra information about the displayed completion options.
+
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :ensure t
+    :after vertico
+    :init
+    (marginalia-mode))
+#+end_src
+
 * Org-roam
 
 [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.

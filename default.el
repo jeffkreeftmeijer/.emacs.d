@@ -40,6 +40,12 @@
   :init
   (savehist-mode 1))
 
+(use-package marginalia
+  :ensure t
+  :after vertico
+  :init
+  (marginalia-mode))
+
 (use-package org-roam
   :ensure t
   :init
