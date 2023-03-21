@@ -132,9 +132,9 @@ Install it, and configure the directory the package will store notes in:
   <<org-roam-1>>)
 #+end_src
 
-** Sync automatically
+** Deferred loading
 
-Turn on automatic database syncing instead of manually running =org-roam-db-sync=:
+Defer loading Org-roam until the =org-roam-node-find= function is executed for the first time:
 
 #+name: org-roam-2
 #+headers: :exports none
@@ -142,11 +142,23 @@ Turn on automatic database syncing instead of manually running =org-roam-db-sync
 #+headers: :tangle no
 #+begin_src emacs-lisp
   <<org-roam-1>>
-    :config
-    (org-roam-db-autosync-mode)
+    :commands
+    (org-roam-node-find)
 #+end_src
 
 #+headers: :noweb yes
+#+headers: :tangle no
 #+begin_src emacs-lisp
   <<org-roam-2>>)
+#+end_src
+
+** Sync automatically
+
+Turn on automatic database syncing instead of manually running =org-roam-db-sync=:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  <<org-roam-2>>
+    :config
+    (org-roam-db-autosync-mode))
 #+end_src

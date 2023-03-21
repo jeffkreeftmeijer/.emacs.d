@@ -32,5 +32,7 @@
   :ensure t
   :init
   (setq org-roam-directory (file-truename "~/notes"))
+  :commands
+  (org-roam-node-find)
   :config
   (org-roam-db-autosync-mode))
