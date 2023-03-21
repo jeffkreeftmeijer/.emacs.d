@@ -36,3 +36,7 @@
   (org-roam-node-find)
   :config
   (org-roam-db-autosync-mode))
+
+(use-package citeproc
+  :ensure t
+  :defer t)

@@ -162,3 +162,15 @@ Turn on automatic database syncing instead of manually running =org-roam-db-sync
     :config
     (org-roam-db-autosync-mode))
 #+end_src
+
+* Citeproc
+
+For exporting Org documents with citations.
+Org's built-in CSL citation processor depends on [[https://github.com/andras-simonyi/citeproc-el][citeproc-el]].
+It checks if the package is available by checking the available features, so its loading can be deferred until it's needed:
+
+#+begin_src emacs-lisp
+  (use-package citeproc
+    :ensure t
+    :defer t)
+#+end_src
