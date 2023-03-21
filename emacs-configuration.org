@@ -89,6 +89,7 @@ The package will only be loaded when one of these functions is called:
     (evil-collection-dired-setup
      evil-collection-eshell-setup
      evil-collection-magit-setup
+     evil-collection-org-setup
      evil-collection-vertico-setup))
 #+end_src
 
@@ -107,6 +108,13 @@ To keep the configuration modular, these declarations don't assume anything abou
     :defer t
     :config
     (evil-collection-eshell-setup))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package org
+    :defer t
+    :config
+    (evil-collection-org-setup))
 #+end_src
 
 #+begin_src emacs-lisp

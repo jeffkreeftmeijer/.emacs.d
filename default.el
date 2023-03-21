@@ -18,6 +18,7 @@
   (evil-collection-dired-setup
    evil-collection-eshell-setup
    evil-collection-magit-setup
+   evil-collection-org-setup
    evil-collection-vertico-setup))
 
 (use-package dired
@@ -29,6 +30,11 @@
   :defer t
   :config
   (evil-collection-eshell-setup))
+
+(use-package org
+  :defer t
+  :config
+  (evil-collection-org-setup))
 
 (use-package magit
   :defer t
