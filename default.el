@@ -85,6 +85,11 @@
   :custom
   (corfu-auto t))
 
+(use-package emacs
+  :custom
+  (org-babel-load-languages '((emacs-lisp . t)
+			      (shell . t))))
+
 (use-package org-roam
   :ensure t
   :init

@@ -217,6 +217,18 @@ Now, since I'm working on switching from running Emacs in the terminal to runnin
     (corfu-auto t))
 #+end_src
 
+* Org-babel
+
+[[https://orgmode.org/worg/org-contrib/babel/][Org-babel]] executes source code within Org documents.
+It only supports Emacs Lisp by default, but more languages are added to =org-babel-load-languages=:
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :custom
+    (org-babel-load-languages '((emacs-lisp . t)
+				(shell . t))))
+#+end_src
+
 * Org-roam
 
 [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
