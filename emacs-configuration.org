@@ -293,16 +293,7 @@ It checks if the package is available by checking the available features, so its
     :defer t)
 #+end_src
 
-* Elixir
-
-#+begin_src emacs-lisp
-  (use-package elixir-mode
-    :ensure t
-    :mode ("mix\\.lock" . elixir-mode)
-    :mode ("\\.exs\\'" . elixir-mode)
-    :mode ("\\.ex\\'" . elixir-mode)
-    :mode ("\\.elixir\\'" . elixir-mode))
-#+end_src
+* Elixir-ls
 
 #+begin_src emacs-lisp
   (use-package eglot
