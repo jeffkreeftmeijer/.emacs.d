@@ -119,4 +119,8 @@
 
 (use-package org
   :custom
+  (org-refile-targets (quote (("~/notes/tasks.org" :level . 1)))))
+
+(use-package org
+  :custom
   (org-agenda-files (directory-files-recursively "~/org/" "\\.org$")))
