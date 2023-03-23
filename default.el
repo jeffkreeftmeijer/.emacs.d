@@ -110,6 +110,11 @@
   :config
   (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls")))
 
+(use-package exec-path-from-shell
+  :ensure t
+  :init
+  (exec-path-from-shell-initialize))
+
 (use-package org
   :custom
   (org-refile-targets (quote (("~/notes/tasks.org" :level . 1)))))
