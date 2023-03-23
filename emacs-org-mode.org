@@ -1,0 +1,107 @@
+:PROPERTIES:
+:ID:       1B87AA94-135C-491E-BC5F-6BA24A14524E
+:header-args: :tangle org.el
+:END:
+#+title: Note-taking, planning and publishing with Emacs Org Mode
+
+Set =~/notes/tasks.org= as a refile target to redirect tasks to:
+
+#+begin_src emacs-lisp
+  (use-package org
+    :custom
+    (org-refile-targets (quote (("~/notes/tasks.org" :level . 1)))))
+#+end_src
+
+#+begin_note
+Create the notes file with at least a level one headline to prevent an error from being raised:
+
+#+begin_quote
+no refile targets
+#+end_quote
+#+end_note
+
+* Org-agenda
+
+Have org-agenda look through the =~/notes= directory to find tasks recursively:
+
+#+begin_src emacs-lisp
+  (use-package org
+    :custom
+    (org-agenda-files (directory-files-recursively "~/org/" "\\.org$")))
+#+end_src
+
+* Org-babel
+
+[[https://orgmode.org/worg/org-contrib/babel/][Org-babel]] executes source code within Org documents.
+It only supports Emacs Lisp by default, but more languages are added to =org-babel-load-languages=:
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :custom
+    (org-babel-load-languages '((emacs-lisp . t)
+				(shell . t))))
+#+end_src
+
+* Org-roam
+
+[[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
+Install it, and configure the directory the package will store notes in:
+
+#+name: org-roam-1
+#+headers: :exports none
+#+headers: :tangle no
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-directory (file-truename "~/notes"))
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :tangle no
+#+begin_src emacs-lisp
+  <<org-roam-1>>)
+#+end_src
+
+** Deferred loading
+
+Defer loading Org-roam until the =org-roam-node-find= function is executed for the first time:
+
+#+name: org-roam-2
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle no
+#+begin_src emacs-lisp
+  <<org-roam-1>>
+    :commands
+    (org-roam-node-find)
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :tangle no
+#+begin_src emacs-lisp
+  <<org-roam-2>>)
+#+end_src
+
+** Sync automatically
+
+Turn on automatic database syncing instead of manually running =org-roam-db-sync=:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  <<org-roam-2>>
+    :config
+    (org-roam-db-autosync-mode))
+#+end_src
+
+* Citeproc
+
+For exporting Org documents with citations.
+Org's built-in CSL citation processor depends on [[https://github.com/andras-simonyi/citeproc-el][citeproc-el]].
+It checks if the package is available by checking the available features, so its loading can be deferred until it's needed:
+
+#+begin_src emacs-lisp
+  (use-package citeproc
+    :ensure t
+    :defer t)
+#+end_src

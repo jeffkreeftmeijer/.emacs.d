@@ -1,3 +1,5 @@
+;;; General
+
 (use-package emacs
   :init
   (scroll-bar-mode -1)
@@ -5,6 +7,8 @@
   (menu-bar-mode -1)
   (setq initial-scratch-message nil)
   (set-face-attribute 'default nil :font "SF Mono-15"))
+
+;;; Evil
 
 (use-package evil
   :ensure t
@@ -53,9 +57,13 @@
   :config
   (evil-collection-vertico-setup))
 
+;;; Magit
+
 (use-package magit
   :ensure t
   :defer t)
+
+;;; Vertico
 
 (use-package vertico
   :ensure t
@@ -77,6 +85,8 @@
   :custom
   (completion-styles '(orderless basic)))
 
+;;; Corfu
+
 (use-package corfu
   :ensure t
   :init
@@ -84,6 +94,25 @@
   (corfu-history-mode)
   :custom
   (corfu-auto t))
+
+;;; Eglot
+
+(use-package eglot
+  :ensure t
+  :hook
+  (elixir-mode . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls")))
+
+;;; Org
+
+(use-package org
+  :custom
+  (org-refile-targets (quote (("~/notes/tasks.org" :level . 1)))))
+
+(use-package org
+  :custom
+  (org-agenda-files (directory-files-recursively "~/org/" "\\.org$")))
 
 (use-package emacs
   :custom
@@ -103,22 +132,9 @@
   :ensure t
   :defer t)
 
-(use-package eglot
-  :ensure t
-  :hook
-  (elixir-mode . eglot-ensure)
-  :config
-  (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls")))
+;;; Eshell
 
 (use-package exec-path-from-shell
   :ensure t
   :init
   (exec-path-from-shell-initialize))
-
-(use-package org
-  :custom
-  (org-refile-targets (quote (("~/notes/tasks.org" :level . 1)))))
-
-(use-package org
-  :custom
-  (org-agenda-files (directory-files-recursively "~/org/" "\\.org$")))

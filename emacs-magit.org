@@ -1,0 +1,16 @@
+:PROPERTIES:
+:header-args: :tangle magit.el
+:ID:       94A65B74-1E94-46FB-BCD0-204DEE0F2359
+:END:
+#+title: Magit: an Emacs interface for working with Git repositories
+
+[[https://magit.vc][Magit]] is the most comfortable way to use Git.[fn:magit]
+
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t
+    :defer t)
+#+end_src
+
+[fn:magit] I'm quite comfortable with Git's CLI in the terminal, so I held off on isntalling Magit even though I've used (and loved) it in the past.
+Now, since I'm working on switching from running Emacs in the terminal to running a terminal in Emacs, I ran into the fact that Eshell can't handle Git's interactive modes because it's a dumb terminal.

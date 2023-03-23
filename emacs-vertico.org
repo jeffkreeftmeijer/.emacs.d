@@ -1,0 +1,41 @@
+:PROPERTIES:
+:ID:       160DECB3-2C67-4502-9434-BF132A69ECD0
+:header-args: :tangle vertico.el
+:END:
+#+title: Vertical completions in Emacs with Vertico
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :ensure t
+    :init
+    (vertico-mode 1))
+#+end_src
+
+** History-aware completions
+
+#+begin_src emacs-lisp
+  (use-package savehist
+    :init
+    (savehist-mode 1))
+#+end_src
+
+** Extra information about completion options
+
+[[https://github.com/minad/marginalia][Marginalia]] is an extension for Vertico that shows extra information about the displayed completion options.
+
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :ensure t
+    :after vertico
+    :init
+    (marginalia-mode))
+#+end_src
+
+** Orderless
+
+#+begin_src emacs-lisp
+  (use-package orderless
+    :ensure t
+    :custom
+    (completion-styles '(orderless basic)))
+#+end_src

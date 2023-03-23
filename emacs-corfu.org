@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       E892BE69-7014-4FF5-BC02-504717795B14
+:header-args: :tangle corfu.el
+:END:
+#+title: Completion at point with Corfu
+
+#+begin_src emacs-lisp
+  (use-package corfu
+    :ensure t
+    :init
+    (global-corfu-mode)
+    (corfu-history-mode)
+    :custom
+    (corfu-auto t))
+#+end_src

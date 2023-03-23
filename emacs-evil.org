@@ -1,0 +1,104 @@
+:PROPERTIES:
+:ID:       385E7884-C300-4A92-81B9-30B1B86262F1
+:header-args: :tangle evil.el
+:END:
+#+title: Vim-style modal editing with Evil
+#+PROPERTY: header-args :tangle evil.el
+
+[[https://github.com/emacs-evil/evil][Evil]] is a Vim emulator for that alters Emacs in a way that's familiar to Vim defectors.
+I'm unablle to edit files without it, so it's the first thing I install.
+
+Aside from Vim's modal editing through switching between different modes, Evil adds Ex commands like ~:w~ to save the current file, ~/~ to search, and ~:!~ to execute a shell command.
+It's an impressively well functioning Vim emulator.[fn:evil]
+
+After installing Evil, turn on =evil-mode= globally:
+
+#+headers: :tangle no
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :config
+    (evil-mode 1))
+#+end_src
+
+[fn:evil] Although Evil definitely helped me transition to Emacs, I'd like to switch to a different modal editing solution at some point.
+Because of Evil's stated purpose as a Vim emulator, it seems like a lot of well-functioning things are reimplemented because they work differently from Vim.
+For example, Vim's Ex-style search is added, while Emacs provides a different search implementation through ~<C-s>~ that I don't know how to use.
+
+** Modal editing everywhere
+
+[[https://github.com/emacs-evil/evil-collection][Evil-collection]] adds Evil bindings Emacs features and external packages.
+
+The evil-collection package needs Evil's key bindings to be disabled.
+This needs to happen before /either/ of the packages is loaded.
+To do that, add an src_emacs-lisp[:exports code]{:init} key to the Evil package declaration to execute before it's loaded:
+
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
+#+end_src
+
+Then, install evil-collection.
+To defer loading, define commands in the package declaration.
+The package will only be loaded when one of these functions is called:
+
+#+begin_src emacs-lisp
+  (use-package evil-collection
+    :ensure t
+    :commands
+    (evil-collection-dired-setup
+     evil-collection-eshell-setup
+     evil-collection-magit-setup
+     evil-collection-org-setup
+     evil-collection-org-roam-setup
+     evil-collection-vertico-setup))
+#+end_src
+
+Finally, add Evil-collection by adding an after for each feature or package it provides key bindings for.
+To keep the configuration modular, these declarations don't assume anything about the packages that are being configured, as setting package-specific configuration will happen later.
+
+#+begin_src emacs-lisp
+  (use-package dired
+    :defer t
+    :config
+    (evil-collection-dired-setup))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package eshell
+    :defer t
+    :config
+    (evil-collection-eshell-setup))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package org
+    :defer t
+    :config
+    (evil-collection-org-setup))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :defer t
+    :config
+    (evil-collection-org-roam-setup))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package magit
+    :defer t
+    :config
+    (evil-collection-magit-setup))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :defer t
+    :config
+    (evil-collection-vertico-setup))
+#+end_src

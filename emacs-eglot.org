@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       BC285A0A-FDDD-4615-8F69-BDE6993BEC7E
+:header-args: :tangle eglot.el
+:END:
+#+title: Language servers with Eglot
+
+* Elixir-ls
+
+#+begin_src emacs-lisp
+  (use-package eglot
+    :ensure t
+    :hook
+    (elixir-mode . eglot-ensure)
+    :config
+    (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls")))
+#+end_src

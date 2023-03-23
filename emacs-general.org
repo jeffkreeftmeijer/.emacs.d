@@ -1,0 +1,55 @@
+:PROPERTIES:
+:ID:       84182611-7F54-482F-9D94-613C198E7EB0
+:header-args: :tangle general.el
+:END:
+#+title: Emacs general editor configuration
+
+** Hide scroll bars
+
+#+begin_src emacs-lisp :tangle no :noweb-ref general-options
+  (scroll-bar-mode -1)
+#+end_src
+
+** Hide the tool bar
+
+#+begin_src emacs-lisp :tangle no :noweb-ref general-options
+  (tool-bar-mode -1)
+#+end_src
+
+** Hide the menu bar
+
+By default, Emacs shows the menu bar at the top of the screen, which is accessed by pressing =<F10>= in the Terminal.
+To turn it off, set =menu-bar-mode= to a negative number:
+
+#+begin_src emacs-lisp :tangle no :noweb-ref general-options
+  (menu-bar-mode -1)
+#+end_src
+
+** Remove the scratch buffer message
+
+The scratch buffer has a helpful comment at the top:
+
+#+begin_example
+;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with C-x C-f and enter text in its buffer.
+#+end_example
+
+To start with an empty scratch buffer, set =initial-scratch-message=:
+
+#+begin_src emacs-lisp :tangle no :noweb-ref general-options
+  (setq initial-scratch-message nil)
+#+end_src
+
+** Use SF Mono as the default font
+
+#+begin_src emacs-lisp :tangle no :noweb-ref general-options
+  (set-face-attribute 'default nil :font "SF Mono-15")
+#+end_src
+
+** Summary
+
+#+begin_src emacs-lisp :noweb yes
+  (use-package emacs
+    :init
+    <<general-options>>)
+#+end_src
