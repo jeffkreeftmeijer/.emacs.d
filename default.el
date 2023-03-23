@@ -116,3 +116,7 @@
   (elixir-mode . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls")))
+
+(use-package org
+  :custom
+  (org-agenda-files (directory-files-recursively "~/org/" "\\.org$")))

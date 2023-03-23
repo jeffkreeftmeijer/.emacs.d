@@ -312,3 +312,13 @@ It checks if the package is available by checking the available features, so its
     :config
     (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls")))
 #+end_src
+
+* Org-agenda
+
+Have org-agenda look through the =~/notes= directory to find tasks recursively:
+
+#+begin_src emacs-lisp
+  (use-package org
+    :custom
+    (org-agenda-files (directory-files-recursively "~/org/" "\\.org$")))
+#+end_src
