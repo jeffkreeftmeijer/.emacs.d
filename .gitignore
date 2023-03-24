@@ -1,0 +1,8 @@
+general.el
+evil.el
+magit.el
+vertico.el
+corfu.el
+eglot.el
+org.el
+eshell.el
