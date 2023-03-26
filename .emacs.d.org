@@ -4,6 +4,7 @@
 #+title: ~/.emacs.d
 #+author: Jeff Kreeftmeijer
 #+date: 2021-07-04
+#+options: toc:t
 
 * General configuration
 :PROPERTIES:
