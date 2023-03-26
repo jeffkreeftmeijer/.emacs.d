@@ -21,7 +21,12 @@
       configured-emacs = (pkgs.emacsWithPackagesFromUsePackage {
         config = ./default.el;
         defaultInitFile = true;
-        package = pkgs.emacsGit;
+        package = pkgs.emacsGit.override {
+          treeSitterPlugins = with pkgs.tree-sitter-grammars; [
+            tree-sitter-elixir
+            tree-sitter-heex
+          ];
+        };
         extraEmacsPackages = epkgs: [
           epkgs.dockerfile-mode
           epkgs.elixir-mode
