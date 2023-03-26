@@ -229,6 +229,22 @@ It only supports Emacs Lisp by default, but more languages are added to =org-bab
 				(shell . t))))
 #+end_src
 
+* Org-auto-tangle
+
+[[https://github.com/yilkalargaw/org-auto-tangle][Org-auto-tangle]] automatically tangles Org files on save.
+
+Be default, it only auto-tangles files marked with the =#+auto_tangle= header option.
+By turning on =org-auto-tangle-default=, org-auto-tangle tangles all Org files, even without that option.
+
+#+begin_src emacs-lisp
+  (use-package org-auto-tangle
+    :ensure t
+    :hook
+    (org-mode . org-auto-tangle-mode)
+    :custom
+    (org-auto-tangle-default t))
+#+end_src
+
 * Org-roam
 
 [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.
