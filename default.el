@@ -20,12 +20,18 @@
 (use-package evil-collection
   :ensure t
   :commands
-  (evil-collection-dired-setup
+  (evil-collection-corfu-setup
+   evil-collection-dired-setup
    evil-collection-eshell-setup
    evil-collection-magit-setup
    evil-collection-org-setup
    evil-collection-org-roam-setup
    evil-collection-vertico-setup))
+
+(use-package corfu
+  :defer t
+  :config
+  (evil-collection-corfu-setup))
 
 (use-package dired
   :defer t
