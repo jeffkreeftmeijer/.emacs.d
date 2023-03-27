@@ -100,7 +100,8 @@ The package will only be loaded when one of these functions is called:
   (use-package evil-collection
     :ensure t
     :commands
-    (evil-collection-dired-setup
+    (evil-collection-corfu-setup
+     evil-collection-dired-setup
      evil-collection-eshell-setup
      evil-collection-magit-setup
      evil-collection-org-setup
@@ -113,6 +114,13 @@ For example, the =evil-collection-vertico-setup= function isn't called until Ver
 
 Finally, add Evil-collection by adding an after for each feature or package it provides key bindings for.
 To keep the configuration modular, these declarations don't assume anything about the packages that are being configured, as setting package-specific configuration will happen later.
+
+#+begin_src emacs-lisp
+  (use-package corfu
+    :defer t
+    :config
+    (evil-collection-corfu-setup))
+#+end_src
 
 #+begin_src emacs-lisp
   (use-package dired
