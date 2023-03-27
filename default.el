@@ -6,7 +6,7 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (setq initial-scratch-message nil)
-  (set-face-attribute 'default nil :font "SF Mono-15"))
+  (set-face-attribute 'default nil :font "SF Mono-14"))
 
 ;;; Evil
 
