@@ -43,7 +43,7 @@ To start with an empty scratch buffer, set =initial-scratch-message=:
 ** Use SF Mono as the default font
 
 #+begin_src emacs-lisp :tangle no :noweb-ref general-options
-  (set-face-attribute 'default nil :font "SF Mono-15")
+  (set-face-attribute 'default nil :font "SF Mono-14")
 #+end_src
 
 ** Summary
