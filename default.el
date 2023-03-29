@@ -9,6 +9,12 @@
   (indent-tabs-mode nil)
   (set-face-attribute 'default nil :font "SF Mono-14"))
 
+;;; Theme
+
+(use-package emacs
+  :init
+  (modus-themes-select 'modus-operandi-tinted))
+
 ;;; Evil
 
 (use-package evil

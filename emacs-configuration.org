@@ -5,10 +5,11 @@
 #+author: Jeff Kreeftmeijer
 
 1. [[id:84182611-7F54-482F-9D94-613C198E7EB0][General configuration]]
-2. [[id:385E7884-C300-4A92-81B9-30B1B86262F1][Vim-style modal editing with Evil]]
-3. [[id:94A65B74-1E94-46FB-BCD0-204DEE0F2359][Magit: an interface for working with Git repositories]]
-4. [[id:160DECB3-2C67-4502-9434-BF132A69ECD0][Vertical completions with Vertico]]
-5. [[id:E892BE69-7014-4FF5-BC02-504717795B14][Emacs completion at point with Corfu]]
-6. [[id:BC285A0A-FDDD-4615-8F69-BDE6993BEC7E][Language servers with Eglot]]
-7. [[id:1B87AA94-135C-491E-BC5F-6BA24A14524E][Note-taking, planning and publishing with Org mode]]
-8. [[id:AD895CCA-3153-4967-A4AE-E912594A4CF5][Eshell: a command interpreter to replace your shell]]
+2. [[id:62F36E0F-5E82-4288-B348-8D5C88793CF2][Customizing Emacs' Modus themes]]
+3. [[id:385E7884-C300-4A92-81B9-30B1B86262F1][Vim-style modal editing with Evil]]
+4. [[id:94A65B74-1E94-46FB-BCD0-204DEE0F2359][Magit: an interface for working with Git repositories]]
+5. [[id:160DECB3-2C67-4502-9434-BF132A69ECD0][Vertical completions with Vertico]]
+6. [[id:E892BE69-7014-4FF5-BC02-504717795B14][Emacs completion at point with Corfu]]
+7. [[id:BC285A0A-FDDD-4615-8F69-BDE6993BEC7E][Language servers with Eglot]]
+8. [[id:1B87AA94-135C-491E-BC5F-6BA24A14524E][Note-taking, planning and publishing with Org mode]]
+9. [[id:AD895CCA-3153-4967-A4AE-E912594A4CF5][Eshell: a command interpreter to replace your shell]]

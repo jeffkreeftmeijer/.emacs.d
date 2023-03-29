@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       62F36E0F-5E82-4288-B348-8D5C88793CF2
+:END:
+#+title: Customizing Emacs' Modus themes
+
+The [[https://protesilaos.com/emacs/modus-themes][Modus themes]] are a set of beautiful and customizable themes, which are shipped with Emacs since version 28.
+
+They consist of two types: Modus Operandi is a light theme, and Modus Vivendi is its dark counterpart.
+The tinted variants shift the background colors from white and black to a more pleasant light ochre and dark blue.
+
+Select =modus-operandi-tinted= as the default theme:
+
+#+begin_src emacs-lisp :noweb-ref theme-init
+  (load-theme 'modus-operandi-tinted)
+#+end_src
+
+#+RESULTS:
+: t
+
+** Summary
+
+#+begin_src emacs-lisp :noweb yes :tangle theme.el
+  (use-package emacs
+    :init
+    <<theme-init>>)
+#+end_src

@@ -10,6 +10,7 @@
 (defun emacs-config/cat-config-files ()
   "Concatenate all configuration into default.el"
   (org-babel-tangle-file "emacs-general.org")
+  (org-babel-tangle-file "emacs-theme.org")
   (org-babel-tangle-file "emacs-evil.org")
   (org-babel-tangle-file "emacs-magit.org")
   (org-babel-tangle-file "emacs-vertico.org")
@@ -23,6 +24,7 @@
 			     ""
 			     (concat
 			      (emacs-config/section "General")
+			      (emacs-config/section "Theme")
 			      (emacs-config/section "Evil")
 			      (emacs-config/section "Magit")
 			      (emacs-config/section "Vertico")
