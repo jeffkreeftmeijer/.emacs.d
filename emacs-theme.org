@@ -17,10 +17,27 @@ Select =modus-operandi-tinted= as the default theme:
 #+RESULTS:
 : t
 
+An interactive function named =modus-themes-toggle= switches between the light and dark themes.
+By default, the function switches between the non-tinted versions, but that can be overwritten to use the tinted versions through the =modus-themes-to-toggle= variable:
+
+#+name: themes-to-toggle
+#+begin_src emacs-lisp :noweb-ref theme-config :exports none
+  modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)
+#+end_src
+
+#+begin_src emacs-lisp :noweb yes
+  (setq <<themes-to-toggle>>)
+#+end_src
+
+#+RESULTS:
+| modus-operandi-tinted | modus-vivendi-tinted |
+
 ** Summary
 
 #+begin_src emacs-lisp :noweb yes :tangle theme.el
   (use-package emacs
     :init
-    <<theme-init>>)
+    <<theme-init>>
+    :custom
+    <<theme-config>>)
 #+end_src
