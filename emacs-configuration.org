@@ -63,6 +63,27 @@ Use spaces instead:
     <<general-options>>)
 #+end_src
 
+* Theme
+
+The [[https://protesilaos.com/emacs/modus-themes][Modus themes]] are a set of beautiful and customizable themes, which are shipped with Emacs since version 28.
+
+They consist of two types: Modus Operandi is a light theme, and Modus Vivendi is its dark counterpart.
+The tinted variants shift the background colors from white and black to a more pleasant light ochre and dark blue.
+
+Select =modus-operandi-tinted= as the default theme:
+
+#+begin_src emacs-lisp :noweb-ref theme-init :tangle no
+  (load-theme 'modus-operandi-tinted)
+#+end_src
+
+** Summary
+
+#+begin_src emacs-lisp :noweb yes
+  (use-package emacs
+    :init
+    <<theme-init>>)
+#+end_src
+
 * Vim-style modal editing with Evil
 
 [[https://github.com/emacs-evil/evil][Evil]] is a Vim emulator for that alters Emacs in a way that's familiar to Vim defectors.
