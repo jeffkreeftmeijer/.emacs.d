@@ -1,4 +1,5 @@
 general.el
+theme.el
 evil.el
 magit.el
 vertico.el
