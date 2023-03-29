@@ -19,6 +19,12 @@
 
 ;;; Evil
 
+(use-package evil-commentary
+  :ensure t
+  :after evil
+  :config
+  (evil-commentary-mode))
+
 (use-package evil
   :ensure t
   :init
