@@ -9,7 +9,9 @@
 
 (use-package emacs
   :init
-  (load-theme 'modus-operandi-tinted))
+  (load-theme 'modus-operandi-tinted)
+  :custom
+  modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 
 (use-package evil
   :ensure t
