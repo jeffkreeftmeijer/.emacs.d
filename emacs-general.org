@@ -40,6 +40,15 @@ To start with an empty scratch buffer, set =initial-scratch-message=:
   (setq initial-scratch-message nil)
 #+end_src
 
+** No tabs
+
+By default, Erlang uses tabs for indentation.
+Use spaces instead:
+
+#+begin_src emacs-lisp :tangle no :noweb-ref general-options
+  (indent-tabs-mode nil)
+#+end_src
+
 ** Use SF Mono as the default font
 
 #+begin_src emacs-lisp :tangle no :noweb-ref general-options
