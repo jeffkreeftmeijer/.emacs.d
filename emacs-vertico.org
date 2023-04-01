@@ -39,3 +39,15 @@
     :custom
     (completion-styles '(orderless basic)))
 #+end_src
+
+** Consult
+
+[[https://github.com/minad/consult][Consult]] adds extra search navigation commands to be used with the Emacs' own completing-read, Vertico, or other completion systems.
+Its functions can be used as drop-in replacements for built-in functionality.
+
+#+begin_src emacs-lisp
+  (use-package consult
+    :ensure t
+    :bind
+    (("C-x p b" . consult-project-buffer))) ; Replace project-switch-to-buffer
+#+end_src

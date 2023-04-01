@@ -106,6 +106,11 @@
   :custom
   (completion-styles '(orderless basic)))
 
+(use-package consult
+  :ensure t
+  :bind
+  (("C-x p b" . consult-project-buffer))) ; Replace project-switch-to-buffer
+
 ;;; Corfu
 
 (use-package corfu
