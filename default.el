@@ -98,6 +98,8 @@
 
 (use-package consult
   :ensure t
+  :init
+  (require 'bind-key)
   :bind
   (("C-x p b" . consult-project-buffer))) ; Replace project-switch-to-buffer
 

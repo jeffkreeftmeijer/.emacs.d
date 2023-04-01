@@ -282,6 +282,8 @@ Its functions can be used as drop-in replacements for built-in functionality.
 #+begin_src emacs-lisp
   (use-package consult
     :ensure t
+    :init
+    (require 'bind-key)
     :bind
     (("C-x p b" . consult-project-buffer))) ; Replace project-switch-to-buffer
 #+end_src
