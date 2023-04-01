@@ -14,8 +14,8 @@
     system = "x86_64-darwin";
     pkgs = (import nixpkgs {
       inherit system;
-      overlays = [ self.overlay ];
-    }).extend(emacs-overlay.overlay);
+      overlays = [ emacs-overlay.overlay self.overlay ];
+    });
   in {
     overlay = (final: prev: rec {
       configured-emacs = (pkgs.emacsWithPackagesFromUsePackage {
