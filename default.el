@@ -11,10 +11,10 @@
 
 ;;; Theme
 
-(use-package emacs
-  :init
-  (load-theme 'modus-operandi-tinted)
+(use-package modus-themes
+  :ensure t
   :custom
+  (load-theme 'modus-operandi-tinted)
   modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 
 ;;; Evil
