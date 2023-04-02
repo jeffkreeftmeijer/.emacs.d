@@ -21,6 +21,23 @@
         "type": "github"
       }
     },
+    "emacs29": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680424963,
+        "narHash": "sha256-i0VGlY56dJibURjxhW7F4GJztRDKBcm+CDAeUCCrg1Q=",
+        "owner": "emacs-mirror",
+        "repo": "emacs",
+	"rev": "3619663f9822f7732854a13e6a890cb0925fbfaa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emacs-mirror",
+        "ref": "emacs-29",
+        "repo": "emacs",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1667395993,
@@ -55,6 +72,7 @@
     "root": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
+        "emacs29": "emacs29",
         "nixpkgs": "nixpkgs"
       }
     }
