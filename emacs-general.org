@@ -4,6 +4,8 @@
 :END:
 #+title: Emacs general editor configuration
 
+* Settings
+
 ** Hide scroll bars
 
 #+begin_src emacs-lisp :tangle no :noweb-ref general-options
@@ -62,3 +64,23 @@ Use spaces instead:
     :init
     <<general-options>>)
 #+end_src
+
+* Packages
+
+** Helpful
+
+[[https://github.com/Wilfred/helpful][Helpful]] is an alternative to Emacs' built-in help, with more contextual information.
+Install the package and replace the default describe functions' bindings:
+
+#+begin_src emacs-lisp
+  (use-package helpful
+    :ensure t
+    :init
+    (require 'bind-key)
+    :bind
+    (("C-h f" . helpful-callable)  ; Replace describe-function
+     ("C-h v" . helpful-variable)  ; Replace describe-variable
+     ("C-h k" . helpful-key)       ; Replace describe-key
+     ("C-h x" . helpful-command))) ; Replace describe-command
+#+end_src
+

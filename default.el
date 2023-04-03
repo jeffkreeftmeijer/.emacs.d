@@ -9,6 +9,16 @@
   (indent-tabs-mode nil)
   (set-face-attribute 'default nil :font "SF Mono-14"))
 
+(use-package helpful
+  :ensure t
+  :init
+  (require 'bind-key)
+  :bind
+  (("C-h f" . helpful-callable)  ; Replace describe-function
+   ("C-h v" . helpful-variable)  ; Replace describe-variable
+   ("C-h k" . helpful-key)       ; Replace describe-key
+   ("C-h x" . helpful-command))) ; Replace describe-command
+
 ;;; Theme
 
 (use-package emacs
