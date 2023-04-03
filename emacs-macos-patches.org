@@ -1,0 +1,6 @@
+#+headers: :prologue mkdir -p patches
+#+begin_src shell
+  curl https://gist.githubusercontent.com/ngquerol/9618d4aba60a6e691c3a4bdbefbdb9e9/raw/ns_system_appearance_change.patch -o patches/ns_system_appearance_change.patch
+#+end_src
+
+#+RESULTS:
