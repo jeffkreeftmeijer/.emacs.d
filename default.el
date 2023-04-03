@@ -27,6 +27,14 @@
   :custom
   modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 
+(use-package auto-dark
+  :ensure t
+  :config
+  (auto-dark-mode t)
+  :custom
+  (auto-dark-light-theme 'modus-operandi-tinted)
+  (auto-dark-dark-theme 'modus-vivendi-tinted))
+
 ;;; Evil
 
 (use-package evil-commentary

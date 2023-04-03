@@ -32,7 +32,8 @@ By default, the function switches between the non-tinted versions, but that can 
 #+RESULTS:
 | modus-operandi-tinted | modus-vivendi-tinted |
 
-** Summary
+Loading the initial theme and configuring which to toggle between is done in a single use-package specification.
+Since the themes are built into Emacs, we use the =emacs= package, which immediately evaluates:
 
 #+begin_src emacs-lisp :noweb yes :tangle theme.el
   (use-package emacs
@@ -40,4 +41,19 @@ By default, the function switches between the non-tinted versions, but that can 
     <<theme-init>>
     :custom
     <<theme-config>>)
+#+end_src
+
+* Auto-dark
+
+[[https://github.com/LionyxML/auto-dark-emacs][Auto-dark]] automatically switches between dark and light themes based on the operating system's appearance.
+Configure it to use the modus themes:
+
+#+begin_src emacs-lisp :tangle theme.el
+  (use-package auto-dark
+    :ensure t
+    :config
+    (auto-dark-mode t)
+    :custom
+    (auto-dark-light-theme 'modus-operandi-tinted)
+    (auto-dark-dark-theme 'modus-vivendi-tinted))
 #+end_src
