@@ -9,7 +9,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, emacs-overlay }:
+  outputs = { self, nixpkgs, emacs-overlay, fetchpatch }:
   let
     system = "x86_64-darwin";
     pkgs = (import nixpkgs {
@@ -22,6 +22,14 @@
         config = ./default.el;
         defaultInitFile = true;
         package = pkgs.emacsGit.overrideAttrs (old: {
+          patches =
+            (old.patches or [])
+            ++ [
+              (fetchpatch {
+                url = "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-28/system-appearance.patch";
+                sha256 = "14ndp2fqqc95s70fwhpxq58y8qqj4gzvvffp77snm2xk76c1bvnn";
+              })
+            ];
           treeSitterPlugins = with pkgs.tree-sitter-grammars; [
             tree-sitter-elixir
             tree-sitter-heex
