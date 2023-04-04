@@ -150,6 +150,14 @@
   :config
   (org-roam-db-autosync-mode))
 
+(use-package ox-gfm
+  :ensure t
+  :commands
+  org-gfm-export-as-markdown
+  org-gfm-convert-region-to-md
+  org-gfm-export-to-markdown
+  org-gfm-publish-to-gfm)
+
 (use-package citeproc
   :ensure t
   :defer t)
