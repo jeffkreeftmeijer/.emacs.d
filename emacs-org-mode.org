@@ -110,6 +110,20 @@ Turn on automatic database syncing instead of manually running =org-roam-db-sync
     (org-roam-db-autosync-mode))
 #+end_src
 
+* Ox-gfm
+
+[[https://github.com/larstvei/ox-gfm][Ox-gfm]] is a Markdown exporter for Org mode, which produces /Github Flavored Markdown/, for generating repository READMEs.
+
+#+begin_src emacs-lisp
+  (use-package ox-gfm
+    :ensure t
+    :commands
+    (org-gfm-export-as-markdown
+     org-gfm-convert-region-to-md
+     org-gfm-export-to-markdown
+     org-gfm-publish-to-gfm))
+#+end_src
+
 * Citeproc
 
 For exporting Org documents with citations.
