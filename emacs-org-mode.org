@@ -58,6 +58,17 @@ By turning on =org-auto-tangle-default=, org-auto-tangle tangles all Org files, 
     (org-auto-tangle-default t))
 #+end_src
 
+* Org-preview-html
+
+[[https://github.com/jakebox/org-preview-html][Org-preview-html]] is a preview window that shows the current Org document's HTML representation in [[https://www.gnu.org/software/emacs/manual/html_mono/eww.html][EWW]], the Emacs Web Browser.
+
+#+begin_src emacs-lisp
+  (use-package org-preview-html
+    :ensure t
+    :commands
+    org-preview-html-mode)
+#+end_src
+
 * Org-roam
 
 [[https://github.com/org-roam/org-roam][Org-roam]] is a knowledge management system.

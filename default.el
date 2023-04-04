@@ -172,6 +172,11 @@
   :custom
   (org-auto-tangle-default t))
 
+(use-package org-preview-html
+  :ensure t
+  :commands
+  org-preview-html-mode)
+
 (use-package org-roam
   :ensure t
   :init
