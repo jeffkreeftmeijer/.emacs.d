@@ -22,6 +22,8 @@
         config = ./default.el;
         defaultInitFile = true;
         package = pkgs.emacsGit.override {
+          withXwidgets = true;
+
           treeSitterPlugins = with pkgs.tree-sitter-grammars; [
             tree-sitter-elixir
             tree-sitter-heex
