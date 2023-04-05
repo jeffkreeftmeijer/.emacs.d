@@ -23,7 +23,7 @@
         defaultInitFile = true;
 
         package = pkgs.emacsGit.overrideAttrs (old: {
-          propagatedBuildInputs = old.propagatedBuildInputs ++ [ pkgs.elixir-ls ];
+          propagatedBuildInputs = [ pkgs.elixir-ls ];
         });
 
         extraEmacsPackages = epkgs: [
