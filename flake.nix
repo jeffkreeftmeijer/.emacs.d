@@ -24,12 +24,8 @@
 
         package = pkgs.emacsGit.overrideAttrs (old: {
           buildInputs = old.buildInputs ++ [ pkgs.elixir-ls ];
-        }).override {
-          treeSitterPlugins = with pkgs.tree-sitter-grammars; [
-            tree-sitter-elixir
-            tree-sitter-heex
-          ];
-        };
+        });
+
         extraEmacsPackages = epkgs: [
           epkgs.dockerfile-mode
           epkgs.elixir-mode
