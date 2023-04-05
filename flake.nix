@@ -23,8 +23,13 @@
         defaultInitFile = true;
 
         package = pkgs.emacsGit.overrideAttrs (old: {
-          propagatedBuildInputs = [ pkgs.elixir-ls ];
+          buildInputs = [ pkgs.elixir-ls ];
         });
+
+        postPatch = ''
+             substituteInPlace default.el \
+               --replace '(elixir-mode "elixir-ls"' '(elixir-mode "${pkgs.elixir-ls}/bin/elixir-ls"'
+           '';
 
         extraEmacsPackages = epkgs: [
           epkgs.dockerfile-mode
