@@ -1,0 +1,20 @@
+name: Update lock file
+
+on:
+  schedule:
+    - cron: '0 0 * * 5'
+
+jobs:
+  update-lock:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v19
+      - run: nix flake lock
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update flake.lock
