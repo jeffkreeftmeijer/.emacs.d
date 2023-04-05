@@ -193,6 +193,9 @@
   :ensure t
   :defer t)
 
+(use-package org-glossary
+  :ensure t)
+
 ;;; Eshell
 
 (use-package exec-path-from-shell

@@ -41,6 +41,10 @@
           linguist = pkgs.callPackage ../pkgs/linguist.el {
             trivialBuild = epkgs.trivialBuild;
           };
+
+          org-glossary = pkgs.callPackage ./pkgs/org-glossary.el {
+            trivialBuild = epkgs.trivialBuild;
+          };
         };
       });
     });

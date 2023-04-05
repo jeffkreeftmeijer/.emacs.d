@@ -136,3 +136,10 @@ It checks if the package is available by checking the available features, so its
     :ensure t
     :defer t)
 #+end_src
+
+* Org-glossary
+
+#+begin_src emacs-lisp
+  (use-package org-glossary
+    :ensure t)
+#+end_src
