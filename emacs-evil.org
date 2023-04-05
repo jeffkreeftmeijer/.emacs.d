@@ -56,6 +56,7 @@ To do that, add an src_emacs-lisp[:exports code]{:init} key to the Evil package 
     :ensure t
     :init
     (setq evil-want-keybinding nil)
+    (setq evil-collection-term-sync-state-and-mode-p t)
     :config
     (evil-mode 1))
 #+end_src
@@ -74,6 +75,7 @@ The package will only be loaded when one of these functions is called:
      evil-collection-magit-setup
      evil-collection-org-setup
      evil-collection-org-roam-setup
+     evil-collection-term-setup
      evil-collection-vertico-setup))
 #+end_src
 
@@ -120,6 +122,13 @@ To keep the configuration modular, these declarations don't assume anything abou
     :defer t
     :config
     (evil-collection-magit-setup))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package term
+    :defer t
+    :config
+    (evil-collection-term-setup))
 #+end_src
 
 #+begin_src emacs-lisp

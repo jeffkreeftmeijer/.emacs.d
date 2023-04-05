@@ -47,6 +47,7 @@
   :ensure t
   :init
   (setq evil-want-keybinding nil)
+  (setq evil-collection-term-sync-state-and-mode-p t)
   :config
   (evil-mode 1))
 
@@ -59,6 +60,7 @@
    evil-collection-magit-setup
    evil-collection-org-setup
    evil-collection-org-roam-setup
+   evil-collection-term-setup
    evil-collection-vertico-setup))
 
 (use-package corfu
@@ -90,6 +92,11 @@
   :defer t
   :config
   (evil-collection-magit-setup))
+
+(use-package term
+  :defer t
+  :config
+  (evil-collection-term-setup))
 
 (use-package vertico
   :defer t
