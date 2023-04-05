@@ -1,0 +1,36 @@
+#+title: Update Emacs to the latest HEAD every week
+
+Since I'm building Emacs from scratch, I might as well take the latest version from the /master/ branch.
+
+My Emacs configuration is stored on Github and managed via Nix, so it's built with locked versions that are in a file I periodically fetch when rebuilding.
+I might not fetch the latest version of the configuration repository every week, which would mean I'm behind on these lock files.
+However, if I do update, I do so in weekly iterations which saves on build time.
+
+This workflow updates the lock file on my Emacs configuration repository every friday at midnight:[fn:friday]
+
+#+headers: :tangle .github/workflows/update-lock.yml
+#+begin_src yaml
+  name: Update lock file
+
+  on:
+    schedule:
+      - cron: '0 0 * * 5'
+    workflow_dispatch:
+
+  jobs:
+    update-lock:
+      runs-on: ubuntu-latest
+
+      permissions:
+        contents: write
+
+      steps:
+        - uses: actions/checkout@v3
+        - uses: cachix/install-nix-action@v19
+        - run: nix flake update
+        - uses: stefanzweifel/git-auto-commit-action@v4
+          with:
+            commit_message: Update flake.lock
+#+end_src
+
+[fn:friday] Friday was chosen because it's most likely to be recently updated when I decide to fetch the lock files and rebuild.
