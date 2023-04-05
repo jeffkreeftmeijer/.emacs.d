@@ -26,10 +26,6 @@
           buildInputs = [ pkgs.elixir-ls ];
         });
 
-        postPatch = ''
-             substituteInPlace default.el \
-               --replace '(elixir-mode "elixir-ls"' '(elixir-mode "${pkgs.elixir-ls}/bin/elixir-ls"'
-           '';
 
         extraEmacsPackages = epkgs: [
           epkgs.dockerfile-mode
@@ -46,7 +42,12 @@
             trivialBuild = epkgs.trivialBuild;
           };
         };
-      });
+      }.overrideAttrs (old: {
+        postPatch = old.postPatch + ''
+           substituteInPlace default.el \
+             --replace '(elixir-mode "elixir-ls"' '(elixir-mode "${pkgs.elixir-ls}/bin/elixir-ls"'
+         '';
+      }));
     });
 
     packages.x86_64-darwin = pkgs;
