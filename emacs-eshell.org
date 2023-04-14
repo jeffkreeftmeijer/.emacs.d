@@ -10,3 +10,10 @@
     :init
     (exec-path-from-shell-initialize))
 #+end_src
+
+#+begin_src emacs-lisp
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+#+end_src
