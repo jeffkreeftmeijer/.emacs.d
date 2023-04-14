@@ -199,3 +199,8 @@
   :ensure t
   :init
   (exec-path-from-shell-initialize))
+
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
