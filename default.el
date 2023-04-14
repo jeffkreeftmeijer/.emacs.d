@@ -174,6 +174,11 @@
   :init
   (exec-path-from-shell-initialize))
 
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+
 (use-package org
   :custom
   (org-refile-targets (quote (("~/notes/tasks.org" :level . 1)))))

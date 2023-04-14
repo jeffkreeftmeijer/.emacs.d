@@ -459,6 +459,15 @@ It checks if the package is available by checking the available features, so its
     (exec-path-from-shell-initialize))
 #+end_src
 
+* direnv
+
+#+begin_src emacs-lisp
+  (use-package direnv
+    :ensure t
+    :config
+    (direnv-mode))
+#+end_src
+
 * Org
 
 Set =~/notes/tasks.org= as a refile target to redirect tasks to:
