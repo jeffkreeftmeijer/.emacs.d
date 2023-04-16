@@ -9,7 +9,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, emacs-overlay, fetchpatch }:
+  outputs = { self, nixpkgs, emacs-overlay }:
   let
     system = "x86_64-darwin";
     pkgs = (import nixpkgs {
