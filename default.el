@@ -94,6 +94,10 @@
   :ensure t
   :defer t)
 
+(use-package forge
+  :ensure t
+  :after magit)
+
 (use-package vertico
   :ensure t
   :init
