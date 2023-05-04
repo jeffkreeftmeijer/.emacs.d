@@ -152,6 +152,7 @@ After installing Evil, turn on =evil-mode= globally:
 Because of Evil's stated purpose as a Vim emulator, it seems like a lot of well-functioning things are reimplemented because they work differently from Vim.
 For example, Vim's Ex-style search is added, while Emacs provides a different search implementation through ~<C-s>~ that I don't know how to use.
 
+
 [[https://github.com/linktohack/evil-commentary][Evil-commentary]] is an Emacs port of [[https://github.com/tpope/vim-commentary][vim-commentary]] which adds key bindings to call Emacs' built in =comment-or-uncomment-region= function:
 
 #+begin_quote
