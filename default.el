@@ -17,6 +17,9 @@
    ("C-h k" . helpful-key)       ; Replace describe-key
    ("C-h x" . helpful-command))) ; Replace describe-command
 
+(use-package modus-themes
+  :ensure t)
+
 (use-package emacs
   :init
   (load-theme 'modus-operandi-tinted)
