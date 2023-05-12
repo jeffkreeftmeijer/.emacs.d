@@ -521,3 +521,10 @@ Have org-agenda look through the =~/notes= directory to find tasks recursively:
     :custom
     (org-agenda-files (directory-files-recursively "~/org/" "\\.org$")))
 #+end_src
+
+* Rustic
+
+#+begin_src emacs-lisp
+  (use-package rustic
+    :ensure t)
+#+end_src

@@ -193,3 +193,6 @@
 (use-package org
   :custom
   (org-agenda-files (directory-files-recursively "~/org/" "\\.org$")))
+
+(use-package rustic
+  :ensure t)
