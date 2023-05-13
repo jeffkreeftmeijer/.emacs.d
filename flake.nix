@@ -27,8 +27,15 @@
             tree-sitter-heex
           ];
         };
+
+        override = epkgs: epkgs // {
+          linguist = pkgs.callPackage pkgs/linguist.el {
+            trivialBuild = epkgs.trivialBuild;
+          };
+        };
+
         extraEmacsPackages = epkgs: [
-          pkgs.callPackage pkgs/linguist.el {}
+          epkgs.linguist
         ];
       });
     });
