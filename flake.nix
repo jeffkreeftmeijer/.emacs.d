@@ -34,6 +34,7 @@
           epkgs.ledger-mode
           epkgs.markdown-mode
           epkgs.nix-mode
+          epkgs.rust-mode
           epkgs.yaml-mode
         ];
 
