@@ -11,12 +11,12 @@ trivialBuild {
   };
 
   packageRequires = [
-    dockerfile-mode
-    elixir-mode
-    git-modes
-    ledger-mode
-    markdown-mode
-    nix-mode
-    yaml-mode
+    # dockerfile-mode
+    # elixir-mode
+    # git-modes
+    # ledger-mode
+    # markdown-mode
+    # nix-mode
+    # yaml-mode
   ];
 }
