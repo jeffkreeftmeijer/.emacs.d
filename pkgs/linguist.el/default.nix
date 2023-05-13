@@ -1,4 +1,4 @@
-{lib, fetchFromGitea, trivialBuild, dockerfile-mode, ...}:
+{lib, fetchFromGitea, trivialBuild, ...}:
 
 trivialBuild {
   pname = "linguist";
@@ -7,17 +7,7 @@ trivialBuild {
     domain = "codeberg.org";
     owner = "jkreeftmeijer";
     repo = "linguist.el";
-    rev = "849455da4d64fd777993515b91a54cfbdb4c7b15";
-    sha256 = "sha256-cLbZRfav6l9slytpXIEG83dylf8HxjjXwLrnw1ICn8g=";
+    rev = "275182957c345bd2d88cee30633c14cace7e56e6";
+    sha256 = "sha256-NRk9tM0U6junhgK/P0yb0haMzkm5IVWMgAa48KTspoQ=";
   };
-
-  packageRequires = [
-    dockerfile-mode
-    # elixir-mode
-    # git-modes
-    # ledger-mode
-    # markdown-mode
-    # nix-mode
-    # yaml-mode
-  ];
 }
