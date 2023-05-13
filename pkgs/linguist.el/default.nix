@@ -11,13 +11,13 @@ trivialBuild {
     sha256 = "sha256-cLbZRfav6l9slytpXIEG83dylf8HxjjXwLrnw1ICn8g=";
   };
 
-  packageRequires = [
-    # dockerfile-mode
-    # elixir-mode
-    # git-modes
-    # ledger-mode
-    # markdown-mode
-    # nix-mode
-    # yaml-mode
+  packageRequires = epkgs: [
+    epkgs.dockerfile-mode
+    epkgs.elixir-mode
+    epkgs.git-modes
+    epkgs.ledger-mode
+    epkgs.markdown-mode
+    epkgs.nix-mode
+    epkgs.yaml-mode
   ];
 }
