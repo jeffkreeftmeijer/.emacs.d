@@ -38,7 +38,7 @@
         ];
 
         override = epkgs: epkgs // {
-          linguist = pkgs.callPackage ../pkgs/linguist.el {
+          linguist = pkgs.callPackage pkgs/linguist.el {
             trivialBuild = epkgs.trivialBuild;
           };
         };
