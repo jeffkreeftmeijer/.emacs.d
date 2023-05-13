@@ -11,7 +11,7 @@ trivialBuild {
     sha256 = "sha256-cLbZRfav6l9slytpXIEG83dylf8HxjjXwLrnw1ICn8g=";
   };
 
-  packageRequires = epkgs: [
+  extraEmacsPackages = epkgs: [
     epkgs.dockerfile-mode
     epkgs.elixir-mode
     epkgs.git-modes
