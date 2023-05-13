@@ -1,13 +1,14 @@
-{lib, fetchFromGitHub, trivialBuild, ...}:
+{lib, fetchFromGitea, trivialBuild, ...}:
 
 trivialBuild {
   pname = "linguist";
 
-  src = fetchFromGitHub {
-    owner = "jeffkreeftmeijer";
+  src = fetchFromGitea {
+    domain = "codeberg.org";
+    owner = "jkreeftmeijer";
     repo = "linguist.el";
     rev = "849455da4d64fd777993515b91a54cfbdb4c7b15";
-    sha256 = "sha256-mzAzEmiVp2vACqCY3OGWCwYG4p9crHVFoaVaVUAwvro=";
+    sha256 = "sha256-cLbZRfav6l9slytpXIEG83dylf8HxjjXwLrnw1ICn8g=";
   };
 
   packageRequires = [
