@@ -27,22 +27,6 @@
             tree-sitter-heex
           ];
         };
-        extraEmacsPackages = epkgs: [
-          epkgs.dockerfile-mode
-          epkgs.elixir-mode
-          epkgs.git-modes
-          epkgs.ledger-mode
-          epkgs.markdown-mode
-          epkgs.nix-mode
-          epkgs.rust-mode
-          epkgs.yaml-mode
-        ];
-
-        override = epkgs: epkgs // {
-          linguist = pkgs.callPackage pkgs/linguist.el {
-            trivialBuild = epkgs.trivialBuild;
-          };
-        };
       });
     });
 
