@@ -347,6 +347,27 @@ Its functions can be used as drop-in replacements for built-in functionality.
     (corfu-auto t))
 #+end_src
 
+* Language modes
+
+Major modes for programming language support automatically add themselves to =auto-mode-alist=, which is a list of file name patterns.
+An example of an item from the default list links the =.el= file extension to =emacs-lisp-mode=:
+
+#+headers: :tangle no
+#+begin_src emacs-lisp
+  ("\\.el\\'" . emacs-lisp-mode)
+#+end_src
+
+When a filename matches an item in this list, the corresponding major mode is enabled automatically.
+Because of that, loading the packages can be deferred until that happens with use-package's =:defer= option.
+To ensure the packages aren't loaded before they're needed, a message is added to each definition's =:config= key, which prints a message whenever the package is loaded.
+
+#+begin_src emacs-lisp
+  (use-package elixir-mode
+    :config (message "Loaded elixir-mode")
+    :defer t
+    :ensure t)
+#+end_src
+
 * Org-babel
 
 [[https://orgmode.org/worg/org-contrib/babel/][Org-babel]] executes source code within Org documents.
@@ -492,32 +513,4 @@ It checks if the package is available by checking the available features, so its
     :ensure t
     :config
     (direnv-mode))
-#+end_src
-
-* Org
-
-Set =~/notes/tasks.org= as a refile target to redirect tasks to:
-
-#+begin_src emacs-lisp
-  (use-package org
-    :custom
-    (org-refile-targets (quote (("~/notes/tasks.org" :level . 1)))))
-#+end_src
-
-#+begin_note
-Create the notes file with at least a level one headline to prevent an error from being raised:
-
-#+begin_quote
-no refile targets
-#+end_quote
-#+end_note
-
-* Org-agenda
-
-Have org-agenda look through the =~/notes= directory to find tasks recursively:
-
-#+begin_src emacs-lisp
-  (use-package org
-    :custom
-    (org-agenda-files (directory-files-recursively "~/org/" "\\.org$")))
 #+end_src

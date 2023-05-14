@@ -136,6 +136,11 @@
   :custom
   (corfu-auto t))
 
+(use-package elixir-mode
+  :config (message "Loaded elixir-mode")
+  :defer t
+  :ensure t)
+
 (use-package emacs
   :custom
   (org-babel-load-languages '((emacs-lisp . t)
