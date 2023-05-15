@@ -162,6 +162,11 @@
   :config
   (org-roam-db-autosync-mode))
 
+(use-package org-roam-ui
+  :ensure t
+  :commands
+  org-roam-ui-mode)
+
 (use-package ox-gfm
   :ensure t
   :commands
