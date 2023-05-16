@@ -4,8 +4,7 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (setq initial-scratch-message nil)
-  (indent-tabs-mode nil)
-  (set-face-attribute 'default nil :font "SF Mono-14"))
+  (indent-tabs-mode nil))
 
 (use-package helpful
   :ensure t
@@ -16,6 +15,9 @@
    ("C-h v" . helpful-variable)  ; Replace describe-variable
    ("C-h k" . helpful-key)       ; Replace describe-key
    ("C-h x" . helpful-command))) ; Replace describe-command
+
+(use-package emacs
+  (set-face-attribute 'default nil :font "SF Mono-14"))
 
 (use-package modus-themes
   :ensure t)

@@ -49,12 +49,6 @@ Use spaces instead:
   (indent-tabs-mode nil)
 #+end_src
 
-** Use SF Mono as the default font
-
-#+begin_src emacs-lisp :tangle no :noweb-ref general-options
-  (set-face-attribute 'default nil :font "SF Mono-14")
-#+end_src
-
 ** Summary
 
 #+begin_src emacs-lisp :noweb yes
@@ -80,10 +74,21 @@ Install the package and replace the default describe functions' bindings:
      ("C-h x" . helpful-command))) ; Replace describe-command
 #+end_src
 
-* Theme
+* Configuring Emacs' appearance
+
+** SF Mono
+
+To configure Apple's SF Mono as the typeface for Emacs to use, and bumping the font size to 14 points, set the =:font= attribute for the default face to =SF Mono-14=:
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    (set-face-attribute 'default nil :font "SF Mono-14"))
+#+end_src
+
+** The Modus Themes
 
 The [[https://protesilaos.com/emacs/modus-themes][Modus themes]] are a set of beautiful and customizable themes, which are shipped with Emacs since version 28.
-Although they're included in my version of Emacs, I install the latest version because it includes [[https://git.sr.ht/~protesilaos/modus-themes/commit/ede2ab0e0ff43b25fdac24a9946a95be705eff95][this patch]].
+A recent version of the themes is installed through use-package:[fn:patch]
 
 #+begin_src emacs-lisp
   (use-package modus-themes
@@ -93,7 +98,7 @@ Although they're included in my version of Emacs, I install the latest version b
 The modus themes consist of two types: Modus Operandi is a light theme, and Modus Vivendi is its dark counterpart.
 The tinted variants shift the background colors from white and black to a more pleasant light ochre and dark blue.
 
-Select =modus-operandi-tinted= as the default theme:
+To select =modus-operandi-tinted= as the default theme, load it with the ~load-theme~ function:
 
 #+begin_src emacs-lisp :noweb-ref theme-init :tangle no
   (load-theme 'modus-operandi-tinted)
@@ -111,7 +116,7 @@ By default, the function switches between the non-tinted versions, but that can 
   (setq <<themes-to-toggle>>)
 #+end_src
 
-** Summary
+To switch to Modus Operandi and configure Modus Vivendi to toggle:
 
 #+begin_src emacs-lisp :noweb yes
   (use-package emacs
@@ -121,10 +126,14 @@ By default, the function switches between the non-tinted versions, but that can 
     <<theme-config>>)
 #+end_src
 
+[fn:patch] Although they're included in my version of Emacs, I install the latest version because it includes [[https://git.sr.ht/~protesilaos/modus-themes/commit/ede2ab0e0ff43b25fdac24a9946a95be705eff95][this patch]], which fixes a typo I ran into while generating style sheets with ~M-x org-html-htmlize-generate-css~.
+Outside of this I wouldn't install a newer version of the themes, as I don't need to be on the bleeding edge because I use a very simple theme configuration.
+
 ** Auto-dark
 
 [[https://github.com/LionyxML/auto-dark-emacs][Auto-dark]] automatically switches between dark and light themes based on the operating system's appearance.
-Configure it to use the modus themes:
+After loading it, it's turned on by switching on =auto-dark-mode=.
+It uses the /wombat/ and /leuven/ themes by default, but these are configured to use the modus themes with the ~auto-dark-light-theme~ and ~auto-dark-dark-theme~ variables:
 
 #+begin_src emacs-lisp
   (use-package auto-dark
