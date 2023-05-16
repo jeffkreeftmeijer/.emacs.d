@@ -372,7 +372,8 @@ To ensure the packages aren't loaded before they're needed, a message is added t
   (use-package markdown-mode
     :config (message "Loaded markdown-mode")
     :defer t
-    :ensure t)
+    :ensure t
+    :mode ("\\.mdx\\'" . markdown-mode))
 #+end_src
 
 * Org-babel

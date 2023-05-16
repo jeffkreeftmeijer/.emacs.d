@@ -144,7 +144,8 @@
 (use-package markdown-mode
   :config (message "Loaded markdown-mode")
   :defer t
-  :ensure t)
+  :ensure t
+  :mode ("\\.mdx\\'" . markdown-mode))
 
 (use-package emacs
   :custom
