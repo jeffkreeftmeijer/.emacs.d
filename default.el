@@ -141,6 +141,11 @@
   :defer t
   :ensure t)
 
+(use-package markdown-mode
+  :config (message "Loaded markdown-mode")
+  :defer t
+  :ensure t)
+
 (use-package emacs
   :custom
   (org-babel-load-languages '((emacs-lisp . t)
