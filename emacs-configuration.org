@@ -378,6 +378,13 @@ To ensure the packages aren't loaded before they're needed, a message is added t
 #+end_src
 
 #+begin_src emacs-lisp
+  (use-package erlang-mode
+    :config (message "Loaded erlang-mode")
+    :defer t
+    :ensure t)
+#+end_src
+
+#+begin_src emacs-lisp
   (use-package markdown-mode
     :config (message "Loaded markdown-mode")
     :defer t
