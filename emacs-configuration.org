@@ -404,6 +404,41 @@ It only supports Emacs Lisp by default, but more languages are added to =org-bab
 				(shell . t))))
 #+end_src
 
+* Ob-async
+
+By default, Org Babel executes blocks synchronously, blocking the editor while code blocks are run.
+The [[https://github.com/astahlman/ob-async][ob-async]] package adds the =:async= keyword to code blocks:
+
+#+headers: :tangle no
+#+begin_src org
+  ,#+begin_src sh :async
+    sleep 3 && echo 'Done!'
+  ,#+end_src
+#+end_src
+
+Evaluating this code block inserts a placeholder results block and gives control back to the user:
+
+#+headers: :tangle no
+#+begin_src org
+  ,#+RESULTS:
+  : 5ade6e774c96f03e53840b9acc89f9f4
+#+end_src
+
+When the evaluation is done, the placeholder is replaced with the actual results:
+
+#+headers: :tangle no
+#+begin_src org
+  ,#+RESULTS:
+  : Done!
+#+end_src
+
+Ob-async is available on MELPA, so it's installed through =use-package=:
+
+#+begin_src emacs-lisp
+  (use-package ob-async
+    :ensure t)
+#+end_src
+
 * Org-auto-tangle
 
 [[https://github.com/yilkalargaw/org-auto-tangle][Org-auto-tangle]] automatically tangles Org files on save.

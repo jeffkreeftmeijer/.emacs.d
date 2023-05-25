@@ -154,6 +154,9 @@
   (org-babel-load-languages '((emacs-lisp . t)
 			      (shell . t))))
 
+(use-package ob-async
+  :ensure t)
+
 (use-package org-auto-tangle
   :ensure t
   :hook
