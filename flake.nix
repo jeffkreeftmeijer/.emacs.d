@@ -21,7 +21,7 @@
       configured-emacs = (pkgs.emacsWithPackagesFromUsePackage {
         config = ./default.el;
         defaultInitFile = true;
-        package = pkgs.emacsGit.override {
+        package = pkgs.emacs-git.override {
           treeSitterPlugins = with pkgs.tree-sitter-grammars; [
             tree-sitter-elixir
             tree-sitter-heex
