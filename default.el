@@ -154,6 +154,11 @@
   :ensure t
   :mode ("\\.mdx\\'" . markdown-mode))
 
+(use-package rust-mode
+  :config (message "Loaded rust-mode")
+  :defer t
+  :ensure t)
+
 (use-package emacs
   :custom
   (org-babel-load-languages '((emacs-lisp . t)

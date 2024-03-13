@@ -392,6 +392,13 @@ To ensure the packages aren't loaded before they're needed, a message is added t
     :mode ("\\.mdx\\'" . markdown-mode))
 #+end_src
 
+#+begin_src emacs-lisp
+  (use-package rust-mode
+    :config (message "Loaded rust-mode")
+    :defer t
+    :ensure t)
+#+end_src
+
 * Org-babel
 
 [[https://orgmode.org/worg/org-contrib/babel/][Org-babel]] executes source code within Org documents.
