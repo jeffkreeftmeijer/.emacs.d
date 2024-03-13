@@ -143,11 +143,6 @@
   :defer t
   :ensure t)
 
-(use-package erlang-mode
-  :config (message "Loaded erlang-mode")
-  :defer t
-  :ensure t)
-
 (use-package markdown-mode
   :config (message "Loaded markdown-mode")
   :defer t
