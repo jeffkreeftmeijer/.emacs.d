@@ -11,7 +11,7 @@
 
   outputs = { self, nixpkgs, emacs-overlay }:
   let
-    system = "x86_64-darwin";
+    system = "aarch64-darwin";
     pkgs = (import nixpkgs {
       inherit system;
       overlays = [ emacs-overlay.overlay self.overlay ];
