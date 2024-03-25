@@ -558,6 +558,8 @@ Turn on automatic database syncing instead of manually running =org-roam-db-sync
 
 * exec-path-from-shell
 
+Make sure the =$PATH= is set up correctly within Emacs.
+
 #+begin_src emacs-lisp
   (use-package exec-path-from-shell
     :ensure t
