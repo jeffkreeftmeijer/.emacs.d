@@ -21,7 +21,7 @@
       configured-emacs = (pkgs.emacsWithPackagesFromUsePackage {
         config = ./default.el;
         defaultInitFile = true;
-        package = pkgs.emacs-git;
+        package = pkgs.emacs;
       });
     });
 
