@@ -17,6 +17,7 @@
    ("C-h x" . helpful-command))) ; Replace describe-command
 
 (use-package emacs
+  :init
   (set-face-attribute 'default nil :font "SF Mono-14"))
 
 (use-package modus-themes

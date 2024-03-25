@@ -82,8 +82,11 @@ To configure Apple's SF Mono as the typeface for Emacs to use, and bumping the f
 
 #+begin_src emacs-lisp
   (use-package emacs
+    :init
     (set-face-attribute 'default nil :font "SF Mono-14"))
 #+end_src
+
+#+RESULTS:
 
 ** The Modus Themes
 
