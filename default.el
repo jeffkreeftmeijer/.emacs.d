@@ -18,7 +18,7 @@
 
 (use-package emacs
   :init
-  (set-face-attribute 'default nil :font "SF Mono-14"))
+  (set-face-attribute 'default nil :family "SF-Mono" :height 140))
 
 (use-package modus-themes
   :ensure t)
