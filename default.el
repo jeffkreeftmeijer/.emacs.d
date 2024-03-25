@@ -197,10 +197,6 @@
   org-gfm-export-to-markdown
   org-gfm-publish-to-gfm)
 
-(use-package citeproc
-  :ensure t
-  :defer t)
-
 (use-package eglot
   :ensure t
   :hook
