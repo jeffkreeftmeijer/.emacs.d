@@ -4,7 +4,8 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (setq initial-scratch-message nil)
-  (indent-tabs-mode nil))
+  (indent-tabs-mode nil)
+  (setq backup-directory-alist `(("." . "~/.emacs.d/backups"))))
 
 (use-package helpful
   :ensure t

@@ -49,6 +49,17 @@ Use spaces instead:
   (indent-tabs-mode nil)
 #+end_src
 
+** Backup files
+
+Place backup files in =~/.emacs.d/backups= instead of the current directory.
+
+#+begin_src emacs-lisp :tangle no :noweb-ref general-options
+  (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+#+end_src
+
+#+RESULTS:
+: ((. . ~/.emacs.d/backups))
+
 ** Summary
 
 #+begin_src emacs-lisp :noweb yes
