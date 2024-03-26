@@ -87,14 +87,14 @@ Install the package and replace the default describe functions' bindings:
 
 * Configuring Emacs' appearance
 
-** Font
+** SF Mono
 
-Increase the font size to 14 points by setting the =:height= attribute through =set-face-attribute=:
+To configure Apple's SF Mono as the typeface for Emacs to use, and bump the font size to 14 points, set the =:family= and =:height= attributes for the default face to =SF Mono= and =140=:
 
 #+begin_src emacs-lisp
   (use-package emacs
     :init
-    (set-face-attribute 'default nil :height 140))
+    (set-face-attribute 'default nil :family "SF Mono" :height 140))
 #+end_src
 
 #+RESULTS:
