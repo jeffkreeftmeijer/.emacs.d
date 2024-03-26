@@ -569,16 +569,21 @@ Turn on automatic database syncing instead of manually running =org-roam-db-sync
 
 * Eglot
 
-Set up Eglot for Elixir.
+Set up Eglot for Elixir and Rust.
 
 #+begin_src emacs-lisp
   (use-package eglot
     :ensure t
     :hook
     (elixir-mode . eglot-ensure)
+    (rust-mode . eglot-ensure)
     :config
-    (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls")))
+    (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls"))
+    (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer")))
 #+end_src
+
+#+RESULTS:
+| eglot-ensure | rust-maybe-initialize-buffer-project |
 
 * exec-path-from-shell
 

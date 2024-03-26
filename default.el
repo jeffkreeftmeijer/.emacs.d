@@ -207,8 +207,10 @@
   :ensure t
   :hook
   (elixir-mode . eglot-ensure)
+  (rust-mode . eglot-ensure)
   :config
-  (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls")))
+  (add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls"))
+  (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer")))
 
 (use-package exec-path-from-shell
   :ensure t
