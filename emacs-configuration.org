@@ -567,7 +567,9 @@ Turn on automatic database syncing instead of manually running =org-roam-db-sync
 
 #+end_src
 
-* Elixir-ls
+* Eglot
+
+Set up Eglot for Elixir.
 
 #+begin_src emacs-lisp
   (use-package eglot
