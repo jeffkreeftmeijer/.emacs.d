@@ -160,6 +160,11 @@
   :defer t
   :ensure t)
 
+(use-package treesit-auto
+  :ensure t
+  :custom (treesit-auto-install 'prompt)
+  :config (global-treesit-auto-mode))
+
 (use-package emacs
   :custom
   (org-babel-load-languages '((emacs-lisp . t)
