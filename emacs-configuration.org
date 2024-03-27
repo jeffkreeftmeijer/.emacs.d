@@ -147,17 +147,24 @@ Outside of this I wouldn't install a newer version of the themes, as I don't nee
 
 [[https://github.com/LionyxML/auto-dark-emacs][Auto-dark]] automatically switches between dark and light themes based on the operating system's appearance.
 After loading it, it's turned on by switching on =auto-dark-mode=.
-It uses the /wombat/ and /leuven/ themes by default, but these are configured to use the modus themes with the ~auto-dark-light-theme~ and ~auto-dark-dark-theme~ variables:
+It uses the /wombat/ and /leuven/ themes by default, but these are configured to use the modus themes with the ~auto-dark-light-theme~ and ~auto-dark-dark-theme~ variables.
+
+Finally, the =auto-dark-allow-osascript= configuration is turned on to allow auto-dark to use OSA scripts to determine the currently selected theme.
+This is [[https://github.com/LionyxML/auto-dark-emacs?tab=readme-ov-file#notes-for-macos-users][required]] because the configuration currently uses a precompiled version of Emacs, as opposed to [[https://github.com/d12frosted/homebrew-emacs-plus][emacs-plus]] or [[https://github.com/railwaycat/homebrew-emacsmacport?tab=readme-ov-file][emacsmacport]].
 
 #+begin_src emacs-lisp
   (use-package auto-dark
     :ensure t
     :config
     (auto-dark-mode t)
+    (setq auto-dark-allow-osascript t)
     :custom
     (auto-dark-light-theme 'modus-operandi-tinted)
     (auto-dark-dark-theme 'modus-vivendi-tinted))
 #+end_src
+
+#+RESULTS:
+: t
 
 * Vim-style modal editing with Evil
 

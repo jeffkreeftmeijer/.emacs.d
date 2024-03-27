@@ -34,6 +34,7 @@
   :ensure t
   :config
   (auto-dark-mode t)
+  (setq auto-dark-allow-osascript t)
   :custom
   (auto-dark-light-theme 'modus-operandi-tinted)
   (auto-dark-dark-theme 'modus-vivendi-tinted))
