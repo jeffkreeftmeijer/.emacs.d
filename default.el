@@ -21,7 +21,7 @@
   :init
   (set-face-attribute 'default nil :family "SF Mono" :height 140)
   (set-face-attribute 'fixed-pitch nil :family "SF Mono" :height 140)
-  (set-face-attribute 'variable-pitch nil :family "SF Pro" :height 140))
+  (set-face-attribute 'variable-pitch nil :family "SF Pro" :height 170))
 
 (use-package emacs
   :config
