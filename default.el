@@ -236,3 +236,8 @@
   :ensure t
   :config
   (direnv-mode))
+
+(use-package eat
+  :ensure t
+  :config
+  (eat-eshell-mode 1))

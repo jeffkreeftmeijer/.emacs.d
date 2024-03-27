@@ -653,3 +653,14 @@ Make sure the =$PATH= is set up correctly within Emacs.
     :config
     (direnv-mode))
 #+end_src
+
+* Eat
+
+Run terminal programs from Eshell with Eat (Emulate A Terminal).
+
+#+begin_src emacs-lisp
+  (use-package eat
+    :ensure t
+    :config
+    (eat-eshell-mode 1))
+#+end_src
