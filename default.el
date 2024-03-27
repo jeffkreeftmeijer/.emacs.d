@@ -22,6 +22,10 @@
   (set-face-attribute 'default nil :family "SF Mono" :height 140)
   (set-face-attribute 'variable-pitch nil :family "SF Pro" :height 140))
 
+(use-package emacs
+  :config
+  (add-hook 'text-mode-hook #'variable-pitch-mode))
+
 (use-package modus-themes
   :ensure t)
 

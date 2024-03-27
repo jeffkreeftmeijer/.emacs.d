@@ -102,6 +102,14 @@ Then, set the fonts for the =default= and =variable-pitch= faces, and set the fo
 
 #+RESULTS:
 
+To enable variable-width fonts for non-code text, enable =variable-pitch-mode= when entering text mode:
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :config
+    (add-hook 'text-mode-hook #'variable-pitch-mode))
+#+end_src
+
 ** The Modus Themes
 
 The [[https://protesilaos.com/emacs/modus-themes][Modus themes]] are a set of beautiful and customizable themes, which are shipped with Emacs since version 28.
