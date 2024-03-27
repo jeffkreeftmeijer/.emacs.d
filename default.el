@@ -39,6 +39,11 @@
   (auto-dark-light-theme 'modus-operandi-tinted)
   (auto-dark-dark-theme 'modus-vivendi-tinted))
 
+(use-package spacious-padding
+  :ensure t
+  :config
+  (spacious-padding-mode 1))
+
 (use-package evil-commentary
   :ensure t
   :after evil

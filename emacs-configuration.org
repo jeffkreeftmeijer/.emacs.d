@@ -166,6 +166,21 @@ This is [[https://github.com/LionyxML/auto-dark-emacs?tab=readme-ov-file#notes-f
 #+RESULTS:
 : t
 
+** Padding
+
+The [[https://protesilaos.com/emacs/spacious-padding][spacious-padding]] package adds spacing around windows and frames, as well as padding the mode line.
+Install it through use-package, then turn on =spacious-padding-mode=:
+
+#+begin_src emacs-lisp
+  (use-package spacious-padding
+    :ensure t
+    :config
+    (spacious-padding-mode 1))
+#+end_src
+
+#+RESULTS:
+: t
+
 * Vim-style modal editing with Evil
 
 [[https://github.com/emacs-evil/evil][Evil]] is a Vim emulator for that alters Emacs in a way that's familiar to Vim defectors.
