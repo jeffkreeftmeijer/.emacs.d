@@ -169,11 +169,14 @@ This is [[https://github.com/LionyxML/auto-dark-emacs?tab=readme-ov-file#notes-f
 ** Padding
 
 The [[https://protesilaos.com/emacs/spacious-padding][spacious-padding]] package adds spacing around windows and frames, as well as padding the mode line.
-Install it through use-package, then turn on =spacious-padding-mode=:
+Install it through use-package, then turn on =spacious-padding-mode=.
+Then, turn on =spacious-padding-subtile-mode-line= for a more subtile mode line:
 
 #+begin_src emacs-lisp
   (use-package spacious-padding
     :ensure t
+    :init
+    (setq spacious-padding-subtle-mode-line t)
     :config
     (spacious-padding-mode 1))
 #+end_src

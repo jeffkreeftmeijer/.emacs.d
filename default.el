@@ -41,6 +41,8 @@
 
 (use-package spacious-padding
   :ensure t
+  :init
+  (setq spacious-padding-subtle-mode-line t)
   :config
   (spacious-padding-mode 1))
 
