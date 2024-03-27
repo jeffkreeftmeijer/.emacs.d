@@ -143,22 +143,22 @@ By default, the function switches between the non-tinted versions, but that can 
 #+end_src
 
 The Modus themes can optionally inherit from the =fixed-pitch= face for some faces, which allows for turning on =variable-pitch-mode= while keeping some text monospaced.
-To turn it on, set =modus-themes-mixed-fonts=:
+To turn it on, set =modus-themes-mixed-fonts=, but make sure it's set before loading one of the modus themes:
 
 #+name: mixed-fonts
-#+begin_src emacs-lisp :noweb-ref theme-config :exports none :tangle no
-  modus-themes-mixed-fonts t
+#+begin_src emacs-lisp :noweb yes :tangle no
+  (setq modus-themes-mixed-fonts t)
 #+end_src
 
-#+begin_src emacs-lisp :noweb yes :tangle no
-  (setq <<mixed-fonts>>)
-#+end_src
+#+RESULTS:
+: t
 
 To switch to Modus Operandi and configure Modus Vivendi to toggle:
 
 #+begin_src emacs-lisp :noweb yes
   (use-package emacs
     :init
+    <<mixed-fonts>>
     <<theme-init>>
     :custom
     <<theme-config>>)

@@ -32,10 +32,10 @@
 
 (use-package emacs
   :init
+  (setq modus-themes-mixed-fonts t)
   (load-theme 'modus-operandi-tinted)
   :custom
-  modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)
-  modus-themes-mixed-fonts t)
+  modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 
 (use-package auto-dark
   :ensure t
