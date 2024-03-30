@@ -670,3 +670,23 @@ Run terminal programs from Eshell with Eat (Emulate A Terminal).
     :config
     (eat-eshell-mode 1))
 #+end_src
+
+* Copilot
+
+Turn on [[https://github.com/copilot-emacs/copilot.el][Copilot]] globally, and disable the warning about indentation offsets.
+Then, set up key bindings for accepting completions in the Copilot completion map:
+
+Don't install Copilot through use-package, as it's not on any of the package archives.
+This assumes Copilot is installed through other means, like (~M-x package-vc-install~).
+
+#+begin_src  emacs-lisp
+  (use-package copilot
+    :config (global-copilot-mode 1)
+    :custom (copilot-indent-offset-warning-disable t)
+    :bind (:map copilot-completion-map
+		("<tab>" . copilot-accept-completion)
+		("TAB" . copilot-accept-completion)))
+#+end_src
+
+#+RESULTS:
+: copilot-accept-completion

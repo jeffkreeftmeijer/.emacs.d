@@ -242,3 +242,10 @@
   :ensure t
   :config
   (eat-eshell-mode 1))
+
+(use-package copilot
+  :config (global-copilot-mode 1)
+  :custom (copilot-indent-offset-warning-disable t)
+  :bind (:map copilot-completion-map
+	      ("<tab>" . copilot-accept-completion)
+	      ("TAB" . copilot-accept-completion)))
