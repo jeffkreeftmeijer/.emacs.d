@@ -6,11 +6,16 @@
 
 ** Hide scroll bars
 
+Emacs shows scroll bars by default, which can be turned off with =scroll-bar-mode=:
+
 #+begin_src emacs-lisp :tangle no :noweb-ref general-options
   (scroll-bar-mode -1)
 #+end_src
 
 ** Hide the tool bar
+
+The tool bar is the row of icons at the top of the window.
+To turn it off, set =tool-bar-mode= to a negative number:
 
 #+begin_src emacs-lisp :tangle no :noweb-ref general-options
   (tool-bar-mode -1)
