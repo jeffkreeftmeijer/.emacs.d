@@ -113,8 +113,7 @@
   (evil-collection-vertico-setup))
 
 (use-package magit
-  :ensure t
-  :defer t)
+  :ensure t)
 
 (use-package forge
   :ensure t
