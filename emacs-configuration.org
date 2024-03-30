@@ -409,6 +409,7 @@ Its functions can be used as drop-in replacements for built-in functionality.
     :init
     (require 'bind-key)
     :bind
+    (("C-x b" . consult-buffer))            ; Replace switch-to-buffer
     (("C-x p b" . consult-project-buffer))) ; Replace project-switch-to-buffer
 #+end_src
 

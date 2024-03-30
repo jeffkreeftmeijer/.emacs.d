@@ -145,6 +145,7 @@
   :init
   (require 'bind-key)
   :bind
+  (("C-x b" . consult-buffer))            ; Replace switch-to-buffer
   (("C-x p b" . consult-project-buffer))) ; Replace project-switch-to-buffer
 
 (use-package corfu
