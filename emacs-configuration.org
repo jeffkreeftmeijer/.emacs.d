@@ -24,4 +24,53 @@ Disable the scroll bar, the tool bar, and the menu bar:
     <<frame-init>>)
 #+end_src
 
+*** Fonts
+
+Use Apple's SF Mono and SF Pro fonts, for fixed and variable fonts, respectively.
+Although the fonts are used in macOS, they're not usable without [[https://developer.apple.com/fonts/][downloading]] them first.
+Then, set the fonts for the =default=, =fixed-pitch=, and =variable-pitch= faces.
+Set the font size to 140 (14 points × 10) for fixed-width fonts, and 170 (17 points × 10) for variable-width ones:
+
+#+headers: :noweb-ref faces-init
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil :family "SF Mono" :height 140)
+  (set-face-attribute 'fixed-pitch nil :family "SF Mono" :height 140)
+  (set-face-attribute 'variable-pitch nil :family "SF Pro" :height 170)
+#+end_src
+
+#+RESULTS:
+
+The =face-cont-family-alternatives= variable is used to provide fallback fonts if the preferred font isn't available.
+This configuration falls back to Menlo when SF Mono isn't available, or it defaults to the default monospace font (which is most likely Courier).
+SF Pro falls back to Helvetica, then Arial.
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref faces-custom
+#+begin_src emacs-lisp
+  (face-font-family-alternatives
+    '(("SF Mono" "Menlo" "monospace")
+      ("SF Pro" "Helvetica" "Arial")))
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (custom-set-variables
+    '<<faces-custom>>)
+#+end_src
+
+#+RESULTS:
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package faces
+    :init
+    <<faces-init>>
+    :custom
+    <<faces-custom>>)
+#+end_src
+
 #+RESULTS:
