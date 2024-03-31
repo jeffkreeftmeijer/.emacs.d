@@ -74,3 +74,51 @@ SF Pro falls back to Helvetica, then Arial.
 #+end_src
 
 #+RESULTS:
+
+*** Themes
+
+The [[https://protesilaos.com/emacs/modus-themes][Modus themes]] are a set of beautiful and customizable themes, which are shipped with Emacs since version 28.
+
+The modus themes consist of two types: Modus Operandi is a light theme, and Modus Vivendi is its dark counterpart.
+The tinted variants shift the background colors from white and black to a more pleasant light ochre and dark blue.
+
+To select =modus-operandi-tinted= as the default theme, load it with the ~load-theme~ function:
+
+#+headers: :noweb-ref modus-themes-init
+#+begin_src emacs-lisp
+  (load-theme 'modus-operandi-tinted)
+#+end_src
+
+#+RESULTS:
+: t
+
+An interactive function named ~modus-themes-toggle~ switches between the light and dark themes.
+By default, the function switches between the non-tinted versions, but that can be overwritten to use the tinted versions through the =modus-themes-to-toggle= variable:
+
+#+headers: :exports none
+#+headers: :noweb-ref modus-themes-custom
+#+begin_src emacs-lisp
+  modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<modus-themes-custom>>)
+#+end_src
+
+#+RESULTS:
+| modus-operandi-tinted | modus-vivendi-tinted |
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package modus-themes
+    :init
+    <<modus-themes-init>>
+    :custom
+    <<modus-themes-custom>>)
+#+end_src
+
+#+RESULTS:

@@ -13,3 +13,9 @@
   (face-font-family-alternatives
     '(("SF Mono" "Menlo" "monospace")
       ("SF Pro" "Helvetica" "Arial"))))
+
+(use-package modus-themes
+  :init
+  (load-theme 'modus-operandi-tinted)
+  :custom
+  modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
