@@ -1,0 +1,27 @@
+* ~/.emacs.d
+
+** Appearance
+
+*** Frames
+
+Disable the scroll bar, the tool bar, and the menu bar:
+
+#+headers: :noweb-ref frame-init
+#+begin_src emacs-lisp
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+#+end_src
+
+#+RESULTS:
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package frame
+    :init
+    <<frame-init>>)
+#+end_src
+
+#+RESULTS:
