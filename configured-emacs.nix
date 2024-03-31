@@ -11,6 +11,7 @@ let
   };
 in
 emacsWithPackages [
+  epkgs.modus-themes
   default
 ]
 
