@@ -12,7 +12,9 @@
   :custom
   (face-font-family-alternatives
     '(("SF Mono" "Menlo" "monospace")
-      ("SF Pro" "Helvetica" "Arial"))))
+      ("SF Pro" "Helvetica" "Arial")))
+  :hook
+  (text-mode . variable-pitch-mode))
 
 (use-package modus-themes
   :init

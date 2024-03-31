@@ -62,6 +62,19 @@ SF Pro falls back to Helvetica, then Arial.
 
 #+RESULTS:
 
+To enable variable-width fonts for non-code text, enable =variable-pitch-mode= when entering text mode:
+
+#+begin_src emacs-lisp
+  (add-hook 'text-mode-hook #'variable-pitch-mode))
+#+end_src
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref faces-hook
+#+begin_src emacs-lisp
+  (text-mode . variable-pitch-mode)
+#+end_src
+
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :tangle default.el
@@ -70,10 +83,13 @@ SF Pro falls back to Helvetica, then Arial.
     :init
     <<faces-init>>
     :custom
-    <<faces-custom>>)
+    <<faces-custom>>
+    :hook
+    <<faces-hook>>)
 #+end_src
 
 #+RESULTS:
+| variable-pitch-mode | text-mode-hook-identify |
 
 *** Themes
 
