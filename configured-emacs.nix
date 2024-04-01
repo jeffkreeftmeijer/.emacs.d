@@ -14,5 +14,6 @@ emacsWithPackages [
   epkgs.modus-themes
   epkgs.spacious-padding
   epkgs.magit
+  epkgs.evil
   default
 ]

@@ -28,3 +28,7 @@
   (spacious-padding-mode 1)
   :custom
   spacious-padding-subtle-mode-line t)
+
+(use-package evil
+  :init
+  (evil-mode 1))

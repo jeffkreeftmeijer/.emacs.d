@@ -184,3 +184,29 @@ Turn on  =spacious-padding-subtile-mode-line= for a more subtile mode line:
 #+end_src
 
 #+RESULTS:
+
+** Modal editing
+
+*** Evil mode
+
+Emacs is the best Vim emulator, and [[https://github.com/emacs-evil/evil][Evil]] is the best Vim mode.
+After installing Evil, turn on =evil-mode= globally:
+
+#+headers: :noweb-ref evil-init
+#+begin_src emacs-lisp
+  (evil-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package evil
+    :init
+    <<evil-init>>)
+#+end_src
+
+#+RESULTS:
