@@ -147,3 +147,40 @@ To turn it on, set =modus-themes-mixed-fonts=, but make sure it's set before loa
 #+end_src
 
 #+RESULTS:
+
+*** Layout
+
+The [[https://protesilaos.com/emacs/spacious-padding][spacious-padding]] package adds spacing around windows and frames, as well as padding the mode line.
+
+Turn on =spacious-padding-mode= to add spacing around windows and frames:
+
+#+headers: :noweb-ref spacious-padding-init
+#+begin_src emacs-lisp
+  (spacious-padding-mode 1)
+#+end_src
+
+Turn on  =spacious-padding-subtile-mode-line= for a more subtile mode line:
+
+#+headers: :exports none
+#+headers: :noweb-ref spacious-padding-custom
+#+begin_src emacs-lisp
+  spacious-padding-subtle-mode-line t
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<spacious-padding-custom>>)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package spacious-padding
+    :init
+    <<spacious-padding-init>>
+    :custom
+    <<spacious-padding-custom>>)
+#+end_src
+
+#+RESULTS:

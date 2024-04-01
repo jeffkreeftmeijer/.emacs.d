@@ -12,6 +12,7 @@ let
 in
 emacsWithPackages [
   epkgs.modus-themes
+  epkgs.spacious-padding
   default
 ]
 

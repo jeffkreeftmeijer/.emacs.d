@@ -22,3 +22,9 @@
   (load-theme 'modus-operandi-tinted)
   :custom
   modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
+
+(use-package spacious-padding
+  :init
+  (spacious-padding-mode 1)
+  :custom
+  spacious-padding-subtle-mode-line t)
