@@ -48,6 +48,10 @@
   :init
   (vertico-mode 1))
 
+(use-package savehist
+  :init
+  (savehist-mode 1))
+
 (use-package files
   :custom
   backup-directory-alist `(("." . "~/.emacs.d/backups")))

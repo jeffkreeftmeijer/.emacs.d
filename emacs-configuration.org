@@ -292,6 +292,30 @@ Turn it on by calling ~evil-commentary-mode~:
 
 #+RESULTS:
 
+** Minibuffer history
+
+Emacs' =savehist= feature saves minibuffer history to =~/emacs.d/history=.
+The history is then used to order vertical completion suggestions.
+
+#+headers: :noweb-ref savehist-init
+#+begin_src emacs-lisp
+  (savehist-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package savehist
+    :init
+    <<savehist-init>>)
+#+end_src
+
+#+RESULTS:
+
 * Backups
 
 Emacs automatically generates [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html][backups]] for files not stored in version control.
