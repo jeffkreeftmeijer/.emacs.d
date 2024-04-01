@@ -20,5 +20,6 @@ emacsWithPackages [
   epkgs.vertico
   epkgs.marginalia
   epkgs.consult
+  epkgs.orderless
   default
 ]

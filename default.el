@@ -59,6 +59,10 @@
   ("M-g g" . consult-goto-line)
   ("M-g M-g" . consult-goto-line))
 
+(use-package orderless
+  :custom
+  completion-styles '(orderless basic))
+
 (use-package savehist
   :init
   (savehist-mode 1))

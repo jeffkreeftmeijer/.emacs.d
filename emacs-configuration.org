@@ -381,6 +381,31 @@ There is [[https://github.com/minad/consult?tab=readme-ov-file#available-command
 #+RESULTS:
 : t
 
+** Pattern matching
+
+[[https://github.com/oantolin/orderless][Orderless]] is a completion style that divides the search pattern in space-separated components, and matches regardless of their order.
+After installing it, add it as a completion style by setting =completion-styles=:
+
+#+headers: :exports none
+#+headers: :noweb-ref orderless-custom
+#+begin_src emacs-lisp
+  completion-styles '(orderless basic)
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<orderless-custom>>)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package orderless
+    :custom
+    <<orderless-custom>>)
+#+end_src
+
 ** Minibuffer history
 
 Emacs' =savehist= feature saves minibuffer history to =~/emacs.d/history=.
