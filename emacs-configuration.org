@@ -406,6 +406,38 @@ After installing it, add it as a completion style by setting =completion-styles=
     <<orderless-custom>>)
 #+end_src
 
+** Minibuffer actions
+
+[[https://github.com/oantolin/embark][Embark]] adds actions to minibuffer results.
+For example, when switching buffers with =switch-to-buffer= or =consult-buffer=, pressing =C-.= opens Embark's list of key bindings.
+From there, you can act on results in the minibuffer.
+In this exampke, pressing =k= kills the currently selected buffer.
+
+#+headers: :exports none
+#+headers: :noweb-ref embark-bind
+#+begin_src emacs-lisp
+  ("C-." . embark-act)
+#+end_src
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-.") 'embark-act)
+#+end_src
+
+#+RESULTS:
+: embark-act
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package embark
+    :bind
+    <<embark-bind>>)
+#+end_src
+
+#+RESULTS:
+: embark-act
+
 ** Minibuffer history
 
 Emacs' =savehist= feature saves minibuffer history to =~/emacs.d/history=.

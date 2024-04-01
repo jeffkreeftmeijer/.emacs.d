@@ -63,6 +63,10 @@
   :custom
   completion-styles '(orderless basic))
 
+(use-package embark
+  :bind
+  ("C-." . embark-act))
+
 (use-package savehist
   :init
   (savehist-mode 1))

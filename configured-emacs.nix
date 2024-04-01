@@ -21,5 +21,6 @@ emacsWithPackages [
   epkgs.marginalia
   epkgs.consult
   epkgs.orderless
+  epkgs.embark
   default
 ]
