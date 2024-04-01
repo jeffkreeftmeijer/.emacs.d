@@ -39,6 +39,11 @@
   :config
   (evil-collection-init))
 
+(use-package evil-commentary
+  :after evil
+  :init
+  (evil-commentary-mode 1))
+
 (use-package files
   :custom
   backup-directory-alist `(("." . "~/.emacs.d/backups")))

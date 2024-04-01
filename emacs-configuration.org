@@ -244,6 +244,31 @@ Evil-collection [[https://github.com/emacs-evil/evil-collection/issues/60][requi
 #+RESULTS:
 : t
 
+** Evil-commentary
+
+[[https://github.com/linktohack/evil-commentary][Evil-commentary]] is an Evil port of [[https://github.com/tpope/vim-commentary][vim-commentary]] which adds key bindings to call Emacs’ built in ~comment-or-uncomment-region~ function.
+Turn it on by calling ~evil-commentary-mode~:
+
+#+headers: :noweb-ref evil-commentary-init
+#+begin_src emacs-lisp
+  (evil-commentary-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package evil-commentary
+    :after evil
+    :init
+    <<evil-commentary-init>>)
+#+end_src
+
+#+RESULTS:
+
 * Backups
 
 Emacs automatically generates [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html][backups]] for files not stored in version control.

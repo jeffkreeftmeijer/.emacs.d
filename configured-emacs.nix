@@ -16,5 +16,6 @@ emacsWithPackages [
   epkgs.magit
   epkgs.evil
   epkgs.evil-collection
+  epkgs.evil-commentary
   default
 ]
