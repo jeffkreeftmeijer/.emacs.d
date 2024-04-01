@@ -15,4 +15,3 @@ emacsWithPackages [
   epkgs.spacious-padding
   default
 ]
-
