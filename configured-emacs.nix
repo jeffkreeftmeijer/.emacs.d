@@ -23,5 +23,12 @@ emacsWithPackages [
   epkgs.orderless
   epkgs.embark
   epkgs.treesit-auto
+  epkgs.elixir-mode
+  epkgs.git-modes
+  epkgs.markdown-mode
+  epkgs.nix-mode
+  epkgs.rust-mode
+  epkgs.typescript-mode
+  epkgs.yaml-mode
   default
 ]
