@@ -15,5 +15,6 @@ emacsWithPackages [
   epkgs.spacious-padding
   epkgs.magit
   epkgs.evil
+  epkgs.evil-collection
   default
 ]

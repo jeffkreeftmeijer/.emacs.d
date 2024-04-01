@@ -206,10 +206,43 @@ After installing Evil, turn on =evil-mode= globally:
 #+begin_src emacs-lisp
   (use-package evil
     :init
+    <<evil-want-keybinding>>
     <<evil-init>>)
 #+end_src
 
 #+RESULTS:
+
+** Evil-collection
+
+For Vim-style key bindings to work everywhere (like magit, eshell, dired and [[https://github.com/emacs-evil/evil-collection/tree/master/modes][many more]]), add [[https://github.com/emacs-evil/evil-collection][evil-collection]].
+Initialize it by calling ~evil-collection-init~:
+
+#+headers: :noweb-ref evil-collection-config
+#+begin_src emacs-lisp
+  (evil-collection-init)
+#+end_src
+
+#+RESULTS:
+
+Evil-collection [[https://github.com/emacs-evil/evil-collection/issues/60][requires =evil-want-keybinding= to be unset]] before either Evil or evil-collection are loaded:
+
+#+headers: :noweb-ref evil-want-keybinding
+#+begin_src emacs-lisp
+  (setq evil-want-keybinding nil)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package evil-collection
+    :after evil
+    :config
+    <<evil-collection-config>>)
+#+end_src
+
+#+RESULTS:
+: t
 
 * Backups
 
