@@ -1,8 +1,8 @@
-* ~/.emacs.d
+#+title: ~/.emacs.d
 
-** Appearance
+* Appearance
 
-*** Frames
+** Frames
 
 Disable the scroll bar, the tool bar, and the menu bar:
 
@@ -24,7 +24,7 @@ Disable the scroll bar, the tool bar, and the menu bar:
     <<frame-init>>)
 #+end_src
 
-*** Fonts
+** Fonts
 
 Use Apple's SF Mono and SF Pro fonts, for fixed and variable fonts, respectively.
 Although the fonts are used in macOS, they're not usable without [[https://developer.apple.com/fonts/][downloading]] them first.
@@ -91,7 +91,7 @@ To enable variable-width fonts for non-code text, enable =variable-pitch-mode= w
 #+RESULTS:
 | variable-pitch-mode | text-mode-hook-identify |
 
-*** Themes
+** Themes
 
 The [[https://protesilaos.com/emacs/modus-themes][Modus themes]] are a set of beautiful and customizable themes, which are shipped with Emacs since version 28.
 
@@ -148,7 +148,7 @@ To turn it on, set =modus-themes-mixed-fonts=, but make sure it's set before loa
 
 #+RESULTS:
 
-*** Layout
+** Layout
 
 The [[https://protesilaos.com/emacs/spacious-padding][spacious-padding]] package adds spacing around windows and frames, as well as padding the mode line.
 
@@ -185,9 +185,9 @@ Turn on  =spacious-padding-subtile-mode-line= for a more subtile mode line:
 
 #+RESULTS:
 
-** Modal editing
+* Modal editing
 
-*** Evil mode
+** Evil mode
 
 Emacs is the best Vim emulator, and [[https://github.com/emacs-evil/evil][Evil]] is the best Vim mode.
 After installing Evil, turn on =evil-mode= globally:
@@ -211,7 +211,7 @@ After installing Evil, turn on =evil-mode= globally:
 
 #+RESULTS:
 
-** Backups
+* Backups
 
 Emacs automatically generates [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html][backups]] for files not stored in version control.
 Instead of storing them in the files' directories, put everything in =~/.emacs.d/backups=:
