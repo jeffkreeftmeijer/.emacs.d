@@ -292,6 +292,31 @@ Turn it on by calling ~evil-commentary-mode~:
 
 #+RESULTS:
 
+** Contextual information
+
+[[https://github.com/minad/marginalia][Marginalia]] adds extra contextual information to minibuffer completions.
+For example, besides just showing command names when executing =M-x=, the package adds a description of the command and the key binding.
+
+#+headers: :noweb-ref marginalia-init
+#+begin_src emacs-lisp
+  (marginalia-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :init
+    <<marginalia-init>>)
+#+end_src
+
+#+RESULTS:
+: t
+
 ** Minibuffer history
 
 Emacs' =savehist= feature saves minibuffer history to =~/emacs.d/history=.

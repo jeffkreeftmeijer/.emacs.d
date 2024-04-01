@@ -48,6 +48,10 @@
   :init
   (vertico-mode 1))
 
+(use-package marginalia
+  :init
+  (marginalia-mode 1))
+
 (use-package savehist
   :init
   (savehist-mode 1))
