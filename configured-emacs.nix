@@ -19,5 +19,6 @@ emacsWithPackages [
   epkgs.evil-commentary
   epkgs.vertico
   epkgs.marginalia
+  epkgs.consult
   default
 ]

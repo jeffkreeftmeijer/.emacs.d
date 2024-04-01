@@ -317,6 +317,70 @@ For example, besides just showing command names when executing =M-x=, the packag
 #+RESULTS:
 : t
 
+** Enhanced navigation commands
+
+[[https://github.com/minad/consult][Consult]] provides enhancements to built-in search and navigation commands.
+There is [[https://github.com/minad/consult?tab=readme-ov-file#available-commands][a long list of available commands]], but this configuration mostly uses Consult for buffer switching with previews.
+
+1. Replace ~switch-to-buffer~ (=C-x b=) with ~consult-buffer~:
+
+  #+headers: :exports none
+  #+headers: :noweb-ref consult-bind
+  #+begin_src emacs-lisp
+    ("C-x b" . consult-buffer)
+  #+end_src
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x b") 'consult-buffer)
+  #+end_src
+
+  #+RESULTS:
+  : consult-buffer
+
+2. Replace ~project-switch-to-buffer~ (=C-x p b=) with ~consult-project-buffer~:
+
+  #+headers: :exports none
+  #+headers: :noweb-ref consult-bind
+  #+begin_src emacs-lisp
+    ("C-x p b" . consult-project-buffer)
+  #+end_src
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x p b") 'consult-project-buffer)
+  #+end_src
+
+  #+RESULTS:
+  : consult-project-buffer
+
+3. Replace ~goto-line~ (=M-g g= and =M-g M-g=) with ~consult-goto-line~:
+
+  #+headers: :exports none
+  #+headers: :noweb-ref consult-bind
+  #+begin_src emacs-lisp
+    ("M-g g" . consult-goto-line)
+    ("M-g M-g" . consult-goto-line)
+  #+end_src
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "M-g g") 'consult-goto-line)
+    (global-set-key (kbd "M-g M-g") 'consult-goto-line)
+  #+end_src
+
+  #+RESULTS:
+  : consult-goto-line
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package consult
+    :bind
+    <<consult-bind>>)
+#+end_src
+
+#+RESULTS:
+: t
+
 ** Minibuffer history
 
 Emacs' =savehist= feature saves minibuffer history to =~/emacs.d/history=.

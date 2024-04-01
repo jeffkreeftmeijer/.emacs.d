@@ -52,6 +52,13 @@
   :init
   (marginalia-mode 1))
 
+(use-package consult
+  :bind
+  ("C-x b" . consult-buffer)
+  ("C-x p b" . consult-project-buffer)
+  ("M-g g" . consult-goto-line)
+  ("M-g M-g" . consult-goto-line))
+
 (use-package savehist
   :init
   (savehist-mode 1))
