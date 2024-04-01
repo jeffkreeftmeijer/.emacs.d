@@ -210,3 +210,34 @@ After installing Evil, turn on =evil-mode= globally:
 #+end_src
 
 #+RESULTS:
+
+** Backups
+
+Emacs automatically generates [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html][backups]] for files not stored in version control.
+Instead of storing them in the files' directories, put everything in =~/.emacs.d/backups=:
+
+#+headers: :exports none
+#+headers: :noweb-ref files-custom
+#+begin_src emacs-lisp
+  backup-directory-alist `(("." . "~/.emacs.d/backups"))
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<files-custom>>)
+#+end_src
+
+#+RESULTS:
+: ((. . ~/.emacs.d/backups))
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package files
+    :custom
+    <<files-custom>>)
+#+end_src
+
+#+RESULTS:

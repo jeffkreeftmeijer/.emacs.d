@@ -32,3 +32,7 @@
 (use-package evil
   :init
   (evil-mode 1))
+
+(use-package files
+  :custom
+  backup-directory-alist `(("." . "~/.emacs.d/backups")))
