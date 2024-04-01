@@ -462,7 +462,9 @@ The history is then used to order vertical completion suggestions.
 
 #+RESULTS:
 
-* Treesitter
+* Development
+
+** Major modes
 
 The [[https://github.com/renzmann/treesit-auto][treesit-auto]] package automatically installs and uses the tree-sitter equivalent of installed major modes.
 For example, it automatically installs and uses =rust-ts-mode= when a Rust file is opened and =rust-mode= is installed.
@@ -510,7 +512,29 @@ To have the package prompt before installing, set the variable to ='prompt=:
 #+RESULTS:
 : t
 
-* Language servers
+** Environments
+
+Programming environments set up with [[https://nixos.org][Nix]] and [[https://direnv.net][direnv]] alter the environment and available programs based on the current directory.
+To provide access to programs on a per-directory level, use the [[https://github.com/wbolster/emacs-direnv][Emacs direnv package]]:
+
+#+headers: :eval no
+#+headers: :noweb-ref direnv-init
+#+begin_src emacs-lisp
+  (direnv-mode 1)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package direnv
+    :init
+    <<direnv-init>>)
+#+end_src
+
+#+RESULTS:
+
+** Language servers
 
 Eglot is Emacs' built-in Language Server Protocol client.
 Language servers are added through the =eglot-server-programs= variable:
@@ -628,25 +652,6 @@ Start eglot automatically for Rust files:
     :hook
     <<eglot-hook>>)
 #+end_src
-
-To make sure the language servers are available, include and enable [[https://github.com/wbolster/emacs-direnv][direnv]]:
-
-#+headers: :eval no
-#+headers: :noweb-ref direnv-init
-#+begin_src emacs-lisp
-  (direnv-mode 1)
-#+end_src
-
-#+headers: :exports none
-#+headers: :noweb yes
-#+headers: :tangle default.el
-#+begin_src emacs-lisp
-  (use-package direnv
-    :init
-    <<direnv-init>>)
-#+end_src
-
-#+RESULTS:
 
 * Backups
 

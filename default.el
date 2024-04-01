@@ -77,16 +77,16 @@
   :custom
   (treesit-auto-install 'prompt))
 
+(use-package direnv
+  :init
+  (direnv-mode 1))
+
 (use-package eglot
   :config
   (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "rust-analyzer"))
   :hook
   (rust-mode . eglot-ensure)
   (rust-ts-mode . eglot-ensure))
-
-(use-package direnv
-  :init
-  (direnv-mode 1))
 
 (use-package files
   :custom
