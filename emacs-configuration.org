@@ -267,6 +267,29 @@ Turn it on by calling ~evil-commentary-mode~:
     <<evil-commentary-init>>)
 #+end_src
 
+* Completion
+
+** Vertical completion
+
+[[https://github.com/minad/vertico][Vertico]] is a vertical completion library, based on Emacs' default completion system.
+
+#+headers: :noweb-ref vertico-init
+#+begin_src emacs-lisp
+  (vertico-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package vertico
+    :init
+    <<vertico-init>>)
+#+end_src
+
 #+RESULTS:
 
 * Backups

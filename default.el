@@ -44,6 +44,10 @@
   :init
   (evil-commentary-mode 1))
 
+(use-package vertico
+  :init
+  (vertico-mode 1))
+
 (use-package files
   :custom
   backup-directory-alist `(("." . "~/.emacs.d/backups")))

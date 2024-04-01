@@ -17,5 +17,6 @@ emacsWithPackages [
   epkgs.evil
   epkgs.evil-collection
   epkgs.evil-commentary
+  epkgs.vertico
   default
 ]
