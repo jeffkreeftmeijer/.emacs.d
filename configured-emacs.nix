@@ -30,5 +30,6 @@ emacsWithPackages [
   epkgs.rust-mode
   epkgs.typescript-mode
   epkgs.yaml-mode
+  epkgs.direnv
   default
 ]

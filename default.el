@@ -84,6 +84,10 @@
   (rust-mode . eglot-ensure)
   (rust-ts-mode . eglot-ensure))
 
+(use-package direnv
+  :init
+  (direnv-mode 1))
+
 (use-package files
   :custom
   backup-directory-alist `(("." . "~/.emacs.d/backups")))

@@ -629,6 +629,23 @@ Start eglot automatically for Rust files:
     <<eglot-hook>>)
 #+end_src
 
+To make sure the language servers are available, include and enable [[https://github.com/wbolster/emacs-direnv][direnv]]:
+
+#+headers: :eval no
+#+headers: :noweb-ref direnv-init
+#+begin_src emacs-lisp
+  (direnv-mode 1)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package direnv
+    :init
+    <<direnv-init>>)
+#+end_src
+
 #+RESULTS:
 
 * Backups
