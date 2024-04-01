@@ -509,6 +509,128 @@ To have the package prompt before installing, set the variable to ='prompt=:
 
 #+RESULTS:
 : t
+
+* Language servers
+
+Eglot is Emacs' built-in Language Server Protocol client.
+Language servers are added through the =eglot-server-programs= variable:
+
+#+headers: :noweb-ref eglot-config
+#+begin_src emacs-lisp
+  (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "rust-analyzer"))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+(((rust-ts-mode rust-mode) rust-analyzer) (rust-mode rust-analyzer) ((rust-ts-mode rust-mode) . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [(rust-analyzer rls) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) ((cmake-mode cmake-ts-mode) cmake-language-server) (vimrc-mode vim-language-server --stdio) ((python-mode python-ts-mode) . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [(pylsp pyls (pyright-langserver --stdio) jedi-language-server ruff-lsp) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) ((js-json-mode json-mode json-ts-mode) . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [((vscode-json-language-server --stdio) (vscode-json-languageserver --stdio) (json-languageserver --stdio)) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) (((js-mode :language-id javascript) (js-ts-mode :language-id javascript) (tsx-ts-mode :language-id typescriptreact) (typescript-ts-mode :language-id typescript) (typescript-mode :language-id typescript)) typescript-language-server --stdio) ((bash-ts-mode sh-mode) bash-language-server start) ((php-mode phps-mode) . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [((phpactor language-server) (php vendor/felixfbecker/language-server/bin/php-language-server.php)) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) ((c-mode c-ts-mode c++-mode c++-ts-mode) . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [(clangd ccls) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) (((caml-mode :language-id ocaml) (tuareg-mode :language-id ocaml) reason-mode) ocamllsp) ((ruby-mode ruby-ts-mode) solargraph socket --port :autoport) (haskell-mode haskell-language-server-wrapper --lsp) (elm-mode elm-language-server) (mint-mode mint ls) (kotlin-mode kotlin-language-server) ((go-mode go-dot-mod-mode go-dot-work-mode go-ts-mode go-mod-ts-mode) gopls) ((R-mode ess-r-mode) R --slave -e languageserver::run()) ((java-mode java-ts-mode) jdtls) ((dart-mode dart-ts-mode) dart language-server --client-id emacs.eglot-dart) (elixir-mode language_server.sh) (ada-mode ada_language_server) (scala-mode . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [(metals metals-emacs) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) (racket-mode racket -l racket-langserver) ((tex-mode context-mode texinfo-mode bibtex-mode) . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [(digestif texlab) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) (erlang-mode erlang_ls --transport stdio) ((yaml-ts-mode yaml-mode) yaml-language-server --stdio) (nix-mode . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [(nil rnix-lsp nixd) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) (gdscript-mode localhost 6008) ((fortran-mode f90-mode) fortls) (futhark-mode futhark lsp) (lua-mode . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [(lua-language-server lua-lsp) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) (zig-mode zls) ((css-mode css-ts-mode) . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [((vscode-css-language-server --stdio) (css-languageserver --stdio)) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) (html-mode . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [((vscode-html-language-server --stdio) (html-languageserver --stdio)) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) ((dockerfile-mode dockerfile-ts-mode) docker-langserver --stdio) ((clojure-mode clojurescript-mode clojurec-mode) clojure-lsp) ((csharp-mode csharp-ts-mode) . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [((omnisharp -lsp) (csharp-ls)) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) (purescript-mode purescript-language-server --stdio) ((perl-mode cperl-mode) perl -MPerl::LanguageServer -e Perl::LanguageServer::run) (markdown-mode . #[256 \300\301\211:\203" @\262<\203 \202 CB\262A\262\202 \211\237\266\203\302\203V \303\304"\305\301"\211A\203N \306\307\310\303\311"\301\312\301\211@@&\313#A\207\211@A\206U \301\207\301\211\211\312\301\211:\203\226 @\262\211A\262\242\262\314\312"\262\203\207 B\262\301\211\262\202\210 \312\203\226 A\262\301\262\202] \203\243 	!\266\301\207\207 [((marksman server) (vscode-markdown-language-server --stdio)) nil #[257 \300\301\302\303\304#"\207 [error None of '%s' are valid executables mapconcat car , ] 7
+
+(fn LISTIFIED)] mapcar #[257 \300@\301"\211\205 @ABB\207 [eglot--executable-find t] 5
+
+(fn A)] remove assoc completing-read [eglot] More than one server executable available:  car t equal eglot--executable-find] 14
+
+(fn &optional INTERACTIVE)]) (graphviz-dot-mode dot-language-server --stdio) (terraform-mode terraform-ls serve) ((uiua-ts-mode uiua-mode) uiua lsp))
+#+end_example
+
+Start eglot automatically for Rust files:
+
+#+begin_src emacs-lisp
+  (add-hook 'rust-mode #'eglot-ensure))
+  (add-hook 'rust-ts-mode #'eglot-ensure))
+#+end_src
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref eglot-hook
+#+begin_src emacs-lisp
+  (rust-mode . eglot-ensure)
+  (rust-ts-mode . eglot-ensure)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package eglot
+    :config
+    <<eglot-config>>
+    :hook
+    <<eglot-hook>>)
+#+end_src
+
+#+RESULTS:
+
 * Backups
 
 Emacs automatically generates [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html][backups]] for files not stored in version control.
