@@ -22,5 +22,6 @@ emacsWithPackages [
   epkgs.consult
   epkgs.orderless
   epkgs.embark
+  epkgs.treesit-auto
   default
 ]

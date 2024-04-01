@@ -71,6 +71,12 @@
   :init
   (savehist-mode 1))
 
+(use-package treesit-auto
+  :config
+  (global-treesit-auto-mode 1)
+  :custom
+  (treesit-auto-install 'prompt))
+
 (use-package files
   :custom
   backup-directory-alist `(("." . "~/.emacs.d/backups")))

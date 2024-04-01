@@ -462,6 +462,53 @@ The history is then used to order vertical completion suggestions.
 
 #+RESULTS:
 
+* Treesitter
+
+The [[https://github.com/renzmann/treesit-auto][treesit-auto]] package automatically installs and uses the tree-sitter equivalent of installed major modes.
+For example, it automatically installs and uses =rust-ts-mode= when a Rust file is opened and =rust-mode= is installed.
+
+To turn it on globally, enable =global-treesit-auto-mode=:
+
+#+headers: :noweb-ref treesit-auto-config
+#+begin_src emacs-lisp
+  (global-treesit-auto-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+To automatically install missing major modes, enable =treesit-auto-install=.
+To have the package prompt before installing, set the variable to ='prompt=:
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref treesit-auto-custom
+#+begin_src emacs-lisp
+  (treesit-auto-install 'prompt)
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (custom-set-variables
+    '<<treesit-auto-custom>>)
+#+end_src
+
+#+RESULTS:
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package treesit-auto
+    :config
+    <<treesit-auto-config>>
+    :custom
+    <<treesit-auto-custom>>)
+#+end_src
+
+#+RESULTS:
+: t
 * Backups
 
 Emacs automatically generates [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html][backups]] for files not stored in version control.
