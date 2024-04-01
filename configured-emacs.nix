@@ -13,5 +13,6 @@ in
 emacsWithPackages [
   epkgs.modus-themes
   epkgs.spacious-padding
+  epkgs.magit
   default
 ]
