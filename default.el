@@ -14,7 +14,8 @@
     '(("SF Mono" "Menlo" "monospace")
       ("SF Pro" "Helvetica" "Arial")))
   :hook
-  (text-mode . variable-pitch-mode))
+  (org-mode . variable-pitch-mode)
+  (markdown-mode . variable-pitch-mode))
 
 (use-package modus-themes
   :init

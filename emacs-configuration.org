@@ -269,17 +269,40 @@ SF Pro falls back to Helvetica, then Arial.
 
 #+RESULTS:
 
-To enable variable-width fonts for non-code text, enable =variable-pitch-mode= when entering text mode:
+** Variable pitch
 
+To use proportional fonts (as opposed to monospaced fonts) for non-code text, enable =variable-pitch-mode= for selected modes.
+While this mode is enabled, the =default= font face inherits from =variable-pitch= instead of =fixed-pitch=.
+
+An often-recommended approach is to hook into =text-mode=, which is the major mode most text-based modes inherit from:
+
+#+headers: :eval no
 #+begin_src emacs-lisp
   (add-hook 'text-mode-hook #'variable-pitch-mode))
 #+end_src
+
+Doing so automatically enables =variable-pitch-mode= thenever =text-mode= is enabled.
+
+This works, but it's a bit too eager for my liking.
+The above configuration enables =variable-pitch-mode= when editing Org files, but also when writing commit messages and editing YAML files.
+I consider text in the latter two as code, so I'd prefer to have those displayed in a monospace font.
+
+Instead of hooking into =text-mode=, explicitly select the modes to use proportional fonts in Org and Markdown mode:
+
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook #'variable-pitch-mode)
+  (add-hook 'markdown-mode-hook #'variable-pitch-mode)
+#+end_src
+
+#+RESULTS:
+| variable-pitch-mode |
 
 #+headers: :eval no
 #+headers: :exports none
 #+headers: :noweb-ref faces-hook
 #+begin_src emacs-lisp
-  (text-mode . variable-pitch-mode)
+  (org-mode . variable-pitch-mode)
+  (markdown-mode . variable-pitch-mode)
 #+end_src
 
 #+headers: :exports none
