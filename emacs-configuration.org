@@ -1,3 +1,4 @@
+# -*- eval: (add-hook 'org-babel-post-tangle-hook #'delete-trailing-whitespace); -*-
 #+title: ~/.emacs.d
 
 * Packages
