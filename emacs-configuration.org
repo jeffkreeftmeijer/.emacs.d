@@ -113,6 +113,15 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
   epkgs.treesit-auto
 #+end_src
 
+- dockerfile-mode
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref packages
+#+begin_src nix
+  epkgs.dockerfile-mode
+#+end_src
+
 - elixir-mode
 
 #+headers: :eval no

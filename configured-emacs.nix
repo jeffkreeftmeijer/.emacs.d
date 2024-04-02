@@ -23,6 +23,7 @@ emacsWithPackages [
   epkgs.orderless
   epkgs.embark
   epkgs.treesit-auto
+  epkgs.dockerfile-mode
   epkgs.elixir-mode
   epkgs.git-modes
   epkgs.markdown-mode
