@@ -1,10 +1,9 @@
 {
   outputs = { self, nixpkgs }: let
     system = "aarch64-darwin";
+    pkgs = import nixpkgs { inherit system; };
   in {
-    devShell."${system}" = let
-      pkgs = import nixpkgs { inherit system; };
-    in pkgs.mkShell {
+    devShell."${system}" = pkgs.mkShell {
       buildInputs = [
         pkgs.pre-commit
       ];
