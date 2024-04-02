@@ -242,31 +242,36 @@ Disable the scroll bar, the tool bar, and the menu bar:
 
 ** Fonts
 
-Use Apple's SF Mono and SF Pro fonts, for fixed and variable fonts, respectively.
-Although the fonts are used in macOS, they're not usable without [[https://developer.apple.com/fonts/][downloading]] them first.
-Then, set the fonts for the =default=, =fixed-pitch=, and =variable-pitch= faces.
-Set the font size to 140 (14 points × 10) for fixed-width fonts, and 170 (17 points × 10) for variable-width ones:
+Use [[https://typeof.net/Iosevka/][Iosevka]] as a monospace font (/fixed/ in Emacs lingo), and Iosevka's "Aile" variant as a (quasi-)proportional font (/variable-pitch/ in Emacs lingo).
+
+Both variants are used with their /regular/ weights, /expanded/ widths, and a height of 150 (15 points × 10):
 
 #+headers: :noweb-ref faces-init
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil :family "SF Mono" :weight 'regular :width 'regular :height 140)
-  (set-face-attribute 'fixed-pitch nil :family "SF Mono" :weight 'regular :width 'regular :height 140)
-  (set-face-attribute 'variable-pitch nil :family "SF Pro" :weight 'regular :width 'regular :height 170)
+  (set-face-attribute 'default nil :family "Iosevka" :weight 'regular :width 'expanded :height 150)
+  (set-face-attribute 'fixed-pitch nil :family "Iosevka" :weight 'regular :width 'expanded :height 150)
+  (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :weight 'regular :width 'expanded :height 150)
 #+end_src
 
 #+RESULTS:
 
-The =face-cont-family-alternatives= variable is used to provide fallback fonts if the preferred font isn't available.
-This configuration falls back to Menlo when SF Mono isn't available, or it defaults to the default monospace font (which is most likely Courier).
-SF Pro falls back to Helvetica, then Arial.
+The =face-cont-family-alternatives= variable provides fallback fonts if the preferred fonts aren't available.
+This produces a font list akin to CSS font-families, starting with the preferred font and falling back to an option that is most likely to be available on any system.
+Having a list of fallback fonts like this removes the need to explicitly depend on fonts being available.
+
+This configuration falls back to Apple's SF Mono and SF Pro if the Iosevka fonts aren't available.
+Since the Apple fonts need to be downloaded explicitly, they aren't more likely to be there than the Iosevka ones, but they're included as they were the previous favorite.
+
+If the SF fonts aren't available, the fixed font falls back to Menlo before the default monospace font (which is most likely Courier).
+The variable pitch font falls back to SF Pro, Helvetica, and finally Arial:
 
 #+headers: :eval no
 #+headers: :exports none
 #+headers: :noweb-ref faces-custom
 #+begin_src emacs-lisp
   (face-font-family-alternatives
-    '(("SF Mono" "Menlo" "monospace")
-      ("SF Pro" "Helvetica" "Arial")))
+    '(("Iosevka" "SF Mono" "Menlo" "monospace")
+      ("Iosevka Aile" "SF Pro" "Helvetica" "Arial")))
 #+end_src
 
 #+headers: :noweb yes
