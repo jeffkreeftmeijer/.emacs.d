@@ -6,9 +6,14 @@
 
 (use-package faces
   :init
-  (set-face-attribute 'default nil :family "Iosevka" :weight 'regular :width 'expanded :height 150)
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka" :weight 'regular :width 'expanded :height 150)
-  (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :weight 'regular :width 'expanded :height 150)
+  (defun jk/set-face-font (face family)
+    (set-face-attribute
+     face nil
+     :family family :weight 'regular :width 'expanded :height 150))
+
+    (jk/set-face-font 'default "Iosevka")
+    (jk/set-face-font 'fixed-pitch "Iosevka")
+    (jk/set-face-font 'variable-pitch "Iosevka Aile")
   :custom
   (face-font-family-alternatives
     '(("Iosevka" "SF Mono" "Menlo" "monospace")

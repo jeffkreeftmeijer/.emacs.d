@@ -248,9 +248,14 @@ Both variants are used with their /regular/ weights, /expanded/ widths, and a he
 
 #+headers: :noweb-ref faces-init
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil :family "Iosevka" :weight 'regular :width 'expanded :height 150)
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka" :weight 'regular :width 'expanded :height 150)
-  (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :weight 'regular :width 'expanded :height 150)
+  (defun jk/set-face-font (face family)
+    (set-face-attribute
+     face nil
+     :family family :weight 'regular :width 'expanded :height 150))
+
+    (jk/set-face-font 'default "Iosevka")
+    (jk/set-face-font 'fixed-pitch "Iosevka")
+    (jk/set-face-font 'variable-pitch "Iosevka Aile")
 #+end_src
 
 #+RESULTS:
