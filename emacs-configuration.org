@@ -261,7 +261,7 @@ Both variants are used with their /regular/ weights, /expanded/ widths, and a he
 
 #+RESULTS:
 
-The =face-cont-family-alternatives= variable provides fallback fonts if the preferred fonts aren't available.
+The =face-font-family-alternatives= variable provides fallback fonts if the preferred fonts aren't available.
 This produces a font list akin to CSS font-families, starting with the preferred font and falling back to an option that is most likely to be available on any system.
 Having a list of fallback fonts like this removes the need to explicitly depend on fonts being available.
 
