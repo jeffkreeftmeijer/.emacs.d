@@ -1,15 +1,19 @@
 {
-  outputs = { self, nixpkgs }: let
-    system = "aarch64-darwin";
+  inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+  outputs = {
+    nixpkgs,
+    flake-utils,
+    ...
+  }: flake-utils.lib.eachDefaultSystem (system: let
     pkgs = import nixpkgs { inherit system; };
   in {
-    packages.${system}.default = pkgs.callPackage ./configured-emacs.nix {};
+    packages.default = pkgs.callPackage ./configured-emacs.nix {};
 
-    devShell."${system}" = pkgs.mkShell {
-      buildInputs = [
-        pkgs.pre-commit
-      ];
+    devShell = pkgs.mkShell {
+      buildInputs = [pkgs.pre-commit];
       shellHook = "pre-commit install > /dev/null";
     };
-  };
+  });
 }
