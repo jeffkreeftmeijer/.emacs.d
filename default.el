@@ -24,7 +24,10 @@
 
 (use-package modus-themes
   :init
-  (setq modus-themes-mixed-fonts t)
+  (setq
+   modus-themes-mixed-fonts t
+   modus-themes-italic-constructs t
+   modus-themes-bold-constructs t)
   (load-theme 'modus-operandi-tinted)
   :custom
   modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
