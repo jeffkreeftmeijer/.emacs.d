@@ -8,8 +8,10 @@
     ...
   }: flake-utils.lib.eachDefaultSystem (system: let
     pkgs = import nixpkgs { inherit system; };
+    configured-emacs = pkgs.callPackage ./configured-emacs.nix {};
   in {
-    packages.default = pkgs.callPackage ./configured-emacs.nix {};
+    packages.configured-emacs = configured-emacs;
+    packages.default = configured-emacs;
 
     devShell = pkgs.mkShell {
       buildInputs = [pkgs.pre-commit];
