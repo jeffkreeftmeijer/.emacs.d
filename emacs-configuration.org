@@ -394,7 +394,7 @@ To turn it on, set =modus-themes-mixed-fonts=, but make sure it's set before loa
 #+end_src
 
 The Modus themes come with the option to use italic and bold constructs, which is turned off by default.
-Enabling produces italic type for some contextual information, and bold type in syntax highlighting.
+Enabling produces italic type for comments and contextual information, and bold type in syntax highlighting.
 
 #+name: modus-themes-italic-bold
 #+headers: :exports none
