@@ -3,201 +3,144 @@
 #+startup: content
 
 * Packages
+:PROPERTIES:
+:header-args: :eval no
+:header-args: :exports none
+:header-args: :noweb-ref packages
+:END:
 
 The following list of packages are added to Emacs through [[https://search.nixos.org/packages?channel=unstable][Nixpkgs' unstable channel]].
 In turn, Nixpkgs gets the packages from their git repositories through their [[https://github.com/melpa/melpa/tree/master/recipes][Melpa recipes]].
 
 - modus-themes
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.modus-themes
 #+end_src
 
 - spacious-padding
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.spacious-padding
 #+end_src
 
 - magit
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.magit
 #+end_src
 
 - evil
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.evil
 #+end_src
 
 - evil-collection
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.evil-collection
 #+end_src
 
 - evil-commentatry
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.evil-commentary
 #+end_src
 
 - vertico
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.vertico
 #+end_src
 
 - marginalia
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.marginalia
 #+end_src
 
 - consult
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.consult
 #+end_src
 
 - orderless
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.orderless
 #+end_src
 
 - embark
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.embark
 #+end_src
 
 - treesit-auto
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.treesit-auto
 #+end_src
 
 - dockerfile-mode
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.dockerfile-mode
 #+end_src
 
 - elixir-mode
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.elixir-mode
 #+end_src
 
 - git-modes
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.git-modes
 #+end_src
 
 - markdown-mode
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.markdown-mode
 #+end_src
 
 - nix-mode
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.nix-mode
 #+end_src
 
 - rust-mode
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.rust-mode
 #+end_src
 
 - typescript-mode
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.typescript-mode
 #+end_src
 
 - yaml-mode
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.yaml-mode
 #+end_src
 
 - direnv
 
-#+headers: :eval no
-#+headers: :exports none
-#+headers: :noweb-ref packages
 #+begin_src nix
   epkgs.direnv
 #+end_src
 
 #+headers: :exports none
 #+headers: :noweb yes
+#+headers: :noweb-ref none
 #+headers: :tangle configured-emacs.nix
 #+begin_src nix
   { pkgs ? import <nixpkgs> {} }:
