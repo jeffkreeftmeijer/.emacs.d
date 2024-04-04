@@ -66,7 +66,8 @@
   ("C-x b" . consult-buffer)
   ("C-x p b" . consult-project-buffer)
   ("M-g g" . consult-goto-line)
-  ("M-g M-g" . consult-goto-line))
+  ("M-g M-g" . consult-goto-line)
+  ("C-x p g" . consult-grep))
 
 (use-package orderless
   :custom
