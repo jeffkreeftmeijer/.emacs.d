@@ -41,7 +41,7 @@
 (use-package evil
   :init
   (setq evil-want-keybinding nil)
-  (evil-mode 1))
+  (evil-mode 0))
 
 (use-package evil-collection
   :after evil
