@@ -139,6 +139,10 @@ end tell"))
   (rust-mode . eglot-ensure)
   (rust-ts-mode . eglot-ensure))
 
+(use-package eshell-atuin
+  :init
+  (eshell-atuin-mode))
+
 (use-package files
   :custom
   backup-directory-alist `(("." . "~/.emacs.d/backups")))

@@ -1067,6 +1067,32 @@ Start eglot automatically for Rust files:
     <<eglot-hook>>)
 #+end_src
 
+* Shell
+
+** History
+
+[[https://atuin.sh][Atuin]] is a cross-shell utility that stores shell history in a SQLite database.
+The [[https://sqrtminusone.xyz/packages/eshell-atuin/][eshell-atuin]] package adds support for both reading from and writing to the history from Eshell.
+
+#+headers: :noweb-ref eshell-atuin-init
+#+begin_src emacs-lisp
+  (eshell-atuin-mode)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package eshell-atuin
+    :init
+    <<eshell-atuin-init>>)
+#+end_src
+
+#+RESULTS:
+
 * Enhancements
 
 This section covers general enhancements to Emacs which don't warrant their own section.
