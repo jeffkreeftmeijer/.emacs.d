@@ -16,9 +16,7 @@ This configuration inherits the system's Nixpkgs, meaning the exact version of E
 
 ** Packages
 :PROPERTIES:
-:header-args: :eval no
-:header-args: :exports none
-:header-args: :noweb-ref packages
+:header-args: :eval no :exports none :noweb-ref packages
 :END:
 
 The following list of packages are added to Emacs through [[https://search.nixos.org/packages?channel=unstable][Nixpkgs' unstable channel]].
