@@ -14,6 +14,43 @@ For example, to try out this Emacs configuration without affecting the rest of y
 This downloads and compiles Emacs, including dependencies and packages, and starts the resulting Emacs.app.
 This configuration inherits the system's Nixpkgs, meaning the exact version of Emacs and all packages are subject to the Nixpkgs channel used on the system.
 
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :noweb-ref none
+#+headers: :tangle configured-emacs.nix
+#+begin_src nix
+  { pkgs ? import <nixpkgs> {} }:
+
+  let
+    epkgs = pkgs.emacsPackages;
+    emacsWithPackages = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages;
+
+    default = epkgs.trivialBuild {
+      pname = "default";
+      src = pkgs.writeText "default.el" (builtins.readFile ./default.el);
+      version = "0.1.0";
+    };
+  in
+  emacsWithPackages [
+    <<packages>>
+    default
+    <<dependencies>>
+  ]
+#+end_src
+
+** Dependencies
+:PROPERTIES:
+:header-args: :eval no :exports none :noweb-ref dependencies
+:END:
+
+This configuration has the following external depdendencies outside of Emacs itself:
+
+- ispell
+
+#+begin_src nix
+  pkgs.ispell
+#+end_src
+
 ** Packages
 :PROPERTIES:
 :header-args: :eval no :exports none :noweb-ref packages
@@ -152,30 +189,6 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
 
 #+begin_src which-key
   epkgs.which-key
-#+end_src
-
-#+headers: :exports none
-#+headers: :noweb yes
-#+headers: :noweb-ref none
-#+headers: :tangle configured-emacs.nix
-#+begin_src nix
-  { pkgs ? import <nixpkgs> {} }:
-
-  let
-    epkgs = pkgs.emacsPackages;
-    emacsWithPackages = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages;
-
-    default = epkgs.trivialBuild {
-      pname = "default";
-      src = pkgs.writeText "default.el" (builtins.readFile ./default.el);
-      version = "0.1.0";
-    };
-  in
-  emacsWithPackages [
-    <<packages>>
-    default
-    pkgs.ispell
-  ]
 #+end_src
 
 * Appearance
