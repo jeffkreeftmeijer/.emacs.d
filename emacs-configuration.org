@@ -1089,8 +1089,22 @@ To read the history in Eshell, bind the =<up>= key to =eshell-atuin-history=, wh
   (keymap-set eshell-hist-mode-map "<up>" 'eshell-atuin-history)
 #+end_src
 
+By default, eshell-atuin only shows commands that completed succesfully.
+To show all commands, change the =eshell-atuin-search-options= variable from =("--exit" "0")= to =nil=:
+
+#+headers: :exports none
+#+headers: :noweb-ref eshell-atuin-custom
+#+begin_src emacs-lisp
+  eshell-atuin-search-options nil
+#+end_src
+
 #+RESULTS:
-: eshell-atuin-history
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<eshell-atuin-custom>>)
+#+end_src
 
 #+headers: :exports none
 #+headers: :noweb yes
@@ -1099,7 +1113,9 @@ To read the history in Eshell, bind the =<up>= key to =eshell-atuin-history=, wh
   (use-package eshell-atuin
     :after em-hist
     :init
-    <<eshell-atuin-init>>)
+    <<eshell-atuin-init>>
+    :custom
+    <<eshell-atuin-custom>>)
 #+end_src
 
 #+RESULTS:
