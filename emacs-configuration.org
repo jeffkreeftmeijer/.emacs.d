@@ -1106,6 +1106,28 @@ To show all commands, change the =eshell-atuin-search-options= variable from =("
   (setq <<eshell-atuin-custom>>)
 #+end_src
 
+Shell history completion is different from other kinds of completion for two reasons:
+
+1. Other completion options are presented in a list from top to bottom, with the search prompt at the top.
+   Because =eshell-atuin-history= is opened by pressing the =<up>= key and history is searched backward, the list is reversed  by using =vertico-reverse=.
+
+2. The command history shouldn't be ordered, as that's already handled by Atuin.
+    Instead of ordering the list again, pass ~identity~ as the =vertico-sort-function=.
+
+Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, set the above options specifically for the ~eshell-atuin-history~ function:
+
+#+headers: :noweb-ref eshell-atuin-init
+#+begin_src emacs-lisp
+  (vertico-multiform-mode 1)
+  (setq vertico-multiform-commands
+	'(
+	  (eshell-atuin-history reverse (vertico-sort-function . identity))
+	  ))
+#+end_src
+
+#+RESULTS:
+| eshell-atuin-history | reverse | (vertico-sort-function . identity) |
+
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :tangle default.el
