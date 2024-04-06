@@ -2,7 +2,19 @@
 #+title: ~/.emacs.d
 #+startup: content
 
-* Packages
+* Installation
+
+This whole Emacs configuration, including the configuration file and the included packages is a Nix [[https://nixos.org/manual/nix/stable/language/derivations.html][derivation]], which means it's installed as a Nix package.
+For example, to try out this Emacs configuration without affecting the rest of your system, run the following command:
+
+#+begin_src shell
+  nix run github:jeffkreeftmeijer/.emacs.d/bankrupt
+#+end_src
+
+This downloads and compiles Emacs, including dependencies and packages, and starts the resulting Emacs.app.
+This configuration inherits the system's Nixpkgs, meaning the exact version of Emacs and all packages are subject to the Nixpkgs channel used on the system.
+
+** Packages
 :PROPERTIES:
 :header-args: :eval no
 :header-args: :exports none
