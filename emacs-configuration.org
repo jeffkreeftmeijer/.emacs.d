@@ -899,6 +899,8 @@ Start eglot automatically for Rust files:
 
 * Enhancements
 
+This section covers general enhancements to Emacs which don't warrant their own section.
+
 ** Backups
 
 Emacs automatically generates [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html][backups]] for files not stored in version control.
