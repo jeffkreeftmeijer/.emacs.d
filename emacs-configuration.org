@@ -138,6 +138,12 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
   epkgs.direnv
 #+end_src
 
+- which-key
+
+#+begin_src which-key
+  epkgs.which-key
+#+end_src
+
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :noweb-ref none
@@ -920,6 +926,30 @@ Instead of storing them in the files' directories, put everything in =~/.emacs.d
   (use-package files
     :custom
     <<files-custom>>)
+#+end_src
+
+#+RESULTS:
+
+** Key suggestions
+
+Which [[https://github.com/justbur/emacs-which-key][which-key]], Emacs shows suggestions when pausing during an incomplete keypress.
+By default, Emacs only shows the already-typed portion of the command.
+
+#+headers: :noweb-ref which-key-init
+#+begin_src emacs-lisp
+  (which-key-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package which-key
+    :init
+    <<which-key-init>>)
 #+end_src
 
 #+RESULTS:

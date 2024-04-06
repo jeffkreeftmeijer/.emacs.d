@@ -101,3 +101,7 @@
 (use-package files
   :custom
   backup-directory-alist `(("." . "~/.emacs.d/backups")))
+
+(use-package which-key
+  :init
+  (which-key-mode 1))

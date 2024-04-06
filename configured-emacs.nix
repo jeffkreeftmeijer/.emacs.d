@@ -32,5 +32,6 @@ emacsWithPackages [
   epkgs.typescript-mode
   epkgs.yaml-mode
   epkgs.direnv
+  epkgs.which-key
   default
 ]
