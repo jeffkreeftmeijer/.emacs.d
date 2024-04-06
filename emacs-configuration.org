@@ -204,9 +204,9 @@ Both variants are used with their /regular/ weights, /expanded/ widths, and a he
      face nil
      :family family :weight 'regular :width 'expanded :height 150))
 
-    (jk/set-face-font 'default "Iosevka")
-    (jk/set-face-font 'fixed-pitch "Iosevka")
-    (jk/set-face-font 'variable-pitch "Iosevka Aile")
+  (jk/set-face-font 'default "Iosevka")
+  (jk/set-face-font 'fixed-pitch "Iosevka")
+  (jk/set-face-font 'variable-pitch "Iosevka Aile")
 #+end_src
 
 #+RESULTS:
