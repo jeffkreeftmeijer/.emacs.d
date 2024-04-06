@@ -140,8 +140,10 @@ end tell"))
   (rust-ts-mode . eglot-ensure))
 
 (use-package eshell-atuin
+  :after em-hist
   :init
-  (eshell-atuin-mode))
+  (eshell-atuin-mode)
+  (keymap-set eshell-hist-mode-map "<up>" 'eshell-atuin-history))
 
 (use-package files
   :custom
