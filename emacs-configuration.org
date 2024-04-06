@@ -496,6 +496,30 @@ Turn it on by calling ~evil-commentary-mode~:
     <<evil-commentary-init>>)
 #+end_src
 
+** Cursors
+
+An example of an essential difference between Emacs and Vim is how they handle the location of the cursor (named point in Emacs).
+In Vim, the cursor is /on/ a character, while Emacs' point is before it.
+In Evil mode, the cursor changes between a box in "normal mode" to a bar in "insert mode".
+Because Emacs is always in a kind of insert mode, make the cursor a bar:
+
+#+headers: :noweb-ref emacs-init
+#+begin_src emacs-lisp
+  (setq-default cursor-type 'bar)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package emacs
+    :init
+    <<emacs-init>>)
+#+end_src
+
 * Completion
 
 ** Vertical completion

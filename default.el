@@ -53,6 +53,10 @@
   :init
   (evil-commentary-mode 1))
 
+(use-package emacs
+  :init
+  (setq-default cursor-type 'bar))
+
 (use-package vertico
   :init
   (vertico-mode 1))
