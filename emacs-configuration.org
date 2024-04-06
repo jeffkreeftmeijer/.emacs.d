@@ -934,8 +934,8 @@ Instead of storing them in the files' directories, put everything in =~/.emacs.d
 
 ** Key suggestions
 
-Which [[https://github.com/justbur/emacs-which-key][which-key]], Emacs shows suggestions when pausing during an incomplete keypress.
-By default, Emacs only shows the already-typed portion of the command.
+With [[https://github.com/justbur/emacs-which-key][which-key]], Emacs shows suggestions when pausing during an incomplete keypress, which is especially useful when trying to learn Emacs' key bindings.
+By default, Emacs only shows the already-typed portion of the command, which doesn't help to find the next key to press.
 
 #+headers: :noweb-ref which-key-init
 #+begin_src emacs-lisp
