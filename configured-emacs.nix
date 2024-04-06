@@ -34,4 +34,5 @@ emacsWithPackages [
   epkgs.direnv
   epkgs.which-key
   default
+  pkgs.ispell
 ]

@@ -164,6 +164,7 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
   emacsWithPackages [
     <<packages>>
     default
+    pkgs.ispell
   ]
 #+end_src
 
