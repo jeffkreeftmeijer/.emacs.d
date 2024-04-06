@@ -144,6 +144,7 @@ end tell"))
   :init
   (eshell-atuin-mode)
   (keymap-set eshell-hist-mode-map "<up>" 'eshell-atuin-history)
+  (keymap-unset eshell-hist-mode-map "<down>")
   (vertico-multiform-mode 1)
   (setq vertico-multiform-commands
         '(

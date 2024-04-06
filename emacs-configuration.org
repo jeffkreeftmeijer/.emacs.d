@@ -1082,12 +1082,16 @@ The [[https://sqrtminusone.xyz/packages/eshell-atuin/][eshell-atuin]] package ad
 #+RESULTS:
 : t
 
-To read the history in Eshell, bind the =<up>= key to =eshell-atuin-history=, which opens the shell history in the minibuffer:
+To read the history in Eshell, bind the =<up>= key to =eshell-atuin-history=, which opens the shell history in the minibuffer.
+Also unset the =<down>= key, which was bound to ~eshell-next-input~ for cycling through history in reverse:
 
 #+headers: :noweb-ref eshell-atuin-init
 #+begin_src emacs-lisp
   (keymap-set eshell-hist-mode-map "<up>" 'eshell-atuin-history)
+  (keymap-unset eshell-hist-mode-map "<down>")
 #+end_src
+
+#+RESULTS:
 
 By default, eshell-atuin only shows commands that completed succesfully.
 To show all commands, change the =eshell-atuin-search-options= variable from =("--exit" "0")= to =nil=:
