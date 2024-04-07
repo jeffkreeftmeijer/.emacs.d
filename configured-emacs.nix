@@ -7,7 +7,11 @@
 } }:
 
 pkgs.emacsWithPackagesFromUsePackage {
-  package = pkgs.emacs-git;
+  package = (pkgs.emacs-git.overrideAttrs(old: {
+    patches = old.patches ++ [
+      ./system-appearance.patch
+    ];
+  }));
 
   config = ./default.el;
   defaultInitFile = true;
