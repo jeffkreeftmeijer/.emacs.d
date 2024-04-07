@@ -2,6 +2,12 @@
 #+title: ~/.emacs.d
 #+startup: content
 
+#+headers: :exports none
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (require 'bind-key)
+#+end_src
+
 * Installation
 
 This whole Emacs configuration, including the configuration file and the included packages is a Nix [[https://nixos.org/manual/nix/stable/language/derivations.html][derivation]], which means it's installed as a Nix package.
