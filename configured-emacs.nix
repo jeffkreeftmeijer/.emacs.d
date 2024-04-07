@@ -1,38 +1,38 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {
+  overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+    }))
+  ];
+} }:
 
-let
-  epkgs = pkgs.emacsPackages;
-  emacsWithPackages = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages;
+pkgs.emacsWithPackagesFromUsePackage {
+  config = ./default.el;
+  defaultInitFile = true;
 
-  default = epkgs.trivialBuild {
-    pname = "default";
-    src = pkgs.writeText "default.el" (builtins.readFile ./default.el);
-    version = "0.1.0";
-  };
-in
-emacsWithPackages [
-  epkgs.modus-themes
-  epkgs.spacious-padding
-  epkgs.magit
-  epkgs.evil
-  epkgs.evil-collection
-  epkgs.evil-commentary
-  epkgs.vertico
-  epkgs.marginalia
-  epkgs.consult
-  epkgs.orderless
-  epkgs.embark
-  epkgs.treesit-auto
-  epkgs.dockerfile-mode
-  epkgs.elixir-mode
-  epkgs.git-modes
-  epkgs.markdown-mode
-  epkgs.nix-mode
-  epkgs.rust-mode
-  epkgs.typescript-mode
-  epkgs.yaml-mode
-  epkgs.direnv
-  epkgs.which-key
-  default
-  pkgs.ispell
-]
+  extraEmacsPackages = epkgs: [
+    epkgs.modus-themes
+    epkgs.spacious-padding
+    epkgs.magit
+    epkgs.evil
+    epkgs.evil-collection
+    epkgs.evil-commentary
+    epkgs.vertico
+    epkgs.marginalia
+    epkgs.consult
+    epkgs.orderless
+    epkgs.embark
+    epkgs.treesit-auto
+    epkgs.dockerfile-mode
+    epkgs.elixir-mode
+    epkgs.git-modes
+    epkgs.markdown-mode
+    epkgs.nix-mode
+    epkgs.rust-mode
+    epkgs.typescript-mode
+    epkgs.yaml-mode
+    epkgs.direnv
+    epkgs.which-key
+    pkgs.ispell
+  ];
+}

@@ -19,23 +19,23 @@ This configuration inherits the system's Nixpkgs, meaning the exact version of E
 #+headers: :noweb-ref none
 #+headers: :tangle configured-emacs.nix
 #+begin_src nix
-  { pkgs ? import <nixpkgs> {} }:
+  { pkgs ? import <nixpkgs> {
+    overlays = [
+      (import (builtins.fetchTarball {
+        url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+      }))
+    ];
+  } }:
 
-  let
-    epkgs = pkgs.emacsPackages;
-    emacsWithPackages = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages;
+  pkgs.emacsWithPackagesFromUsePackage {
+    config = ./default.el;
+    defaultInitFile = true;
 
-    default = epkgs.trivialBuild {
-      pname = "default";
-      src = pkgs.writeText "default.el" (builtins.readFile ./default.el);
-      version = "0.1.0";
-    };
-  in
-  emacsWithPackages [
-    <<packages>>
-    default
-    <<dependencies>>
-  ]
+    extraEmacsPackages = epkgs: [
+      <<packages>>
+      <<dependencies>>
+    ];
+  }
 #+end_src
 
 ** Dependencies
