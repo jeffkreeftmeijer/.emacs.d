@@ -26,8 +26,9 @@
   (org-mode . variable-pitch-mode)
   (markdown-mode . variable-pitch-mode))
 
-(use-package modus-themes
-  :init
+(use-package emacs
+  :config
+  (require-theme 'modus-themes)
   (setq
    modus-themes-mixed-fonts t
    modus-themes-italic-constructs t

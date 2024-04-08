@@ -329,9 +329,16 @@ The [[https://protesilaos.com/emacs/modus-themes][Modus themes]] are a set of be
 The modus themes consist of two types: Modus Operandi is a light theme, and Modus Vivendi is its dark counterpart.
 The tinted variants shift the background colors from white and black to a more pleasant light ochre and dark blue.
 
+When using the version of the Modus themes that's included in Emacs, the themes need to be [[https://protesilaos.com/emacs/modus-themes#h:b66b128d-54a4-4265-b59f-4d1ea2feb073][explicitly required using =require-theme=]]:
+
+#+headers: :noweb-ref modus-themes-require
+#+begin_src emacs-lisp
+  (require-theme 'modus-themes)
+#+end_src
+
 To select =modus-operandi-tinted= as the default theme, load it with the ~load-theme~ function:
 
-#+headers: :noweb-ref modus-themes-init
+#+headers: :noweb-ref modus-themes-config
 #+begin_src emacs-lisp
   (load-theme 'modus-operandi-tinted)
 #+end_src
@@ -397,11 +404,12 @@ Note that any configuration options to the themes themselves need to happen befo
 #+headers: :noweb yes
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
-  (use-package modus-themes
-    :init
+  (use-package emacs
+    :config
+    <<modus-themes-require>>
     (setq
      <<modus-themes-customizations>>)
-    <<modus-themes-init>>
+    <<modus-themes-config>>
     :custom
     <<modus-themes-custom>>)
 #+end_src
