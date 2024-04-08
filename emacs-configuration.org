@@ -366,7 +366,46 @@ By default, the function switches between the non-tinted versions, but that can 
 #+end_src
 
 #+RESULTS:
-| modus-operandi-tinted | modus-vivendi-tinted |
+| modus-operandi-tinted  | modus-vivendi-tinted |
+
+*** Switching between dark and light mode
+
+[[https://github.com/LionyxML/auto-dark-emacs][Auto-dark]] automatically switches between dark and light themes based on the operating system's appearance.
+
+#+headers: :noweb-ref auto-dark-config
+#+begin_src emacs-lisp
+  (auto-dark-mode 1)
+#+end_src
+
+It uses the /wombat/ and /leuven/ themes by default, but these are configured to use the modus themes with the ~auto-dark-light-theme~ and ~auto-dark-dark-theme~ variables.
+
+#+headers: :exports none
+#+headers: :noweb-ref auto-dark-custom
+#+begin_src emacs-lisp
+  (auto-dark-light-theme 'modus-operandi-tinted)
+  (auto-dark-dark-theme 'modus-vivendi-tinted)
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<auto-dark-custom>>)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package auto-dark
+    :ensure t
+    :config
+    <<auto-dark-config>>
+    :custom
+    <<auto-dark-custom>>)
+#+end_src
+
+#+RESULTS:
+: t
 
 *** Customization
 

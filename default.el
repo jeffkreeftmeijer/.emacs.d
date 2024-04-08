@@ -14,7 +14,7 @@
     (set-face-attribute
      face nil
      :family family :weight 'regular :width 'expanded :height 150))
-  
+
   (jk/set-face-font 'default "Iosevka")
   (jk/set-face-font 'fixed-pitch "Iosevka")
   (jk/set-face-font 'variable-pitch "Iosevka Aile")
@@ -25,6 +25,14 @@
   :hook
   (org-mode . variable-pitch-mode)
   (markdown-mode . variable-pitch-mode))
+
+(use-package auto-dark
+  :ensure t
+  :config
+  (auto-dark-mode 1)
+  :custom
+  (auto-dark-light-theme 'modus-operandi-tinted)
+  (auto-dark-dark-theme 'modus-vivendi-tinted))
 
 (use-package emacs
   :config
