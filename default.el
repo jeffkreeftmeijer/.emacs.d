@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (require 'bind-key)
 
 (use-package frame

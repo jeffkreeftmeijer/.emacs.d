@@ -5,8 +5,13 @@
 #+headers: :exports none
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t -*-
+
   (require 'bind-key)
 #+end_src
+
+#+RESULTS:
+: bind-key
 
 * Installation
 
