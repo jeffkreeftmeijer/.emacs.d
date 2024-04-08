@@ -7,6 +7,8 @@
 } }:
 
 pkgs.emacsWithPackagesFromUsePackage {
+  package = pkgs.emacs-git;
+
   config = ./default.el;
   defaultInitFile = true;
 

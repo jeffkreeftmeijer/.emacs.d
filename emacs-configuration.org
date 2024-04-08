@@ -34,6 +34,8 @@ This configuration inherits the system's Nixpkgs, meaning the exact version of E
   } }:
 
   pkgs.emacsWithPackagesFromUsePackage {
+    package = pkgs.emacs-git;
+
     config = ./default.el;
     defaultInitFile = true;
 
