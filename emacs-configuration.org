@@ -67,12 +67,6 @@ This configuration has the following external depdendencies outside of Emacs its
 The following list of packages are added to Emacs through [[https://search.nixos.org/packages?channel=unstable][Nixpkgs' unstable channel]].
 In turn, Nixpkgs gets the packages from their git repositories through their [[https://github.com/melpa/melpa/tree/master/recipes][Melpa recipes]].
 
-- modus-themes
-
-#+begin_src nix
-  epkgs.modus-themes
-#+end_src
-
 - spacious-padding
 
 #+begin_src nix

@@ -13,7 +13,6 @@ pkgs.emacsWithPackagesFromUsePackage {
   defaultInitFile = true;
 
   extraEmacsPackages = epkgs: [
-    epkgs.modus-themes
     epkgs.spacious-padding
     epkgs.magit
     epkgs.evil
