@@ -407,6 +407,35 @@ It uses the /wombat/ and /leuven/ themes by default, but these are configured to
 #+RESULTS:
 : t
 
+With auto-dark in place, Emacs' theme can be switched by toggling the system-wide dark mode instead of using ~modus-themes-toggle~.
+The ~jk/dark~ and ~jk/light~ functions run an apple script to turn dark mode on and off from Emacs:
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (defun jk/dark ()
+    "Switch to macOS' dark appearance."
+    (interactive)
+    (do-applescript
+     "tell application \"System Events\"
+    tell appearance preferences
+      set dark mode to true
+    end tell
+  end tell"))
+
+  (defun jk/light ()
+    "Switch to macOS' light appearance."
+    (interactive)
+    (do-applescript
+     "tell application \"System Events\"
+    tell appearance preferences
+      set dark mode to false
+    end tell
+  end tell"))
+#+end_src
+
+#+RESULTS:
+: jk/light
+
 *** Customization
 
 The Modus themes can optionally inherit from the =fixed-pitch= face for some faces, which allows for turning on =variable-pitch-mode= while keeping some text monospaced.

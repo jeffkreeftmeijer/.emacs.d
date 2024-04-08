@@ -34,6 +34,26 @@
   (auto-dark-light-theme 'modus-operandi-tinted)
   (auto-dark-dark-theme 'modus-vivendi-tinted))
 
+(defun jk/dark ()
+  "Switch to macOS' dark appearance."
+  (interactive)
+  (do-applescript
+   "tell application \"System Events\"
+  tell appearance preferences
+    set dark mode to true
+  end tell
+end tell"))
+
+(defun jk/light ()
+  "Switch to macOS' light appearance."
+  (interactive)
+  (do-applescript
+   "tell application \"System Events\"
+  tell appearance preferences
+    set dark mode to false
+  end tell
+end tell"))
+
 (use-package emacs
   :config
   (require-theme 'modus-themes)
