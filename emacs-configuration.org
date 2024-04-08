@@ -762,6 +762,29 @@ The history is then used to order vertical completion suggestions.
 
 #+RESULTS:
 
+** Completion at point
+
+Emacs 30 includes =completion-preview.el=, since [[https://git.savannah.gnu.org/cgit/emacs.git/commit/lisp/completion-preview.el?id=e82d807a2845673e2d55a27915661b2f1374b89a][e82d807a2845673e2d55a27915661b2f1374b89a]], which adds grayed-out completion previews while typing, akin to the autocomplete in the Fish shell.
+
+#+headers: :noweb-ref completion-preview-init
+#+begin_src emacs-lisp
+  (global-completion-preview-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package completion-preview
+    :init
+    <<completion-preview-init>>)
+#+end_src
+
+#+RESULTS:
+
 * Development
 
 ** Major modes
