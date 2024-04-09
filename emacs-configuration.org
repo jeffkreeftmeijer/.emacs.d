@@ -202,12 +202,6 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
   epkgs.direnv
 #+end_src
 
-- eshell-atuin
-
-#+begin_src nix
-  epkgs.eshell-atuin
-#+end_src
-
 - which-key
 
 #+begin_src which-key

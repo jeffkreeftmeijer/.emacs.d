@@ -37,7 +37,6 @@ pkgs.emacsWithPackagesFromUsePackage {
     epkgs.typescript-mode
     epkgs.yaml-mode
     epkgs.direnv
-    epkgs.eshell-atuin
     epkgs.which-key
     pkgs.ispell
     pkgs.atuin
