@@ -1050,17 +1050,6 @@ Start eglot automatically for Rust files:
   (rust-ts-mode . eglot-ensure)
 #+end_src
 
-Format the current buffer using ~eglot-format-buffer~ whenever a file is saved:
-
-#+headers: :exports none
-#+headers: :noweb-ref eglot-config
-#+begin_src emacs-lisp
-(add-hook 'before-save-hook #'eglot-format-buffer)
-#+end_src
-
-#+RESULTS:
-| eglot-format-buffer |
-
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :tangle default.el
