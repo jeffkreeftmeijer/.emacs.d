@@ -135,6 +135,7 @@ end tell"))
 (use-package eglot
   :config
   (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "rust-analyzer"))
+  (add-hook 'before-save-hook #'eglot-format-buffer)
   :hook
   (rust-mode . eglot-ensure)
   (rust-ts-mode . eglot-ensure))
