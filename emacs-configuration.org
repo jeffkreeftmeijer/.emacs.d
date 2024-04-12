@@ -536,11 +536,11 @@ Turn on  =spacious-padding-subtile-mode-line= for a more subtile mode line:
 ** Evil mode
 
 Emacs is the best Vim emulator, and [[https://github.com/emacs-evil/evil][Evil]] is the best Vim mode.
-While this configuration includes Evil mode, it't turned off by default:
+After installing Evil, turn on =evil-mode= globally:
 
 #+headers: :noweb-ref evil-init
 #+begin_src emacs-lisp
-  (evil-mode 0)
+  (evil-mode 1)
 #+end_src
 
 #+RESULTS:
