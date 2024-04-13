@@ -1164,6 +1164,27 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 
 #+RESULTS:
 
+
+* Dired
+
+#+headers: :noweb-ref dirvish-init
+#+begin_src emacs-lisp
+  (dirvish-override-dired-mode)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package dirvish
+    :ensure t
+    :init
+    <<dirvish-init>>)
+#+end_src
+
 * Enhancements
 
 This section covers general enhancements to Emacs which don't warrant their own section.

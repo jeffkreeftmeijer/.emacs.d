@@ -153,6 +153,11 @@ end tell"))
   :custom
   eshell-atuin-search-options nil)
 
+(use-package dirvish
+  :ensure t
+  :init
+  (dirvish-override-dired-mode))
+
 (use-package files
   :custom
   backup-directory-alist `(("." . "~/.emacs.d/backups")))
