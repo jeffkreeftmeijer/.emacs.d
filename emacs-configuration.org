@@ -572,7 +572,6 @@ After installing Evil, turn on =evil-mode= globally:
 
 #+headers: :exports none
 #+headers: :noweb yes
-#+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package evil
     :init

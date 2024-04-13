@@ -71,11 +71,6 @@ end tell"))
   :custom
   spacious-padding-subtle-mode-line t)
 
-(use-package evil
-  :init
-  (setq evil-want-keybinding nil)
-  (evil-mode 1))
-
 (use-package evil-commentary
   :after evil
   :init
