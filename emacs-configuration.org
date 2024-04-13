@@ -41,11 +41,7 @@ This configuration inherits the system's Nixpkgs, meaning the exact version of E
   pkgs.emacsWithPackagesFromUsePackage {
     package = (pkgs.emacs-git.overrideAttrs(old: {
       patches = old.patches ++ [
-        ./system-appearance.patch
-      ];
-
-      propagatedBuildInputs = [
-        <<dependencies>>
+	./system-appearance.patch
       ];
     }));
 
@@ -54,6 +50,7 @@ This configuration inherits the system's Nixpkgs, meaning the exact version of E
 
     extraEmacsPackages = epkgs: [
       <<packages>>
+      <<dependencies>>
     ];
   }
 #+end_src

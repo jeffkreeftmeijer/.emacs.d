@@ -11,15 +11,6 @@ pkgs.emacsWithPackagesFromUsePackage {
     patches = old.patches ++ [
       ./system-appearance.patch
     ];
-
-    propagatedBuildInputs = [
-      pkgs.ispell
-      pkgs.atuin
-      pkgs.rustfmt
-      pkgs.rust-analyzer
-      pkgs.nodePackages.typescript-language-server
-      pkgs.rubyPackages.solargraph
-    ];
   }));
 
   config = ./default.el;
@@ -47,5 +38,11 @@ pkgs.emacsWithPackagesFromUsePackage {
     epkgs.yaml-mode
     epkgs.direnv
     epkgs.which-key
+    pkgs.ispell
+    pkgs.atuin
+    pkgs.rustfmt
+    pkgs.rust-analyzer
+    pkgs.nodePackages.typescript-language-server
+    pkgs.rubyPackages.solargraph
   ];
 }
