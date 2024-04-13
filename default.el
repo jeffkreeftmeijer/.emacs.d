@@ -76,11 +76,6 @@ end tell"))
   (setq evil-want-keybinding nil)
   (evil-mode 1))
 
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
-
 (use-package evil-commentary
   :after evil
   :init
