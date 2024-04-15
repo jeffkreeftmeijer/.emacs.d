@@ -50,52 +50,8 @@ This configuration inherits the system's Nixpkgs, meaning the exact version of E
 
     extraEmacsPackages = epkgs: [
       <<packages>>
-      <<dependencies>>
     ];
   }
-#+end_src
-
-** Dependencies
-:PROPERTIES:
-:header-args: :eval no :exports none :noweb-ref dependencies
-:END:
-
-This configuration has the following external depdendencies outside of Emacs itself:
-
-- ispell
-
-#+begin_src nix
-  pkgs.ispell
-#+end_src
-
-- atuin
-
-#+begin_src nix
-  pkgs.atuin
-#+end_src
-
-- rustfmt
-
-#+begin_src nix
-  pkgs.rustfmt
-#+end_src
-
-- rust-analyzer
-
-#+begin_src nix
-  pkgs.rust-analyzer
-#+end_src
-
-- typescript-language-server
-
-#+begin_src nix
-  pkgs.nodePackages.typescript-language-server
-#+end_src
-
-- solargraph
-
-#+begin_src nix
-  pkgs.rubyPackages.solargraph
 #+end_src
 
 ** Packages
