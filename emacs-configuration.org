@@ -1116,3 +1116,35 @@ By default, Emacs only shows the already-typed portion of the command, which doe
 #+end_src
 
 #+RESULTS:
+
+** Projects
+
+By default, ~project.el~ only takes projects into account that have a =.git= directory.
+Use [[https://github.com/karthink/project-x][project-x]] to allow for projects that are not under version control, and projects nested within other projects.
+
+Project-x is not on any of the pacakge managers, so this configuration assumes it's installed manually for now.
+Also, this configuration re-sets ~project-find-functions~ to try ~project-x-try-local~ before ~project-try-vc~ to make it work for projects nested within directories under version control.
+
+#+headers: :noweb-ref project-x-init
+#+begin_src emacs-lisp
+  (project-x-mode 1)
+  (setq project-find-functions '(project-x-try-local project-try-vc))
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package project-x
+    :after project
+    :init
+    <<project-x-init>>)
+#+end_src
+
+With project-x enabled, Emacs will recognise directories with a =.project= file as project directories.[fn:project-x]
+
+[fn:project-x] Apparently, [[https://github.com/karthink/project-x/issues/5#issuecomment-1522535927][=project.el= now supports identifying projects based on a special file in its directory root]].
+Project-x should be obsolete for this purpose, but I haven't figured it out yet.

@@ -156,3 +156,9 @@ end tell"))
 (use-package which-key
   :init
   (which-key-mode 1))
+
+(use-package project-x
+  :after project
+  :init
+  (project-x-mode 1)
+  (setq project-find-functions '(project-x-try-local project-try-vc)))
