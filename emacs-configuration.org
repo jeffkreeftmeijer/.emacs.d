@@ -963,6 +963,7 @@ Start eglot automatically for Rust files:
 ** Terminal emulation
 
 Use [[https://codeberg.org/akib/emacs-eat/][Eat]] (Emulate A Terminal) as a terminal emulator.
+If Eat prints [[https://elpa.nongnu.org/nongnu-devel/doc/eat.html#Garbled-Text]["garbled" text]], run =M-x eat-compile-terminfo=, then restart the Eat buffer.
 
 #+headers: :exports none
 #+headers: :noweb yes
