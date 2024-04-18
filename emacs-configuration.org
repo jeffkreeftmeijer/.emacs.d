@@ -928,6 +928,7 @@ Language servers are added through the =eglot-server-programs= variable:
 #+headers: :noweb-ref eglot-config
 #+begin_src emacs-lisp
   (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "rust-analyzer"))
+  (add-to-list 'eglot-server-programs '((elixir-ts-mode elixir-mode) "elixir-ls"))
 #+end_src
 
 #+RESULTS:
