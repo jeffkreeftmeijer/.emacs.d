@@ -960,6 +960,20 @@ Start eglot automatically for Rust files:
 
 * Shell
 
+** Terminal emulation
+
+Use [[https://codeberg.org/akib/emacs-eat/][Eat]] (Emulate A Terminal) as a terminal emulator.
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package eat
+    :ensure t)
+#+end_src
+
+#+RESULTS:
+
 ** History
 
 [[https://atuin.sh][Atuin]] is a cross-shell utility that stores shell history in a SQLite database.
