@@ -965,15 +965,42 @@ Start eglot automatically for Rust files:
 Use [[https://codeberg.org/akib/emacs-eat/][Eat]] (Emulate A Terminal) as a terminal emulator.
 If Eat prints [[https://elpa.nongnu.org/nongnu-devel/doc/eat.html#Garbled-Text]["garbled" text]], run =M-x eat-compile-terminfo=, then restart the Eat buffer.
 
+Aside from starting the terminal emulator with =M-x eat= and =M-x eat-project=, Eat adds terminal emulation to Eshell with ~eat-eshell-mode~.
+This allows Eshell to run full screen terminal applications.
+
+#+headers: :noweb-ref eat-init
+#+begin_src emacs-lisp
+  (eat-eshell-mode 1)
+#+end_src
+
+Because Eat now handles full screen terminal applications, Eshell no longer has to run programs in a term buffer.
+Therefor, the ~eshell-visual-commands~ list can be unset.
+
+#+headers: :exports none
+#+headers: :noweb-ref eat-custom
+#+begin_src emacs-lisp
+  eshell-visual-commands nil
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<eat-custom>>)
+#+end_src
+
+Now, an application like ~top~ will run in the Eshell buffer without a separate term buffer having to be opened.
+
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package eat
-    :ensure t)
+    :ensure t
+    :init
+    <<eat-init>>
+    :custom
+    <<eat-custom>>)
 #+end_src
-
-#+RESULTS:
 
 ** History
 

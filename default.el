@@ -131,7 +131,11 @@ end tell"))
   (rust-ts-mode . eglot-ensure))
 
 (use-package eat
-  :ensure t)
+  :ensure t
+  :init
+  (eat-eshell-mode 1)
+  :custom
+  eshell-visual-commands nil)
 
 (use-package eshell-atuin
   :after em-hist
