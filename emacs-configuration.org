@@ -1079,7 +1079,6 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 
 #+RESULTS:
 
-
 * Dired
 
 #+headers: :noweb-ref dirvish-init
