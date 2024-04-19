@@ -1201,3 +1201,26 @@ With project-x enabled, Emacs will recognise directories with a =.project= file 
 
 [fn:project-x] Apparently, [[https://github.com/karthink/project-x/issues/5#issuecomment-1522535927][=project.el= now supports identifying projects based on a special file in its directory root]].
 Project-x should be obsolete for this purpose, but I haven't figured it out yet.
+
+* Desktop
+
+Enable [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html#Saving-Emacs-Sessions][~desktop-save-mode~]] to save Emacs' state between sessions.
+
+#+headers: :noweb-ref desktop-config
+#+begin_src emacs-lisp
+  (desktop-save-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package desktop
+    :config
+    <<desktop-config>>)
+#+end_src
+
+#+RESULTS:
