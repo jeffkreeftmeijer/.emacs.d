@@ -156,6 +156,9 @@ end tell"))
   :init
   (dirvish-override-dired-mode))
 
+(use-package org-roam
+  :ensure t)
+
 (use-package notmuch
   :ensure t)
 
