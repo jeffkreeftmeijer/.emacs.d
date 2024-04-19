@@ -19,7 +19,7 @@ This whole Emacs configuration, including the configuration file and the include
 For example, to try out this Emacs configuration without affecting the rest of your system, run the following command:
 
 #+begin_src shell
-  nix run github:jeffkreeftmeijer/.emacs.d/bankrupt
+  nix run github:jeffkreeftmeijer/.emacs.d
 #+end_src
 
 This downloads and compiles Emacs, including dependencies and packages, and starts the resulting Emacs.app.
