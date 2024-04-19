@@ -156,6 +156,9 @@ end tell"))
   :init
   (dirvish-override-dired-mode))
 
+(use-package notmuch
+  :ensure t)
+
 (use-package files
   :custom
   backup-directory-alist `(("." . "~/.emacs.d/backups")))

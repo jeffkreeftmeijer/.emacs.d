@@ -1099,6 +1099,18 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
     <<dirvish-init>>)
 #+end_src
 
+* Email
+
+Use [[https://notmuchmail.org/notmuch-emacs/][notmuch.el]] to read email.
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package notmuch
+    :ensure t)
+#+end_src
+
 * Enhancements
 
 This section covers general enhancements to Emacs which don't warrant their own section.
