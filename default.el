@@ -145,9 +145,9 @@ end tell"))
   (keymap-unset eshell-hist-mode-map "<down>")
   (vertico-multiform-mode 1)
   (setq vertico-multiform-commands
-        '(
-  	(eshell-atuin-history reverse (vertico-sort-function . identity))
-  	))
+        '((eshell-atuin-history
+  	 reverse
+  	 (vertico-sort-function . identity))))
   :custom
   eshell-atuin-search-options nil)
 

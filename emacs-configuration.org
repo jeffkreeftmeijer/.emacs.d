@@ -1057,9 +1057,9 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 #+begin_src emacs-lisp
   (vertico-multiform-mode 1)
   (setq vertico-multiform-commands
-	'(
-	  (eshell-atuin-history reverse (vertico-sort-function . identity))
-	  ))
+	'((eshell-atuin-history
+	   reverse
+	   (vertico-sort-function . identity))))
 #+end_src
 
 #+RESULTS:
