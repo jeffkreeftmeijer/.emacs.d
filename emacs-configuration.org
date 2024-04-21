@@ -122,54 +122,6 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
   epkgs.embark
 #+end_src
 
-- dockerfile-mode
-
-#+begin_src nix
-  epkgs.dockerfile-mode
-#+end_src
-
-- elixir-mode
-
-#+begin_src nix
-  epkgs.elixir-mode
-#+end_src
-
-- git-modes
-
-#+begin_src nix
-  epkgs.git-modes
-#+end_src
-
-- markdown-mode
-
-#+begin_src nix
-  epkgs.markdown-mode
-#+end_src
-
-- nix-mode
-
-#+begin_src nix
-  epkgs.nix-mode
-#+end_src
-
-- rust-mode
-
-#+begin_src nix
-  epkgs.rust-mode
-#+end_src
-
-- typescript-mode
-
-#+begin_src nix
-  epkgs.typescript-mode
-#+end_src
-
-- yaml-mode
-
-#+begin_src nix
-  epkgs.yaml-mode
-#+end_src
-
 - direnv
 
 #+begin_src nix
@@ -894,6 +846,74 @@ To have the package prompt before installing, set the variable to ='prompt=:
 
 #+RESULTS:
 : t
+
+*** Additional major modes
+
+In addition to the list of already installed major modes, this configuration adds adds more when they're needed[fn::I'd rather not worry about installing major modes and use a package like [[https://github.com/sheerun/vim-polyglot][vim-polyglot]], but I haven't been able to find an equivalent for Emacs.].
+
+- dockerfile-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode
+    :ensure t)
+#+end_src
+
+- elixir-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package elixir-mode
+    :ensure t)
+#+end_src
+
+- git-modes
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package git-modes
+    :ensure t)
+#+end_src
+
+- markdown-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t)
+#+end_src
+
+- nix-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package nix-mode
+    :ensure t)
+#+end_src
+
+- rust-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package rust-mode
+    :ensure t)
+#+end_src
+
+- typescript-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package typescript-mode
+    :ensure t)
+#+end_src
+
+- yaml-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :ensure t)
+#+end_src
 
 ** Environments
 

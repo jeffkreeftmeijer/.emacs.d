@@ -27,14 +27,6 @@ pkgs.emacsWithPackagesFromUsePackage {
     epkgs.consult
     epkgs.orderless
     epkgs.embark
-    epkgs.dockerfile-mode
-    epkgs.elixir-mode
-    epkgs.git-modes
-    epkgs.markdown-mode
-    epkgs.nix-mode
-    epkgs.rust-mode
-    epkgs.typescript-mode
-    epkgs.yaml-mode
     epkgs.direnv
     epkgs.which-key
   ];

@@ -119,6 +119,30 @@ end tell"))
   :custom
   (treesit-auto-install 'prompt))
 
+(use-package dockerfile-mode
+  :ensure t)
+
+(use-package elixir-mode
+  :ensure t)
+
+(use-package git-modes
+  :ensure t)
+
+(use-package markdown-mode
+  :ensure t)
+
+(use-package nix-mode
+  :ensure t)
+
+(use-package rust-mode
+  :ensure t)
+
+(use-package typescript-mode
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t)
+
 (use-package direnv
   :init
   (direnv-mode 1))
