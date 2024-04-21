@@ -846,6 +846,8 @@ Emacs 30 includes =completion-preview.el=, since [[https://git.savannah.gnu.org/
 
 ** Major modes
 
+*** Treesitter
+
 The [[https://github.com/renzmann/treesit-auto][treesit-auto]] package automatically installs and uses the tree-sitter equivalent of installed major modes.
 For example, it automatically installs and uses =rust-ts-mode= when a Rust file is opened and =rust-mode= is installed.
 
