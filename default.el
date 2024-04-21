@@ -113,6 +113,7 @@ end tell"))
   (global-completion-preview-mode 1))
 
 (use-package treesit-auto
+  :ensure t
   :config
   (global-treesit-auto-mode 1)
   :custom

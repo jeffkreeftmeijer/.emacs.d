@@ -27,7 +27,6 @@ pkgs.emacsWithPackagesFromUsePackage {
     epkgs.consult
     epkgs.orderless
     epkgs.embark
-    epkgs.treesit-auto
     epkgs.dockerfile-mode
     epkgs.elixir-mode
     epkgs.git-modes

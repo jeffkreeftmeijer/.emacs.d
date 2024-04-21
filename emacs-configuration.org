@@ -122,12 +122,6 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
   epkgs.embark
 #+end_src
 
-- treesit-auto
-
-#+begin_src nix
-  epkgs.treesit-auto
-#+end_src
-
 - dockerfile-mode
 
 #+begin_src nix
@@ -889,6 +883,7 @@ To have the package prompt before installing, set the variable to ='prompt=:
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package treesit-auto
+    :ensure t
     :config
     <<treesit-auto-config>>
     :custom
