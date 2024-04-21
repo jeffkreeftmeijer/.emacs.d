@@ -119,6 +119,10 @@ end tell"))
   :custom
   (treesit-auto-install 'prompt))
 
+(use-package beancount
+  :ensure t
+  :mode ("\\.beancount\\'" . beancount-mode))
+
 (use-package dockerfile-mode
   :ensure t)
 

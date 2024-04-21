@@ -851,6 +851,15 @@ To have the package prompt before installing, set the variable to ='prompt=:
 
 In addition to the list of already installed major modes, this configuration adds adds more when they're needed[fn::I'd rather not worry about installing major modes and use a package like [[https://github.com/sheerun/vim-polyglot][vim-polyglot]], but I haven't been able to find an equivalent for Emacs.].
 
+- beancount-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package beancount
+    :ensure t
+    :mode ("\\.beancount\\'" . beancount-mode))
+#+end_src
+
 - dockerfile-mode
 
 #+headers: :tangle default.el
