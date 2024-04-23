@@ -151,13 +151,17 @@ end tell"))
   :init
   (direnv-mode 1))
 
+(defun jk/maybe-format-buffer ()
+  (when (eglot-managed-p) (eglot-format-buffer)))
+
 (use-package eglot
   :config
   (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "rust-analyzer"))
   (add-to-list 'eglot-server-programs '((elixir-ts-mode elixir-mode) "elixir-ls"))
   :hook
   (rust-mode . eglot-ensure)
-  (rust-ts-mode . eglot-ensure))
+  (rust-ts-mode . eglot-ensure)
+  (after-save . jk/maybe-format-buffer))
 
 (use-package eat
   :ensure t

@@ -973,6 +973,44 @@ Start eglot automatically for Rust files:
   (rust-ts-mode . eglot-ensure)
 #+end_src
 
+*** Automatically format files on save in Eglot-enabled buffers
+
+The ~eglot-format-buffer~ function doesn't check if Eglot is running in the current buffer.
+This means hooking using it as a global ~after-save-hook~ produces errors in the echo area whenever a file is saved while Eglot isn't enabled:
+
+#+begin_src emacs-lisp
+  (jsonrpc-error
+   "No current JSON-RPC connection"
+   (jsonrpc-error-code . -32603)
+   (jsonrpc-error-message . "No current JSON-RPC connection"))
+#+end_src
+
+To remedy this, add a function that formats only when Eglot is enabled.
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (defun jk/maybe-format-buffer ()
+    (when (eglot-managed-p) (eglot-format-buffer)))
+#+end_src
+
+#+RESULTS:
+: jk/maybe-format-buffer
+
+This function is then added as a global ~after-save-hook~.
+
+#+begin_src emacs-lisp
+  (add-hook 'after-save-hook 'jk/maybe-format-buffer)
+#+end_src
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref eglot-hook
+#+begin_src emacs-lisp
+  (after-save . jk/maybe-format-buffer)
+#+end_src
+
+Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
+
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :tangle default.el
