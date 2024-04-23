@@ -961,8 +961,8 @@ Language servers are added through the =eglot-server-programs= variable:
 Start eglot automatically for Rust files:
 
 #+begin_src emacs-lisp
-  (add-hook 'rust-mode #'eglot-ensure))
-  (add-hook 'rust-ts-mode #'eglot-ensure))
+  (add-hook 'rust-mode #'eglot-ensure)
+  (add-hook 'rust-ts-mode #'eglot-ensure)
 #+end_src
 
 #+headers: :eval no
