@@ -204,7 +204,3 @@ end tell"))
   :init
   (project-x-mode 1)
   (setq project-find-functions '(project-x-try-local project-try-vc)))
-
-(use-package desktop
-  :config
-  (desktop-save-mode 1))
