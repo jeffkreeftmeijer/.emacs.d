@@ -204,3 +204,7 @@ end tell"))
   :init
   (project-x-mode 1)
   (setq project-find-functions '(project-x-try-local project-try-vc)))
+
+(use-package pixel-scroll
+  :init
+  (pixel-scroll-precision-mode 1))

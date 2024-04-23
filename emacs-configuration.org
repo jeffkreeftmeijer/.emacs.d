@@ -1240,3 +1240,24 @@ With project-x enabled, Emacs will recognise directories with a =.project= file 
 
 [fn:project-x] Apparently, [[https://github.com/karthink/project-x/issues/5#issuecomment-1522535927][=project.el= now supports identifying projects based on a special file in its directory root]].
 Project-x should be obsolete for this purpose, but I haven't figured it out yet.
+
+** Precise scrolling
+
+[[https://www.gnu.org/software/emacs/manual///html_node/efaq/New-in-Emacs-29.html][Added in Emacs 29]], ~pixel-scroll-precision-mode~ enables smooth scrolling instead of scrolling line by line.
+
+#+headers: :noweb-ref pixel-scroll-init
+#+begin_src emacs-lisp
+  (pixel-scroll-precision-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package pixel-scroll
+    :init
+    <<pixel-scroll-init>>)
+#+end_src
