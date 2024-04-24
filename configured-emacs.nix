@@ -22,7 +22,6 @@ pkgs.emacsWithPackagesFromUsePackage {
   defaultInitFile = true;
 
   extraEmacsPackages = epkgs: [
-    epkgs.spacious-padding
     epkgs.magit
     epkgs.evil
     epkgs.evil-collection

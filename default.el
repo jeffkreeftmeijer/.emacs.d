@@ -14,7 +14,7 @@
     (set-face-attribute
      face nil
      :family family :weight 'regular :width 'expanded :height 150))
-  
+
   (jk/set-face-font 'default "Iosevka")
   (jk/set-face-font 'fixed-pitch "Iosevka")
   (jk/set-face-font 'variable-pitch "Iosevka Aile")
@@ -66,6 +66,7 @@ end tell"))
   modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 
 (use-package spacious-padding
+  :ensure t
   :init
   (spacious-padding-mode 1)
   :custom

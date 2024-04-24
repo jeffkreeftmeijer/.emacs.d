@@ -171,12 +171,6 @@ The included configuration file is [[https://github.com/jeffkreeftmeijer/.emacs.
 The following list of packages are added to Emacs through [[https://search.nixos.org/packages?channel=unstable][Nixpkgs' unstable channel]].
 In turn, Nixpkgs gets the packages from their git repositories through their [[https://github.com/melpa/melpa/tree/master/recipes][Melpa recipes]].
 
-- spacious-padding
-
-#+begin_src nix
-  epkgs.spacious-padding
-#+end_src
-
 - magit
 
 #+begin_src nix
@@ -558,6 +552,7 @@ Turn on  =spacious-padding-subtile-mode-line= for a more subtile mode line:
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package spacious-padding
+    :ensure t
     :init
     <<spacious-padding-init>>
     :custom
