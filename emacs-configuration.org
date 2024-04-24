@@ -23,7 +23,7 @@ For example, to try out this Emacs configuration without affecting the rest of y
   nix run github:jeffkreeftmeijer/.emacs.d
 #+end_src
 
-This downloads and compiles Emacs, including dependencies and packages, and starts the resulting Emacs.app.
+This downloads and compiles Emacs, including packages and the configuration, and starts the resulting Emacs.app.
 This configuration inherits the system's Nixpkgs, meaning the exact version of Emacs and all packages are subject to the Nixpkgs channel used on the system.
 
 #+headers: :exports none
