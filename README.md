@@ -1,46 +1,46 @@
 
 # ~/.emacs.d
 
-- [Installation](#orgf0925cb)
-  - [Packages](#orgc073797)
-- [Appearance](#org4cf221a)
-  - [Frames](#orga01aee3)
-  - [Fonts](#org4931536)
-  - [Variable pitch](#orgdbd6df6)
-  - [Themes](#org2bca859)
-  - [Layout](#org0649c38)
-- [Modal editing](#org0ad8172)
-  - [Evil mode](#org62198be)
-  - [Evil-collection](#orgc3ec33e)
-  - [Evil-commentary](#orga163eee)
-  - [Cursors](#org9170525)
-- [Completion](#orgcdce0f4)
-  - [Vertical completion](#org464c358)
-  - [Contextual information](#org710d10a)
-  - [Enhanced navigation commands](#org074c3c1)
-  - [Pattern matching](#org25099c5)
-  - [Minibuffer actions](#orga07a242)
-  - [Minibuffer history](#orgd5a7d66)
-  - [Completion at point](#orgcf296b7)
-- [Development](#org4b3e1a1)
-  - [Major modes](#org0d15e69)
-  - [Environments](#org66dfa9c)
-  - [Language servers](#orge935683)
-- [Shell](#org00185da)
-  - [Terminal emulation](#org48b767c)
-  - [History](#org0b5a284)
-- [Dired](#org9530648)
-- [Org](#org8ac1a17)
-- [Email](#orgb3c80af)
-- [Enhancements](#orgf99e58c)
-  - [Backups](#orgb10f24b)
-  - [Key suggestions](#orgca7d5ca)
-  - [Projects](#org5cc1e06)
-- [Desktop](#org01c12a1)
+- [Installation](#org181c0e1)
+  - [Packages](#org481a005)
+- [Appearance](#org4b0505d)
+  - [Frames](#orgc1d6b7b)
+  - [Fonts](#orgba34c30)
+  - [Variable pitch](#orgad0bc1e)
+  - [Themes](#org592b730)
+  - [Layout](#org0597618)
+- [Modal editing](#org7470efc)
+  - [Evil mode](#orgb9b16d1)
+  - [Evil-collection](#orge296c23)
+  - [Evil-commentary](#org05a830c)
+  - [Cursors](#org4e5f03d)
+- [Completion](#org12986d0)
+  - [Vertical completion](#org0bf0185)
+  - [Contextual information](#orgbc53239)
+  - [Enhanced navigation commands](#orgbca652b)
+  - [Pattern matching](#org3af8904)
+  - [Minibuffer actions](#org93a79b3)
+  - [Minibuffer history](#org4b04f23)
+  - [Completion at point](#org5db4982)
+- [Development](#orgcb6cb03)
+  - [Major modes](#orgde707d8)
+  - [Environments](#orgd3ad41d)
+  - [Language servers](#orgc4b4406)
+- [Shell](#orgb81229a)
+  - [Terminal emulation](#orgfbed12d)
+  - [History](#orgdf2669e)
+- [Dired](#org53a8b4d)
+- [Org](#org1124ab2)
+- [Email](#orgc0c6f25)
+- [Enhancements](#org27a2eb7)
+  - [Backups](#org50256c5)
+  - [Key suggestions](#org327542e)
+  - [Projects](#orgdea41fe)
+  - [Precise scrolling](#org595fd92)
 
 
 
-<a id="orgf0925cb"></a>
+<a id="org181c0e1"></a>
 
 ## Installation
 
@@ -53,7 +53,7 @@ nix run github:jeffkreeftmeijer/.emacs.d
 This downloads and compiles Emacs, including dependencies and packages, and starts the resulting Emacs.app. This configuration inherits the system's Nixpkgs, meaning the exact version of Emacs and all packages are subject to the Nixpkgs channel used on the system.
 
 
-<a id="orgc073797"></a>
+<a id="org481a005"></a>
 
 ### Packages
 
@@ -79,35 +79,17 @@ The following list of packages are added to Emacs through [Nixpkgs' unstable cha
 
 -   embark
 
--   treesit-auto
-
--   dockerfile-mode
-
--   elixir-mode
-
--   git-modes
-
--   markdown-mode
-
--   nix-mode
-
--   rust-mode
-
--   typescript-mode
-
--   yaml-mode
-
 -   direnv
 
 -   which-key
 
 
-<a id="org4cf221a"></a>
+<a id="org4b0505d"></a>
 
 ## Appearance
 
 
-<a id="orga01aee3"></a>
+<a id="orgc1d6b7b"></a>
 
 ### Frames
 
@@ -120,7 +102,7 @@ Disable the scroll bar, the tool bar, and the menu bar:
 ```
 
 
-<a id="org4931536"></a>
+<a id="orgba34c30"></a>
 
 ### Fonts
 
@@ -153,7 +135,7 @@ If the SF fonts aren't available, the fixed font falls back to Menlo before the 
 ```
 
 
-<a id="orgdbd6df6"></a>
+<a id="orgad0bc1e"></a>
 
 ### Variable pitch
 
@@ -177,7 +159,7 @@ Instead of hooking into `text-mode`, explicitly select the modes to use proporti
 ```
 
 
-<a id="org2bca859"></a>
+<a id="org592b730"></a>
 
 ### Themes
 
@@ -261,7 +243,7 @@ An interactive function named `modus-themes-toggle` switches between the light a
     Note that any configuration options to the themes themselves need to happen before the theme is loaded, or the theme needs to be reloaded through `load-theme` after setting the customizations.
 
 
-<a id="org0649c38"></a>
+<a id="org0597618"></a>
 
 ### Layout
 
@@ -280,12 +262,12 @@ Turn on `spacious-padding-subtile-mode-line` for a more subtile mode line:
 ```
 
 
-<a id="org0ad8172"></a>
+<a id="org7470efc"></a>
 
 ## Modal editing
 
 
-<a id="org62198be"></a>
+<a id="orgb9b16d1"></a>
 
 ### Evil mode
 
@@ -296,7 +278,7 @@ Emacs is the best Vim emulator, and [Evil](https://github.com/emacs-evil/evil) i
 ```
 
 
-<a id="orgc3ec33e"></a>
+<a id="orge296c23"></a>
 
 ### Evil-collection
 
@@ -313,7 +295,7 @@ Evil-collection [requires `evil-want-keybinding` to be unset](https://github.com
 ```
 
 
-<a id="orga163eee"></a>
+<a id="org05a830c"></a>
 
 ### Evil-commentary
 
@@ -324,7 +306,7 @@ Evil-collection [requires `evil-want-keybinding` to be unset](https://github.com
 ```
 
 
-<a id="org9170525"></a>
+<a id="org4e5f03d"></a>
 
 ### Cursors
 
@@ -335,12 +317,12 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="orgcdce0f4"></a>
+<a id="org12986d0"></a>
 
 ## Completion
 
 
-<a id="org464c358"></a>
+<a id="org0bf0185"></a>
 
 ### Vertical completion
 
@@ -351,7 +333,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org710d10a"></a>
+<a id="orgbc53239"></a>
 
 ### Contextual information
 
@@ -362,7 +344,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org074c3c1"></a>
+<a id="orgbca652b"></a>
 
 ### Enhanced navigation commands
 
@@ -394,7 +376,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
     ```
 
 
-<a id="org25099c5"></a>
+<a id="org3af8904"></a>
 
 ### Pattern matching
 
@@ -405,7 +387,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="orga07a242"></a>
+<a id="org93a79b3"></a>
 
 ### Minibuffer actions
 
@@ -416,7 +398,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="orgd5a7d66"></a>
+<a id="org4b04f23"></a>
 
 ### Minibuffer history
 
@@ -427,7 +409,7 @@ Emacs' `savehist` feature saves minibuffer history to `~/emacs.d/history`. The h
 ```
 
 
-<a id="orgcf296b7"></a>
+<a id="org5db4982"></a>
 
 ### Completion at point
 
@@ -438,32 +420,102 @@ Emacs 30 includes `completion-preview.el`, since [e82d807a2845673e2d55a27915661b
 ```
 
 
-<a id="org4b3e1a1"></a>
+<a id="orgcb6cb03"></a>
 
 ## Development
 
 
-<a id="org0d15e69"></a>
+<a id="orgde707d8"></a>
 
 ### Major modes
 
-The [treesit-auto](https://github.com/renzmann/treesit-auto) package automatically installs and uses the tree-sitter equivalent of installed major modes. For example, it automatically installs and uses `rust-ts-mode` when a Rust file is opened and `rust-mode` is installed.
+1.  Treesitter
 
-To turn it on globally, enable `global-treesit-auto-mode`:
+    The [treesit-auto](https://github.com/renzmann/treesit-auto) package automatically installs and uses the tree-sitter equivalent of installed major modes. For example, it automatically installs and uses `rust-ts-mode` when a Rust file is opened and `rust-mode` is installed.
+    
+    To turn it on globally, enable `global-treesit-auto-mode`:
+    
+    ```emacs-lisp
+    (global-treesit-auto-mode 1)
+    ```
+    
+    To automatically install missing major modes, enable `treesit-auto-install`. To have the package prompt before installing, set the variable to `'prompt`:
+    
+    ```emacs-lisp
+    (custom-set-variables
+      '(treesit-auto-install 'prompt))
+    ```
 
-```emacs-lisp
-(global-treesit-auto-mode 1)
-```
+2.  Additional major modes
 
-To automatically install missing major modes, enable `treesit-auto-install`. To have the package prompt before installing, set the variable to `'prompt`:
+    In addition to the list of already installed major modes, this configuration adds adds more when they're needed<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+    
+    -   beancount-mode
+    
+    ```emacs-lisp
+    (use-package beancount
+      :ensure t
+      :mode ("\\.beancount\\'" . beancount-mode))
+    ```
+    
+    -   dockerfile-mode
+    
+    ```emacs-lisp
+    (use-package dockerfile-mode
+      :ensure t)
+    ```
+    
+    -   elixir-mode
+    
+    ```emacs-lisp
+    (use-package elixir-mode
+      :ensure t)
+    ```
+    
+    -   git-modes
+    
+    ```emacs-lisp
+    (use-package git-modes
+      :ensure t)
+    ```
+    
+    -   markdown-mode
+    
+    ```emacs-lisp
+    (use-package markdown-mode
+      :ensure t)
+    ```
+    
+    -   nix-mode
+    
+    ```emacs-lisp
+    (use-package nix-mode
+      :ensure t)
+    ```
+    
+    -   rust-mode
+    
+    ```emacs-lisp
+    (use-package rust-mode
+      :ensure t)
+    ```
+    
+    -   typescript-mode
+    
+    ```emacs-lisp
+    (use-package typescript-mode
+      :ensure t)
+    ```
+    
+    -   yaml-mode
+    
+    ```emacs-lisp
+    (use-package yaml-mode
+      :ensure t)
+    ```
 
-```emacs-lisp
-(custom-set-variables
-  '(treesit-auto-install 'prompt))
-```
 
-
-<a id="org66dfa9c"></a>
+<a id="orgd3ad41d"></a>
 
 ### Environments
 
@@ -474,7 +526,7 @@ Programming environments set up with [Nix](https://nixos.org) and [direnv](https
 ```
 
 
-<a id="orge935683"></a>
+<a id="orgc4b4406"></a>
 
 ### Language servers
 
@@ -488,17 +540,43 @@ Eglot is Emacs' built-in Language Server Protocol client. Language servers are a
 Start eglot automatically for Rust files:
 
 ```emacs-lisp
-(add-hook 'rust-mode #'eglot-ensure))
-(add-hook 'rust-ts-mode #'eglot-ensure))
+(add-hook 'rust-mode #'eglot-ensure)
+(add-hook 'rust-ts-mode #'eglot-ensure)
 ```
 
+1.  Automatically format files on save in Eglot-enabled buffers
 
-<a id="org00185da"></a>
+    The `eglot-format-buffer` function doesn't check if Eglot is running in the current buffer. This means hooking using it as a global `after-save-hook` produces errors in the echo area whenever a file is saved while Eglot isn't enabled:
+    
+    ```emacs-lisp
+    (jsonrpc-error
+     "No current JSON-RPC connection"
+     (jsonrpc-error-code . -32603)
+     (jsonrpc-error-message . "No current JSON-RPC connection"))
+    ```
+    
+    To remedy this, add a function that formats only when Eglot is enabled.
+    
+    ```emacs-lisp
+    (defun jk/maybe-format-buffer ()
+      (when (eglot-managed-p) (eglot-format-buffer)))
+    ```
+    
+    This function is then added as a global `after-save-hook`.
+    
+    ```emacs-lisp
+    (add-hook 'after-save-hook 'jk/maybe-format-buffer)
+    ```
+    
+    Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
+
+
+<a id="orgb81229a"></a>
 
 ## Shell
 
 
-<a id="org48b767c"></a>
+<a id="orgfbed12d"></a>
 
 ### Terminal emulation
 
@@ -519,7 +597,7 @@ Because Eat now handles full screen terminal applications, Eshell no longer has 
 Now, an application like `top` will run in the Eshell buffer without a separate term buffer having to be opened.
 
 
-<a id="org0b5a284"></a>
+<a id="orgdf2669e"></a>
 
 ### History
 
@@ -559,7 +637,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org9530648"></a>
+<a id="org53a8b4d"></a>
 
 ## Dired
 
@@ -568,28 +646,28 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org8ac1a17"></a>
+<a id="org1124ab2"></a>
 
 ## Org
 
 k
 
 
-<a id="orgb3c80af"></a>
+<a id="orgc0c6f25"></a>
 
 ## Email
 
 Use [notmuch.el](https://notmuchmail.org/notmuch-emacs/) to read email.
 
 
-<a id="orgf99e58c"></a>
+<a id="org27a2eb7"></a>
 
 ## Enhancements
 
 This section covers general enhancements to Emacs which don't warrant their own section.
 
 
-<a id="orgb10f24b"></a>
+<a id="org50256c5"></a>
 
 ### Backups
 
@@ -600,7 +678,7 @@ Emacs automatically generates [backups](https://www.gnu.org/software/emacs/manua
 ```
 
 
-<a id="orgca7d5ca"></a>
+<a id="org327542e"></a>
 
 ### Key suggestions
 
@@ -611,7 +689,7 @@ With [which-key](https://github.com/justbur/emacs-which-key), Emacs shows sugges
 ```
 
 
-<a id="org5cc1e06"></a>
+<a id="orgdea41fe"></a>
 
 ### Projects
 
@@ -624,19 +702,21 @@ Project-x is not on any of the pacakge managers, so this configuration assumes i
 (setq project-find-functions '(project-x-try-local project-try-vc))
 ```
 
-With project-x enabled, Emacs will recognise directories with a `.project` file as project directories.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+With project-x enabled, Emacs will recognise directories with a `.project` file as project directories.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
 
 
-<a id="org01c12a1"></a>
+<a id="org595fd92"></a>
 
-## Desktop
+### Precise scrolling
 
-Enable [`desktop-save-mode`](https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html#Saving-Emacs-Sessions) to save Emacs' state between sessions.
+[Added in Emacs 29](https://www.gnu.org/software/emacs/manual///html_node/efaq/New-in-Emacs-29.html), `pixel-scroll-precision-mode` enables smooth scrolling instead of scrolling line by line.
 
 ```emacs-lisp
-(desktop-save-mode 1)
+(pixel-scroll-precision-mode 1)
 ```
 
 ## Footnotes
 
-<sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> Apparently, [`project.el` now supports identifying projects based on a special file in its directory root](https://github.com/karthink/project-x/issues/5#issuecomment-1522535927). Project-x should be obsolete for this purpose, but I haven't figured it out yet.
+<sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> I'd rather not worry about installing major modes and use a package like [vim-polyglot](https://github.com/sheerun/vim-polyglot), but I haven't been able to find an equivalent for Emacs.
+
+<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> Apparently, [`project.el` now supports identifying projects based on a special file in its directory root](https://github.com/karthink/project-x/issues/5#issuecomment-1522535927). Project-x should be obsolete for this purpose, but I haven't figured it out yet.
