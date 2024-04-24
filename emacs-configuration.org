@@ -16,15 +16,17 @@
 
 * Installation
 
-This whole Emacs configuration, including the configuration file and the included packages is a Nix [[https://nixos.org/manual/nix/stable/language/derivations.html][derivation]], which means it's installed as a Nix package.
-For example, to try out this Emacs configuration without affecting the rest of your system, run the following command:
+This whole Emacs configuration, including the configuration file and the included packages is a Nix [[https://nixos.org/manual/nix/stable/language/derivations.html][derivation]].
+By installing Emacs through Nix, the editor, its packages and the configuration are bundled together in a single bundle.
+This allows for quick installs and reproducable builds.
+
+As an example, to try out this Emacs configuration without affecting the rest of your system, run the following command.
+This downloads and compiles Emacs, including packages and the configuration, and starts the resulting Emacs.app.
 
 #+begin_src shell
   nix run github:jeffkreeftmeijer/.emacs.d
 #+end_src
 
-This downloads and compiles Emacs, including packages and the configuration, and starts the resulting Emacs.app.
-This configuration inherits the system's Nixpkgs, meaning the exact version of Emacs and all packages are subject to the Nixpkgs channel used on the system.
 
 #+headers: :exports none
 #+headers: :noweb yes
