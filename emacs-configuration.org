@@ -68,6 +68,51 @@ To use the latest version, replace the revision hash with a branch name like ~ma
 
 Assuming the derivation is saved to a file named ~emacs-git.nix~, it can be built through ~nix build~:
 
+** Applying Emacs Plus patches
+
+[[https://github.com/d12frosted/homebrew-emacs-plus][Emacs Plus]] is a Homebrew formula to build Emacs on macOS, which applies a couple of patches while building.
+First, download the patches for the correct Emacs version.
+In this case, get the patches for Emacs 30:
+
+#+begin_src shell
+  curl https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/system-appearance.patch -o patches/system-appearance.patch
+  curl https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/round-undecorated-frame.patch -o patches/round-undecorated-frame.patch
+  curl https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/poll.patch -o patches/poll.patch
+  curl https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-28/fix-window-role.patch -o patches/fix-window-role.patch
+#+end_src
+
+#+RESULTS:
+
+Then, override the attributes in ~pkgs.emacs-git~ when using emacs-overlay---or ~pkgs.emacs~ when building Emacs from Nixpkgs---to add all path files to the package's patches list:
+
+#+name: patched
+#+headers: :exports none
+#+begin_src nix
+  pkgs.emacs-git.overrideAttrs(old: {
+    patches = old.patches ++ [
+      ./patches/system-appearance.patch
+      ./patches/round-undecorated-frame.patch
+      ./patches/poll.patch
+      ./patches/fix-window-role.patch
+    ];
+  })
+#+end_src
+
+#+headers: :tangle emacs-patched.nix
+#+headers: :noweb yes
+#+begin_src nix
+  <<pkgs>>
+
+  <<patched>>
+#+end_src
+
+Assuming the derivation is saved to a file named ~emacs-patched.nix~, it can be built through ~nix build~:
+
+#+begin_src shell
+  nix build --file emacs-patched.nix
+  open /result/Applications/Emacs.app
+#+end_src
+
 
 #+headers: :exports none
 #+headers: :noweb yes
@@ -77,11 +122,9 @@ Assuming the derivation is saved to a file named ~emacs-git.nix~, it can be buil
   <<pkgs>>
 
   pkgs.emacsWithPackagesFromUsePackage {
-    package = (pkgs.emacs-git.overrideAttrs(old: {
-      patches = old.patches ++ [
-	./system-appearance.patch
-      ];
-    }));
+    package = (
+      <<patched>>
+    );
 
     config = ./default.el;
     defaultInitFile = true;
