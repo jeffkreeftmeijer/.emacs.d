@@ -27,19 +27,54 @@ This downloads and compiles Emacs, including packages and the configuration, and
   nix run github:jeffkreeftmeijer/.emacs.d
 #+end_src
 
+** Building Emacs from Git with Nix
+
+Instead of using the [[https://search.nixos.org/packages?channel=23.11&show=emacs&from=0&size=50&sort=relevance&type=packages&query=emacs][stable Emacs from Nixpkgs]], this configuration uses [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] to build Emacs from its master branch.
+The overlay updates daily, but this configuration only updates sporadically, when there's reason to do so, to keep everything as stable as possible.
+
+I'm inclined to use a stable version of Emacs instead of building from Git, as I'm not specifically looking to be on the bleeding edge. However, newly added features tend to pull me in.
+
+Currently, there are two reasons I'm currently running on a prerelease version:
+
+1. Emacs master updated its included version of the modus-themes, including the tinted variants of modus-vivendi and modus-operandi, which are my preferred themes.
+    Running Emacs master therefor requires one less dependency.
+2. [[https://git.savannah.gnu.org/cgit/emacs.git/log/lisp/completion-preview.el][Completion-preview.el]], a fish-like completion-at-point package, was merged into master in [[https://git.savannah.gnu.org/cgit/emacs.git/commit/lisp/completion-preview.el?id=e82d807a2845673e2d55a27915661b2f1374b89a][e82d807a2845673e2d55a27915661b2f1374b89a]].
+
+To build a Nix derivation that intalls Emacs from Git using Emacs-overlay, import ~nixpkgs~, and then apply the overlay from a tarball.
+Then, return ~pkgs.emacs-git~:
+
+#+name: pkgs
+#+headers: :exports none
+#+begin_src nix
+    { pkgs ? import <nixpkgs> {
+      overlays = [
+	(import (builtins.fetchTarball {
+	  url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+	}))
+      ];
+    } }:
+#+end_src
+
+#+headers: :tangle emacs-git.nix
+#+headers: :noweb yes
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacs-git
+#+end_src
+
+In this example, the version of emacs-overlay (and thus Emacs itself) is locked to a specific version.
+To use the latest version, replace the revision hash with a branch name like ~master~.
+
+Assuming the derivation is saved to a file named ~emacs-git.nix~, it can be built through ~nix build~:
+
 
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :noweb-ref none
 #+headers: :tangle configured-emacs.nix
 #+begin_src nix
-  { pkgs ? import <nixpkgs> {
-    overlays = [
-      (import (builtins.fetchTarball {
-	url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
-      }))
-    ];
-  } }:
+  <<pkgs>>
 
   pkgs.emacsWithPackagesFromUsePackage {
     package = (pkgs.emacs-git.overrideAttrs(old: {
