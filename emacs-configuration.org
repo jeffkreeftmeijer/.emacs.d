@@ -1175,8 +1175,8 @@ Luckily, Org's exporters are endlessly configurable, and include support for HTM
 #+headers: :exports none
 #+headers: :noweb-ref ox-org-custom
 #+begin_src emacs-lisp
-  (org-html-doctype "html5")
-  (org-html-html5-fancy t)
+  org-html-doctype "html5"
+  org-html-html5-fancy t
 #+end_src
 
 #+headers: :noweb yes
@@ -1184,6 +1184,9 @@ Luckily, Org's exporters are endlessly configurable, and include support for HTM
   (setq
    <<ox-org-custom>>)
 #+end_src
+
+#+RESULTS:
+: t
 
 #+headers: :exports none
 #+headers: :noweb yes
@@ -1193,6 +1196,8 @@ Luckily, Org's exporters are endlessly configurable, and include support for HTM
     :custom
     <<ox-org-custom>>)
 #+end_src
+
+#+RESULTS:
 
 #+headers: :exports none
 #+headers: :noweb yes

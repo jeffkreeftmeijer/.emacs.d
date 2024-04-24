@@ -14,7 +14,7 @@
     (set-face-attribute
      face nil
      :family family :weight 'regular :width 'expanded :height 150))
-
+  
   (jk/set-face-font 'default "Iosevka")
   (jk/set-face-font 'fixed-pitch "Iosevka")
   (jk/set-face-font 'variable-pitch "Iosevka Aile")
@@ -191,8 +191,8 @@ end tell"))
 
 (use-package ox-org
   :custom
-  (org-html-doctype "html5")
-  (org-html-html5-fancy t))
+  org-html-doctype "html5"
+  org-html-html5-fancy t)
 
 (use-package org-roam
   :ensure t)
