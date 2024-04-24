@@ -171,6 +171,9 @@ end tell"))
   (rust-ts-mode . eglot-ensure)
   (after-save . jk/maybe-format-buffer))
 
+(use-package magit
+  :ensure t)
+
 (use-package eat
   :ensure t
   :init

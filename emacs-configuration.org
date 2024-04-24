@@ -156,31 +156,7 @@ The included configuration file is [[https://github.com/jeffkreeftmeijer/.emacs.
 
     config = ./default.el;
     defaultInitFile = true;
-
-    extraEmacsPackages = epkgs: [
-      <<packages>>
-    ];
   }
-#+end_src
-
-** Packages
-:PROPERTIES:
-:header-args: :eval no :exports none :noweb-ref packages
-:END:
-
-The following list of packages are added to Emacs through [[https://search.nixos.org/packages?channel=unstable][Nixpkgs' unstable channel]].
-In turn, Nixpkgs gets the packages from their git repositories through their [[https://github.com/melpa/melpa/tree/master/recipes][Melpa recipes]].
-
-- magit
-
-#+begin_src nix
-  epkgs.magit
-#+end_src
-
-- which-key
-
-#+begin_src which-key
-  epkgs.which-key
 #+end_src
 
 * Appearance
@@ -1079,6 +1055,21 @@ Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically 
     <<eglot-config>>
     :hook
     <<eglot-hook>>)
+#+end_src
+
+* Version control
+
+[[https://magit.vc][Magit]] is a user interface for Git in Emacs.
+Even after years of using Git from the console, it's the quickest way to use Git, and it's one of the most sophisticated Emacs packages.
+
+An interesting thing about Magit is that it doesn't have many configuration options.
+It doesn't need any, as it's a great experience out of the box.
+
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t)
 #+end_src
 
 * Shell

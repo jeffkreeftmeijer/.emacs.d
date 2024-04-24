@@ -20,9 +20,4 @@ pkgs.emacsWithPackagesFromUsePackage {
 
   config = ./default.el;
   defaultInitFile = true;
-
-  extraEmacsPackages = epkgs: [
-    epkgs.magit
-    epkgs.which-key
-  ];
 }
