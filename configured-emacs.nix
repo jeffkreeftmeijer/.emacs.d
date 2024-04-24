@@ -23,7 +23,6 @@ pkgs.emacsWithPackagesFromUsePackage {
 
   extraEmacsPackages = epkgs: [
     epkgs.magit
-    epkgs.direnv
     epkgs.which-key
   ];
 }

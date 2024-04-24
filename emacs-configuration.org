@@ -177,12 +177,6 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
   epkgs.magit
 #+end_src
 
-- direnv
-
-#+begin_src nix
-  epkgs.direnv
-#+end_src
-
 - which-key
 
 #+begin_src which-key
@@ -1004,6 +998,7 @@ To provide access to programs on a per-directory level, use the [[https://github
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package direnv
+    :ensure t
     :init
     <<direnv-init>>)
 #+end_src

@@ -155,6 +155,7 @@ end tell"))
   :ensure t)
 
 (use-package direnv
+  :ensure t
   :init
   (direnv-mode 1))
 
