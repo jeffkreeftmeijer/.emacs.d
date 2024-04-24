@@ -55,7 +55,6 @@ Then, return ~pkgs.emacs-git~:
     } }:
 #+end_src
 
-#+headers: :tangle emacs-git.nix
 #+headers: :noweb yes
 #+begin_src nix
   <<pkgs>>
@@ -98,7 +97,6 @@ Then, override the attributes in ~pkgs.emacs-git~ when using emacs-overlay---or 
   })
 #+end_src
 
-#+headers: :tangle emacs-patched.nix
 #+headers: :noweb yes
 #+begin_src nix
   <<pkgs>>
@@ -119,7 +117,6 @@ The ~emacsWithPackagesFromUsePackage~ function parses configuration files in sea
 For example, to package Emacs with Evil and enable ~evil-mode~ on startup, add a ~use-package~ statement as the emacs configuration:
 
 #+headers: :noweb yes
-#+headers: :tangle emacs-evil.nix
 #+begin_src nix
   <<pkgs>>
 
