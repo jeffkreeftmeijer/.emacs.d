@@ -213,6 +213,7 @@ end tell"))
   backup-directory-alist `(("." . "~/.emacs.d/backups")))
 
 (use-package which-key
+  :ensure t
   :init
   (which-key-mode 1))
 

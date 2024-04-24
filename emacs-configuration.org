@@ -1332,6 +1332,7 @@ By default, Emacs only shows the already-typed portion of the command, which doe
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package which-key
+    :ensure t
     :init
     <<which-key-init>>)
 #+end_src
