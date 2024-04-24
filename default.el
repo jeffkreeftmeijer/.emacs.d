@@ -73,6 +73,7 @@ end tell"))
   spacious-padding-subtle-mode-line t)
 
 (use-package evil-commentary
+  :ensure t
   :after evil
   :init
   (evil-commentary-mode 1))

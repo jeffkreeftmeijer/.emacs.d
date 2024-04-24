@@ -177,24 +177,6 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
   epkgs.magit
 #+end_src
 
-- evil
-
-#+begin_src nix
-  epkgs.evil
-#+end_src
-
-- evil-collection
-
-#+begin_src nix
-  epkgs.evil-collection
-#+end_src
-
-- evil-commentatry
-
-#+begin_src nix
-  epkgs.evil-commentary
-#+end_src
-
 - vertico
 
 #+begin_src nix
@@ -580,6 +562,7 @@ After installing Evil, turn on =evil-mode= globally:
 #+headers: :noweb yes
 #+begin_src emacs-lisp
   (use-package evil
+    :ensure t
     :init
     <<evil-want-keybinding>>
     <<evil-init>>)
@@ -610,6 +593,7 @@ Evil-collection [[https://github.com/emacs-evil/evil-collection/issues/60][requi
 #+headers: :noweb yes
 #+begin_src emacs-lisp
   (use-package evil-collection
+    :ensure t
     :after evil
     :config
     <<evil-collection-config>>)
@@ -636,6 +620,7 @@ Turn it on by calling ~evil-commentary-mode~:
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package evil-commentary
+    :ensure t
     :after evil
     :init
     <<evil-commentary-init>>)

@@ -23,9 +23,6 @@ pkgs.emacsWithPackagesFromUsePackage {
 
   extraEmacsPackages = epkgs: [
     epkgs.magit
-    epkgs.evil
-    epkgs.evil-collection
-    epkgs.evil-commentary
     epkgs.vertico
     epkgs.marginalia
     epkgs.consult
