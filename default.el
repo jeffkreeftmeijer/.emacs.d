@@ -189,6 +189,11 @@ end tell"))
   :init
   (dirvish-override-dired-mode))
 
+(use-package ox-org
+  :custom
+  (org-html-doctype "html5")
+  (org-html-html5-fancy t))
+
 (use-package org-roam
   :ensure t)
 

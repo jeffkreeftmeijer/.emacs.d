@@ -1166,6 +1166,34 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 
 * Org
 
+** Modern defaults for Org HTML exports
+
+Org files can be can be exported to other formats, like HTML.
+Due to backwards compatibility constraints, however, the produced documents have an =xhtml-strict= doctype with syntax to match.
+Luckily, Org's exporters are endlessly configurable, and include support for HTML5 when enabled.
+
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  (org-html-doctype "html5")
+  (org-html-html5-fancy t)
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq
+   <<ox-org-custom>>)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package ox-org
+    :custom
+    <<ox-org-custom>>)
+#+end_src
+
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :tangle default.el
