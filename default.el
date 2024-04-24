@@ -83,14 +83,17 @@ end tell"))
   (setq-default cursor-type 'bar))
 
 (use-package vertico
+  :ensure t
   :init
   (vertico-mode 1))
 
 (use-package marginalia
+  :ensure t
   :init
   (marginalia-mode 1))
 
 (use-package consult
+  :ensure t
   :bind
   ("C-x b" . consult-buffer)
   ("C-x p b" . consult-project-buffer)
@@ -99,10 +102,12 @@ end tell"))
   ("C-x p g" . consult-grep))
 
 (use-package orderless
+  :ensure t
   :custom
   completion-styles '(orderless basic))
 
 (use-package embark
+  :ensure t
   :bind
   ("C-." . embark-act))
 

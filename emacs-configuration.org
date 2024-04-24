@@ -177,36 +177,6 @@ In turn, Nixpkgs gets the packages from their git repositories through their [[h
   epkgs.magit
 #+end_src
 
-- vertico
-
-#+begin_src nix
-  epkgs.vertico
-#+end_src
-
-- marginalia
-
-#+begin_src nix
-  epkgs.marginalia
-#+end_src
-
-- consult
-
-#+begin_src nix
-  epkgs.consult
-#+end_src
-
-- orderless
-
-#+begin_src nix
-  epkgs.orderless
-#+end_src
-
-- embark
-
-#+begin_src nix
-  epkgs.embark
-#+end_src
-
 - direnv
 
 #+begin_src nix
@@ -669,6 +639,7 @@ Because Emacs is always in a kind of insert mode, make the cursor a bar:
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package vertico
+    :ensure t
     :init
     <<vertico-init>>)
 #+end_src
@@ -693,6 +664,7 @@ For example, besides just showing command names when executing =M-x=, the packag
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package marginalia
+    :ensure t
     :init
     <<marginalia-init>>)
 #+end_src
@@ -772,6 +744,7 @@ There is [[https://github.com/minad/consult?tab=readme-ov-file#available-command
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package consult
+    :ensure t
     :bind
     <<consult-bind>>)
 #+end_src
@@ -800,6 +773,7 @@ After installing it, add it as a completion style by setting =completion-styles=
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package orderless
+    :ensure t
     :custom
     <<orderless-custom>>)
 #+end_src
@@ -829,6 +803,7 @@ In this exampke, pressing =k= kills the currently selected buffer.
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package embark
+    :ensure t
     :bind
     <<embark-bind>>)
 #+end_src

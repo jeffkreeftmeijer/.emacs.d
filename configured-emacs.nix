@@ -23,11 +23,6 @@ pkgs.emacsWithPackagesFromUsePackage {
 
   extraEmacsPackages = epkgs: [
     epkgs.magit
-    epkgs.vertico
-    epkgs.marginalia
-    epkgs.consult
-    epkgs.orderless
-    epkgs.embark
     epkgs.direnv
     epkgs.which-key
   ];
