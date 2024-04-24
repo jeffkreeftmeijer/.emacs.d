@@ -1176,7 +1176,6 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 
 #+RESULTS:
 
-k
 * Email
 
 Use [[https://notmuchmail.org/notmuch-emacs/][notmuch.el]] to read email.
