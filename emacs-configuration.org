@@ -113,6 +113,34 @@ Assuming the derivation is saved to a file named ~emacs-patched.nix~, it can be 
   open /result/Applications/Emacs.app
 #+end_src
 
+** Emacs with bundled configuration
+
+The ~emacsWithPackagesFromUsePackage~ function parses configuration files in search of packages to bundle with Emacs.
+For example, to package Emacs with Evil and enable ~evil-mode~ on startup, add a ~use-package~ statement as the emacs configuration:
+
+#+headers: :noweb yes
+#+headers: :tangle emacs-evil.nix
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacsWithPackagesFromUsePackage {
+    package = pkgs.emacs-git;
+    config = ''
+    (use-package evil
+      :ensure t
+      :init
+      (evil-mode 1))
+    '';
+    defaultInitFile = true;
+  }
+#+end_src
+
+Assuming the derivation is saved to a file named ~emacs-enil.nix~, it can be built through ~nix build~:
+
+#+begin_src shell
+  nix build --file emacs-evil.nix
+  open /result/Applications/Emacs.app
+#+end_src
 
 #+headers: :exports none
 #+headers: :noweb yes
