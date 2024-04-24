@@ -142,9 +142,12 @@ Assuming the derivation is saved to a file named ~emacs-enil.nix~, it can be bui
   open /result/Applications/Emacs.app
 #+end_src
 
-#+headers: :exports none
+** Configured Emacs
+
+By combining the features in Emacs overlay, this configuration produces /configured Emacs/, a version of Emacs with macOS-specific patches applied, packages installed and a full configuration loaded.
+The included configuration file is [[https://github.com/jeffkreeftmeijer/.emacs.d/blob/main/default.el][~default.el~]], which is generated from the rest of this configuration.
+
 #+headers: :noweb yes
-#+headers: :noweb-ref none
 #+headers: :tangle configured-emacs.nix
 #+begin_src nix
   <<pkgs>>
