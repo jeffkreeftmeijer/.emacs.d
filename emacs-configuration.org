@@ -85,24 +85,24 @@ In this case, get the patches for Emacs 30:
 
 Then, override the attributes in ~pkgs.emacs-git~ when using emacs-overlay---or ~pkgs.emacs~ when building Emacs from Nixpkgs---to add all path files to the package's patches list:
 
-#+name: patched
+#+name: patches
 #+headers: :exports none
 #+begin_src nix
-  pkgs.emacs-git.overrideAttrs(old: {
-    patches = old.patches ++ [
-      ./patches/system-appearance.patch
-      ./patches/round-undecorated-frame.patch
-      ./patches/poll.patch
-      ./patches/fix-window-role.patch
-    ];
-  })
+  patches = old.patches ++ [
+    ./patches/system-appearance.patch
+    ./patches/round-undecorated-frame.patch
+    ./patches/poll.patch
+    ./patches/fix-window-role.patch
+  ];
 #+end_src
 
 #+headers: :noweb yes
 #+begin_src nix
   <<pkgs>>
 
-  <<patched>>
+  pkgs.emacs-git.overrideAttrs(old: {
+    <<patches>>
+  })
 #+end_src
 
 Assuming the derivation is saved to a file named ~emacs-patched.nix~, it can be built through ~nix build~:
@@ -152,7 +152,9 @@ The included configuration file is [[https://github.com/jeffkreeftmeijer/.emacs.
 
   pkgs.emacsWithPackagesFromUsePackage {
     package = (
-      <<patched>>
+      pkgs.emacs-git.overrideAttrs(old: {
+        <<patches>>
+      })
     );
 
     config = ./default.el;
