@@ -1220,19 +1220,64 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 
 Org files can be can be exported to other formats, like HTML.
 Due to backwards compatibility constraints, however, the produced documents have an =xhtml-strict= doctype with syntax to match.
-Luckily, Org's exporters are endlessly configurable, and include support for HTML5 when enabled.
+Luckily, Org's exporters are endlessly configurable, and include support for more modern configurations.
 
+*** HTML 5
+
+Aside from replacing the doctype in the document, setting ~org-html-doctype~ to /html5/ has modernizing effects on the output file.
+For example, it uses the ~charset~ attribute (as opposed to ~http-equiv~) to set the character set, it drops the XML declaration from the header of the document, it switches to the HTML5 validator for the footer (which is then disabled later), and disables HTML table attributes[fn:ox-html-predicates].
+Setting the doctype instantly transports the document from the start of the millenium to last decade.
+
+[fn:ox-html-predicates] The easiest way to find out what each of these options does is to locate where the predicate functions are called in [[https://git.savannah.gnu.org/cgit/emacs/org-mode.git/tree/lisp/ox-html.el][~ox-html.el~]] in Org's source code.
+For example, to find out what changing the doctype to HTML5 does, search for ~org-html-html5-p~.
+
+
+To enable the HTML5 doctype , set the ~org-html-doctype~ variable:
+
+#+name: ox-html5
 #+headers: :exports none
 #+headers: :noweb-ref ox-org-custom
 #+begin_src emacs-lisp
   org-html-doctype "html5"
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<ox-html5>>)
+#+end_src
+
+*** "Fancy" HTML tags
+
+To continue modernizing, enable ~org-html-html5-fancy~ for /fancy/ HTML5 elements.
+This means ~<figure>~ tags to wrap images, a ~<header>~ tag around the file's main headline, and a ~<nav>~ tag around the table of contents.
+It also enables HTML5-powered special blocks to produce modern HTML elements from Org's special blocks:
+
+#+begin_src org
+  ,#+begin_aside
+    An aside.
+  ,#+end_aside
+#+end_src
+
+Exports to:
+
+#+begin_src html
+<aside>
+  An aside.
+</aside>
+#+end_src
+
+To enable HTML5 "fancy" tags, set the ~org-html-html5-fancy~ variable:
+
+#+name: ox-html5-fancy
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
   org-html-html5-fancy t
 #+end_src
 
 #+headers: :noweb yes
 #+begin_src emacs-lisp
-  (setq
-   <<ox-org-custom>>)
+  (setq <<ox-html5-fancy>>)
 #+end_src
 
 #+RESULTS:
