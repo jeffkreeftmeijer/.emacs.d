@@ -1280,6 +1280,32 @@ To enable HTML5 "fancy" tags, set the ~org-html-html5-fancy~ variable:
   (setq <<ox-html5-fancy>>)
 #+end_src
 
+*** Containers
+
+Aside from the modern elements already enabled by the HTML5 doctype and ~org-html-html5-fancy~, Org allows for more customizations to its HTML exports.
+Use ~org-html-container-element~ and ~org-html-divs~ to replace some of the standard ~<div>~ elements with HTML 5 alternatives:
+
+1. Use the ~<section>~ element instead of the main section ~<div>~ elements
+2. Use the ~<header>~ element to wrap document preambles
+3. Use the ~<main>~ element to wrap the document's main section
+4. Use the ~<footer>~ element to wrap document postambles
+
+#+name: ox-org-containers
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-html-container-element "section"
+  org-html-divs '((preamble  "header" "preamble")
+		  (content   "main" "content")
+		  (postamble "footer" "postamble"))
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq
+   <<ox-org-containers>>)
+#+end_src
+
 #+RESULTS:
 : t
 

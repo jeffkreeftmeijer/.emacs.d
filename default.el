@@ -203,7 +203,11 @@ end tell"))
 (use-package ox-org
   :custom
   org-html-doctype "html5"
-  org-html-html5-fancy t)
+  org-html-html5-fancy t
+  org-html-container-element "section"
+  org-html-divs '((preamble  "header" "preamble")
+  		(content   "main" "content")
+  		(postamble "footer" "postamble")))
 
 (use-package org-roam
   :ensure t)
