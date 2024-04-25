@@ -1309,7 +1309,18 @@ Use ~org-html-container-element~ and ~org-html-divs~ to replace some of the stan
 #+RESULTS:
 : t
 
-#+headers: :exports none
+*** Summary
+
+To configure Org mode's HTML exporter to output HTML 5 with modern elements, set the following configuration.
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq
+   <<ox-org-custom>>)
+#+end_src
+
+When using ~use-package~ for configuration, hook into the ~ox-org~ package an use the ~:custom~ keyword.
+
 #+headers: :noweb yes
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
