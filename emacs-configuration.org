@@ -2,6 +2,7 @@
 #+title: ~/.emacs.d
 #+startup: content
 #+options: toc:2 num:t
+#+date: 2021-07-04
 
 #+headers: :exports none
 #+headers: :tangle default.el
