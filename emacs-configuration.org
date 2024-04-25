@@ -68,6 +68,41 @@ To use the latest version, replace the revision hash with a branch name like ~ma
 
 Assuming the derivation is saved to a file named ~emacs-git.nix~, it can be built through ~nix build~:
 
+** Enabling XWidgets in Emacs on macOS with Nix
+
+Nix disables the ~withXwidgets~ option for Emacs on macOS, so simply enabling it won't work yet:
+
+#+headers: :noweb yes
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacs-git.overrideAttrs(old: {
+    withXwidgets = true;
+  })
+#+end_src
+
+In the meantime, circumvent Nix's option by manually adding the build flag.
+As expected, enabling XWidgets also requires the WebKit framework as a build input:
+
+#+name: xwidgets
+#+headers: :exports none
+#+begin_src nix
+  buildInputs = old.buildInputs ++ [
+    pkgs.darwin.apple_sdk.frameworks.WebKit
+  ];
+
+  configureFlags = old.configureFlags ++ ["--with-xwidgets"];
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacs-git.overrideAttrs(old: {
+    <<xwidgets>>
+  })
+#+end_src
+
 ** Applying Emacs Plus patches
 
 [[https://github.com/d12frosted/homebrew-emacs-plus][Emacs Plus]] is a Homebrew formula to build Emacs on macOS, which applies a couple of patches while building.
@@ -142,7 +177,7 @@ Assuming the derivation is saved to a file named ~emacs-enil.nix~, it can be bui
 
 ** Configured Emacs
 
-By combining the features in Emacs overlay, this configuration produces /configured Emacs/, a version of Emacs with macOS-specific patches applied, packages installed and a full configuration loaded.
+By combining the features in Emacs overlay, this configuration produces /configured Emacs/, a version of Emacs with macOS-specific patches applied, XWidgets enabled, packages installed and a full configuration loaded.
 The included configuration file is [[https://github.com/jeffkreeftmeijer/.emacs.d/blob/main/default.el][~default.el~]], which is generated from the rest of this configuration.
 
 #+headers: :noweb yes
@@ -153,7 +188,9 @@ The included configuration file is [[https://github.com/jeffkreeftmeijer/.emacs.
   pkgs.emacsWithPackagesFromUsePackage {
     package = (
       pkgs.emacs-git.overrideAttrs(old: {
-        <<patches>>
+	<<patches>>
+
+	<<xwidgets>>
       })
     );
 

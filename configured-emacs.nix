@@ -15,6 +15,12 @@ pkgs.emacsWithPackagesFromUsePackage {
         ./patches/poll.patch
         ./patches/fix-window-role.patch
       ];
+
+      buildInputs = old.buildInputs ++ [
+        pkgs.darwin.apple_sdk.frameworks.WebKit
+      ];
+
+      configureFlags = old.configureFlags ++ ["--with-xwidgets"];
     })
   );
 
