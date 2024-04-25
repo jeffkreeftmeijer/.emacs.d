@@ -1216,11 +1216,102 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 
 * Org
 
-** Modern defaults for Org HTML exports
+** Modern defaults for Org exports
 
 Org files can be can be exported to other formats, like HTML.
 Due to backwards compatibility constraints, however, the produced documents have an =xhtml-strict= doctype with syntax to match.
 Luckily, Org's exporters are endlessly configurable, and include support for more modern configurations.
+
+*** Smart quotes
+
+Automatically convert single and double quotes to their curly equivalents, depending on the document language.
+
+#+name: ox-smart-quotes
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-export-with-smart-quotes t
+#+end_src
+
+#+RESULTS:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<ox-smart-quotes>>)
+#+end_src
+
+#+RESULTS:
+
+*** Entities
+
+Disable entities, like using ~&ldquo;~ instead of “ in HTML.
+This option only works for entities included in the document, not the entities added through smart quotes.
+
+#+name: ox-entities
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-export-with-entities nil
+#+end_src
+
+#+RESULTS:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<ox-entities>>)
+#+end_src
+
+#+RESULTS:
+
+*** Headline levels
+
+Instead of 3, set the maximum headline level to 5.
+This matches the HTML standard of having six headline levels, when counting the document title as the first, leaving five.
+
+#+name: ox-headline-levels
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-export-headline-levels 5
+#+end_src
+
+#+RESULTS: ox-headline-levels
+: 5
+
+#+RESULTS:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<ox-headline-levels>>)
+#+end_src
+
+#+RESULTS:
+: 5
+
+*** Table of contents and section numbers
+
+Disable both the table of contents and section numbers, as they're easily turned on when needed, not needed for most exports, and not present in the source documents.
+
+#+name: ox-toc-num
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-export-with-toc nil
+  org-export-section-numbers nil
+#+end_src
+
+#+RESULTS: ox-section-numbers
+
+#+RESULTS:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq
+   <<ox-toc-num>>)
+#+end_src
+
+#+RESULTS:
+
 
 *** HTML 5
 
