@@ -1,51 +1,21 @@
 
 # ~/.emacs.d
 
-- [Installation](#org45e1ba9)
-  - [Building Emacs from Git with Nix](#org74493fe)
-  - [Applying Emacs Plus patches](#org006de4e)
-  - [Emacs with bundled configuration](#org48b4ed6)
-  - [Configured Emacs](#orgb0a51bb)
-- [Appearance](#org37ee44f)
-  - [Frames](#orgb155eaf)
-  - [Fonts](#orge84f79b)
-  - [Variable pitch](#orgcc4ce1b)
-  - [Themes](#orgd833ab9)
-  - [Layout](#org3566aac)
-- [Modal editing](#org6d85754)
-  - [Evil mode](#org2d73da9)
-  - [Evil-collection](#orgb057484)
-  - [Evil-commentary](#orgb3f3ba2)
-  - [Cursors](#org3ce8d7e)
-- [Completion](#orgde9585e)
-  - [Vertical completion](#org9d4c544)
-  - [Contextual information](#org06e7586)
-  - [Enhanced navigation commands](#org9b0b619)
-  - [Pattern matching](#orgab0ea1b)
-  - [Minibuffer actions](#orge85a75a)
-  - [Minibuffer history](#org03b31f7)
-  - [Completion at point](#org64cd018)
-- [Development](#org9fe4956)
-  - [Major modes](#orgd02c133)
-  - [Environments](#org0b9602d)
-  - [Language servers](#orgf1dfa06)
-- [Version control](#org4e3cea3)
-- [Shell](#org1d8ef9b)
-  - [Terminal emulation](#orgfbd3e79)
-  - [History](#orga88047e)
-- [Dired](#orgbb3ef7f)
-- [Org](#orgd2b292e)
-  - [Modern defaults for Org HTML exports](#org9acff71)
-- [Email](#org458de60)
-- [Enhancements](#org62f7610)
-  - [Backups](#orga5149c7)
-  - [Key suggestions](#orgd91b801)
-  - [Projects](#org95a7961)
-  - [Precise scrolling](#org365705b)
+- [Installation](#org95d1d34)
+- [Appearance](#org8e8cdd2)
+- [Modal editing](#org0d77473)
+- [Completion](#org10f384c)
+- [Development](#orgc12b5e4)
+- [Version control](#orgc382c1c)
+- [Shell](#org365a13b)
+- [Dired](#org32689b2)
+- [Org](#org9a88dd9)
+- [Email](#orgb52dad2)
+- [Enhancements](#orgaa4f777)
 
 
 
-<a id="org45e1ba9"></a>
+<a id="org95d1d34"></a>
 
 ## Installation
 
@@ -57,8 +27,6 @@ As an example, to try out this Emacs configuration without affecting the rest of
 nix run github:jeffkreeftmeijer/.emacs.d
 ```
 
-
-<a id="org74493fe"></a>
 
 ### Building Emacs from Git with Nix
 
@@ -90,7 +58,44 @@ In this example, the version of emacs-overlay (and thus Emacs itself) is locked 
 Assuming the derivation is saved to a file named `emacs-git.nix`, it can be built through `nix build`:
 
 
-<a id="org006de4e"></a>
+### Enabling XWidgets in Emacs on macOS with Nix
+
+Nix disables the `withXwidgets` option for Emacs on macOS, so simply enabling it won't work yet:
+
+```nix
+{ pkgs ? import <nixpkgs> {
+  overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+    }))
+  ];
+} }:
+
+pkgs.emacs-git.overrideAttrs(old: {
+  withXwidgets = true;
+})
+```
+
+In the meantime, circumvent Nix's option by manually adding the build flag. As expected, enabling XWidgets also requires the WebKit framework as a build input:
+
+```nix
+{ pkgs ? import <nixpkgs> {
+  overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+    }))
+  ];
+} }:
+
+pkgs.emacs-git.overrideAttrs(old: {
+  buildInputs = old.buildInputs ++ [
+    pkgs.darwin.apple_sdk.frameworks.WebKit
+  ];
+
+  configureFlags = old.configureFlags ++ ["--with-xwidgets"];
+})
+```
+
 
 ### Applying Emacs Plus patches
 
@@ -132,8 +137,6 @@ open /result/Applications/Emacs.app
 ```
 
 
-<a id="org48b4ed6"></a>
-
 ### Emacs with bundled configuration
 
 The `emacsWithPackagesFromUsePackage` function parses configuration files in search of packages to bundle with Emacs. For example, to package Emacs with Evil and enable `evil-mode` on startup, add a `use-package` statement as the emacs configuration:
@@ -167,11 +170,9 @@ open /result/Applications/Emacs.app
 ```
 
 
-<a id="orgb0a51bb"></a>
-
 ### Configured Emacs
 
-By combining the features in Emacs overlay, this configuration produces *configured Emacs*, a version of Emacs with macOS-specific patches applied, packages installed and a full configuration loaded. The included configuration file is [`default.el`](https://github.com/jeffkreeftmeijer/.emacs.d/blob/main/default.el), which is generated from the rest of this configuration.
+By combining the features in Emacs overlay, this configuration produces *configured Emacs*, a version of Emacs with macOS-specific patches applied, XWidgets enabled, packages installed and a full configuration loaded. The included configuration file is [`default.el`](https://github.com/jeffkreeftmeijer/.emacs.d/blob/main/default.el), which is generated from the rest of this configuration.
 
 ```nix
 { pkgs ? import <nixpkgs> {
@@ -191,6 +192,12 @@ pkgs.emacsWithPackagesFromUsePackage {
 	./patches/poll.patch
 	./patches/fix-window-role.patch
       ];
+
+      buildInputs = old.buildInputs ++ [
+	pkgs.darwin.apple_sdk.frameworks.WebKit
+      ];
+
+      configureFlags = old.configureFlags ++ ["--with-xwidgets"];
     })
   );
 
@@ -200,12 +207,10 @@ pkgs.emacsWithPackagesFromUsePackage {
 ```
 
 
-<a id="org37ee44f"></a>
+<a id="org8e8cdd2"></a>
 
 ## Appearance
 
-
-<a id="orgb155eaf"></a>
 
 ### Frames
 
@@ -217,8 +222,6 @@ Disable the scroll bar, the tool bar, and the menu bar:
 (menu-bar-mode -1)
 ```
 
-
-<a id="orge84f79b"></a>
 
 ### Fonts
 
@@ -251,8 +254,6 @@ If the SF fonts aren't available, the fixed font falls back to Menlo before the 
 ```
 
 
-<a id="orgcc4ce1b"></a>
-
 ### Variable pitch
 
 To use proportional fonts (as opposed to monospaced fonts) for non-code text, enable `variable-pitch-mode` for selected modes. While this mode is enabled, the `default` font face inherits from `variable-pitch` instead of `fixed-pitch`.
@@ -274,8 +275,6 @@ Instead of hooking into `text-mode`, explicitly select the modes to use proporti
 (add-hook 'markdown-mode-hook #'variable-pitch-mode)
 ```
 
-
-<a id="orgd833ab9"></a>
 
 ### Themes
 
@@ -359,8 +358,6 @@ An interactive function named `modus-themes-toggle` switches between the light a
     Note that any configuration options to the themes themselves need to happen before the theme is loaded, or the theme needs to be reloaded through `load-theme` after setting the customizations.
 
 
-<a id="org3566aac"></a>
-
 ### Layout
 
 The [spacious-padding](https://protesilaos.com/emacs/spacious-padding) package adds spacing around windows and frames, as well as padding the mode line.
@@ -378,12 +375,10 @@ Turn on `spacious-padding-subtile-mode-line` for a more subtile mode line:
 ```
 
 
-<a id="org6d85754"></a>
+<a id="org0d77473"></a>
 
 ## Modal editing
 
-
-<a id="org2d73da9"></a>
 
 ### Evil mode
 
@@ -393,8 +388,6 @@ Emacs is the best Vim emulator, and [Evil](https://github.com/emacs-evil/evil) i
 (evil-mode 1)
 ```
 
-
-<a id="orgb057484"></a>
 
 ### Evil-collection
 
@@ -411,8 +404,6 @@ Evil-collection [requires `evil-want-keybinding` to be unset](https://github.com
 ```
 
 
-<a id="orgb3f3ba2"></a>
-
 ### Evil-commentary
 
 [Evil-commentary](https://github.com/linktohack/evil-commentary) is an Evil port of [vim-commentary](https://github.com/tpope/vim-commentary) which adds key bindings to call Emacs’ built in `comment-or-uncomment-region` function. Turn it on by calling `evil-commentary-mode`:
@@ -421,8 +412,6 @@ Evil-collection [requires `evil-want-keybinding` to be unset](https://github.com
 (evil-commentary-mode 1)
 ```
 
-
-<a id="org3ce8d7e"></a>
 
 ### Cursors
 
@@ -433,12 +422,10 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="orgde9585e"></a>
+<a id="org10f384c"></a>
 
 ## Completion
 
-
-<a id="org9d4c544"></a>
 
 ### Vertical completion
 
@@ -449,8 +436,6 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org06e7586"></a>
-
 ### Contextual information
 
 [Marginalia](https://github.com/minad/marginalia) adds extra contextual information to minibuffer completions. For example, besides just showing command names when executing `M-x`, the package adds a description of the command and the key binding.
@@ -459,8 +444,6 @@ An example of an essential difference between Emacs and Vim is how they handle t
 (marginalia-mode 1)
 ```
 
-
-<a id="org9b0b619"></a>
 
 ### Enhanced navigation commands
 
@@ -492,8 +475,6 @@ An example of an essential difference between Emacs and Vim is how they handle t
     ```
 
 
-<a id="orgab0ea1b"></a>
-
 ### Pattern matching
 
 [Orderless](https://github.com/oantolin/orderless) is a completion style that divides the search pattern in space-separated components, and matches regardless of their order. After installing it, add it as a completion style by setting `completion-styles`:
@@ -502,8 +483,6 @@ An example of an essential difference between Emacs and Vim is how they handle t
 (setq completion-styles '(orderless basic))
 ```
 
-
-<a id="orge85a75a"></a>
 
 ### Minibuffer actions
 
@@ -514,8 +493,6 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org03b31f7"></a>
-
 ### Minibuffer history
 
 Emacs' `savehist` feature saves minibuffer history to `~/emacs.d/history`. The history is then used to order vertical completion suggestions.
@@ -524,8 +501,6 @@ Emacs' `savehist` feature saves minibuffer history to `~/emacs.d/history`. The h
 (savehist-mode 1)
 ```
 
-
-<a id="org64cd018"></a>
 
 ### Completion at point
 
@@ -536,12 +511,10 @@ Emacs 30 includes `completion-preview.el`, since [e82d807a2845673e2d55a27915661b
 ```
 
 
-<a id="org9fe4956"></a>
+<a id="orgc12b5e4"></a>
 
 ## Development
 
-
-<a id="orgd02c133"></a>
 
 ### Major modes
 
@@ -631,8 +604,6 @@ Emacs 30 includes `completion-preview.el`, since [e82d807a2845673e2d55a27915661b
     ```
 
 
-<a id="org0b9602d"></a>
-
 ### Environments
 
 Programming environments set up with [Nix](https://nixos.org) and [direnv](https://direnv.net) alter the environment and available programs based on the current directory. To provide access to programs on a per-directory level, use the [Emacs direnv package](https://github.com/wbolster/emacs-direnv):
@@ -641,8 +612,6 @@ Programming environments set up with [Nix](https://nixos.org) and [direnv](https
 (direnv-mode 1)
 ```
 
-
-<a id="orgf1dfa06"></a>
 
 ### Language servers
 
@@ -687,7 +656,7 @@ Start eglot automatically for Rust files:
     Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
 
 
-<a id="org4e3cea3"></a>
+<a id="orgc382c1c"></a>
 
 ## Version control
 
@@ -701,12 +670,10 @@ An interesting thing about Magit is that it doesn't have many configuration opti
 ```
 
 
-<a id="org1d8ef9b"></a>
+<a id="org365a13b"></a>
 
 ## Shell
 
-
-<a id="orgfbd3e79"></a>
 
 ### Terminal emulation
 
@@ -726,8 +693,6 @@ Because Eat now handles full screen terminal applications, Eshell no longer has 
 
 Now, an application like `top` will run in the Eshell buffer without a separate term buffer having to be opened.
 
-
-<a id="orga88047e"></a>
 
 ### History
 
@@ -767,7 +732,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="orgbb3ef7f"></a>
+<a id="org32689b2"></a>
 
 ## Dired
 
@@ -776,39 +741,151 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="orgd2b292e"></a>
+<a id="org9a88dd9"></a>
 
 ## Org
 
 
-<a id="org9acff71"></a>
+### Modern defaults for Org exports
 
-### Modern defaults for Org HTML exports
+Org files can be can be exported to other formats, like HTML. Due to backwards compatibility constraints, however, the produced documents have an `xhtml-strict` doctype with syntax to match. Luckily, Org's exporters are endlessly configurable, and include support for more modern configurations.
 
-Org files can be can be exported to other formats, like HTML. Due to backwards compatibility constraints, however, the produced documents have an `xhtml-strict` doctype with syntax to match. Luckily, Org's exporters are endlessly configurable, and include support for HTML5 when enabled.
+1.  Smart quotes
 
-```emacs-lisp
-(setq
- org-html-doctype "html5"
- org-html-html5-fancy t)
-```
+    Automatically convert single and double quotes to their curly equivalents, depending on the document language.
+    
+    ```emacs-lisp
+    (setq org-export-with-smart-quotes t)
+    ```
+
+2.  Entities
+
+    Disable entities, like using `&ldquo;` instead of “ in HTML. This option only works for entities included in the document, not the entities added through smart quotes.
+    
+    ```emacs-lisp
+    (setq org-export-with-entities nil)
+    ```
+
+3.  Headline levels
+
+    Instead of 3, set the maximum headline level to 5. This matches the HTML standard of having six headline levels, when counting the document title as the first, leaving five.
+    
+    ```emacs-lisp
+    (setq org-export-headline-levels 5)
+    ```
+
+4.  Table of contents and section numbers
+
+    Disable both the table of contents and section numbers, as they're easily turned on when needed, not needed for most exports, and not present in the source documents.
+    
+    ```emacs-lisp
+    (setq
+     org-export-with-toc nil
+     org-export-section-numbers nil)
+    ```
+
+5.  HTML 5
+
+    Aside from replacing the doctype in the document, setting `org-html-doctype` to *html5* has modernizing effects on the output file. For example, it uses the `charset` attribute (as opposed to `http-equiv`) to set the character set, it drops the XML declaration from the header of the document, it switches to the HTML5 validator for the footer (which is then disabled later), and disables HTML table attributes<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Setting the doctype instantly transports the document from the start of the millenium to last decade.
+    
+    To enable the HTML5 doctype , set the `org-html-doctype` variable:
+    
+    ```emacs-lisp
+    (setq org-html-doctype "html5")
+    ```
+
+6.  "Fancy" HTML tags
+
+    To continue modernizing, enable `org-html-html5-fancy` for *fancy* HTML5 elements. This means `<figure>` tags to wrap images, a `<header>` tag around the file's main headline, and a `<nav>` tag around the table of contents. It also enables HTML5-powered special blocks to produce modern HTML elements from Org's special blocks:
+    
+    ```org
+    #+begin_aside
+      An aside.
+    #+end_aside
+    ```
+    
+    Exports to:
+    
+    ```html
+    <aside>
+      An aside.
+    </aside>
+    ```
+    
+    To enable HTML5 "fancy" tags, set the `org-html-html5-fancy` variable:
+    
+    ```emacs-lisp
+    (setq org-html-html5-fancy t)
+    ```
+
+7.  Containers
+
+    Aside from the modern elements already enabled by the HTML5 doctype and `org-html-html5-fancy`, Org allows for more customizations to its HTML exports. Use `org-html-container-element` and `org-html-divs` to replace some of the standard `<div>` elements with HTML 5 alternatives:
+    
+    1.  Use the `<section>` element instead of the main section `<div>` elements
+    2.  Use the `<header>` element to wrap document preambles
+    3.  Use the `<main>` element to wrap the document's main section
+    4.  Use the `<footer>` element to wrap document postambles
+    
+    ```emacs-lisp
+    (setq
+     org-html-container-element "section"
+     org-html-divs '((preamble  "header" "preamble")
+    		(content   "main" "content")
+    		(postamble "footer" "postamble")))
+    ```
+
+8.  Summary
+
+    To configure Org mode's HTML exporter to output HTML 5 with modern elements, set the following configuration.
+    
+    ```emacs-lisp
+    (setq
+     org-export-with-smart-quotes t
+     org-export-with-entities nil
+     org-export-headline-levels 5
+     org-export-with-toc nil
+     org-export-section-numbers nil
+     org-html-doctype "html5"
+     org-html-html5-fancy t
+     org-html-container-element "section"
+     org-html-divs '((preamble  "header" "preamble")
+    		(content   "main" "content")
+    		(postamble "footer" "postamble")))
+    ```
+    
+    When using `use-package` for configuration, hook into the `ox-org` package an use the `:custom` keyword.
+    
+    ```emacs-lisp
+    (use-package ox-org
+      :custom
+      org-export-with-smart-quotes t
+      org-export-with-entities nil
+      org-export-headline-levels 5
+      org-export-with-toc nil
+      org-export-section-numbers nil
+      org-html-doctype "html5"
+      org-html-html5-fancy t
+      org-html-container-element "section"
+      org-html-divs '((preamble  "header" "preamble")
+    		(content   "main" "content")
+    		(postamble "footer" "postamble")))
+    ```
 
 
-<a id="org458de60"></a>
+<a id="orgb52dad2"></a>
 
 ## Email
 
 Use [notmuch.el](https://notmuchmail.org/notmuch-emacs/) to read email.
 
 
-<a id="org62f7610"></a>
+<a id="orgaa4f777"></a>
 
 ## Enhancements
 
 This section covers general enhancements to Emacs which don't warrant their own section.
 
-
-<a id="orga5149c7"></a>
 
 ### Backups
 
@@ -819,8 +896,6 @@ Emacs automatically generates [backups](https://www.gnu.org/software/emacs/manua
 ```
 
 
-<a id="orgd91b801"></a>
-
 ### Key suggestions
 
 With [which-key](https://github.com/justbur/emacs-which-key), Emacs shows suggestions when pausing during an incomplete keypress, which is especially useful when trying to learn Emacs' key bindings. By default, Emacs only shows the already-typed portion of the command, which doesn't help to find the next key to press.
@@ -829,8 +904,6 @@ With [which-key](https://github.com/justbur/emacs-which-key), Emacs shows sugges
 (which-key-mode 1)
 ```
 
-
-<a id="org95a7961"></a>
 
 ### Projects
 
@@ -843,10 +916,8 @@ Project-x is not on any of the pacakge managers, so this configuration assumes i
 (setq project-find-functions '(project-x-try-local project-try-vc))
 ```
 
-With project-x enabled, Emacs will recognise directories with a `.project` file as project directories.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
+With project-x enabled, Emacs will recognise directories with a `.project` file as project directories.<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>
 
-
-<a id="org365705b"></a>
 
 ### Precise scrolling
 
@@ -860,4 +931,6 @@ With project-x enabled, Emacs will recognise directories with a `.project` file 
 
 <sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> I'd rather not worry about installing major modes and use a package like [vim-polyglot](https://github.com/sheerun/vim-polyglot), but I haven't been able to find an equivalent for Emacs.
 
-<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> Apparently, [`project.el` now supports identifying projects based on a special file in its directory root](https://github.com/karthink/project-x/issues/5#issuecomment-1522535927). Project-x should be obsolete for this purpose, but I haven't figured it out yet.
+<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> The easiest way to find out what each of these options does is to locate where the predicate functions are called in [`ox-html.el`](https://git.savannah.gnu.org/cgit/emacs/org-mode.git/tree/lisp/ox-html.el) in Org's source code. For example, to find out what changing the doctype to HTML5 does, search for `org-html-html5-p`.
+
+<sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> Apparently, [`project.el` now supports identifying projects based on a special file in its directory root](https://github.com/karthink/project-x/issues/5#issuecomment-1522535927). Project-x should be obsolete for this purpose, but I haven't figured it out yet.
