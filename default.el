@@ -161,7 +161,7 @@ end tell"))
 
 (defun jk/maybe-format-buffer ()
   (when (and (fboundp 'eglot-managed-p)
-	     (glot-managed-p))
+	     (eglot-managed-p))
     (eglot-format-buffer)))
 
 (use-package eglot
