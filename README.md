@@ -1,21 +1,21 @@
 
 # ~/.emacs.d
 
-- [Installation](#org95d1d34)
-- [Appearance](#org8e8cdd2)
-- [Modal editing](#org0d77473)
-- [Completion](#org10f384c)
-- [Development](#orgc12b5e4)
-- [Version control](#orgc382c1c)
-- [Shell](#org365a13b)
-- [Dired](#org32689b2)
-- [Org](#org9a88dd9)
-- [Email](#orgb52dad2)
-- [Enhancements](#orgaa4f777)
+- [Installation](#org3792df1)
+- [Appearance](#orgb4b1c0f)
+- [Modal editing](#org5df4228)
+- [Completion](#org4893608)
+- [Development](#orgeedc2f3)
+- [Version control](#org6e0cb8d)
+- [Shell](#org5b14afb)
+- [Dired](#org7836ba6)
+- [Org](#org6c680bc)
+- [Email](#org0421d0b)
+- [Enhancements](#org987bd6b)
 
 
 
-<a id="org95d1d34"></a>
+<a id="org3792df1"></a>
 
 ## Installation
 
@@ -207,7 +207,7 @@ pkgs.emacsWithPackagesFromUsePackage {
 ```
 
 
-<a id="org8e8cdd2"></a>
+<a id="orgb4b1c0f"></a>
 
 ## Appearance
 
@@ -375,7 +375,7 @@ Turn on `spacious-padding-subtile-mode-line` for a more subtile mode line:
 ```
 
 
-<a id="org0d77473"></a>
+<a id="org5df4228"></a>
 
 ## Modal editing
 
@@ -422,7 +422,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org10f384c"></a>
+<a id="org4893608"></a>
 
 ## Completion
 
@@ -511,7 +511,7 @@ Emacs 30 includes `completion-preview.el`, since [e82d807a2845673e2d55a27915661b
 ```
 
 
-<a id="orgc12b5e4"></a>
+<a id="orgeedc2f3"></a>
 
 ## Development
 
@@ -644,7 +644,9 @@ Start eglot automatically for Rust files:
     
     ```emacs-lisp
     (defun jk/maybe-format-buffer ()
-      (when (eglot-managed-p) (eglot-format-buffer)))
+      (when (and (fboundp 'eglot-managed-p)
+    	     (eglot-managed-p))
+        (eglot-format-buffer)))
     ```
     
     This function is then added as a global `after-save-hook`.
@@ -656,7 +658,7 @@ Start eglot automatically for Rust files:
     Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
 
 
-<a id="orgc382c1c"></a>
+<a id="org6e0cb8d"></a>
 
 ## Version control
 
@@ -670,7 +672,7 @@ An interesting thing about Magit is that it doesn't have many configuration opti
 ```
 
 
-<a id="org365a13b"></a>
+<a id="org5b14afb"></a>
 
 ## Shell
 
@@ -732,7 +734,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org32689b2"></a>
+<a id="org7836ba6"></a>
 
 ## Dired
 
@@ -741,7 +743,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org9a88dd9"></a>
+<a id="org6c680bc"></a>
 
 ## Org
 
@@ -873,14 +875,14 @@ Org files can be can be exported to other formats, like HTML. Due to backwards c
     ```
 
 
-<a id="orgb52dad2"></a>
+<a id="org0421d0b"></a>
 
 ## Email
 
 Use [notmuch.el](https://notmuchmail.org/notmuch-emacs/) to read email.
 
 
-<a id="orgaa4f777"></a>
+<a id="org987bd6b"></a>
 
 ## Enhancements
 
