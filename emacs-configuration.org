@@ -577,6 +577,7 @@ Evil-collection [[https://github.com/emacs-evil/evil-collection/issues/60][requi
 
 #+headers: :exports none
 #+headers: :noweb yes
+#+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package evil-collection
     :ensure t
