@@ -1037,6 +1037,7 @@ Language servers are added through the =eglot-server-programs= variable:
 #+begin_src emacs-lisp
   (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "rust-analyzer"))
   (add-to-list 'eglot-server-programs '((elixir-ts-mode elixir-mode) "elixir-ls"))
+  (add-to-list 'eglot-server-programs '((nix-mode) "nixd"))
 #+end_src
 
 Start eglot automatically for Rust files:
