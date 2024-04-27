@@ -1,8 +1,14 @@
 # -*- eval: (add-hook 'after-save-hook #'org-babel-tangle nil t); eval: (add-hook 'org-babel-post-tangle-hook #'delete-trailing-whitespace nil t); -*-
+:PROPERTIES:
+:ID:       05767757-AA75-4B82-A0D8-1480A1678B20
+:END:
 #+title: ~/.emacs.d
+#+author: Jeff Kreeftmeijer
+#+html_path: /emacs-configuration/
 #+startup: content
 #+options: toc:2 num:t
 #+date: 2021-07-04
+#+description: Jeff Kreeftmeijer's Emacs configuration
 
 #+headers: :exports none
 #+headers: :tangle default.el
