@@ -1,21 +1,21 @@
 
 # ~/.emacs.d
 
-- [Installation](#orga6f3552)
-- [Appearance](#org0211fea)
-- [Modal editing](#org57ddc17)
-- [Completion](#org1598a31)
-- [Development](#orge8997fb)
-- [Version control](#orgd3b40fd)
-- [Shell](#orgded4bc1)
-- [Dired](#org1442df2)
-- [Org](#orgc17928d)
-- [Email](#orge79f61d)
-- [Enhancements](#org0c502b5)
+- [Installation](#org2b6065e)
+- [Appearance](#org6875520)
+- [Modal editing](#org4518eb3)
+- [Completion](#orgfe442fe)
+- [Development](#org9d06132)
+- [Version control](#orgd179b88)
+- [Shell](#orga233673)
+- [Dired](#org8995f6c)
+- [Org](#orga0eac54)
+- [Email](#org9ef2e29)
+- [Enhancements](#org977a8ac)
 
 
 
-<a id="orga6f3552"></a>
+<a id="org2b6065e"></a>
 
 ## Installation
 
@@ -207,7 +207,7 @@ pkgs.emacsWithPackagesFromUsePackage {
 ```
 
 
-<a id="org0211fea"></a>
+<a id="org6875520"></a>
 
 ## Appearance
 
@@ -375,7 +375,7 @@ Turn on `spacious-padding-subtile-mode-line` for a more subtile mode line:
 ```
 
 
-<a id="org57ddc17"></a>
+<a id="org4518eb3"></a>
 
 ## Modal editing
 
@@ -422,7 +422,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org1598a31"></a>
+<a id="orgfe442fe"></a>
 
 ## Completion
 
@@ -511,7 +511,7 @@ Emacs 30 includes `completion-preview.el`, since [e82d807a2845673e2d55a27915661b
 ```
 
 
-<a id="orge8997fb"></a>
+<a id="org9d06132"></a>
 
 ## Development
 
@@ -658,7 +658,7 @@ Start eglot automatically for Rust files:
     Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
 
 
-<a id="orgd3b40fd"></a>
+<a id="orgd179b88"></a>
 
 ## Version control
 
@@ -672,7 +672,7 @@ An interesting thing about Magit is that it doesn't have many configuration opti
 ```
 
 
-<a id="orgded4bc1"></a>
+<a id="orga233673"></a>
 
 ## Shell
 
@@ -734,7 +734,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org1442df2"></a>
+<a id="org8995f6c"></a>
 
 ## Dired
 
@@ -743,9 +743,33 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="orgc17928d"></a>
+<a id="orga0eac54"></a>
 
 ## Org
+
+
+### Note-taking
+
+I'm trying out [org-node](https://github.com/meedstrom/org-node), a just-released alternative to [org-roam](https://www.orgroam.com), my current note-taking solution. Currently, this configuration uses both packages.
+
+1.  Org-node
+
+    Org-node is not on any of the package repositories [yet](https://www.reddit.com/r/emacs/comments/1cfbgqi/comment/l1ok712/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button). This configuration doesn't ensure the package is there, so it's assumed it's installed manually. I've installed org-node through `package-vc-install` for now.
+    
+    Enable org-node by calling `org-node-enable` whenever an `org-mode` is enabled:
+    
+    ```emacs-lisp
+    (add-hook 'org-mode-hook #'org-node-enable))
+    ```
+
+
+### Org-roam
+
+Org-roam stores notes in `org-roam-directory`, which is `~/org-roam` by default. Use `~/notes` instead:
+
+```emacs-lisp
+(setq org-roam-directory (file-truename "~/notes"))
+```
 
 
 ### Modern defaults for Org exports
@@ -875,14 +899,14 @@ Org files can be can be exported to other formats, like HTML. Due to backwards c
     ```
 
 
-<a id="orge79f61d"></a>
+<a id="org9ef2e29"></a>
 
 ## Email
 
 Use [notmuch.el](https://notmuchmail.org/notmuch-emacs/) to read email.
 
 
-<a id="org0c502b5"></a>
+<a id="org977a8ac"></a>
 
 ## Enhancements
 
