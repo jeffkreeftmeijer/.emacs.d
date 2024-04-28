@@ -1294,12 +1294,34 @@ Enable org-node by calling ~org-node-enable~ whenever an ~org-mode~ is enabled:
 #+RESULTS:
 | org-node-enable | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | variable-pitch-mode |
 
+** Org-roam
+
+Org-roam stores notes in ~org-roam-directory~, which is ~~/org-roam~ by default.
+Use ~~/notes~ instead:
+
+#+headers: :exports none
+#+headers: :noweb-ref org-roam-custom
+#+begin_src emacs-lisp
+  org-roam-directory (file-truename "~/notes")
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<org-roam-custom>>)
+#+end_src
+
+#+RESULTS:
+: /Users/jeff/notes
+
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package org-roam
-    :ensure t)
+    :ensure t
+    :custom
+    <<org-roam-custom>>)
 #+end_src
 
 #+RESULTS:

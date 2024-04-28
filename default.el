@@ -218,7 +218,9 @@ end tell"))
   :hook (org-mode . org-node-enable))
 
 (use-package org-roam
-  :ensure t)
+  :ensure t
+  :custom
+  org-roam-directory (file-truename "~/notes"))
 
 (use-package ox-org
   :custom
