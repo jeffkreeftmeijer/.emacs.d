@@ -214,6 +214,9 @@ end tell"))
   :init
   (dirvish-override-dired-mode))
 
+(use-package org-roam
+  :ensure t)
+
 (use-package ox-org
   :custom
   org-export-with-smart-quotes t
@@ -227,9 +230,6 @@ end tell"))
   org-html-divs '((preamble  "header" "preamble")
   		(content   "main" "content")
   		(postamble "footer" "postamble")))
-
-(use-package org-roam
-  :ensure t)
 
 (use-package notmuch
   :ensure t)

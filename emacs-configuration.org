@@ -1265,6 +1265,18 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 
 * Org
 
+** Note-taking
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t)
+#+end_src
+
+#+RESULTS:
+
 ** Modern defaults for Org exports
 
 Org files can be can be exported to other formats, like HTML.
@@ -1467,16 +1479,6 @@ When using ~use-package~ for configuration, hook into the ~ox-org~ package an us
   (use-package ox-org
     :custom
     <<ox-org-custom>>)
-#+end_src
-
-#+RESULTS:
-
-#+headers: :exports none
-#+headers: :noweb yes
-#+headers: :tangle default.el
-#+begin_src emacs-lisp
-  (use-package org-roam
-    :ensure t)
 #+end_src
 
 #+RESULTS:
