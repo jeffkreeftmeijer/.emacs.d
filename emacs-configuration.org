@@ -1074,8 +1074,7 @@ To remedy this, add a function that formats only when Eglot is enabled.
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (defun jk/maybe-format-buffer ()
-    (when (and (fboundp 'eglot-managed-p)
-	       (eglot-managed-p))
+    (when (bound-and-true-p eglot-managed-p)
       (eglot-format-buffer)))
 #+end_src
 

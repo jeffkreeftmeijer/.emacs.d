@@ -172,8 +172,7 @@ end tell"))
   (direnv-mode 1))
 
 (defun jk/maybe-format-buffer ()
-  (when (and (fboundp 'eglot-managed-p)
-	     (eglot-managed-p))
+  (when (bound-and-true-p eglot-managed-p)
     (eglot-format-buffer)))
 
 (use-package eglot
