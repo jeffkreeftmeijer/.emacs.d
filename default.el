@@ -214,6 +214,9 @@ end tell"))
   :init
   (dirvish-override-dired-mode))
 
+(use-package org-gode
+  :hook (org-mode . org-node-enable))
+
 (use-package org-roam
   :ensure t)
 

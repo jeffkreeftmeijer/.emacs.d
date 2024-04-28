@@ -1267,6 +1267,33 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 
 ** Note-taking
 
+I'm trying out [[https://github.com/meedstrom/org-node][org-node]], a just-released alternative to [[https://www.orgroam.com][org-roam]], my current note-taking solution.
+Currently, this configuration uses both packages.
+
+*** Org-node
+
+Org-node is not on any of the package repositories [[https://www.reddit.com/r/emacs/comments/1cfbgqi/comment/l1ok712/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button][yet]].
+This configuration doesn't ensure the package is there, so it's assumed it's installed manually.
+I've installed org-node through ~package-vc-install~ for now.
+
+Enable org-node by calling ~org-node-enable~ whenever an ~org-mode~ is enabled:
+
+#+headers: :eval no
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook #'org-node-enable))
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-gode
+    :hook (org-mode . org-node-enable))
+#+end_src
+
+#+RESULTS:
+| org-node-enable | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | variable-pitch-mode |
+
 #+headers: :exports none
 #+headers: :noweb yes
 #+headers: :tangle default.el
