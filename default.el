@@ -222,6 +222,10 @@ end tell"))
   :custom
   org-roam-directory (file-truename "~/notes"))
 
+(use-package org-agenda
+  :custom
+  org-agenda-files '("/Users/jeff/Library/Mobile\ Documents/iCloud\~com\~appsonthemove\~beorg/Documents/org/inbox.org"))
+
 (use-package ox-org
   :custom
   org-export-with-smart-quotes t

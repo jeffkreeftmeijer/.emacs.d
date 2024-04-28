@@ -1326,6 +1326,35 @@ Use ~~/notes~ instead:
 
 #+RESULTS:
 
+** Task management
+
+[[https://beorgapp.com][Beorg]] is an iOS app that takes Org mode to iOS.
+It includes a list of tasks named /inbox/ that's synced via iCloud, meaning it can be added to the agenda through ~org-agenda-files~.
+
+#+headers: :exports none
+#+headers: :noweb-ref org-agenda-custom
+#+begin_src emacs-lisp
+  org-agenda-files '("/Users/jeff/Library/Mobile\ Documents/iCloud\~com\~appsonthemove\~beorg/Documents/org/inbox.org")
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<org-agenda-custom>>)
+#+end_src
+
+#+RESULTS:
+: /Users/jeff/notes
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-agenda
+    :custom
+    <<org-agenda-custom>>)
+#+end_src
+
 ** Modern defaults for Org exports
 
 Org files can be can be exported to other formats, like HTML.
