@@ -1,21 +1,21 @@
 
 # ~/.emacs.d
 
-- [Installation](#org2b6065e)
-- [Appearance](#org6875520)
-- [Modal editing](#org4518eb3)
-- [Completion](#orgfe442fe)
-- [Development](#org9d06132)
-- [Version control](#orgd179b88)
-- [Shell](#orga233673)
-- [Dired](#org8995f6c)
-- [Org](#orga0eac54)
-- [Email](#org9ef2e29)
-- [Enhancements](#org977a8ac)
+- [Installation](#orgbe1975d)
+- [Appearance](#orgd4926ac)
+- [Modal editing](#orgd7b958b)
+- [Completion](#orgb36bc9c)
+- [Development](#org6295269)
+- [Version control](#orgc8d24b6)
+- [Shell](#orga8cf09a)
+- [Dired](#org9456d14)
+- [Org](#org98044ac)
+- [Email](#org51046f3)
+- [Enhancements](#orge6d1ba3)
 
 
 
-<a id="org2b6065e"></a>
+<a id="orgbe1975d"></a>
 
 ## Installation
 
@@ -207,7 +207,7 @@ pkgs.emacsWithPackagesFromUsePackage {
 ```
 
 
-<a id="org6875520"></a>
+<a id="orgd4926ac"></a>
 
 ## Appearance
 
@@ -375,7 +375,7 @@ Turn on `spacious-padding-subtile-mode-line` for a more subtile mode line:
 ```
 
 
-<a id="org4518eb3"></a>
+<a id="orgd7b958b"></a>
 
 ## Modal editing
 
@@ -422,7 +422,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="orgfe442fe"></a>
+<a id="orgb36bc9c"></a>
 
 ## Completion
 
@@ -511,7 +511,7 @@ Emacs 30 includes `completion-preview.el`, since [e82d807a2845673e2d55a27915661b
 ```
 
 
-<a id="org9d06132"></a>
+<a id="org6295269"></a>
 
 ## Development
 
@@ -658,7 +658,7 @@ Start eglot automatically for Rust files:
     Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
 
 
-<a id="orgd179b88"></a>
+<a id="orgc8d24b6"></a>
 
 ## Version control
 
@@ -672,7 +672,7 @@ An interesting thing about Magit is that it doesn't have many configuration opti
 ```
 
 
-<a id="orga233673"></a>
+<a id="orga8cf09a"></a>
 
 ## Shell
 
@@ -734,7 +734,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org8995f6c"></a>
+<a id="org9456d14"></a>
 
 ## Dired
 
@@ -743,7 +743,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="orga0eac54"></a>
+<a id="org98044ac"></a>
 
 ## Org
 
@@ -769,6 +769,15 @@ Org-roam stores notes in `org-roam-directory`, which is `~/org-roam` by default.
 
 ```emacs-lisp
 (setq org-roam-directory (file-truename "~/notes"))
+```
+
+
+### Task management
+
+[Beorg](https://beorgapp.com) is an iOS app that takes Org mode to iOS. It includes a list of tasks named *inbox* that's synced via iCloud, meaning it can be added to the agenda through `org-agenda-files`.
+
+```emacs-lisp
+(setq org-agenda-files '("/Users/jeff/Library/Mobile\ Documents/iCloud\~com\~appsonthemove\~beorg/Documents/org/inbox.org"))
 ```
 
 
@@ -899,14 +908,14 @@ Org files can be can be exported to other formats, like HTML. Due to backwards c
     ```
 
 
-<a id="org9ef2e29"></a>
+<a id="org51046f3"></a>
 
 ## Email
 
 Use [notmuch.el](https://notmuchmail.org/notmuch-emacs/) to read email.
 
 
-<a id="org977a8ac"></a>
+<a id="orge6d1ba3"></a>
 
 ## Enhancements
 
