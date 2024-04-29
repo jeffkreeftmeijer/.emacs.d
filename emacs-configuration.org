@@ -742,20 +742,20 @@ There is [[https://github.com/minad/consult?tab=readme-ov-file#available-command
   #+RESULTS:
   : consult-goto-line
 
-4. Replace ~project-find-regexp~ (=C-x p g=) with ~consult-grep~:
+4. Replace ~project-find-regexp~ (=C-x p g=) with ~consult-ripgrep~:
 
   #+headers: :exports none
   #+headers: :noweb-ref consult-bind
   #+begin_src emacs-lisp
-    ("C-x p g" . consult-grep)
+    ("C-x p g" . consult-ripgrep)
   #+end_src
 
   #+begin_src emacs-lisp
-    (global-set-key (kbd "C-x p g") 'consult-grep)
+    (global-set-key (kbd "C-x p g") 'consult-ripgrep)
   #+end_src
 
   #+RESULTS:
-  : consult-grep
+  : consult-ripgrep
 
 #+headers: :exports none
 #+headers: :noweb yes
