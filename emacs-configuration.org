@@ -1050,6 +1050,9 @@ Start eglot automatically for Nix an Rust files:
   (add-hook 'rust-ts-mode #'eglot-ensure)
 #+end_src
 
+#+RESULTS:
+| eglot-ensure |
+
 #+headers: :eval no
 #+headers: :exports none
 #+headers: :noweb-ref eglot-hook
