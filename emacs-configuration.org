@@ -1331,6 +1331,18 @@ Use ~~/notes~ instead:
 
 #+RESULTS:
 
+*** Org-roam-ui
+
+[[https://github.com/org-roam/org-roam-ui][Org-roam-ui]] is a graphical frontend for Org-roam, which displays all nodes in a graph for browsing the directory of nodes and discovering possible missing links.
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-roam-ui
+    :ensure t)
+#+end_src
+
 ** Task management
 
 [[https://beorgapp.com][Beorg]] is an iOS app that takes Org mode to iOS.
