@@ -183,6 +183,7 @@ end tell"))
   :hook
   (rust-mode . eglot-ensure)
   (rust-ts-mode . eglot-ensure)
+  (nix-mode . eglot-ensure)
   (after-save . jk/maybe-format-buffer))
 
 (use-package magit
