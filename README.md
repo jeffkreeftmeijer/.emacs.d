@@ -1,21 +1,21 @@
 
 # ~/.emacs.d
 
-- [Installation](#org40bf536)
-- [Appearance](#org4462f88)
-- [Modal editing](#orge5a2871)
-- [Completion](#org4348c43)
-- [Development](#org58147d7)
-- [Version control](#org6d9e4f6)
-- [Shell](#orgd7e0a71)
-- [Dired](#orgf13c52b)
-- [Org](#org09fa36b)
-- [Email](#org4b49cda)
-- [Enhancements](#org7180c7d)
+- [Installation](#orgc850163)
+- [Appearance](#org569b263)
+- [Modal editing](#org6a65361)
+- [Completion](#orgdca0518)
+- [Development](#org8584649)
+- [Version control](#orgf530203)
+- [Shell](#org712bdfa)
+- [Dired](#org42573e4)
+- [Org](#orga7ac900)
+- [Email](#org858d1a7)
+- [Enhancements](#org21f7761)
 
 
 
-<a id="org40bf536"></a>
+<a id="orgc850163"></a>
 
 ## Installation
 
@@ -207,7 +207,7 @@ pkgs.emacsWithPackagesFromUsePackage {
 ```
 
 
-<a id="org4462f88"></a>
+<a id="org569b263"></a>
 
 ## Appearance
 
@@ -375,7 +375,7 @@ Turn on `spacious-padding-subtile-mode-line` for a more subtile mode line:
 ```
 
 
-<a id="orge5a2871"></a>
+<a id="org6a65361"></a>
 
 ## Modal editing
 
@@ -422,7 +422,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org4348c43"></a>
+<a id="orgdca0518"></a>
 
 ## Completion
 
@@ -468,10 +468,10 @@ An example of an essential difference between Emacs and Vim is how they handle t
     (global-set-key (kbd "M-g M-g") 'consult-goto-line)
     ```
 
-4.  Replace `project-find-regexp` (`C-x p g`) with `consult-grep`:
+4.  Replace `project-find-regexp` (`C-x p g`) with `consult-ripgrep`:
     
     ```emacs-lisp
-    (global-set-key (kbd "C-x p g") 'consult-grep)
+    (global-set-key (kbd "C-x p g") 'consult-ripgrep)
     ```
 
 
@@ -511,7 +511,7 @@ Emacs 30 includes `completion-preview.el`, since [e82d807a2845673e2d55a27915661b
 ```
 
 
-<a id="org58147d7"></a>
+<a id="org8584649"></a>
 
 ## Development
 
@@ -659,7 +659,7 @@ Start eglot automatically for Nix an Rust files:
     Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
 
 
-<a id="org6d9e4f6"></a>
+<a id="orgf530203"></a>
 
 ## Version control
 
@@ -673,7 +673,7 @@ An interesting thing about Magit is that it doesn't have many configuration opti
 ```
 
 
-<a id="orgd7e0a71"></a>
+<a id="org712bdfa"></a>
 
 ## Shell
 
@@ -735,7 +735,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="orgf13c52b"></a>
+<a id="org42573e4"></a>
 
 ## Dired
 
@@ -744,7 +744,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org09fa36b"></a>
+<a id="orga7ac900"></a>
 
 ## Org
 
@@ -770,6 +770,10 @@ I'm trying out [org-node](https://github.com/meedstrom/org-node), a just-release
     ```emacs-lisp
     (setq org-roam-directory (file-truename "~/notes"))
     ```
+
+3.  Org-roam-ui
+
+    [Org-roam-ui](https://github.com/org-roam/org-roam-ui) is a graphical frontend for Org-roam, which displays all nodes in a graph for browsing the directory of nodes and discovering possible missing links.
 
 
 ### Task management
@@ -908,14 +912,14 @@ Org files can be can be exported to other formats, like HTML. Due to backwards c
     ```
 
 
-<a id="org4b49cda"></a>
+<a id="org858d1a7"></a>
 
 ## Email
 
 Use [notmuch.el](https://notmuchmail.org/notmuch-emacs/) to read email.
 
 
-<a id="org7180c7d"></a>
+<a id="org21f7761"></a>
 
 ## Enhancements
 
