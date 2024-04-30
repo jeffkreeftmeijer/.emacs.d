@@ -1,21 +1,54 @@
 
 # ~/.emacs.d
 
-- [Installation](#orgc850163)
-- [Appearance](#org569b263)
-- [Modal editing](#org6a65361)
-- [Completion](#orgdca0518)
-- [Development](#org8584649)
-- [Version control](#orgf530203)
-- [Shell](#org712bdfa)
-- [Dired](#org42573e4)
-- [Org](#orga7ac900)
-- [Email](#org858d1a7)
-- [Enhancements](#org21f7761)
+- [Installation](#org60ba66e)
+  - [Building Emacs from Git with Nix](#org319f909)
+  - [Enabling XWidgets in Emacs on macOS with Nix](#org150a49d)
+  - [Applying Emacs Plus patches](#org3a29530)
+  - [Emacs with bundled configuration](#org6fbb288)
+  - [Configured Emacs](#orga6b44c6)
+- [Appearance](#org499cf9e)
+  - [Frames](#org4e2231c)
+  - [Fonts](#orgff5079b)
+  - [Variable pitch](#orga6978a9)
+  - [Themes](#orgc166663)
+  - [Layout](#orgae1228a)
+- [Modal editing](#orga4f9436)
+  - [Evil mode](#org192a212)
+  - [Evil-collection](#org352028a)
+  - [Evil-commentary](#org9eee1a9)
+  - [Cursors](#org0cbd351)
+- [Completion](#orgbf296d6)
+  - [Vertical completion](#org1794a2e)
+  - [Contextual information](#org563aa00)
+  - [Enhanced navigation commands](#orgc6bc729)
+  - [Pattern matching](#orgf855663)
+  - [Minibuffer actions](#orgb870c77)
+  - [Minibuffer history](#org7205923)
+  - [Completion at point](#org3d6a90b)
+- [Development](#orgb0775bb)
+  - [Major modes](#org905dde7)
+  - [Environments](#orgc1ce5e5)
+  - [Language servers](#orga56ab36)
+- [Version control](#org88f1d8e)
+- [Shell](#orga561bcc)
+  - [Terminal emulation](#org21bdf06)
+  - [History](#orgb4b9ea4)
+- [Dired](#org806624e)
+- [Org](#orgb2b9e0d)
+  - [Note-taking](#org030d7a0)
+  - [Task management](#org3d222b7)
+  - [Modern defaults for Org exports](#org7c8375f)
+- [Email](#orgc25fdc2)
+- [Enhancements](#orgf734f9c)
+  - [Backups](#orga510ba8)
+  - [Key suggestions](#orgd9fa64f)
+  - [Projects](#orgf3d5d34)
+  - [Precise scrolling](#org4511fc6)
 
 
 
-<a id="orgc850163"></a>
+<a id="org60ba66e"></a>
 
 ## Installation
 
@@ -27,6 +60,8 @@ As an example, to try out this Emacs configuration without affecting the rest of
 nix run github:jeffkreeftmeijer/.emacs.d
 ```
 
+
+<a id="org319f909"></a>
 
 ### Building Emacs from Git with Nix
 
@@ -57,6 +92,8 @@ In this example, the version of emacs-overlay (and thus Emacs itself) is locked 
 
 Assuming the derivation is saved to a file named `emacs-git.nix`, it can be built through `nix build`:
 
+
+<a id="org150a49d"></a>
 
 ### Enabling XWidgets in Emacs on macOS with Nix
 
@@ -96,6 +133,8 @@ pkgs.emacs-git.overrideAttrs(old: {
 })
 ```
 
+
+<a id="org3a29530"></a>
 
 ### Applying Emacs Plus patches
 
@@ -137,6 +176,8 @@ open /result/Applications/Emacs.app
 ```
 
 
+<a id="org6fbb288"></a>
+
 ### Emacs with bundled configuration
 
 The `emacsWithPackagesFromUsePackage` function parses configuration files in search of packages to bundle with Emacs. For example, to package Emacs with Evil and enable `evil-mode` on startup, add a `use-package` statement as the emacs configuration:
@@ -169,6 +210,8 @@ nix build --file emacs-evil.nix
 open /result/Applications/Emacs.app
 ```
 
+
+<a id="orga6b44c6"></a>
 
 ### Configured Emacs
 
@@ -207,10 +250,12 @@ pkgs.emacsWithPackagesFromUsePackage {
 ```
 
 
-<a id="org569b263"></a>
+<a id="org499cf9e"></a>
 
 ## Appearance
 
+
+<a id="org4e2231c"></a>
 
 ### Frames
 
@@ -222,6 +267,8 @@ Disable the scroll bar, the tool bar, and the menu bar:
 (menu-bar-mode -1)
 ```
 
+
+<a id="orgff5079b"></a>
 
 ### Fonts
 
@@ -254,6 +301,8 @@ If the SF fonts aren't available, the fixed font falls back to Menlo before the 
 ```
 
 
+<a id="orga6978a9"></a>
+
 ### Variable pitch
 
 To use proportional fonts (as opposed to monospaced fonts) for non-code text, enable `variable-pitch-mode` for selected modes. While this mode is enabled, the `default` font face inherits from `variable-pitch` instead of `fixed-pitch`.
@@ -275,6 +324,8 @@ Instead of hooking into `text-mode`, explicitly select the modes to use proporti
 (add-hook 'markdown-mode-hook #'variable-pitch-mode)
 ```
 
+
+<a id="orgc166663"></a>
 
 ### Themes
 
@@ -300,63 +351,67 @@ An interactive function named `modus-themes-toggle` switches between the light a
 (setq modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 ```
 
-1.  Switching between dark and light mode
 
-    [Auto-dark](https://github.com/LionyxML/auto-dark-emacs) automatically switches between dark and light themes based on the operating system's appearance.
-    
-    ```emacs-lisp
-    (auto-dark-mode 1)
-    ```
-    
-    It uses the *wombat* and *leuven* themes by default, but these are configured to use the modus themes with the `auto-dark-light-theme` and `auto-dark-dark-theme` variables.
-    
-    ```emacs-lisp
-    (setq (auto-dark-light-theme 'modus-operandi-tinted)
-    (setq (auto-dark-dark-theme 'modus-vivendi-tinted))
-    ```
-    
-    With auto-dark in place, Emacs' theme can be switched by toggling the system-wide dark mode instead of using `modus-themes-toggle`. The `jk/dark` and `jk/light` functions run an apple script to turn dark mode on and off from Emacs:
-    
-    ```emacs-lisp
-    (defun jk/dark ()
-      "Switch to macOS' dark appearance."
-      (interactive)
-      (do-applescript
-       "tell application \"System Events\"
-      tell appearance preferences
-        set dark mode to true
-      end tell
-    end tell"))
-    
-    (defun jk/light ()
-      "Switch to macOS' light appearance."
-      (interactive)
-      (do-applescript
-       "tell application \"System Events\"
-      tell appearance preferences
-        set dark mode to false
-      end tell
-    end tell"))
-    ```
+#### Switching between dark and light mode
 
-2.  Customization
+[Auto-dark](https://github.com/LionyxML/auto-dark-emacs) automatically switches between dark and light themes based on the operating system's appearance.
 
-    The Modus themes can optionally inherit from the `fixed-pitch` face for some faces, which allows for turning on `variable-pitch-mode` while keeping some text monospaced. To turn it on, set `modus-themes-mixed-fonts`, but make sure it's set before loading one of the modus themes:
-    
-    ```emacs-lisp
-    (setq modus-themes-mixed-fonts t)
-    ```
-    
-    The Modus themes come with the option to use italic and bold constructs, which is turned off by default. Enabling produces italic type for comments and contextual information, and bold type in syntax highlighting.
-    
-    ```emacs-lisp
-    (setq
-     modus-themes-italic-constructs t
-     modus-themes-bold-constructs t)
-    ```
-    
-    Note that any configuration options to the themes themselves need to happen before the theme is loaded, or the theme needs to be reloaded through `load-theme` after setting the customizations.
+```emacs-lisp
+(auto-dark-mode 1)
+```
 
+It uses the *wombat* and *leuven* themes by default, but these are configured to use the modus themes with the `auto-dark-light-theme` and `auto-dark-dark-theme` variables.
+
+```emacs-lisp
+(setq (auto-dark-light-theme 'modus-operandi-tinted)
+(setq (auto-dark-dark-theme 'modus-vivendi-tinted))
+```
+
+With auto-dark in place, Emacs' theme can be switched by toggling the system-wide dark mode instead of using `modus-themes-toggle`. The `jk/dark` and `jk/light` functions run an apple script to turn dark mode on and off from Emacs:
+
+```emacs-lisp
+(defun jk/dark ()
+  "Switch to macOS' dark appearance."
+  (interactive)
+  (do-applescript
+   "tell application \"System Events\"
+  tell appearance preferences
+    set dark mode to true
+  end tell
+end tell"))
+
+(defun jk/light ()
+  "Switch to macOS' light appearance."
+  (interactive)
+  (do-applescript
+   "tell application \"System Events\"
+  tell appearance preferences
+    set dark mode to false
+  end tell
+end tell"))
+```
+
+
+#### Customization
+
+The Modus themes can optionally inherit from the `fixed-pitch` face for some faces, which allows for turning on `variable-pitch-mode` while keeping some text monospaced. To turn it on, set `modus-themes-mixed-fonts`, but make sure it's set before loading one of the modus themes:
+
+```emacs-lisp
+(setq modus-themes-mixed-fonts t)
+```
+
+The Modus themes come with the option to use italic and bold constructs, which is turned off by default. Enabling produces italic type for comments and contextual information, and bold type in syntax highlighting.
+
+```emacs-lisp
+(setq
+ modus-themes-italic-constructs t
+ modus-themes-bold-constructs t)
+```
+
+Note that any configuration options to the themes themselves need to happen before the theme is loaded, or the theme needs to be reloaded through `load-theme` after setting the customizations.
+
+
+<a id="orgae1228a"></a>
 
 ### Layout
 
@@ -375,10 +430,12 @@ Turn on `spacious-padding-subtile-mode-line` for a more subtile mode line:
 ```
 
 
-<a id="org6a65361"></a>
+<a id="orga4f9436"></a>
 
 ## Modal editing
 
+
+<a id="org192a212"></a>
 
 ### Evil mode
 
@@ -388,6 +445,8 @@ Emacs is the best Vim emulator, and [Evil](https://github.com/emacs-evil/evil) i
 (evil-mode 1)
 ```
 
+
+<a id="org352028a"></a>
 
 ### Evil-collection
 
@@ -404,6 +463,8 @@ Evil-collection [requires `evil-want-keybinding` to be unset](https://github.com
 ```
 
 
+<a id="org9eee1a9"></a>
+
 ### Evil-commentary
 
 [Evil-commentary](https://github.com/linktohack/evil-commentary) is an Evil port of [vim-commentary](https://github.com/tpope/vim-commentary) which adds key bindings to call Emacs’ built in `comment-or-uncomment-region` function. Turn it on by calling `evil-commentary-mode`:
@@ -412,6 +473,8 @@ Evil-collection [requires `evil-want-keybinding` to be unset](https://github.com
 (evil-commentary-mode 1)
 ```
 
+
+<a id="org0cbd351"></a>
 
 ### Cursors
 
@@ -422,10 +485,12 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="orgdca0518"></a>
+<a id="orgbf296d6"></a>
 
 ## Completion
 
+
+<a id="org1794a2e"></a>
 
 ### Vertical completion
 
@@ -436,6 +501,8 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
+<a id="org563aa00"></a>
+
 ### Contextual information
 
 [Marginalia](https://github.com/minad/marginalia) adds extra contextual information to minibuffer completions. For example, besides just showing command names when executing `M-x`, the package adds a description of the command and the key binding.
@@ -444,6 +511,8 @@ An example of an essential difference between Emacs and Vim is how they handle t
 (marginalia-mode 1)
 ```
 
+
+<a id="orgc6bc729"></a>
 
 ### Enhanced navigation commands
 
@@ -475,6 +544,8 @@ An example of an essential difference between Emacs and Vim is how they handle t
     ```
 
 
+<a id="orgf855663"></a>
+
 ### Pattern matching
 
 [Orderless](https://github.com/oantolin/orderless) is a completion style that divides the search pattern in space-separated components, and matches regardless of their order. After installing it, add it as a completion style by setting `completion-styles`:
@@ -483,6 +554,8 @@ An example of an essential difference between Emacs and Vim is how they handle t
 (setq completion-styles '(orderless basic))
 ```
 
+
+<a id="orgb870c77"></a>
 
 ### Minibuffer actions
 
@@ -493,6 +566,8 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
+<a id="org7205923"></a>
+
 ### Minibuffer history
 
 Emacs' `savehist` feature saves minibuffer history to `~/emacs.d/history`. The history is then used to order vertical completion suggestions.
@@ -501,6 +576,8 @@ Emacs' `savehist` feature saves minibuffer history to `~/emacs.d/history`. The h
 (savehist-mode 1)
 ```
 
+
+<a id="org3d6a90b"></a>
 
 ### Completion at point
 
@@ -511,98 +588,104 @@ Emacs 30 includes `completion-preview.el`, since [e82d807a2845673e2d55a27915661b
 ```
 
 
-<a id="org8584649"></a>
+<a id="orgb0775bb"></a>
 
 ## Development
 
 
+<a id="org905dde7"></a>
+
 ### Major modes
 
-1.  Treesitter
 
-    The [treesit-auto](https://github.com/renzmann/treesit-auto) package automatically installs and uses the tree-sitter equivalent of installed major modes. For example, it automatically installs and uses `rust-ts-mode` when a Rust file is opened and `rust-mode` is installed.
-    
-    To turn it on globally, enable `global-treesit-auto-mode`:
-    
-    ```emacs-lisp
-    (global-treesit-auto-mode 1)
-    ```
-    
-    To automatically install missing major modes, enable `treesit-auto-install`. To have the package prompt before installing, set the variable to `'prompt`:
-    
-    ```emacs-lisp
-    (custom-set-variables
-      '(treesit-auto-install 'prompt))
-    ```
+#### Treesitter
 
-2.  Additional major modes
+The [treesit-auto](https://github.com/renzmann/treesit-auto) package automatically installs and uses the tree-sitter equivalent of installed major modes. For example, it automatically installs and uses `rust-ts-mode` when a Rust file is opened and `rust-mode` is installed.
 
-    In addition to the list of already installed major modes, this configuration adds adds more when they're needed<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
-    
-    -   beancount-mode
-    
-    ```emacs-lisp
-    (use-package beancount
-      :ensure t
-      :mode ("\\.beancount\\'" . beancount-mode))
-    ```
-    
-    -   dockerfile-mode
-    
-    ```emacs-lisp
-    (use-package dockerfile-mode
-      :ensure t)
-    ```
-    
-    -   elixir-mode
-    
-    ```emacs-lisp
-    (use-package elixir-mode
-      :ensure t)
-    ```
-    
-    -   git-modes
-    
-    ```emacs-lisp
-    (use-package git-modes
-      :ensure t)
-    ```
-    
-    -   markdown-mode
-    
-    ```emacs-lisp
-    (use-package markdown-mode
-      :ensure t)
-    ```
-    
-    -   nix-mode
-    
-    ```emacs-lisp
-    (use-package nix-mode
-      :ensure t)
-    ```
-    
-    -   rust-mode
-    
-    ```emacs-lisp
-    (use-package rust-mode
-      :ensure t)
-    ```
-    
-    -   typescript-mode
-    
-    ```emacs-lisp
-    (use-package typescript-mode
-      :ensure t)
-    ```
-    
-    -   yaml-mode
-    
-    ```emacs-lisp
-    (use-package yaml-mode
-      :ensure t)
-    ```
+To turn it on globally, enable `global-treesit-auto-mode`:
 
+```emacs-lisp
+(global-treesit-auto-mode 1)
+```
+
+To automatically install missing major modes, enable `treesit-auto-install`. To have the package prompt before installing, set the variable to `'prompt`:
+
+```emacs-lisp
+(custom-set-variables
+  '(treesit-auto-install 'prompt))
+```
+
+
+#### Additional major modes
+
+In addition to the list of already installed major modes, this configuration adds adds more when they're needed<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+
+-   beancount-mode
+
+```emacs-lisp
+(use-package beancount
+  :ensure t
+  :mode ("\\.beancount\\'" . beancount-mode))
+```
+
+-   dockerfile-mode
+
+```emacs-lisp
+(use-package dockerfile-mode
+  :ensure t)
+```
+
+-   elixir-mode
+
+```emacs-lisp
+(use-package elixir-mode
+  :ensure t)
+```
+
+-   git-modes
+
+```emacs-lisp
+(use-package git-modes
+  :ensure t)
+```
+
+-   markdown-mode
+
+```emacs-lisp
+(use-package markdown-mode
+  :ensure t)
+```
+
+-   nix-mode
+
+```emacs-lisp
+(use-package nix-mode
+  :ensure t)
+```
+
+-   rust-mode
+
+```emacs-lisp
+(use-package rust-mode
+  :ensure t)
+```
+
+-   typescript-mode
+
+```emacs-lisp
+(use-package typescript-mode
+  :ensure t)
+```
+
+-   yaml-mode
+
+```emacs-lisp
+(use-package yaml-mode
+  :ensure t)
+```
+
+
+<a id="orgc1ce5e5"></a>
 
 ### Environments
 
@@ -612,6 +695,8 @@ Programming environments set up with [Nix](https://nixos.org) and [direnv](https
 (direnv-mode 1)
 ```
 
+
+<a id="orga56ab36"></a>
 
 ### Language servers
 
@@ -631,35 +716,36 @@ Start eglot automatically for Nix an Rust files:
 (add-hook 'rust-ts-mode #'eglot-ensure)
 ```
 
-1.  Automatically format files on save in Eglot-enabled buffers
 
-    The `eglot-format-buffer` function doesn't check if Eglot is running in the current buffer. This means hooking using it as a global `after-save-hook` produces errors in the echo area whenever a file is saved while Eglot isn't enabled:
-    
-    ```emacs-lisp
-    (jsonrpc-error
-     "No current JSON-RPC connection"
-     (jsonrpc-error-code . -32603)
-     (jsonrpc-error-message . "No current JSON-RPC connection"))
-    ```
-    
-    To remedy this, add a function that formats only when Eglot is enabled.
-    
-    ```emacs-lisp
-    (defun jk/maybe-format-buffer ()
-      (when (bound-and-true-p eglot-managed-p)
-        (eglot-format-buffer)))
-    ```
-    
-    This function is then added as a global `after-save-hook`.
-    
-    ```emacs-lisp
-    (add-hook 'after-save-hook 'jk/maybe-format-buffer)
-    ```
-    
-    Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
+#### Automatically format files on save in Eglot-enabled buffers
+
+The `eglot-format-buffer` function doesn't check if Eglot is running in the current buffer. This means hooking using it as a global `after-save-hook` produces errors in the echo area whenever a file is saved while Eglot isn't enabled:
+
+```emacs-lisp
+(jsonrpc-error
+ "No current JSON-RPC connection"
+ (jsonrpc-error-code . -32603)
+ (jsonrpc-error-message . "No current JSON-RPC connection"))
+```
+
+To remedy this, add a function that formats only when Eglot is enabled.
+
+```emacs-lisp
+(defun jk/maybe-format-buffer ()
+  (when (bound-and-true-p eglot-managed-p)
+    (eglot-format-buffer)))
+```
+
+This function is then added as a global `after-save-hook`.
+
+```emacs-lisp
+(add-hook 'after-save-hook 'jk/maybe-format-buffer)
+```
+
+Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
 
 
-<a id="orgf530203"></a>
+<a id="org88f1d8e"></a>
 
 ## Version control
 
@@ -673,10 +759,12 @@ An interesting thing about Magit is that it doesn't have many configuration opti
 ```
 
 
-<a id="org712bdfa"></a>
+<a id="orga561bcc"></a>
 
 ## Shell
 
+
+<a id="org21bdf06"></a>
 
 ### Terminal emulation
 
@@ -696,6 +784,8 @@ Because Eat now handles full screen terminal applications, Eshell no longer has 
 
 Now, an application like `top` will run in the Eshell buffer without a separate term buffer having to be opened.
 
+
+<a id="orgb4b9ea4"></a>
 
 ### History
 
@@ -735,7 +825,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org42573e4"></a>
+<a id="org806624e"></a>
 
 ## Dired
 
@@ -744,37 +834,44 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="orga7ac900"></a>
+<a id="orgb2b9e0d"></a>
 
 ## Org
 
+
+<a id="org030d7a0"></a>
 
 ### Note-taking
 
 I'm trying out [org-node](https://github.com/meedstrom/org-node), a just-released alternative to [org-roam](https://www.orgroam.com), my current note-taking solution. Currently, this configuration uses both packages.
 
-1.  Org-node
 
-    Org-node is not on any of the package repositories [yet](https://www.reddit.com/r/emacs/comments/1cfbgqi/comment/l1ok712/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button). This configuration doesn't ensure the package is there, so it's assumed it's installed manually. I've installed org-node through `package-vc-install` for now.
-    
-    Enable org-node by calling `org-node-enable` whenever an `org-mode` is enabled:
-    
-    ```emacs-lisp
-    (add-hook 'org-mode-hook #'org-node-enable))
-    ```
+#### Org-node
 
-2.  Org-roam
+Org-node is not on any of the package repositories [yet](https://www.reddit.com/r/emacs/comments/1cfbgqi/comment/l1ok712/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button). This configuration doesn't ensure the package is there, so it's assumed it's installed manually. I've installed org-node through `package-vc-install` for now.
 
-    Org-roam stores notes in `org-roam-directory`, which is `~/org-roam` by default. Use `~/notes` instead:
-    
-    ```emacs-lisp
-    (setq org-roam-directory (file-truename "~/notes"))
-    ```
+Enable org-node by calling `org-node-enable` whenever an `org-mode` is enabled:
 
-3.  Org-roam-ui
+```emacs-lisp
+(add-hook 'org-mode-hook #'org-node-enable))
+```
 
-    [Org-roam-ui](https://github.com/org-roam/org-roam-ui) is a graphical frontend for Org-roam, which displays all nodes in a graph for browsing the directory of nodes and discovering possible missing links.
 
+#### Org-roam
+
+Org-roam stores notes in `org-roam-directory`, which is `~/org-roam` by default. Use `~/notes` instead:
+
+```emacs-lisp
+(setq org-roam-directory (file-truename "~/notes"))
+```
+
+
+#### Org-roam-ui
+
+[Org-roam-ui](https://github.com/org-roam/org-roam-ui) is a graphical frontend for Org-roam, which displays all nodes in a graph for browsing the directory of nodes and discovering possible missing links.
+
+
+<a id="org3d222b7"></a>
 
 ### Task management
 
@@ -785,146 +882,158 @@ I'm trying out [org-node](https://github.com/meedstrom/org-node), a just-release
 ```
 
 
+<a id="org7c8375f"></a>
+
 ### Modern defaults for Org exports
 
 Org files can be can be exported to other formats, like HTML. Due to backwards compatibility constraints, however, the produced documents have an `xhtml-strict` doctype with syntax to match. Luckily, Org's exporters are endlessly configurable, and include support for more modern configurations.
 
-1.  Smart quotes
 
-    Automatically convert single and double quotes to their curly equivalents, depending on the document language.
-    
-    ```emacs-lisp
-    (setq org-export-with-smart-quotes t)
-    ```
+#### Smart quotes
 
-2.  Entities
+Automatically convert single and double quotes to their curly equivalents, depending on the document language.
 
-    Disable entities, like using `&ldquo;` instead of “ in HTML. This option only works for entities included in the document, not the entities added through smart quotes.
-    
-    ```emacs-lisp
-    (setq org-export-with-entities nil)
-    ```
-
-3.  Headline levels
-
-    Instead of 3, set the maximum headline level to 5. This matches the HTML standard of having six headline levels, when counting the document title as the first, leaving five.
-    
-    ```emacs-lisp
-    (setq org-export-headline-levels 5)
-    ```
-
-4.  Table of contents and section numbers
-
-    Disable both the table of contents and section numbers, as they're easily turned on when needed, not needed for most exports, and not present in the source documents.
-    
-    ```emacs-lisp
-    (setq
-     org-export-with-toc nil
-     org-export-section-numbers nil)
-    ```
-
-5.  HTML 5
-
-    Aside from replacing the doctype in the document, setting `org-html-doctype` to *html5* has modernizing effects on the output file. For example, it uses the `charset` attribute (as opposed to `http-equiv`) to set the character set, it drops the XML declaration from the header of the document, it switches to the HTML5 validator for the footer (which is then disabled later), and disables HTML table attributes<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Setting the doctype instantly transports the document from the start of the millenium to last decade.
-    
-    To enable the HTML5 doctype , set the `org-html-doctype` variable:
-    
-    ```emacs-lisp
-    (setq org-html-doctype "html5")
-    ```
-
-6.  "Fancy" HTML tags
-
-    To continue modernizing, enable `org-html-html5-fancy` for *fancy* HTML5 elements. This means `<figure>` tags to wrap images, a `<header>` tag around the file's main headline, and a `<nav>` tag around the table of contents. It also enables HTML5-powered special blocks to produce modern HTML elements from Org's special blocks:
-    
-    ```org
-    #+begin_aside
-      An aside.
-    #+end_aside
-    ```
-    
-    Exports to:
-    
-    ```html
-    <aside>
-      An aside.
-    </aside>
-    ```
-    
-    To enable HTML5 "fancy" tags, set the `org-html-html5-fancy` variable:
-    
-    ```emacs-lisp
-    (setq org-html-html5-fancy t)
-    ```
-
-7.  Containers
-
-    Aside from the modern elements already enabled by the HTML5 doctype and `org-html-html5-fancy`, Org allows for more customizations to its HTML exports. Use `org-html-container-element` and `org-html-divs` to replace some of the standard `<div>` elements with HTML 5 alternatives:
-    
-    1.  Use the `<section>` element instead of the main section `<div>` elements
-    2.  Use the `<header>` element to wrap document preambles
-    3.  Use the `<main>` element to wrap the document's main section
-    4.  Use the `<footer>` element to wrap document postambles
-    
-    ```emacs-lisp
-    (setq
-     org-html-container-element "section"
-     org-html-divs '((preamble  "header" "preamble")
-    		(content   "main" "content")
-    		(postamble "footer" "postamble")))
-    ```
-
-8.  Summary
-
-    To configure Org mode's HTML exporter to output HTML 5 with modern elements, set the following configuration.
-    
-    ```emacs-lisp
-    (setq
-     org-export-with-smart-quotes t
-     org-export-with-entities nil
-     org-export-headline-levels 5
-     org-export-with-toc nil
-     org-export-section-numbers nil
-     org-html-doctype "html5"
-     org-html-html5-fancy t
-     org-html-container-element "section"
-     org-html-divs '((preamble  "header" "preamble")
-    		(content   "main" "content")
-    		(postamble "footer" "postamble")))
-    ```
-    
-    When using `use-package` for configuration, hook into the `ox-org` package an use the `:custom` keyword.
-    
-    ```emacs-lisp
-    (use-package ox-org
-      :custom
-      org-export-with-smart-quotes t
-      org-export-with-entities nil
-      org-export-headline-levels 5
-      org-export-with-toc nil
-      org-export-section-numbers nil
-      org-html-doctype "html5"
-      org-html-html5-fancy t
-      org-html-container-element "section"
-      org-html-divs '((preamble  "header" "preamble")
-    		(content   "main" "content")
-    		(postamble "footer" "postamble")))
-    ```
+```emacs-lisp
+(setq org-export-with-smart-quotes t)
+```
 
 
-<a id="org858d1a7"></a>
+#### Entities
+
+Disable entities, like using `&ldquo;` instead of “ in HTML. This option only works for entities included in the document, not the entities added through smart quotes.
+
+```emacs-lisp
+(setq org-export-with-entities nil)
+```
+
+
+#### Headline levels
+
+Instead of 3, set the maximum headline level to 5. This matches the HTML standard of having six headline levels, when counting the document title as the first, leaving five.
+
+```emacs-lisp
+(setq org-export-headline-levels 5)
+```
+
+
+#### Table of contents and section numbers
+
+Disable both the table of contents and section numbers, as they're easily turned on when needed, not needed for most exports, and not present in the source documents.
+
+```emacs-lisp
+(setq
+ org-export-with-toc nil
+ org-export-section-numbers nil)
+```
+
+
+#### HTML 5
+
+Aside from replacing the doctype in the document, setting `org-html-doctype` to *html5* has modernizing effects on the output file. For example, it uses the `charset` attribute (as opposed to `http-equiv`) to set the character set, it drops the XML declaration from the header of the document, it switches to the HTML5 validator for the footer (which is then disabled later), and disables HTML table attributes<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Setting the doctype instantly transports the document from the start of the millenium to last decade.
+
+To enable the HTML5 doctype , set the `org-html-doctype` variable:
+
+```emacs-lisp
+(setq org-html-doctype "html5")
+```
+
+
+#### "Fancy" HTML tags
+
+To continue modernizing, enable `org-html-html5-fancy` for *fancy* HTML5 elements. This means `<figure>` tags to wrap images, a `<header>` tag around the file's main headline, and a `<nav>` tag around the table of contents. It also enables HTML5-powered special blocks to produce modern HTML elements from Org's special blocks:
+
+```org
+#+begin_aside
+  An aside.
+#+end_aside
+```
+
+Exports to:
+
+```html
+<aside>
+  An aside.
+</aside>
+```
+
+To enable HTML5 "fancy" tags, set the `org-html-html5-fancy` variable:
+
+```emacs-lisp
+(setq org-html-html5-fancy t)
+```
+
+
+#### Containers
+
+Aside from the modern elements already enabled by the HTML5 doctype and `org-html-html5-fancy`, Org allows for more customizations to its HTML exports. Use `org-html-container-element` and `org-html-divs` to replace some of the standard `<div>` elements with HTML 5 alternatives:
+
+1.  Use the `<section>` element instead of the main section `<div>` elements
+2.  Use the `<header>` element to wrap document preambles
+3.  Use the `<main>` element to wrap the document's main section
+4.  Use the `<footer>` element to wrap document postambles
+
+```emacs-lisp
+(setq
+ org-html-container-element "section"
+ org-html-divs '((preamble  "header" "preamble")
+		(content   "main" "content")
+		(postamble "footer" "postamble")))
+```
+
+
+#### Summary
+
+To configure Org mode's HTML exporter to output HTML 5 with modern elements, set the following configuration.
+
+```emacs-lisp
+(setq
+ org-export-with-smart-quotes t
+ org-export-with-entities nil
+ org-export-headline-levels 5
+ org-export-with-toc nil
+ org-export-section-numbers nil
+ org-html-doctype "html5"
+ org-html-html5-fancy t
+ org-html-container-element "section"
+ org-html-divs '((preamble  "header" "preamble")
+		(content   "main" "content")
+		(postamble "footer" "postamble")))
+```
+
+When using `use-package` for configuration, hook into the `ox-org` package an use the `:custom` keyword.
+
+```emacs-lisp
+(use-package ox-org
+  :custom
+  org-export-with-smart-quotes t
+  org-export-with-entities nil
+  org-export-headline-levels 5
+  org-export-with-toc nil
+  org-export-section-numbers nil
+  org-html-doctype "html5"
+  org-html-html5-fancy t
+  org-html-container-element "section"
+  org-html-divs '((preamble  "header" "preamble")
+		(content   "main" "content")
+		(postamble "footer" "postamble")))
+```
+
+
+<a id="orgc25fdc2"></a>
 
 ## Email
 
 Use [notmuch.el](https://notmuchmail.org/notmuch-emacs/) to read email.
 
 
-<a id="org21f7761"></a>
+<a id="orgf734f9c"></a>
 
 ## Enhancements
 
 This section covers general enhancements to Emacs which don't warrant their own section.
 
+
+<a id="orga510ba8"></a>
 
 ### Backups
 
@@ -935,6 +1044,8 @@ Emacs automatically generates [backups](https://www.gnu.org/software/emacs/manua
 ```
 
 
+<a id="orgd9fa64f"></a>
+
 ### Key suggestions
 
 With [which-key](https://github.com/justbur/emacs-which-key), Emacs shows suggestions when pausing during an incomplete keypress, which is especially useful when trying to learn Emacs' key bindings. By default, Emacs only shows the already-typed portion of the command, which doesn't help to find the next key to press.
@@ -943,6 +1054,8 @@ With [which-key](https://github.com/justbur/emacs-which-key), Emacs shows sugges
 (which-key-mode 1)
 ```
 
+
+<a id="orgf3d5d34"></a>
 
 ### Projects
 
@@ -957,6 +1070,8 @@ Project-x is not on any of the pacakge managers, so this configuration assumes i
 
 With project-x enabled, Emacs will recognise directories with a `.project` file as project directories.<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>
 
+
+<a id="org4511fc6"></a>
 
 ### Precise scrolling
 
