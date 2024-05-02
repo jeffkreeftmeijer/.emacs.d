@@ -933,7 +933,7 @@ To have the package prompt before installing, set the variable to ='prompt=:
 
 In addition to the list of already installed major modes, this configuration adds adds more when they're needed[fn::I'd rather not worry about installing major modes and use a package like [[https://github.com/sheerun/vim-polyglot][vim-polyglot]], but I haven't been able to find an equivalent for Emacs.].
 
-- beancount-mode
+**** beancount-mode
 
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
@@ -942,7 +942,7 @@ In addition to the list of already installed major modes, this configuration add
     :mode ("\\.beancount\\'" . beancount-mode))
 #+end_src
 
-- dockerfile-mode
+**** dockerfile-mode
 
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
@@ -950,7 +950,7 @@ In addition to the list of already installed major modes, this configuration add
     :ensure t)
 #+end_src
 
-- elixir-mode
+**** elixir-mode
 
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
@@ -958,7 +958,7 @@ In addition to the list of already installed major modes, this configuration add
     :ensure t)
 #+end_src
 
-- git-modes
+**** git-modes
 
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
@@ -966,7 +966,7 @@ In addition to the list of already installed major modes, this configuration add
     :ensure t)
 #+end_src
 
-- markdown-mode
+**** markdown-mode
 
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
@@ -974,7 +974,7 @@ In addition to the list of already installed major modes, this configuration add
     :ensure t)
 #+end_src
 
-- nix-mode
+**** nix-mode
 
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
@@ -982,7 +982,7 @@ In addition to the list of already installed major modes, this configuration add
     :ensure t)
 #+end_src
 
-- rust-mode
+**** rust-mode
 
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
@@ -990,7 +990,7 @@ In addition to the list of already installed major modes, this configuration add
     :ensure t)
 #+end_src
 
-- typescript-mode
+**** typescript-mode
 
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
@@ -998,7 +998,7 @@ In addition to the list of already installed major modes, this configuration add
     :ensure t)
 #+end_src
 
-- yaml-mode
+**** yaml-mode
 
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
