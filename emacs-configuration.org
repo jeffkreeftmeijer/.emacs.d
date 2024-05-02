@@ -935,6 +935,8 @@ In addition to the list of already installed major modes, this configuration add
 
 **** beancount-mode
 
+[[https://github.com/beancount/beancount-mode][Bencount-mode]] requires hooking up the mode manually, so enable it for each file with a =.beancount= extension:
+
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package beancount
