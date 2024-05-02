@@ -970,10 +970,13 @@ In addition to the list of already installed major modes, this configuration add
 
 **** markdown-mode
 
+There is currently no Emacs major mode for [[https://github.com/mdx-js/mdx][MDX]], so enable [[https://jblevins.org/projects/markdown-mode/][Markdown-mode]] for files with a =.mdx= extension:
+
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package markdown-mode
-    :ensure t)
+    :ensure t
+    :mode ("\\.mdx\\'" . markdown-mode))
 #+end_src
 
 **** nix-mode

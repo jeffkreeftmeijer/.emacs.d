@@ -152,7 +152,8 @@ end tell"))
   :ensure t)
 
 (use-package markdown-mode
-  :ensure t)
+  :ensure t
+  :mode ("\\.mdx\\'" . markdown-mode))
 
 (use-package nix-mode
   :ensure t)
