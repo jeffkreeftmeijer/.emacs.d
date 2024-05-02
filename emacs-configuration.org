@@ -1565,6 +1565,7 @@ Use ~org-html-container-element~ and ~org-html-divs~ to replace some of the stan
 
 To configure Org mode's HTML exporter to output HTML 5 with modern elements, set the following configuration.
 
+#+headers: :tangle ox-modern.el
 #+headers: :noweb yes
 #+begin_src emacs-lisp
   (setq
