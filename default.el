@@ -80,7 +80,8 @@ end tell"))
 (use-package evil
   :ensure t
   :hook
-  (prog-mode . turn-on-evil-mode))
+  (prog-mode . turn-on-evil-mode)
+  (text-mode . turn-on-evil-mode))
 
 (use-package evil-commentary
   :ensure t

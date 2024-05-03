@@ -540,10 +540,11 @@ Emacs is the best Vim emulator, and [[https://github.com/emacs-evil/evil][Evil]]
 After installing Evil, turn on =evil-mode= globally:
 
 Instead of enabling Evil's gloval ~evil-mode~ hook, turn it on per buffer.
-By hooking into /prog-mode/, Evil mode is only turned on for programming buffers.
+By hooking into both /prog-mode/ and /text-mode/, Evil mode is only turned on for programming and text editing buffers.
 
 #+begin_src emacs-lisp
   (add-hook 'prog-mode-hook 'turn-on-evil-mode)
+  (add-hook 'text-mode-hook 'turn-on-evil-mode)
 #+end_src
 
 #+headers: :eval no
@@ -551,6 +552,7 @@ By hooking into /prog-mode/, Evil mode is only turned on for programming buffers
 #+headers: :noweb-ref evil-hook
 #+begin_src emacs-lisp
   (prog-mode . turn-on-evil-mode)
+  (text-mode . turn-on-evil-mode)
 #+end_src
 
 #+headers: :exports none
