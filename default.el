@@ -272,6 +272,10 @@ end tell"))
   :init
   (pixel-scroll-precision-mode 1))
 
+(use-package simple
+  :init
+  (indent-tabs-mode 0))
+
 (write-region
  (format "%s,%s\n"
 	 (string-trim (shell-command-to-string "git --git-dir ~/emacs-config/.git rev-parse HEAD"))

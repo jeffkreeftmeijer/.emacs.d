@@ -1712,6 +1712,27 @@ Project-x should be obsolete for this purpose, but I haven't figured it out yet.
     <<pixel-scroll-init>>)
 #+end_src
 
+** Indentation
+
+Don't use tabs for indentation.
+
+#+headers: :noweb-ref simple-init
+#+begin_src emacs-lisp
+  (indent-tabs-mode 0)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package simple
+    :init
+    <<simple-init>>)
+#+end_src
+
 * Benchmarking
 
 Use [[https://github.com/dholm/benchmark-init-el][benchmark-init]] to benchmark Emacs' initialization.
