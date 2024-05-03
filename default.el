@@ -80,14 +80,7 @@ end tell"))
 (use-package evil
   :ensure t
   :init
-  (setq evil-want-keybinding nil)
   (evil-mode 1))
-
-(use-package evil-collection
-  :ensure t
-  :after evil
-  :config
-  (evil-collection-init))
 
 (use-package evil-commentary
   :ensure t
