@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package benchmark-init
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
 (require 'bind-key)
 
 (use-package frame
@@ -266,3 +271,11 @@ end tell"))
 (use-package pixel-scroll
   :init
   (pixel-scroll-precision-mode 1))
+
+(write-region
+ (format "%s,%s\n"
+	 (string-trim (shell-command-to-string "git --git-dir ~/emacs-config/.git rev-parse HEAD"))
+	 (benchmark-init/node-duration-adjusted benchmark-init/durations-tree))
+ nil
+ "~/.emacs.d/benchmark.csv"
+ 'append)

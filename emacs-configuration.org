@@ -12,8 +12,11 @@
 
 #+headers: :exports none
 #+headers: :tangle default.el
+#+headers: :noweb yes
 #+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
+
+  <<benchmark-init>>
 
   (require 'bind-key)
 #+end_src
@@ -1708,3 +1711,32 @@ Project-x should be obsolete for this purpose, but I haven't figured it out yet.
     :init
     <<pixel-scroll-init>>)
 #+end_src
+
+* Benchmarking
+
+Use [[https://github.com/dholm/benchmark-init-el][benchmark-init]] to benchmark Emacs' initialization.
+Enable benchmark-init at the top of the configuration file, before any packages are loaded.
+
+#+name: benchmark-init
+#+begin_src emacs-lisp
+  (use-package benchmark-init
+    :ensure t
+    :config
+    (add-hook 'after-init-hook 'benchmark-init/deactivate))
+#+end_src
+
+After starting Emacs, the benchmarking results can be examined using the ~benchmark-init/show-durations-tree~ function.
+Aside from that, append the total duration to a file named =~/.emacs.d/benchmark.csv= for future reference.
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (write-region
+   (format "%s,%s\n"
+	   (string-trim (shell-command-to-string "git --git-dir ~/emacs-config/.git rev-parse HEAD"))
+	   (benchmark-init/node-duration-adjusted benchmark-init/durations-tree))
+   nil
+   "~/.emacs.d/benchmark.csv"
+   'append)
+#+end_src
+
+#+RESULTS:
