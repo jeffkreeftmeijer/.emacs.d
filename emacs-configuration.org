@@ -539,13 +539,19 @@ Turn on  =spacious-padding-subtile-mode-line= for a more subtile mode line:
 Emacs is the best Vim emulator, and [[https://github.com/emacs-evil/evil][Evil]] is the best Vim mode.
 After installing Evil, turn on =evil-mode= globally:
 
-#+headers: :noweb-ref evil-init
+Instead of enabling Evil's gloval ~evil-mode~ hook, turn it on per buffer.
+By hooking into /prog-mode/, Evil mode is only turned on for programming buffers.
+
 #+begin_src emacs-lisp
-  (evil-mode 1)
+  (add-hook 'prog-mode-hook 'turn-on-evil-mode)
 #+end_src
 
-#+RESULTS:
-: t
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref evil-hook
+#+begin_src emacs-lisp
+  (prog-mode . turn-on-evil-mode)
+#+end_src
 
 #+headers: :exports none
 #+headers: :noweb yes
@@ -553,8 +559,8 @@ After installing Evil, turn on =evil-mode= globally:
 #+begin_src emacs-lisp
   (use-package evil
     :ensure t
-    :init
-    <<evil-init>>)
+    :hook
+    <<evil-hook>>)
 #+end_src
 
 #+RESULTS:

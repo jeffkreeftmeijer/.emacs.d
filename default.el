@@ -79,8 +79,8 @@ end tell"))
 
 (use-package evil
   :ensure t
-  :init
-  (evil-mode 1))
+  :hook
+  (prog-mode . turn-on-evil-mode))
 
 (use-package evil-commentary
   :ensure t
