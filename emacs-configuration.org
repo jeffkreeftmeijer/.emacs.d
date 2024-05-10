@@ -1561,6 +1561,97 @@ When using ~use-package~ for configuration, hook into the ~ox-org~ package an us
 
 #+RESULTS:
 
+
+** Source code
+
+One of Org's most impressive features is source code evalutation through its [[https://orgmode.org/worg/org-contrib/babel/][Library of Babel]].
+Babel can both evaluate (run a source code block from within an Org document) and extract (take a source code block from an Org document and place it in another file) code.
+
+*** Evaluation
+
+By default, Org only evaluates Emacs Lisp code, but other languages can be added via src_emacs-lisp[:exports code]{org-babel-load-languages}:
+
+#+headers: :exports none
+#+headers: :noweb-ref org-babel-custom
+#+begin_src emacs-lisp
+  org-babel-load-languages '((emacs-lisp . t)
+                              (shell . t))
+#+end_src
+
+#+RESULTS:
+: ((emacs-lisp . t) (shell . t))
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq
+   <<org-babel-custom>>)
+#+end_src
+
+#+RESULTS:
+: ((emacs-lisp . t) (lisp . t))
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-babel
+    :custom
+    <<org-babel-custom>>)
+#+end_src
+
+*** Extraction
+
+Org extracts each code block that has a "tangle" attribute whenever the src_emacs-lisp[:exports code]{org-babel-tangle} function is evaluated.
+It's bound do =C-c C-v t= by default.
+However, it's convenient to have code blocks /tangled/ automatically when the source document is saved.
+
+Automatic source code tangling can be enabled per-document by adding a document header line:
+
+#+begin_src org
+  # -*- eval: (add-hook 'after-save-hook #'org-babel-tangle nil t); -*-
+#+end_src
+
+For documents where this header can't be added, or situations where the header hasn't been added yet, there's a package named [[https://github.com/yilkalargaw/org-auto-tangle][org-auto-tangle]].
+
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook #'org-auto-tangle-mode)
+#+end_src
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref org-auto-tangle-hook
+#+begin_src emacs-lisp
+  (org-mode . org-auto-tangle-mode)
+#+end_src
+
+The org-auto-tangle package automatically extracts code blocks for every document that has the src_org[:exports code]{#+auto_tangle: t} option.
+To turn it on for all Org documents regardless, set src_emacs-lisp[:exports code]{org-auto-tangle-default}:
+
+#+headers: :exports none
+#+headers: :noweb-ref org-auto-tangle-custom
+#+begin_src emacs-lisp
+  org-auto-tangle-default t
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<org-auto-tangle-custom>>)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-auto-tangle
+    :ensure t
+    :custom
+    <<org-auto-tangle-custom>>
+    :hook
+    <<org-auto-tangle-hook>>)
+#+end_src
+
 * Email
 
 Use [[https://notmuchmail.org/notmuch-emacs/][notmuch.el]] to read email.

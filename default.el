@@ -244,6 +244,18 @@ end tell"))
   		(content   "main" "content")
   		(postamble "footer" "postamble")))
 
+(use-package org-babel
+  :custom
+  org-babel-load-languages '((emacs-lisp . t)
+                              (shell . t)))
+
+(use-package org-auto-tangle
+  :ensure t
+  :custom
+  org-auto-tangle-default t
+  :hook
+  (org-mode . org-auto-tangle-mode))
+
 (use-package notmuch
   :ensure t)
 
