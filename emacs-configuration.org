@@ -1221,6 +1221,7 @@ Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, se
 #+headers: :tangle default.el
 #+begin_src emacs-lisp
   (use-package eshell-atuin
+    :ensure t
     :after em-hist
     :init
     <<eshell-atuin-init>>

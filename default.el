@@ -197,6 +197,7 @@ end tell"))
   eshell-visual-commands nil)
 
 (use-package eshell-atuin
+  :ensure t
   :after em-hist
   :init
   (eshell-atuin-mode)
