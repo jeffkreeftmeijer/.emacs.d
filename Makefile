@@ -1,5 +1,5 @@
 build:
-	nix build --print-build-logs --file configured-emacs.nix
+	nix build --print-build-logs .#configured-emacs
 
 open:
 	open result/Applications/Emacs.app

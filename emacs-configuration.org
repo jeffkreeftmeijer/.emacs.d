@@ -59,7 +59,7 @@ Then, return ~pkgs.emacs-git~:
     { pkgs ? import <nixpkgs> {
       overlays = [
 	(import (builtins.fetchTarball {
-	  url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+	  url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
 	}))
       ];
     } }:
@@ -72,8 +72,12 @@ Then, return ~pkgs.emacs-git~:
   pkgs.emacs-git
 #+end_src
 
-In this example, the version of emacs-overlay (and thus Emacs itself) is locked to a specific version.
-To use the latest version, replace the revision hash with a branch name like ~master~.
+The version of emacs-overlay (and thus Emacs itself) is determined by the version specified in the master branch.
+That version is then locked in the ~flake.lock~ file until it's explicitly updated:
+
+#+begin_src shell
+  nix flake lock --update-input emacs-overlay
+#+end_src
 
 Assuming the derivation is saved to a file named ~emacs-git.nix~, it can be built through ~nix build~:
 
@@ -177,7 +181,7 @@ For example, to package Emacs with Evil and enable ~evil-mode~ on startup, add a
   }
 #+end_src
 
-Assuming the derivation is saved to a file named ~emacs-enil.nix~, it can be built through ~nix build~:
+Assuming the derivation is saved to a file named ~emacs-evil.nix~, it can be built through ~nix build~:
 
 #+begin_src shell
   nix build --file emacs-evil.nix

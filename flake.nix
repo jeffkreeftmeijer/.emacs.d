@@ -4,7 +4,7 @@
       url = "github:numtide/flake-utils";
     };
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/f7fcac1403356fd09e2320bc3d61ccefe36c1b91";
+      url = "github:nix-community/emacs-overlay/master";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
