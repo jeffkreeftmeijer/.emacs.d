@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package exwm
+  :ensure t)
+
 (use-package benchmark-init
   :ensure t
   :config
