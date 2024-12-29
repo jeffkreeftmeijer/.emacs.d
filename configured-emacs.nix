@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {
   overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+      url = https://github.com/nix-community/emacs-overlay/archive/97678931872b1bad445ed341e083c09025b4f0e7.tar.gz;
     }))
   ];
 } }:
