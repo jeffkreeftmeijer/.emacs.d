@@ -73,7 +73,7 @@ end tell"))
    modus-themes-mixed-fonts t
    modus-themes-italic-constructs t
    modus-themes-bold-constructs t)
-  (load-theme 'modus-operandi-tinted)
+  (load-theme 'modus-vivendi-tinted)
   :custom
   modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 
@@ -218,7 +218,8 @@ end tell"))
   :init
   (dirvish-override-dired-mode))
 
-(use-package org-gode
+(use-package org
+  :ensure t
   :hook (org-mode . org-node-enable))
 
 (use-package org-roam
@@ -247,10 +248,10 @@ end tell"))
   		(content   "main" "content")
   		(postamble "footer" "postamble")))
 
-(use-package org-babel
-  :custom
-  org-babel-load-languages '((emacs-lisp . t)
-                              (shell . t)))
+; (use-package org-babel
+;   :custom
+;   org-babel-load-languages '((emacs-lisp . t)
+;                               (shell . t)))
 
 (use-package org-auto-tangle
   :ensure t
@@ -271,11 +272,12 @@ end tell"))
   :init
   (which-key-mode 1))
 
-(use-package project-x
-  :after project
-  :init
-  (project-x-mode 1)
-  (setq project-find-functions '(project-x-try-local project-try-vc)))
+;; (use-package project-x
+;;   :ensure t
+;;   :after project
+;;   :init
+;;   (project-x-mode 1)
+;;   (setq project-find-functions '(project-x-try-local project-try-vc)))
 
 (use-package pixel-scroll
   :init
