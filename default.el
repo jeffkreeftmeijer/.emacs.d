@@ -133,10 +133,6 @@ end tell"))
   :init
   (savehist-mode 1))
 
-(use-package completion-preview
-  :init
-  (global-completion-preview-mode 1))
-
 (use-package treesit-auto
   :ensure t
   :config
