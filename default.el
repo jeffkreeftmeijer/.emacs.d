@@ -63,9 +63,9 @@ end tell"))
   end tell
 end tell"))
 
-(use-package emacs
+(use-package modus-themes
+  :ensure t
   :config
-  (require-theme 'modus-themes)
   (setq
    modus-themes-mixed-fonts t
    modus-themes-italic-constructs t
