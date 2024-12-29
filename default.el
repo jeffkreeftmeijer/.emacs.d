@@ -31,6 +31,10 @@
   (org-mode . variable-pitch-mode)
   (markdown-mode . variable-pitch-mode))
 
+(use-package emacs
+  :custom
+  (visible-bell 1))
+
 (use-package auto-dark
   :ensure t
   :config
