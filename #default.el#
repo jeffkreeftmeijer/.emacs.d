@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package exwm
+  :ensure t)
+
 (use-package benchmark-init
   :ensure t
   :config
@@ -19,7 +22,7 @@
     (set-face-attribute
      face nil
      :family family :weight 'regular :width 'expanded :height 150))
-  
+
   (jk/set-face-font 'default "Iosevka")
   (jk/set-face-font 'fixed-pitch "Iosevka")
   (jk/set-face-font 'variable-pitch "Iosevka Aile")
@@ -31,18 +34,13 @@
   (org-mode . variable-pitch-mode)
   (markdown-mode . variable-pitch-mode))
 
+(use-package emacs
+  :custom
+  (visible-bell 1))
+
 (use-package auto-dark
   :ensure t
-  :config
-  (auto-dark-mode 1)
-  :custom
-  (auto-dark-light-theme 'modus-operandi-tinted)
-  (auto-dark-dark-theme 'modus-vivendi-tinted))
-
-(defun jk/dark ()
-  "Switch to macOS' dark appearance."
-  (interactive)
-  (do-applescript
+  :configlescript
    "tell application \"System Events\"
   tell appearance preferences
     set dark mode to true
@@ -59,9 +57,9 @@ end tell"))
   end tell
 end tell"))
 
-(use-package emacs
+(use-package modus-themes
+  :ensure t
   :config
-  (require-theme 'modus-themes)
   (setq
    modus-themes-mixed-fonts t
    modus-themes-italic-constructs t
@@ -125,10 +123,6 @@ end tell"))
 (use-package savehist
   :init
   (savehist-mode 1))
-
-(use-package completion-preview
-  :init
-  (global-completion-preview-mode 1))
 
 (use-package treesit-auto
   :ensure t
@@ -215,7 +209,8 @@ end tell"))
   :init
   (dirvish-override-dired-mode))
 
-(use-package org-gode
+(use-package org
+  :ensure t
   :hook (org-mode . org-node-enable))
 
 (use-package org-roam
@@ -244,10 +239,10 @@ end tell"))
   		(content   "main" "content")
   		(postamble "footer" "postamble")))
 
-(use-package org-babel
-  :custom
-  org-babel-load-languages '((emacs-lisp . t)
-                              (shell . t)))
+; (use-package org-babel
+;   :custom
+;   org-babel-load-languages '((emacs-lisp . t)
+;                               (shell . t)))
 
 (use-package org-auto-tangle
   :ensure t
@@ -268,11 +263,12 @@ end tell"))
   :init
   (which-key-mode 1))
 
-(use-package project-x
-  :after project
-  :init
-  (project-x-mode 1)
-  (setq project-find-functions '(project-x-try-local project-try-vc)))
+;; (use-package project-x
+;;   :ensure t
+;;   :after project
+;;   :init
+;;   (project-x-mode 1)
+;;   (setq project-find-functions '(project-x-try-local project-try-vc)))
 
 (use-package pixel-scroll
   :init

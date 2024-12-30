@@ -1,0 +1,1828 @@
+# -*- eval: (add-hook 'after-save-hook #'org-babel-tangle nil t); eval: (add-hook 'org-babel-post-tangle-hook #'delete-trailing-whitespace nil t); -*-
+:PROPERTIES:
+:ID:       05767757-AA75-4B82-A0D8-1480A1678B20
+:END:
+#+title: ~/.emacs.d
+#+author: Jeff Kreeftmeijer
+#+html_path: /emacs-configuration/
+#+startup: content
+#+options: toc:2 num:t
+#+date: 2021-07-04
+#+description: Jeff Kreeftmeijer's Emacs configuration
+
+#+headers: :exports none
+#+headers: :tangle default.el
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t -*-
+
+  <<benchmark-init>>
+
+  (require 'bind-key)
+#+end_src
+
+#+RESULTS:
+: bind-key
+
+* Installation
+
+This whole Emacs configuration, including the configuration file and the included packages is a Nix [[https://nixos.org/manual/nix/stable/language/derivations.html][derivation]].
+By installing Emacs through Nix, the editor, its packages and the configuration are bundled together in a single bundle.
+This allows for quick installs and reproducable builds.
+
+As an example, to try out this Emacs configuration without affecting the rest of your system, run the following command.
+This downloads and compiles Emacs, including packages and the configuration, and starts the resulting Emacs.app.
+
+#+begin_src shell
+  nix run github:jeffkreeftmeijer/.emacs.d
+#+end_src
+
+** Building Emacs from Git with Nix
+
+Instead of using the [[https://search.nixos.org/packages?channel=23.11&show=emacs&from=0&size=50&sort=relevance&type=packages&query=emacs][stable Emacs from Nixpkgs]], this configuration uses [[https://github.com/nix-community/emacs-overlay][emacs-overlay]] to build Emacs from its master branch.
+The overlay updates daily, but this configuration only updates sporadically, when there's reason to do so, to keep everything as stable as possible.
+
+I'm inclined to use a stable version of Emacs instead of building from Git, as I'm not specifically looking to be on the bleeding edge. However, newly added features tend to pull me in.
+
+Currently, there are two reasons I'm currently running on a prerelease version:
+
+1. Emacs master updated its included version of the modus-themes, including the tinted variants of modus-vivendi and modus-operandi, which are my preferred themes.
+    Running Emacs master therefor requires one less dependency.
+2. [[https://git.savannah.gnu.org/cgit/emacs.git/log/lisp/completion-preview.el][Completion-preview.el]], a fish-like completion-at-point package, was merged into master in [[https://git.savannah.gnu.org/cgit/emacs.git/commit/lisp/completion-preview.el?id=e82d807a2845673e2d55a27915661b2f1374b89a][e82d807a2845673e2d55a27915661b2f1374b89a]].
+
+To build a Nix derivation that intalls Emacs from Git using Emacs-overlay, import ~nixpkgs~, and then apply the overlay from a tarball.
+Then, return ~pkgs.emacs-git~:
+
+#+name: pkgs
+#+headers: :exports none
+#+begin_src nix
+    { pkgs ? import <nixpkgs> {
+      overlays = [
+	(import (builtins.fetchTarball {
+	  url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+	}))
+      ];
+    } }:
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacs-git
+#+end_src
+
+In this example, the version of emacs-overlay (and thus Emacs itself) is locked to a specific version.
+To use the latest version, replace the revision hash with a branch name like ~master~.
+
+Assuming the derivation is saved to a file named ~emacs-git.nix~, it can be built through ~nix build~:
+
+** Enabling XWidgets in Emacs on macOS with Nix
+
+Nix disables the ~withXwidgets~ option for Emacs on macOS, so simply enabling it won't work yet:
+
+#+headers: :noweb yes
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacs-git.overrideAttrs(old: {
+    withXwidgets = true;
+  })
+#+end_src
+
+In the meantime, circumvent Nix's option by manually adding the build flag.
+As expected, enabling XWidgets also requires the WebKit framework as a build input:
+
+#+name: xwidgets
+#+headers: :exports none
+#+begin_src nix
+  buildInputs = old.buildInputs ++ [
+    pkgs.darwin.apple_sdk.frameworks.WebKit
+  ];
+
+  configureFlags = old.configureFlags ++ ["--with-xwidgets"];
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacs-git.overrideAttrs(old: {
+    <<xwidgets>>
+  })
+#+end_src
+
+** Applying Emacs Plus patches
+
+[[https://github.com/d12frosted/homebrew-emacs-plus][Emacs Plus]] is a Homebrew formula to build Emacs on macOS, which applies a couple of patches while building.
+First, download the patches for the correct Emacs version.
+In this case, get the patches for Emacs 30:
+
+#+begin_src shell
+  curl https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/system-appearance.patch -o patches/system-appearance.patch
+  curl https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/round-undecorated-frame.patch -o patches/round-undecorated-frame.patch
+  curl https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/poll.patch -o patches/poll.patch
+  curl https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-28/fix-window-role.patch -o patches/fix-window-role.patch
+#+end_src
+
+#+RESULTS:
+
+Then, override the attributes in ~pkgs.emacs-git~ when using emacs-overlay---or ~pkgs.emacs~ when building Emacs from Nixpkgs---to add all path files to the package's patches list:
+
+#+name: patches
+#+headers: :exports none
+#+begin_src nix
+  patches = old.patches ++ [
+    ./patches/system-appearance.patch
+    ./patches/round-undecorated-frame.patch
+    ./patches/poll.patch
+    ./patches/fix-window-role.patch
+  ];
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacs-git.overrideAttrs(old: {
+    <<patches>>
+  })
+#+end_src
+
+Assuming the derivation is saved to a file named ~emacs-patched.nix~, it can be built through ~nix build~:
+
+#+begin_src shell
+  nix build --file emacs-patched.nix
+  open /result/Applications/Emacs.app
+#+end_src
+
+** Emacs with bundled configuration
+
+The ~emacsWithPackagesFromUsePackage~ function parses configuration files in search of packages to bundle with Emacs.
+For example, to package Emacs with Evil and enable ~evil-mode~ on startup, add a ~use-package~ statement as the emacs configuration:
+
+#+headers: :noweb yes
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacsWithPackagesFromUsePackage {
+    package = pkgs.emacs-git;
+    config = ''
+    (use-package evil
+      :ensure t
+      :init
+      (evil-mode 1))
+    '';
+    defaultInitFile = true;
+  }
+#+end_src
+
+Assuming the derivation is saved to a file named ~emacs-enil.nix~, it can be built through ~nix build~:
+
+#+begin_src shell
+  nix build --file emacs-evil.nix
+  open /result/Applications/Emacs.app
+#+end_src
+
+** Configured Emacs
+
+By combining the features in Emacs overlay, this configuration produces /configured Emacs/, a version of Emacs with macOS-specific patches applied, XWidgets enabled, packages installed and a full configuration loaded.
+The included configuration file is [[https://github.com/jeffkreeftmeijer/.emacs.d/blob/main/default.el][~default.el~]], which is generated from the rest of this configuration.
+
+#+headers: :noweb yes
+#+headers: :tangle configured-emacs.nix
+#+begin_src nix
+  <<pkgs>>
+
+  pkgs.emacsWithPackagesFromUsePackage {
+    package = (
+      pkgs.emacs-git.overrideAttrs(old: {
+	<<patches>>
+
+	<<xwidgets>>
+      })
+    );
+
+    config = ./default.el;
+    defaultInitFile = true;
+  }
+#+end_src
+
+* Appearance
+
+** Frames
+
+Disable the scroll bar, the tool bar, and the menu bar:
+
+#+headers: :noweb-ref frame-init
+#+begin_src emacs-lisp
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+#+end_src
+
+#+RESULTS:
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package frame
+    :init
+    <<frame-init>>)
+#+end_src
+
+** Fonts
+
+Use [[https://typeof.net/Iosevka/][Iosevka]] as a monospace font (/fixed/ in Emacs lingo), and Iosevka's "Aile" variant as a (quasi-)proportional font (/variable-pitch/ in Emacs lingo).
+
+Both variants are used with their /regular/ weights, /expanded/ widths, and a height of 150 (15 points × 10):
+
+#+headers: :noweb-ref faces-init
+#+begin_src emacs-lisp
+  (defun jk/set-face-font (face family)
+    (set-face-attribute
+     face nil
+     :family family :weight 'regular :width 'expanded :height 150))
+
+  (jk/set-face-font 'default "Iosevka")
+  (jk/set-face-font 'fixed-pitch "Iosevka")
+  (jk/set-face-font 'variable-pitch "Iosevka Aile")
+#+end_src
+
+#+RESULTS:
+
+The =face-font-family-alternatives= variable provides fallback fonts if the preferred fonts aren't available.
+This produces a font list akin to CSS font-families, starting with the preferred font and falling back to an option that is most likely to be available on any system.
+Having a list of fallback fonts like this removes the need to explicitly depend on fonts being available.
+
+This configuration falls back to Apple's SF Mono and SF Pro if the Iosevka fonts aren't available.
+Since the Apple fonts need to be downloaded explicitly, they aren't more likely to be there than the Iosevka ones, but they're included as they were the previous favorite.
+
+If the SF fonts aren't available, the fixed font falls back to Menlo before the default monospace font (which is most likely Courier).
+The variable pitch font falls back to SF Pro, Helvetica, and finally Arial:
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref faces-custom
+#+begin_src emacs-lisp
+  (face-font-family-alternatives
+    '(("Iosevka" "SF Mono" "Menlo" "monospace")
+      ("Iosevka Aile" "SF Pro" "Helvetica" "Arial")))
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (custom-set-variables
+    '<<faces-custom>>)
+#+end_src
+
+#+RESULTS:
+
+** Variable pitch
+
+To use proportional fonts (as opposed to monospaced fonts) for non-code text, enable =variable-pitch-mode= for selected modes.
+While this mode is enabled, the =default= font face inherits from =variable-pitch= instead of =fixed-pitch=.
+
+An often-recommended approach is to hook into =text-mode=, which is the major mode most text-based modes inherit from:
+
+#+headers: :eval no
+#+begin_src emacs-lisp
+  (add-hook 'text-mode-hook #'variable-pitch-mode))
+#+end_src
+
+Doing so automatically enables =variable-pitch-mode= thenever =text-mode= is enabled.
+
+This works, but it's a bit too eager for my liking.
+The above configuration enables =variable-pitch-mode= when editing Org files, but also when writing commit messages and editing YAML files.
+I consider text in the latter two as code, so I'd prefer to have those displayed in a monospace font.
+
+Instead of hooking into =text-mode=, explicitly select the modes to use proportional fonts in Org and Markdown mode:
+
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook #'variable-pitch-mode)
+  (add-hook 'markdown-mode-hook #'variable-pitch-mode)
+#+end_src
+
+#+RESULTS:
+| variable-pitch-mode |
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref faces-hook
+#+begin_src emacs-lisp
+  (org-mode . variable-pitch-mode)
+  (markdown-mode . variable-pitch-mode)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package faces
+    :init
+    <<faces-init>>
+    :custom
+    <<faces-custom>>
+    :hook
+    <<faces-hook>>)
+#+end_src
+
+#+RESULTS:
+| variable-pitch-mode | text-mode-hook-identify |
+
+** Themes
+
+The [[https://protesilaos.com/emacs/modus-themes][Modus themes]] are a set of beautiful and customizable themes, which are shipped with Emacs since version 28.
+
+The modus themes consist of two types: Modus Operandi is a light theme, and Modus Vivendi is its dark counterpart.
+The tinted variants shift the background colors from white and black to a more pleasant light ochre and dark blue.
+
+When using the version of the Modus themes that's included in Emacs, the themes need to be [[https://protesilaos.com/emacs/modus-themes#h:b66b128d-54a4-4265-b59f-4d1ea2feb073][explicitly required using =require-theme=]]:
+
+#+headers: :noweb-ref modus-themes-require
+#+begin_src emacs-lisp
+  (require-theme 'modus-themes)
+#+end_src
+
+To select =modus-operandi-tinted= as the default theme, load it with the ~load-theme~ function:
+
+#+headers: :noweb-ref modus-themes-config
+#+begin_src emacs-lisp
+  (load-theme 'modus-operandi-tinted)
+#+end_src
+
+#+RESULTS:
+: t
+
+An interactive function named ~modus-themes-toggle~ switches between the light and dark themes.
+By default, the function switches between the non-tinted versions, but that can be overwritten to use the tinted versions through the =modus-themes-to-toggle= variable:
+
+#+headers: :exports none
+#+headers: :noweb-ref modus-themes-custom
+#+begin_src emacs-lisp
+  modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<modus-themes-custom>>)
+#+end_src
+
+#+RESULTS:
+| modus-operandi-tinted  | modus-vivendi-tinted |
+
+*** Switching between dark and light mode
+
+[[https://github.com/LionyxML/auto-dark-emacs][Auto-dark]] automatically switches between dark and light themes based on the operating system's appearance.
+
+#+headers: :noweb-ref auto-dark-config
+#+begin_src emacs-lisp
+  (auto-dark-mode 1)
+#+end_src
+
+It uses the /wombat/ and /leuven/ themes by default, but these are configured to use the modus themes with the ~auto-dark-light-theme~ and ~auto-dark-dark-theme~ variables.
+
+#+headers: :exports none
+#+headers: :noweb-ref auto-dark-custom
+#+begin_src emacs-lisp
+  (auto-dark-light-theme 'modus-operandi-tinted)
+  (auto-dark-dark-theme 'modus-vivendi-tinted)
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<auto-dark-custom>>)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package auto-dark
+    :ensure t
+    :config
+    <<auto-dark-config>>
+    :custom
+    <<auto-dark-custom>>)
+#+end_src
+
+#+RESULTS:
+: t
+
+With auto-dark in place, Emacs' theme can be switched by toggling the system-wide dark mode instead of using ~modus-themes-toggle~.
+The ~jk/dark~ and ~jk/light~ functions run an apple script to turn dark mode on and off from Emacs:
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (defun jk/dark ()
+    "Switch to macOS' dark appearance."
+    (interactive)
+    (do-applescript
+     "tell application \"System Events\"
+    tell appearance preferences
+      set dark mode to true
+    end tell
+  end tell"))
+
+  (defun jk/light ()
+    "Switch to macOS' light appearance."
+    (interactive)
+    (do-applescript
+     "tell application \"System Events\"
+    tell appearance preferences
+      set dark mode to false
+    end tell
+  end tell"))
+#+end_src
+
+#+RESULTS:
+: jk/light
+
+*** Customization
+
+The Modus themes can optionally inherit from the =fixed-pitch= face for some faces, which allows for turning on =variable-pitch-mode= while keeping some text monospaced.
+To turn it on, set =modus-themes-mixed-fonts=, but make sure it's set before loading one of the modus themes:
+
+#+name: modus-themes-mixed-fonts
+#+headers: :exports none
+#+headers: :noweb-ref modus-themes-customizations
+#+begin_src emacs-lisp
+  modus-themes-mixed-fonts t
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<modus-themes-mixed-fonts>>)
+#+end_src
+
+The Modus themes come with the option to use italic and bold constructs, which is turned off by default.
+Enabling produces italic type for comments and contextual information, and bold type in syntax highlighting.
+
+#+name: modus-themes-italic-bold
+#+headers: :exports none
+#+headers: :noweb-ref modus-themes-customizations
+#+begin_src emacs-lisp
+  modus-themes-italic-constructs t
+  modus-themes-bold-constructs t
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq
+   <<modus-themes-italic-bold>>)
+#+end_src
+
+Note that any configuration options to the themes themselves need to happen before the theme is loaded, or the theme needs to be reloaded through ~load-theme~ after setting the customizations.
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package emacs
+    :config
+    <<modus-themes-require>>
+    (setq
+     <<modus-themes-customizations>>)
+    <<modus-themes-config>>
+    :custom
+    <<modus-themes-custom>>)
+#+end_src
+
+#+RESULTS:
+
+** Layout
+
+The [[https://protesilaos.com/emacs/spacious-padding][spacious-padding]] package adds spacing around windows and frames, as well as padding the mode line.
+
+Turn on =spacious-padding-mode= to add spacing around windows and frames:
+
+#+headers: :noweb-ref spacious-padding-init
+#+begin_src emacs-lisp
+  (spacious-padding-mode 1)
+#+end_src
+
+Turn on  =spacious-padding-subtile-mode-line= for a more subtile mode line:
+
+#+headers: :exports none
+#+headers: :noweb-ref spacious-padding-custom
+#+begin_src emacs-lisp
+  spacious-padding-subtle-mode-line t
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<spacious-padding-custom>>)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package spacious-padding
+    :ensure t
+    :init
+    <<spacious-padding-init>>
+    :custom
+    <<spacious-padding-custom>>)
+#+end_src
+
+#+RESULTS:
+
+* Modal editing
+
+** Evil mode
+
+Emacs is the best Vim emulator, and [[https://github.com/emacs-evil/evil][Evil]] is the best Vim mode.
+After installing Evil, turn on =evil-mode= globally:
+
+Instead of enabling Evil's gloval ~evil-mode~ hook, turn it on per buffer.
+By hooking into both /prog-mode/ and /text-mode/, Evil mode is only turned on for programming and text editing buffers.
+
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook 'turn-on-evil-mode)
+  (add-hook 'text-mode-hook 'turn-on-evil-mode)
+#+end_src
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref evil-hook
+#+begin_src emacs-lisp
+  (prog-mode . turn-on-evil-mode)
+  (text-mode . turn-on-evil-mode)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :hook
+    <<evil-hook>>)
+#+end_src
+
+#+RESULTS:
+
+** Evil-commentary
+
+[[https://github.com/linktohack/evil-commentary][Evil-commentary]] is an Evil port of [[https://github.com/tpope/vim-commentary][vim-commentary]] which adds key bindings to call Emacs’ built in ~comment-or-uncomment-region~ function.
+Turn it on by calling ~evil-commentary-mode~:
+
+#+headers: :noweb-ref evil-commentary-init
+#+begin_src emacs-lisp
+  (evil-commentary-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package evil-commentary
+    :ensure t
+    :after evil
+    :init
+    <<evil-commentary-init>>)
+#+end_src
+
+** Cursors
+
+An example of an essential difference between Emacs and Vim is how they handle the location of the cursor (named point in Emacs).
+In Vim, the cursor is /on/ a character, while Emacs' point is before it.
+In Evil mode, the cursor changes between a box in "normal mode" to a bar in "insert mode".
+Because Emacs is always in a kind of insert mode, make the cursor a bar:
+
+#+headers: :noweb-ref emacs-init
+#+begin_src emacs-lisp
+  (setq-default cursor-type 'bar)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package emacs
+    :init
+    <<emacs-init>>)
+#+end_src
+
+* Completion
+
+** Vertical completion
+
+[[https://github.com/minad/vertico][Vertico]] is a vertical completion library, based on Emacs' default completion system.
+
+#+headers: :noweb-ref vertico-init
+#+begin_src emacs-lisp
+  (vertico-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package vertico
+    :ensure t
+    :init
+    <<vertico-init>>)
+#+end_src
+
+#+RESULTS:
+
+** Contextual information
+
+[[https://github.com/minad/marginalia][Marginalia]] adds extra contextual information to minibuffer completions.
+For example, besides just showing command names when executing =M-x=, the package adds a description of the command and the key binding.
+
+#+headers: :noweb-ref marginalia-init
+#+begin_src emacs-lisp
+  (marginalia-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :ensure t
+    :init
+    <<marginalia-init>>)
+#+end_src
+
+#+RESULTS:
+: t
+
+** Enhanced navigation commands
+
+[[https://github.com/minad/consult][Consult]] provides enhancements to built-in search and navigation commands.
+There is [[https://github.com/minad/consult?tab=readme-ov-file#available-commands][a long list of available commands]], but this configuration mostly uses Consult for buffer switching with previews.
+
+1. Replace ~switch-to-buffer~ (=C-x b=) with ~consult-buffer~:
+
+  #+headers: :exports none
+  #+headers: :noweb-ref consult-bind
+  #+begin_src emacs-lisp
+    ("C-x b" . consult-buffer)
+  #+end_src
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x b") 'consult-buffer)
+  #+end_src
+
+  #+RESULTS:
+  : consult-buffer
+
+2. Replace ~project-switch-to-buffer~ (=C-x p b=) with ~consult-project-buffer~:
+
+  #+headers: :exports none
+  #+headers: :noweb-ref consult-bind
+  #+begin_src emacs-lisp
+    ("C-x p b" . consult-project-buffer)
+  #+end_src
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x p b") 'consult-project-buffer)
+  #+end_src
+
+  #+RESULTS:
+  : consult-project-buffer
+
+3. Replace ~goto-line~ (=M-g g= and =M-g M-g=) with ~consult-goto-line~:
+
+  #+headers: :exports none
+  #+headers: :noweb-ref consult-bind
+  #+begin_src emacs-lisp
+    ("M-g g" . consult-goto-line)
+    ("M-g M-g" . consult-goto-line)
+  #+end_src
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "M-g g") 'consult-goto-line)
+    (global-set-key (kbd "M-g M-g") 'consult-goto-line)
+  #+end_src
+
+  #+RESULTS:
+  : consult-goto-line
+
+4. Replace ~project-find-regexp~ (=C-x p g=) with ~consult-ripgrep~:
+
+  #+headers: :exports none
+  #+headers: :noweb-ref consult-bind
+  #+begin_src emacs-lisp
+    ("C-x p g" . consult-ripgrep)
+  #+end_src
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x p g") 'consult-ripgrep)
+  #+end_src
+
+  #+RESULTS:
+  : consult-ripgrep
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package consult
+    :ensure t
+    :bind
+    <<consult-bind>>)
+#+end_src
+
+#+RESULTS:
+: t
+
+** Pattern matching
+
+[[https://github.com/oantolin/orderless][Orderless]] is a completion style that divides the search pattern in space-separated components, and matches regardless of their order.
+After installing it, add it as a completion style by setting =completion-styles=:
+
+#+headers: :exports none
+#+headers: :noweb-ref orderless-custom
+#+begin_src emacs-lisp
+  completion-styles '(orderless basic)
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<orderless-custom>>)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package orderless
+    :ensure t
+    :custom
+    <<orderless-custom>>)
+#+end_src
+
+** Minibuffer actions
+
+[[https://github.com/oantolin/embark][Embark]] adds actions to minibuffer results.
+For example, when switching buffers with =switch-to-buffer= or =consult-buffer=, pressing =C-.= opens Embark's list of key bindings.
+From there, you can act on results in the minibuffer.
+In this exampke, pressing =k= kills the currently selected buffer.
+
+#+headers: :exports none
+#+headers: :noweb-ref embark-bind
+#+begin_src emacs-lisp
+  ("C-." . embark-act)
+#+end_src
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-.") 'embark-act)
+#+end_src
+
+#+RESULTS:
+: embark-act
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package embark
+    :ensure t
+    :bind
+    <<embark-bind>>)
+#+end_src
+
+#+RESULTS:
+: embark-act
+
+** Minibuffer history
+
+Emacs' =savehist= feature saves minibuffer history to =~/emacs.d/history=.
+The history is then used to order vertical completion suggestions.
+
+#+headers: :noweb-ref savehist-init
+#+begin_src emacs-lisp
+  (savehist-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package savehist
+    :init
+    <<savehist-init>>)
+#+end_src
+
+#+RESULTS:
+
+** Completion at point
+
+Emacs 30 includes =completion-preview.el=, since [[https://git.savannah.gnu.org/cgit/emacs.git/commit/lisp/completion-preview.el?id=e82d807a2845673e2d55a27915661b2f1374b89a][e82d807a2845673e2d55a27915661b2f1374b89a]], which adds grayed-out completion previews while typing, akin to the autocomplete in the Fish shell.
+
+#+headers: :noweb-ref completion-preview-init
+#+begin_src emacs-lisp
+  (global-completion-preview-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package completion-preview
+    :init
+    <<completion-preview-init>>)
+#+end_src
+
+#+RESULTS:
+
+* Development
+
+** Major modes
+
+*** Treesitter
+
+The [[https://github.com/renzmann/treesit-auto][treesit-auto]] package automatically installs and uses the tree-sitter equivalent of installed major modes.
+For example, it automatically installs and uses =rust-ts-mode= when a Rust file is opened and =rust-mode= is installed.
+
+To turn it on globally, enable =global-treesit-auto-mode=:
+
+#+headers: :noweb-ref treesit-auto-config
+#+begin_src emacs-lisp
+  (global-treesit-auto-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+To automatically install missing major modes, enable =treesit-auto-install=.
+To have the package prompt before installing, set the variable to ='prompt=:
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref treesit-auto-custom
+#+begin_src emacs-lisp
+  (treesit-auto-install 'prompt)
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (custom-set-variables
+    '<<treesit-auto-custom>>)
+#+end_src
+
+#+RESULTS:
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package treesit-auto
+    :ensure t
+    :config
+    <<treesit-auto-config>>
+    :custom
+    <<treesit-auto-custom>>)
+#+end_src
+
+#+RESULTS:
+: t
+
+*** Additional major modes
+
+In addition to the list of already installed major modes, this configuration adds adds more when they're needed[fn::I'd rather not worry about installing major modes and use a package like [[https://github.com/sheerun/vim-polyglot][vim-polyglot]], but I haven't been able to find an equivalent for Emacs.].
+
+**** beancount-mode
+
+[[https://github.com/beancount/beancount-mode][Bencount-mode]] requires hooking up the mode manually, so enable it for each file with a =.beancount= extension:
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package beancount
+    :ensure t
+    :mode ("\\.beancount\\'" . beancount-mode))
+#+end_src
+
+**** dockerfile-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode
+    :ensure t)
+#+end_src
+
+**** elixir-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package elixir-mode
+    :ensure t)
+#+end_src
+
+**** git-modes
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package git-modes
+    :ensure t)
+#+end_src
+
+**** markdown-mode
+
+There is currently no Emacs major mode for [[https://github.com/mdx-js/mdx][MDX]], so enable [[https://jblevins.org/projects/markdown-mode/][Markdown-mode]] for files with a =.mdx= extension:
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t
+    :mode ("\\.mdx\\'" . markdown-mode))
+#+end_src
+
+**** nix-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package nix-mode
+    :ensure t)
+#+end_src
+
+**** rust-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package rust-mode
+    :ensure t)
+#+end_src
+
+**** typescript-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package typescript-mode
+    :ensure t)
+#+end_src
+
+**** yaml-mode
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :ensure t)
+#+end_src
+
+** Environments
+
+Programming environments set up with [[https://nixos.org][Nix]] and [[https://direnv.net][direnv]] alter the environment and available programs based on the current directory.
+To provide access to programs on a per-directory level, use the [[https://github.com/wbolster/emacs-direnv][Emacs direnv package]]:
+
+#+headers: :eval no
+#+headers: :noweb-ref direnv-init
+#+begin_src emacs-lisp
+  (direnv-mode 1)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package direnv
+    :ensure t
+    :init
+    <<direnv-init>>)
+#+end_src
+
+#+RESULTS:
+
+** Language servers
+
+Eglot is Emacs' built-in Language Server Protocol client.
+Language servers are added through the =eglot-server-programs= variable:
+
+#+headers: :noweb-ref eglot-config
+#+headers: :results none
+#+begin_src emacs-lisp
+  (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "rust-analyzer"))
+  (add-to-list 'eglot-server-programs '((elixir-ts-mode elixir-mode) "elixir-ls"))
+  (add-to-list 'eglot-server-programs '((nix-mode) "nixd"))
+#+end_src
+
+Start eglot automatically for Nix an Rust files:
+
+#+begin_src emacs-lisp
+  (add-hook 'nix-mode #'eglot-ensure)
+  (add-hook 'rust-mode #'eglot-ensure)
+  (add-hook 'rust-ts-mode #'eglot-ensure)
+#+end_src
+
+#+RESULTS:
+| eglot-ensure |
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref eglot-hook
+#+begin_src emacs-lisp
+  (rust-mode . eglot-ensure)
+  (rust-ts-mode . eglot-ensure)
+  (nix-mode . eglot-ensure)
+#+end_src
+
+*** Automatically format files on save in Eglot-enabled buffers
+
+The ~eglot-format-buffer~ function doesn't check if Eglot is running in the current buffer.
+This means hooking using it as a global ~after-save-hook~ produces errors in the echo area whenever a file is saved while Eglot isn't enabled:
+
+#+begin_src emacs-lisp
+  (jsonrpc-error
+   "No current JSON-RPC connection"
+   (jsonrpc-error-code . -32603)
+   (jsonrpc-error-message . "No current JSON-RPC connection"))
+#+end_src
+
+To remedy this, add a function that formats only when Eglot is enabled.
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (defun jk/maybe-format-buffer ()
+    (when (bound-and-true-p eglot-managed-p)
+      (eglot-format-buffer)))
+#+end_src
+
+#+RESULTS:
+: jk/maybe-format-buffer
+
+This function is then added as a global ~after-save-hook~.
+
+#+begin_src emacs-lisp
+  (add-hook 'after-save-hook 'jk/maybe-format-buffer)
+#+end_src
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref eglot-hook
+#+begin_src emacs-lisp
+  (after-save . jk/maybe-format-buffer)
+#+end_src
+
+Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package eglot
+    :config
+    <<eglot-config>>
+    :hook
+    <<eglot-hook>>)
+#+end_src
+
+* Version control
+
+[[https://magit.vc][Magit]] is a user interface for Git in Emacs.
+Even after years of using Git from the console, it's the quickest way to use Git, and it's one of the most sophisticated Emacs packages.
+
+An interesting thing about Magit is that it doesn't have many configuration options.
+It doesn't need any, as it's a great experience out of the box.
+
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t)
+#+end_src
+
+* Shell
+
+** Terminal emulation
+
+Use [[https://codeberg.org/akib/emacs-eat/][Eat]] (Emulate A Terminal) as a terminal emulator.
+If Eat prints [[https://elpa.nongnu.org/nongnu-devel/doc/eat.html#Garbled-Text]["garbled" text]], run =M-x eat-compile-terminfo=, then restart the Eat buffer.
+
+Aside from starting the terminal emulator with =M-x eat= and =M-x eat-project=, Eat adds terminal emulation to Eshell with ~eat-eshell-mode~.
+This allows Eshell to run full screen terminal applications.
+
+#+headers: :noweb-ref eat-init
+#+begin_src emacs-lisp
+  (eat-eshell-mode 1)
+#+end_src
+
+Because Eat now handles full screen terminal applications, Eshell no longer has to run programs in a term buffer.
+Therefor, the ~eshell-visual-commands~ list can be unset.
+
+#+headers: :exports none
+#+headers: :noweb-ref eat-custom
+#+begin_src emacs-lisp
+  eshell-visual-commands nil
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<eat-custom>>)
+#+end_src
+
+Now, an application like ~top~ will run in the Eshell buffer without a separate term buffer having to be opened.
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package eat
+    :ensure t
+    :init
+    <<eat-init>>
+    :custom
+    <<eat-custom>>)
+#+end_src
+
+** History
+
+[[https://atuin.sh][Atuin]] is a cross-shell utility that stores shell history in a SQLite database.
+The [[https://sqrtminusone.xyz/packages/eshell-atuin/][eshell-atuin]] package adds support for both reading from and writing to the history from Eshell.
+
+#+headers: :noweb-ref eshell-atuin-init
+#+begin_src emacs-lisp
+  (eshell-atuin-mode)
+#+end_src
+
+#+RESULTS:
+: t
+
+To read the history in Eshell, bind the =<up>= key to =eshell-atuin-history=, which opens the shell history in the minibuffer.
+Also unset the =<down>= key, which was bound to ~eshell-next-input~ for cycling through history in reverse:
+
+#+headers: :noweb-ref eshell-atuin-init
+#+begin_src emacs-lisp
+  (keymap-set eshell-hist-mode-map "<up>" 'eshell-atuin-history)
+  (keymap-unset eshell-hist-mode-map "<down>")
+#+end_src
+
+#+RESULTS:
+
+By default, eshell-atuin only shows commands that completed succesfully.
+To show all commands, change the =eshell-atuin-search-options= variable from =("--exit" "0")= to =nil=:
+
+#+headers: :exports none
+#+headers: :noweb-ref eshell-atuin-custom
+#+begin_src emacs-lisp
+  eshell-atuin-search-options nil
+#+end_src
+
+#+RESULTS:
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<eshell-atuin-custom>>)
+#+end_src
+
+Shell history completion is different from other kinds of completion for two reasons:
+
+1. Other completion options are presented in a list from top to bottom, with the search prompt at the top.
+   Because =eshell-atuin-history= is opened by pressing the =<up>= key and history is searched backward, the list is reversed  by using =vertico-reverse=.
+
+2. The command history shouldn't be ordered, as that's already handled by Atuin.
+    Instead of ordering the list again, pass ~identity~ as the =vertico-sort-function=.
+
+Using =vertico-multiform=, which is enabled through ~vertico-multiform-mode~, set the above options specifically for the ~eshell-atuin-history~ function:
+
+#+headers: :noweb-ref eshell-atuin-init
+#+begin_src emacs-lisp
+  (vertico-multiform-mode 1)
+  (setq vertico-multiform-commands
+	'((eshell-atuin-history
+	   reverse
+	   (vertico-sort-function . identity))))
+#+end_src
+
+#+RESULTS:
+| eshell-atuin-history | reverse | (vertico-sort-function . identity) |
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package eshell-atuin
+    :after em-hist
+    :init
+    <<eshell-atuin-init>>
+    :custom
+    <<eshell-atuin-custom>>)
+#+end_src
+
+#+RESULTS:
+
+* Dired
+
+#+headers: :noweb-ref dirvish-init
+#+begin_src emacs-lisp
+  (dirvish-override-dired-mode)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package dirvish
+    :ensure t
+    :init
+    <<dirvish-init>>)
+#+end_src
+
+* Org
+
+** Note-taking
+
+I'm trying out [[https://github.com/meedstrom/org-node][org-node]], a just-released alternative to [[https://www.orgroam.com][org-roam]], my current note-taking solution.
+Currently, this configuration uses both packages.
+
+*** Org-node
+
+Org-node is not on any of the package repositories [[https://www.reddit.com/r/emacs/comments/1cfbgqi/comment/l1ok712/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button][yet]].
+This configuration doesn't ensure the package is there, so it's assumed it's installed manually.
+I've installed org-node through ~package-vc-install~ for now.
+
+Enable org-node by calling ~org-node-enable~ whenever an ~org-mode~ is enabled:
+
+#+headers: :eval no
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook #'org-node-enable))
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-gode
+    :hook (org-mode . org-node-enable))
+#+end_src
+
+#+RESULTS:
+| org-node-enable | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | variable-pitch-mode |
+
+*** Org-roam
+
+Org-roam stores notes in ~org-roam-directory~, which is ~~/org-roam~ by default.
+Use ~~/notes~ instead:
+
+#+headers: :exports none
+#+headers: :noweb-ref org-roam-custom
+#+begin_src emacs-lisp
+  org-roam-directory (file-truename "~/notes")
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<org-roam-custom>>)
+#+end_src
+
+#+RESULTS:
+: /Users/jeff/notes
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :custom
+    <<org-roam-custom>>)
+#+end_src
+
+#+RESULTS:
+
+*** Org-roam-ui
+
+[[https://github.com/org-roam/org-roam-ui][Org-roam-ui]] is a graphical frontend for Org-roam, which displays all nodes in a graph for browsing the directory of nodes and discovering possible missing links.
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-roam-ui
+    :ensure t)
+#+end_src
+
+** Task management
+
+[[https://beorgapp.com][Beorg]] is an iOS app that takes Org mode to iOS.
+It includes a list of tasks named /inbox/ that's synced via iCloud, meaning it can be added to the agenda through ~org-agenda-files~.
+
+#+headers: :exports none
+#+headers: :noweb-ref org-agenda-custom
+#+begin_src emacs-lisp
+  org-agenda-files '("/Users/jeff/Library/Mobile\ Documents/iCloud\~com\~appsonthemove\~beorg/Documents/org/inbox.org")
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<org-agenda-custom>>)
+#+end_src
+
+#+RESULTS:
+: /Users/jeff/notes
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-agenda
+    :custom
+    <<org-agenda-custom>>)
+#+end_src
+
+** Modern defaults for Org exports
+
+Org files can be can be exported to other formats, like HTML.
+Due to backwards compatibility constraints, however, the produced documents have an =xhtml-strict= doctype with syntax to match.
+Luckily, Org's exporters are endlessly configurable, and include support for more modern configurations.
+
+*** Smart quotes
+
+Automatically convert single and double quotes to their curly equivalents, depending on the document language.
+
+#+name: ox-smart-quotes
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-export-with-smart-quotes t
+#+end_src
+
+#+RESULTS:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<ox-smart-quotes>>)
+#+end_src
+
+#+RESULTS:
+
+*** Entities
+
+Disable entities, like using ~&ldquo;~ instead of “ in HTML.
+This option only works for entities included in the document, not the entities added through smart quotes.
+
+#+name: ox-entities
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-export-with-entities nil
+#+end_src
+
+#+RESULTS:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<ox-entities>>)
+#+end_src
+
+#+RESULTS:
+
+*** Headline levels
+
+Instead of 3, set the maximum headline level to 5.
+This matches the HTML standard of having six headline levels, when counting the document title as the first, leaving five.
+
+#+name: ox-headline-levels
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-export-headline-levels 5
+#+end_src
+
+#+RESULTS: ox-headline-levels
+: 5
+
+#+RESULTS:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<ox-headline-levels>>)
+#+end_src
+
+#+RESULTS:
+: 5
+
+*** Table of contents and section numbers
+
+Disable both the table of contents and section numbers, as they're easily turned on when needed, not needed for most exports, and not present in the source documents.
+
+#+name: ox-toc-num
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-export-with-toc nil
+  org-export-section-numbers nil
+#+end_src
+
+#+RESULTS: ox-section-numbers
+
+#+RESULTS:
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq
+   <<ox-toc-num>>)
+#+end_src
+
+#+RESULTS:
+
+
+*** HTML 5
+
+Aside from replacing the doctype in the document, setting ~org-html-doctype~ to /html5/ has modernizing effects on the output file.
+For example, it uses the ~charset~ attribute (as opposed to ~http-equiv~) to set the character set, it drops the XML declaration from the header of the document, it switches to the HTML5 validator for the footer (which is then disabled later), and disables HTML table attributes[fn:ox-html-predicates].
+Setting the doctype instantly transports the document from the start of the millenium to last decade.
+
+[fn:ox-html-predicates] The easiest way to find out what each of these options does is to locate where the predicate functions are called in [[https://git.savannah.gnu.org/cgit/emacs/org-mode.git/tree/lisp/ox-html.el][~ox-html.el~]] in Org's source code.
+For example, to find out what changing the doctype to HTML5 does, search for ~org-html-html5-p~.
+
+
+To enable the HTML5 doctype , set the ~org-html-doctype~ variable:
+
+#+name: ox-html5
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-html-doctype "html5"
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<ox-html5>>)
+#+end_src
+
+*** "Fancy" HTML tags
+
+To continue modernizing, enable ~org-html-html5-fancy~ for /fancy/ HTML5 elements.
+This means ~<figure>~ tags to wrap images, a ~<header>~ tag around the file's main headline, and a ~<nav>~ tag around the table of contents.
+It also enables HTML5-powered special blocks to produce modern HTML elements from Org's special blocks:
+
+#+begin_src org
+  ,#+begin_aside
+    An aside.
+  ,#+end_aside
+#+end_src
+
+Exports to:
+
+#+begin_src html
+<aside>
+  An aside.
+</aside>
+#+end_src
+
+To enable HTML5 "fancy" tags, set the ~org-html-html5-fancy~ variable:
+
+#+name: ox-html5-fancy
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-html-html5-fancy t
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq <<ox-html5-fancy>>)
+#+end_src
+
+*** Containers
+
+Aside from the modern elements already enabled by the HTML5 doctype and ~org-html-html5-fancy~, Org allows for more customizations to its HTML exports.
+Use ~org-html-container-element~ and ~org-html-divs~ to replace some of the standard ~<div>~ elements with HTML 5 alternatives:
+
+1. Use the ~<section>~ element instead of the main section ~<div>~ elements
+2. Use the ~<header>~ element to wrap document preambles
+3. Use the ~<main>~ element to wrap the document's main section
+4. Use the ~<footer>~ element to wrap document postambles
+
+#+name: ox-org-containers
+#+headers: :exports none
+#+headers: :noweb-ref ox-org-custom
+#+begin_src emacs-lisp
+  org-html-container-element "section"
+  org-html-divs '((preamble  "header" "preamble")
+		  (content   "main" "content")
+		  (postamble "footer" "postamble"))
+#+end_src
+
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq
+   <<ox-org-containers>>)
+#+end_src
+
+#+RESULTS:
+: t
+
+*** Summary
+
+To configure Org mode's HTML exporter to output HTML 5 with modern elements, set the following configuration.
+
+#+headers: :tangle ox-modern.el
+#+headers: :noweb yes
+#+begin_src emacs-lisp
+  (setq
+   <<ox-org-custom>>)
+#+end_src
+
+When using ~use-package~ for configuration, hook into the ~ox-org~ package an use the ~:custom~ keyword.
+
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package ox-org
+    :custom
+    <<ox-org-custom>>)
+#+end_src
+
+#+RESULTS:
+
+
+** Source code
+
+One of Org's most impressive features is source code evalutation through its [[https://orgmode.org/worg/org-contrib/babel/][Library of Babel]].
+Babel can both evaluate (run a source code block from within an Org document) and extract (take a source code block from an Org document and place it in another file) code.
+
+*** Evaluation
+
+By default, Org only evaluates Emacs Lisp code, but other languages can be added via src_emacs-lisp[:exports code]{org-babel-load-languages}:
+
+#+headers: :exports none
+#+headers: :noweb-ref org-babel-custom
+#+begin_src emacs-lisp
+  org-babel-load-languages '((emacs-lisp . t)
+                              (shell . t))
+#+end_src
+
+#+RESULTS:
+: ((emacs-lisp . t) (shell . t))
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq
+   <<org-babel-custom>>)
+#+end_src
+
+#+RESULTS:
+: ((emacs-lisp . t) (lisp . t))
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-babel
+    :custom
+    <<org-babel-custom>>)
+#+end_src
+
+*** Extraction
+
+Org extracts each code block that has a "tangle" attribute whenever the src_emacs-lisp[:exports code]{org-babel-tangle} function is evaluated.
+It's bound do =C-c C-v t= by default.
+However, it's convenient to have code blocks /tangled/ automatically when the source document is saved.
+
+Automatic source code tangling can be enabled per-document by adding a document header line:
+
+#+begin_src org
+  # -*- eval: (add-hook 'after-save-hook #'org-babel-tangle nil t); -*-
+#+end_src
+
+For documents where this header can't be added, or situations where the header hasn't been added yet, there's a package named [[https://github.com/yilkalargaw/org-auto-tangle][org-auto-tangle]].
+
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook #'org-auto-tangle-mode)
+#+end_src
+
+#+headers: :eval no
+#+headers: :exports none
+#+headers: :noweb-ref org-auto-tangle-hook
+#+begin_src emacs-lisp
+  (org-mode . org-auto-tangle-mode)
+#+end_src
+
+The org-auto-tangle package automatically extracts code blocks for every document that has the src_org[:exports code]{#+auto_tangle: t} option.
+To turn it on for all Org documents regardless, set src_emacs-lisp[:exports code]{org-auto-tangle-default}:
+
+#+headers: :exports none
+#+headers: :noweb-ref org-auto-tangle-custom
+#+begin_src emacs-lisp
+  org-auto-tangle-default t
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<org-auto-tangle-custom>>)
+#+end_src
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package org-auto-tangle
+    :ensure t
+    :custom
+    <<org-auto-tangle-custom>>
+    :hook
+    <<org-auto-tangle-hook>>)
+#+end_src
+
+* Email
+
+Use [[https://notmuchmail.org/notmuch-emacs/][notmuch.el]] to read email.
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package notmuch
+    :ensure t)
+#+end_src
+
+* Enhancements
+
+This section covers general enhancements to Emacs which don't warrant their own section.
+
+** Backups
+
+Emacs automatically generates [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html][backups]] for files not stored in version control.
+Instead of storing them in the files' directories, put everything in =~/.emacs.d/backups=:
+
+#+headers: :exports none
+#+headers: :noweb-ref files-custom
+#+begin_src emacs-lisp
+  backup-directory-alist `(("." . "~/.emacs.d/backups"))
+#+end_src
+
+#+headers: :noweb yes
+#+headers: :noweb-prefix no
+#+begin_src emacs-lisp
+  (setq <<files-custom>>)
+#+end_src
+
+#+RESULTS:
+: ((. . ~/.emacs.d/backups))
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package files
+    :custom
+    <<files-custom>>)
+#+end_src
+
+#+RESULTS:
+
+** Key suggestions
+
+With [[https://github.com/justbur/emacs-which-key][which-key]], Emacs shows suggestions when pausing during an incomplete keypress, which is especially useful when trying to learn Emacs' key bindings.
+By default, Emacs only shows the already-typed portion of the command, which doesn't help to find the next key to press.
+
+#+headers: :noweb-ref which-key-init
+#+begin_src emacs-lisp
+  (which-key-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init
+    <<which-key-init>>)
+#+end_src
+
+#+RESULTS:
+
+** Projects
+
+By default, ~project.el~ only takes projects into account that have a =.git= directory.
+Use [[https://github.com/karthink/project-x][project-x]] to allow for projects that are not under version control, and projects nested within other projects.
+
+Project-x is not on any of the pacakge managers, so this configuration assumes it's installed manually for now.
+Also, this configuration re-sets ~project-find-functions~ to try ~project-x-try-local~ before ~project-try-vc~ to make it work for projects nested within directories under version control.
+
+#+headers: :noweb-ref project-x-init
+#+begin_src emacs-lisp
+  (project-x-mode 1)
+  (setq project-find-functions '(project-x-try-local project-try-vc))
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package project-x
+    :after project
+    :init
+    <<project-x-init>>)
+#+end_src
+
+With project-x enabled, Emacs will recognise directories with a =.project= file as project directories.[fn:project-x]
+
+[fn:project-x] Apparently, [[https://github.com/karthink/project-x/issues/5#issuecomment-1522535927][=project.el= now supports identifying projects based on a special file in its directory root]].
+Project-x should be obsolete for this purpose, but I haven't figured it out yet.
+
+** Precise scrolling
+
+[[https://www.gnu.org/software/emacs/manual///html_node/efaq/New-in-Emacs-29.html][Added in Emacs 29]], ~pixel-scroll-precision-mode~ enables smooth scrolling instead of scrolling line by line.
+
+#+headers: :noweb-ref pixel-scroll-init
+#+begin_src emacs-lisp
+  (pixel-scroll-precision-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package pixel-scroll
+    :init
+    <<pixel-scroll-init>>)
+#+end_src
+
+** Indentation
+
+Don't use tabs for indentation.
+
+#+headers: :noweb-ref simple-init
+#+begin_src emacs-lisp
+  (indent-tabs-mode 0)
+#+end_src
+
+#+RESULTS:
+: t
+
+#+headers: :exports none
+#+headers: :noweb yes
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (use-package simple
+    :init
+    <<simple-init>>)
+#+end_src
+
+* Benchmarking
+
+Use [[https://github.com/dholm/benchmark-init-el][benchmark-init]] to benchmark Emacs' initialization.
+Enable benchmark-init at the top of the configuration file, before any packages are loaded.
+
+#+name: benchmark-init
+#+begin_src emacs-lisp
+  (use-package benchmark-init
+    :ensure t
+    :config
+    (add-hook 'after-init-hook 'benchmark-init/deactivate))
+#+end_src
+
+After starting Emacs, the benchmarking results can be examined using the ~benchmark-init/show-durations-tree~ function.
+Aside from that, append the total duration to a file named =~/.emacs.d/benchmark.csv= for future reference.
+
+#+headers: :tangle default.el
+#+begin_src emacs-lisp
+  (write-region
+   (format "%s,%s\n"
+	   (string-trim (shell-command-to-string "git --git-dir ~/emacs-config/.git rev-parse HEAD"))
+	   (benchmark-init/node-duration-adjusted benchmark-init/durations-tree))
+   nil
+   "~/.emacs.d/benchmark.csv"
+   'append)
+#+end_src
+
+#+RESULTS:
