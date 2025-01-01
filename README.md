@@ -1,56 +1,56 @@
 
 # ~/.emacs.d
 
-- [Installation](#org6967eab)
-  - [Building Emacs from Git with Nix](#org1f67e66)
-  - [Enabling XWidgets in Emacs on macOS with Nix](#org1aeb2c5)
-  - [Applying Emacs Plus patches](#org553a949)
-  - [Emacs with bundled configuration](#orgb415895)
-  - [Configured Emacs](#org1d2bdb8)
-- [Appearance](#org24b6b41)
-  - [Frames](#orgea164be)
-  - [Fonts](#org00b4118)
-  - [Variable pitch](#orgf6c4d5c)
-  - [Themes](#org26d674b)
-  - [Layout](#orgb68963c)
-- [Modal editing](#orgcfcc6c8)
-  - [Evil mode](#org5782a22)
-  - [Evil-commentary](#orgd89047a)
-  - [Cursors](#org9be9a75)
-- [Completion](#org6cd8c09)
-  - [Vertical completion](#orged88ab4)
-  - [Contextual information](#org11e3392)
-  - [Enhanced navigation commands](#org23e4a03)
-  - [Pattern matching](#org40b1bad)
-  - [Minibuffer actions](#org9021faf)
-  - [Minibuffer history](#orgc0b8446)
-  - [Completion at point](#orga124aa8)
-- [Development](#org3e2eb1f)
-  - [Major modes](#org2abe4fc)
-  - [Environments](#org747c804)
-  - [Language servers](#orgfd9a674)
-- [Version control](#org2e197bd)
-- [Shell](#orgc68ad35)
-  - [Terminal emulation](#org3ce75f8)
-  - [History](#org57f3e96)
-- [Dired](#org883d4ad)
-- [Org](#org4128790)
-  - [Note-taking](#org24b5a75)
-  - [Task management](#org48d794f)
-  - [Modern defaults for Org exports](#org7342d1e)
-  - [Source code](#org975112b)
-- [Email](#org528378a)
-- [Enhancements](#orgac5540b)
-  - [Backups](#org6266f17)
-  - [Key suggestions](#org94d4498)
-  - [Projects](#orgf162fc5)
-  - [Precise scrolling](#org26560e9)
-  - [Indentation](#orgf0a1260)
-- [Benchmarking](#org7f9bfc7)
+- [Installation](#org1f0fac6)
+  - [Building Emacs from Git with Nix](#org6bc7fa6)
+  - [Enabling XWidgets in Emacs on macOS with Nix](#orgd424d35)
+  - [Applying Emacs Plus patches](#orgf2ea9fb)
+  - [Emacs with bundled configuration](#org0955e74)
+  - [Configured Emacs](#org43d8959)
+- [Appearance](#org2f3cd39)
+  - [Frames](#org4377b63)
+  - [Fonts](#org76a0c30)
+  - [Variable pitch](#org5fbfd05)
+  - [Themes](#org2b1f208)
+  - [Layout](#orgb759bc1)
+- [Modal editing](#org043e741)
+  - [Evil mode](#orgefb5aae)
+  - [Evil-commentary](#org5d9ab6a)
+  - [Cursors](#org7c32e82)
+- [Completion](#org480124e)
+  - [Vertical completion](#orga86ff66)
+  - [Contextual information](#orgda18320)
+  - [Enhanced navigation commands](#org7864369)
+  - [Pattern matching](#orgbd02852)
+  - [Minibuffer actions](#org5e2469b)
+  - [Minibuffer history](#orgd81a361)
+  - [Completion at point](#org620e2e0)
+- [Development](#orgdaa499f)
+  - [Major modes](#orgbb80caa)
+  - [Environments](#org5bcb9ed)
+  - [Language servers](#orgd9a22b3)
+- [Version control](#orgd72c9b1)
+- [Shell](#org8e94f14)
+  - [Terminal emulation](#orga1fe769)
+  - [History](#org22d649e)
+- [Dired](#orga456606)
+- [Org](#orgce2a837)
+  - [Note-taking](#org202efa9)
+  - [Task management](#org7090598)
+  - [Modern defaults for Org exports](#orgfa7a867)
+  - [Source code](#org4524681)
+- [Email](#org0863a90)
+- [Enhancements](#org4e9f42d)
+  - [Backups](#org3ec9d5c)
+  - [Key suggestions](#org292d6a2)
+  - [Projects](#org9654aa4)
+  - [Precise scrolling](#orgd730eb5)
+  - [Indentation](#org290e677)
+- [Benchmarking](#orgf5ab2d5)
 
 
 
-<a id="org6967eab"></a>
+<a id="org1f0fac6"></a>
 
 ## Installation
 
@@ -63,7 +63,7 @@ nix run github:jeffkreeftmeijer/.emacs.d
 ```
 
 
-<a id="org1f67e66"></a>
+<a id="org6bc7fa6"></a>
 
 ### Building Emacs from Git with Nix
 
@@ -82,7 +82,7 @@ To build a Nix derivation that intalls Emacs from Git using Emacs-overlay, impor
 { pkgs ? import <nixpkgs> {
   overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     }))
   ];
 } }:
@@ -90,12 +90,16 @@ To build a Nix derivation that intalls Emacs from Git using Emacs-overlay, impor
 pkgs.emacs-git
 ```
 
-In this example, the version of emacs-overlay (and thus Emacs itself) is locked to a specific version. To use the latest version, replace the revision hash with a branch name like `master`.
+The version of emacs-overlay (and thus Emacs itself) is determined by the version specified in the master branch. That version is then locked in the `flake.lock` file until it's explicitly updated:
+
+```shell
+nix flake lock --update-input emacs-overlay
+```
 
 Assuming the derivation is saved to a file named `emacs-git.nix`, it can be built through `nix build`:
 
 
-<a id="org1aeb2c5"></a>
+<a id="orgd424d35"></a>
 
 ### Enabling XWidgets in Emacs on macOS with Nix
 
@@ -105,7 +109,7 @@ Nix disables the `withXwidgets` option for Emacs on macOS, so simply enabling it
 { pkgs ? import <nixpkgs> {
   overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     }))
   ];
 } }:
@@ -121,7 +125,7 @@ In the meantime, circumvent Nix's option by manually adding the build flag. As e
 { pkgs ? import <nixpkgs> {
   overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     }))
   ];
 } }:
@@ -136,7 +140,7 @@ pkgs.emacs-git.overrideAttrs(old: {
 ```
 
 
-<a id="org553a949"></a>
+<a id="orgf2ea9fb"></a>
 
 ### Applying Emacs Plus patches
 
@@ -155,7 +159,7 @@ Then, override the attributes in `pkgs.emacs-git` when using emacs-overlay&#x201
 { pkgs ? import <nixpkgs> {
   overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     }))
   ];
 } }:
@@ -178,7 +182,7 @@ open /result/Applications/Emacs.app
 ```
 
 
-<a id="orgb415895"></a>
+<a id="org0955e74"></a>
 
 ### Emacs with bundled configuration
 
@@ -188,7 +192,7 @@ The `emacsWithPackagesFromUsePackage` function parses configuration files in sea
 { pkgs ? import <nixpkgs> {
   overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     }))
   ];
 } }:
@@ -205,7 +209,7 @@ pkgs.emacsWithPackagesFromUsePackage {
 }
 ```
 
-Assuming the derivation is saved to a file named `emacs-enil.nix`, it can be built through `nix build`:
+Assuming the derivation is saved to a file named `emacs-evil.nix`, it can be built through `nix build`:
 
 ```shell
 nix build --file emacs-evil.nix
@@ -213,7 +217,7 @@ open /result/Applications/Emacs.app
 ```
 
 
-<a id="org1d2bdb8"></a>
+<a id="org43d8959"></a>
 
 ### Configured Emacs
 
@@ -223,7 +227,7 @@ By combining the features in Emacs overlay, this configuration produces *configu
 { pkgs ? import <nixpkgs> {
   overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/f7fcac1403356fd09e2320bc3d61ccefe36c1b91.tar.gz;
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     }))
   ];
 } }:
@@ -252,12 +256,12 @@ pkgs.emacsWithPackagesFromUsePackage {
 ```
 
 
-<a id="org24b6b41"></a>
+<a id="org2f3cd39"></a>
 
 ## Appearance
 
 
-<a id="orgea164be"></a>
+<a id="org4377b63"></a>
 
 ### Frames
 
@@ -270,7 +274,7 @@ Disable the scroll bar, the tool bar, and the menu bar:
 ```
 
 
-<a id="org00b4118"></a>
+<a id="org76a0c30"></a>
 
 ### Fonts
 
@@ -303,7 +307,7 @@ If the SF fonts aren't available, the fixed font falls back to Menlo before the 
 ```
 
 
-<a id="orgf6c4d5c"></a>
+<a id="org5fbfd05"></a>
 
 ### Variable pitch
 
@@ -327,7 +331,7 @@ Instead of hooking into `text-mode`, explicitly select the modes to use proporti
 ```
 
 
-<a id="org26d674b"></a>
+<a id="org2b1f208"></a>
 
 ### Themes
 
@@ -413,7 +417,7 @@ The Modus themes come with the option to use italic and bold constructs, which i
 Note that any configuration options to the themes themselves need to happen before the theme is loaded, or the theme needs to be reloaded through `load-theme` after setting the customizations.
 
 
-<a id="orgb68963c"></a>
+<a id="orgb759bc1"></a>
 
 ### Layout
 
@@ -432,12 +436,12 @@ Turn on `spacious-padding-subtile-mode-line` for a more subtile mode line:
 ```
 
 
-<a id="orgcfcc6c8"></a>
+<a id="org043e741"></a>
 
 ## Modal editing
 
 
-<a id="org5782a22"></a>
+<a id="orgefb5aae"></a>
 
 ### Evil mode
 
@@ -451,7 +455,7 @@ Instead of enabling Evil's gloval `evil-mode` hook, turn it on per buffer. By ho
 ```
 
 
-<a id="orgd89047a"></a>
+<a id="org5d9ab6a"></a>
 
 ### Evil-commentary
 
@@ -462,7 +466,7 @@ Instead of enabling Evil's gloval `evil-mode` hook, turn it on per buffer. By ho
 ```
 
 
-<a id="org9be9a75"></a>
+<a id="org7c32e82"></a>
 
 ### Cursors
 
@@ -473,12 +477,12 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org6cd8c09"></a>
+<a id="org480124e"></a>
 
 ## Completion
 
 
-<a id="orged88ab4"></a>
+<a id="orga86ff66"></a>
 
 ### Vertical completion
 
@@ -489,7 +493,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org11e3392"></a>
+<a id="orgda18320"></a>
 
 ### Contextual information
 
@@ -500,7 +504,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org23e4a03"></a>
+<a id="org7864369"></a>
 
 ### Enhanced navigation commands
 
@@ -532,7 +536,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
     ```
 
 
-<a id="org40b1bad"></a>
+<a id="orgbd02852"></a>
 
 ### Pattern matching
 
@@ -543,7 +547,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="org9021faf"></a>
+<a id="org5e2469b"></a>
 
 ### Minibuffer actions
 
@@ -554,7 +558,7 @@ An example of an essential difference between Emacs and Vim is how they handle t
 ```
 
 
-<a id="orgc0b8446"></a>
+<a id="orgd81a361"></a>
 
 ### Minibuffer history
 
@@ -565,7 +569,7 @@ Emacs' `savehist` feature saves minibuffer history to `~/emacs.d/history`. The h
 ```
 
 
-<a id="orga124aa8"></a>
+<a id="org620e2e0"></a>
 
 ### Completion at point
 
@@ -576,12 +580,12 @@ Emacs 30 includes `completion-preview.el`, since [e82d807a2845673e2d55a27915661b
 ```
 
 
-<a id="org3e2eb1f"></a>
+<a id="orgdaa499f"></a>
 
 ## Development
 
 
-<a id="org2abe4fc"></a>
+<a id="orgbb80caa"></a>
 
 ### Major modes
 
@@ -678,7 +682,7 @@ In addition to the list of already installed major modes, this configuration add
     ```
 
 
-<a id="org747c804"></a>
+<a id="org5bcb9ed"></a>
 
 ### Environments
 
@@ -689,7 +693,7 @@ Programming environments set up with [Nix](https://nixos.org) and [direnv](https
 ```
 
 
-<a id="orgfd9a674"></a>
+<a id="orgd9a22b3"></a>
 
 ### Language servers
 
@@ -738,7 +742,7 @@ This function is then added as a global `after-save-hook`.
 Now, with the hook enabled, any Eglot-enabled buffer is formatted automatically on save.
 
 
-<a id="org2e197bd"></a>
+<a id="orgd72c9b1"></a>
 
 ## Version control
 
@@ -752,12 +756,12 @@ An interesting thing about Magit is that it doesn't have many configuration opti
 ```
 
 
-<a id="orgc68ad35"></a>
+<a id="org8e94f14"></a>
 
 ## Shell
 
 
-<a id="org3ce75f8"></a>
+<a id="orga1fe769"></a>
 
 ### Terminal emulation
 
@@ -778,7 +782,7 @@ Because Eat now handles full screen terminal applications, Eshell no longer has 
 Now, an application like `top` will run in the Eshell buffer without a separate term buffer having to be opened.
 
 
-<a id="org57f3e96"></a>
+<a id="org22d649e"></a>
 
 ### History
 
@@ -818,7 +822,7 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org883d4ad"></a>
+<a id="orga456606"></a>
 
 ## Dired
 
@@ -827,12 +831,12 @@ Using `vertico-multiform`, which is enabled through `vertico-multiform-mode`, se
 ```
 
 
-<a id="org4128790"></a>
+<a id="orgce2a837"></a>
 
 ## Org
 
 
-<a id="org24b5a75"></a>
+<a id="org202efa9"></a>
 
 ### Note-taking
 
@@ -864,7 +868,7 @@ Org-roam stores notes in `org-roam-directory`, which is `~/org-roam` by default.
 [Org-roam-ui](https://github.com/org-roam/org-roam-ui) is a graphical frontend for Org-roam, which displays all nodes in a graph for browsing the directory of nodes and discovering possible missing links.
 
 
-<a id="org48d794f"></a>
+<a id="org7090598"></a>
 
 ### Task management
 
@@ -875,7 +879,7 @@ Org-roam stores notes in `org-roam-directory`, which is `~/org-roam` by default.
 ```
 
 
-<a id="org7342d1e"></a>
+<a id="orgfa7a867"></a>
 
 ### Modern defaults for Org exports
 
@@ -1012,7 +1016,7 @@ When using `use-package` for configuration, hook into the `ox-org` package an us
 ```
 
 
-<a id="org975112b"></a>
+<a id="org4524681"></a>
 
 ### Source code
 
@@ -1053,21 +1057,21 @@ The org-auto-tangle package automatically extracts code blocks for every documen
 ```
 
 
-<a id="org528378a"></a>
+<a id="org0863a90"></a>
 
 ## Email
 
 Use [notmuch.el](https://notmuchmail.org/notmuch-emacs/) to read email.
 
 
-<a id="orgac5540b"></a>
+<a id="org4e9f42d"></a>
 
 ## Enhancements
 
 This section covers general enhancements to Emacs which don't warrant their own section.
 
 
-<a id="org6266f17"></a>
+<a id="org3ec9d5c"></a>
 
 ### Backups
 
@@ -1078,7 +1082,7 @@ Emacs automatically generates [backups](https://www.gnu.org/software/emacs/manua
 ```
 
 
-<a id="org94d4498"></a>
+<a id="org292d6a2"></a>
 
 ### Key suggestions
 
@@ -1089,7 +1093,7 @@ With [which-key](https://github.com/justbur/emacs-which-key), Emacs shows sugges
 ```
 
 
-<a id="orgf162fc5"></a>
+<a id="org9654aa4"></a>
 
 ### Projects
 
@@ -1105,7 +1109,7 @@ Project-x is not on any of the pacakge managers, so this configuration assumes i
 With project-x enabled, Emacs will recognise directories with a `.project` file as project directories.<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>
 
 
-<a id="org26560e9"></a>
+<a id="orgd730eb5"></a>
 
 ### Precise scrolling
 
@@ -1116,7 +1120,7 @@ With project-x enabled, Emacs will recognise directories with a `.project` file 
 ```
 
 
-<a id="orgf0a1260"></a>
+<a id="org290e677"></a>
 
 ### Indentation
 
@@ -1127,7 +1131,7 @@ Don't use tabs for indentation.
 ```
 
 
-<a id="org7f9bfc7"></a>
+<a id="orgf5ab2d5"></a>
 
 ## Benchmarking
 
